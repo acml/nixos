@@ -20,7 +20,7 @@ It features:
 Boot in NixOS LiveCD, and then:
 
 ``
-curl -Ls https://github.com/LEXUGE/nixos/raw/master/install.sh | bash
+curl -Ls https://github.com/acml/nixos/raw/master/install.sh | bash
 ``
 
 Follow the instructions and there you go.
