@@ -2,44 +2,31 @@
 
 set -e
 
-prompt1="Enter your option: "
 ESP="/boot/efi"
 MOUNTPOINT="/mnt"
 
-contains_element() {
-	#check if an element exist in a string
-	for e in "${@:2}"; do [[ $e == "$1" ]] && break; done
-}
-
-#SELECT DEVICE
-select_device() {
-	devices_list=($(lsblk -d | awk '{print "/dev/" $1}' | grep 'sd\|hd\|vd\|nvme\|mmcblk'))
-	PS3="$prompt1"
-	echo -e "Attached Devices:\n"
-	lsblk -lnp -I 2,3,8,9,22,34,56,57,58,65,66,67,68,69,70,71,72,91,128,129,130,131,132,133,134,135,259 | awk '{print $1,$4,$6,$7}' | column -t
-	echo -e "\n"
-	echo -e "Select device to partition:\n"
-	select device in "${devices_list[@]}"; do
-		if contains_element "${device}" "${devices_list[@]}"; then
-			break
-		else
-			exit 1
-		fi
-	done
-	ROOT_PARTITION="${device}p2"
-	ESP_PARTITION="${device}p1"
-}
+root_device=/dev/nvme0n1
+home_device=/dev/sda
+ROOT_PARTITION="${root_device}p2"
+ESP_PARTITION="${root_device}p1"
+HOME_PARTITION="${home_device}1"
 
 #CREATE_PARTITION
 create_partition() {
-	wipefs -a "${device}"
+	wipefs -a "${root_device}"
 	# Set GPT scheme
-	parted "${device}" mklabel gpt &>/dev/null
+	parted "${root_device}" mklabel gpt &>/dev/null
 	# Create ESP for /efi
-	parted "${device}" mkpart primary fat32 1MiB 512MiB &>/dev/null
-	parted "${device}" set 1 esp on &>/dev/null
+	parted "${root_device}" mkpart primary fat32 1MiB 512MiB &>/dev/null
+	parted "${root_device}" set 1 esp on &>/dev/null
 	# Create /
-	parted "${device}" mkpart primary 512MiB 100% &>/dev/null
+	parted "${root_device}" mkpart primary 512MiB 100% &>/dev/null
+
+	wipefs -a "${home_device}"
+	# Set GPT scheme
+	parted "${home_device}" mklabel gpt &>/dev/null
+	# Create /home
+	parted "${home_device}" mkpart primary 0% 100% &>/dev/null
 }
 
 #FORMAT_PARTITION
@@ -50,11 +37,19 @@ format_partition() {
 	echo "Open '/' partition"
 	cryptsetup open "${ROOT_PARTITION}" cryptroot
 	mkfs.ext4 /dev/mapper/cryptroot >/dev/null
+
+	echo "LUKS Setup for '/home' partition"
+	cryptsetup luksFormat --type luks1 -s 512 -h sha512 -i 3000 "${HOME_PARTITION}"
+	echo "Open '/home' partition"
+	cryptsetup open "${HOME_PARTITION}" crypthome
+	mkfs.ext4 /dev/mapper/crypthome >/dev/null
 }
 
 #MOUNT_PARTITION
 mount_partition() {
 	mount /dev/mapper/cryptroot "${MOUNTPOINT}"
+	mkdir -p "${MOUNTPOINT}/home"
+	mount /dev/mapper/crypthome "${MOUNTPOINT}/home"
 	mkdir -p "${MOUNTPOINT}"${ESP}
 	mount "${ESP_PARTITION}" "${MOUNTPOINT}"${ESP}
 }
@@ -64,6 +59,8 @@ create_keyfile() {
 	dd bs=512 count=4 if=/dev/random of=${MOUNTPOINT}/etc/nixos/secrets/keyfile.bin iflag=fullblock
 	echo "Add key to root partition"
 	cryptsetup luksAddKey "${ROOT_PARTITION}" ${MOUNTPOINT}/etc/nixos/secrets/keyfile.bin
+	echo "Add key to home partition"
+	cryptsetup luksAddKey "${HOME_PARTITION}" ${MOUNTPOINT}/etc/nixos/secrets/keyfile.bin
 	chmod 600 ${MOUNTPOINT}/etc/nixos/secrets/keyfile.bin
 }
 
@@ -72,9 +69,9 @@ nixos_install() {
 	nix-channel --add https://nixos.org/channels/nixos-unstable nixos
 	nix-channel --update
 
-	# Install git by using TUNA binary cache with fallback
-	nix-env -iA nixos.gitMinimal --option substituters "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store https://cache.nixos.org/"
-	git clone https://github.com/LEXUGE/nixos ${MOUNTPOINT}/etc/nixos/
+	# Install git
+	nix-env -iA nixos.gitMinimal
+	git clone https://github.com/acml/nixos ${MOUNTPOINT}/etc/nixos/
 	# rm -rf ${MOUNTPOINT}/etc/nixos/.git/
 
 	create_keyfile
@@ -88,13 +85,12 @@ nixos_install() {
 
 	# Install NixOS using TUNA binary cache with fallback
 	nixos-generate-config --root /mnt
-	nixos-install --option substituters "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store https://cache.nixos.org/"
+	nixos-install
 
 	reboot
 }
 
 # INSTALLATION
-select_device
 create_partition
 format_partition
 mount_partition

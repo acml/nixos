@@ -1,9 +1,9 @@
 # Device specific configuration for ThinkPad X1 Carbon 7th Gen (20R1)
 { config, pkgs, lib, ... }:
 
-let cfg = config.icebox.static.devices.x1c7;
+let cfg = config.icebox.static.devices.g3;
 in {
-  options.icebox.static.devices.x1c7 = with lib; {
+  options.icebox.static.devices.g3 = with lib; {
     enable = mkOption {
       type = types.bool;
       default = false;
@@ -32,12 +32,12 @@ in {
           devices = {
             power = [ "AC" ];
             battery = [ "BAT0" ];
-            ramSize = 16384;
-            network-interface = [ "wlp0s20f3" ];
+            ramSize = 32768;
+            network-interface = [ "wlo1" ];
           };
           system = {
             # Set DPi to 200% scale
-            scale = 2;
+            scale = 1;
             # Enable Bluetuooth by default
             bluetooth.enable = mkDefault true;
           };

@@ -220,5 +220,5 @@ in {
         polybar bottom &
       '';
     };
-  }) config.icebox.static.users.ashde;
+  }) config.icebox.static.users.ahmetde;
 }

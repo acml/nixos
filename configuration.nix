@@ -18,12 +18,12 @@ in {
 
   icebox = {
     users = {
-      plugins = [ "ashde" "hm-fix" ];
+      plugins = [ "ahmetde" "hm-fix" ];
       users = {
-        ash = {
+        ahmet = {
           regular = {
             hashedPassword =
-              "$6$FAs.ZfxAkhAK0ted$/aHwa39iJ6wsZDCxoJVjedhfPZ0XlmgKcxkgxGDE.hw3JlCjPHmauXmQAZUlF8TTUGgxiOJZcbYSPsW.QBH5F.";
+              "$6$.6NbHKr23r$uD0zVajkT5IWBDeexyn6ZkYmzCCkgpInOrsSGtUsygs6nqTP7Kny2U5zzQSEBnrniYsZoBj35p4PMjaCpzj7l0";
             shell = pkgs.zsh;
             isNormalUser = true;
             # wheel - sudo
@@ -33,30 +33,30 @@ in {
             extraGroups = [ "wheel" "networkmanager" "video" "libvirtd" ];
           };
           configs = {
-            ashde = {
+            ahmetde = {
               enable = true;
               # Adapt followings to what your device profile supplied
               battery = "BAT0";
               power = "AC";
-              network-interface = "wlp0s20f3";
+              network-interface = "wlo1";
               extraPackages = with pkgs; [
                 htop
-                deluge
+                # deluge
                 zoom-us
                 thunderbird
                 spotify
                 firefox
-                tdesktop
-                minecraft
+                # tdesktop
+                # minecraft
                 virtmanager
-                texlive.combined.scheme-full
-                steam
-                etcher
-                vlc
+                # texlive.combined.scheme-full
+                # steam
+                # etcher
+                # vlc
                 pavucontrol
-                calibre
-                tor-browser-bundle-bin
-                latest.rustChannels.stable.rust
+                # calibre
+                # tor-browser-bundle-bin
+                # latest.rustChannels.stable.rust
               ];
             };
           };
@@ -65,14 +65,14 @@ in {
     };
 
     devices = {
-      plugins = [ "x1c7" "howdy" ];
+      plugins = [ "g3" "howdy" ];
       configs = {
-        x1c7 = {
+        g3 = {
           enable = true;
           # Choose "howdy", "fprintd", or null.
-          bio-auth = "howdy";
+          bio-auth = "fprintd";
         };
-        # x1c7 would automatically enable howdy and set necessary configuratons.
+        # g3 would automatically enable howdy and set necessary configuratons.
         howdy.pamServices = [ "sudo" "login" "polkit-1" "i3lock" ];
       };
     };
@@ -109,12 +109,11 @@ in {
         x-os = {
           enable = true;
           hostname = "nixos";
-          # Use TUNA Mirror together with original cache because TUNA has better performance inside Mainland China.
           # Set the list to `[ ]` to use official cache only.
           binaryCaches =
-            [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
+            [  ];
           # Choose ibus engines to apply
-          ibus-engines = with pkgs.ibus-engines; [ libpinyin ];
+          # ibus-engines = with pkgs.ibus-engines; [ libpinyin ];
         };
         clash = {
           enable = true;

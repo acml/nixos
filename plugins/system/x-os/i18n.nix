@@ -13,7 +13,7 @@ in {
 
   config = mkIf cfg.enable {
     # Set your time zone.
-    time.timeZone = "Asia/Shanghai";
+    time.timeZone = "Europe/Istanbul";
 
     # Select internationalisation properties.
     console = {
@@ -22,10 +22,10 @@ in {
     };
     i18n = {
       defaultLocale = "en_US.UTF-8";
-      inputMethod = {
-        enabled = "ibus";
-        ibus.engines = cfg.ibus-engines;
-      };
+      # inputMethod = {
+      #   enabled = "ibus";
+      #   ibus.engines = cfg.ibus-engines;
+      # };
     };
   };
 }

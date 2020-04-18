@@ -18,6 +18,11 @@ mkIf cfg.enable (mkMerge [
         allowDiscards = true;
         fallbackToPassword = true;
       };
+      luks.devices."crypthome" = {
+        keyFile = "/keyfile.bin";
+        allowDiscards = true;
+        fallbackToPassword = true;
+      };
     };
 
     # Use GRUB with encrypted /boot under EFI env.

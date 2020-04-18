@@ -36,9 +36,9 @@ in lib.mkIf cfg.enable {
         };
       };
       # Startup commands
-      sessionCommands = ''
-        ibus-daemon -drx
-      '';
+      # sessionCommands = ''
+      #   ibus-daemon -drx
+      # '';
     };
   };
 

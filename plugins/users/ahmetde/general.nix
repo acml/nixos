@@ -4,7 +4,7 @@ let
   inherit (config.icebox.static.lib.configs) system devices;
   iceLib = config.icebox.static.lib;
 in {
-  options.icebox.static.users.ashde = with lib;
+  options.icebox.static.users.ahmetde = with lib;
     mkOption {
       type = with types;
         attrsOf (submodule {
@@ -13,13 +13,13 @@ in {
               type = types.bool;
               default = false;
               example = true;
-              description = "Whether to enable user <literal>ash</literal>.";
+              description = "Whether to enable user <literal>ahmet</literal>.";
             };
 
             extraPackages = mkOption {
               type = with types; listOf package;
               description =
-                "Extra packages to install for user <literal>ash</literal>.";
+                "Extra packages to install for user <literal>ahmet</literal>.";
             };
             battery = mkOption {
               type = types.enum devices.battery;
@@ -134,7 +134,7 @@ in {
     # Handwritten configs
     home.file = {
       ".config/gtk-3.0/settings.ini".source =
-        (system.dirs.dotfiles + /ash/gtk-settings.ini);
+        (system.dirs.dotfiles + /ahmet/gtk-settings.ini);
       ".emacs.d/init.el".source =
         (system.dirs.dotfiles + "/${name}/emacs.d/init.el");
       ".emacs.d/elisp/".source =
@@ -142,10 +142,10 @@ in {
     };
 
     # Dconf settings
-    dconf.settings = {
-      "desktop/ibus/general/hotkey" = {
-        triggers = [ "<Control><Shift>space" ];
-      };
-    };
-  }) config.icebox.static.users.ashde;
+    # dconf.settings = {
+    #   "desktop/ibus/general/hotkey" = {
+    #     triggers = [ "<Control><Shift>space" ];
+    #   };
+    # };
+  }) config.icebox.static.users.ahmetde;
 }

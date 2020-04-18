@@ -17,7 +17,7 @@ in {
     # Add swap file
     swapDevices = [{
       device = "/var/swapFile";
-      size = (devices.ramSize * 2);
+      size = devices.ramSize;
     }];
 
     # Support NTFS
