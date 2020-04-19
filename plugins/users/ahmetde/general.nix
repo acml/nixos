@@ -142,6 +142,11 @@ in {
         (system.dirs.dotfiles + "/${name}/emacs.d/elisp");
     };
 
+    home.keyboard = {
+      # options = [ "caps:escape" "esperanto:colemak" ];
+      variant = "colemak";
+    };
+
     # Dconf settings
     # dconf.settings = {
     #   "desktop/ibus/general/hotkey" = {

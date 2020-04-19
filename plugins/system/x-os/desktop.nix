@@ -9,6 +9,9 @@ in lib.mkIf cfg.enable {
     enable = true;
     dpi = dpi * scale;
 
+    # Keyboard settings
+    layout = "us";
+    xkbVariant = "colemak";
     # Capslock as Control
     xkbOptions = "ctrl:nocaps";
 
