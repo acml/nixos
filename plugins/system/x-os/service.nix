@@ -43,7 +43,7 @@ in mkIf cfg.enable (mkMerge [
     services.fwupd.enable = true;
 
     # Enable the OpenSSH daemon.
-    # services.openssh.enable = true;
+    services.openssh.enable = true;
   })
 
   (mkIf (system.bluetooth.enable) {

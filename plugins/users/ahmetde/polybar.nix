@@ -50,7 +50,7 @@ in {
 
           bottom = true;
 
-          modules-left = "cpu filesystem pulseaudio power";
+          modules-left = "cpu filesystem-root filesystem-home pulseaudio power";
           tray-position = "right";
           # Number of spaces between modules
           module-margin = 2;
@@ -122,9 +122,16 @@ in {
           label = "CPU:%percentage%%";
         };
 
-        "module/filesystem" = {
+        "module/filesystem-root" = {
           type = "internal/fs";
           mount-0 = "/";
+          label-mounted = "%mountpoint%:%free%";
+          format-mounted-underline = "\${colors.green}";
+        };
+
+        "module/filesystem-home" = {
+          type = "internal/fs";
+          mount-0 = "/home";
           label-mounted = "%mountpoint%:%free%";
           format-mounted-underline = "\${colors.green}";
         };

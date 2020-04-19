@@ -83,7 +83,7 @@ in {
               family = "Fira Code Retina";
               style = "Regular";
             };
-            size = 10.0;
+            size = 7.0;
           };
           env = { WINIT_HIDPI_FACTOR = toString system.scale; };
         };
@@ -134,12 +134,15 @@ in {
 
     # Handwritten configs
     home.file = {
-      ".config/gtk-3.0/settings.ini".source =
-        (system.dirs.dotfiles + /ahmet/gtk-settings.ini);
-      ".emacs.d/init.el".source =
-        (system.dirs.dotfiles + "/${name}/emacs.d/init.el");
-      ".emacs.d/elisp/".source =
-        (system.dirs.dotfiles + "/${name}/emacs.d/elisp");
+      ".config/gtk-3.0/settings.ini".source = (system.dirs.dotfiles + "/${name}/gtk-settings.ini");
+      # Handle multiple emacs installs
+      ".emacs".source = (system.dirs.dotfiles + "/${name}/emacs/.emacs");
+      ".emacs-profiles.el".source = (system.dirs.dotfiles + "/${name}/emacs/emacs-profiles.el");
+      ".emacs.d/config.spacemacs/init.el".source = (system.dirs.dotfiles + "/${name}/emacs/spacemacs");
+      ".emacs.d/config.doom/" = {
+        source = (system.dirs.dotfiles + "/${name}/emacs/doom.d");
+        recursive = true;
+      };
     };
 
     home.keyboard = {
