@@ -83,6 +83,7 @@ in {
               family = "Fira Code Retina";
               style = "Regular";
             };
+            size = 10.0;
           };
           env = { WINIT_HIDPI_FACTOR = toString system.scale; };
         };
@@ -96,12 +97,12 @@ in {
       # Git
       git = {
         enable = true;
-        userName = "Harry Ying";
-        userEmail = "lexugeyky@outlook.com";
-        signing = {
-          signByDefault = true;
-          key = "0xAE53B4C2E58EDD45";
-        };
+        userName = "Ahmet Cemal Özgezer";
+        userEmail = "ahmet.ozgezer@andasis.com";
+        # signing = {
+        #   signByDefault = true;
+        #   key = "0xAE53B4C2E58EDD45";
+        # };
         extraConfig = { credential = { helper = "store"; }; };
       };
 

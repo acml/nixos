@@ -108,7 +108,7 @@ in {
       configs = {
         x-os = {
           enable = true;
-          hostname = "nixos";
+          hostname = "darkstar";
           # Set the list to `[ ]` to use official cache only.
           binaryCaches =
             [  ];
