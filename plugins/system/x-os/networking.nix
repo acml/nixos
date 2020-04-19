@@ -25,13 +25,13 @@ in {
       # Enable networkmanager. REMEMBER to add yourself to group in order to use nm related stuff.
       enable = true;
       # Don't use DNS advertised by connected network. Use local configuration
-      dns = "none";
+      # dns = "none";
     };
 
     # Customized binary caches list (with fallback to official binary cache)
     nix.binaryCaches = cfg.binaryCaches;
 
     # Use local DNS server all the time
-    networking.resolvconf.useLocalResolver = true;
+    # networking.resolvconf.useLocalResolver = true;
   };
 }
