@@ -103,7 +103,8 @@ in {
     };
 
     system = {
-      plugins = [ "x-os" "clash" ];
+      # plugins = [ "x-os" "clash" ];
+      plugins = [ "x-os" ];
       stateVersion = "19.09";
       configs = {
         x-os = {
@@ -115,11 +116,11 @@ in {
           # Choose ibus engines to apply
           # ibus-engines = with pkgs.ibus-engines; [ libpinyin ];
         };
-        clash = {
-          enable = true;
-          redirPort =
-            7892; # This must be the same with the one in your clash.yaml
-        };
+        # clash = {
+        #   enable = true;
+        #   redirPort =
+        #     7892; # This must be the same with the one in your clash.yaml
+        # };
       };
     };
 
