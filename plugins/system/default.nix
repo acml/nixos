@@ -1,1 +1,2 @@
-{ imports = [ ./clash ./x-os ]; }
+# { imports = [ ./clash ./x-os ]; }
+{ imports = [ ./x-os ]; }
