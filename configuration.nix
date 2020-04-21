@@ -153,7 +153,7 @@ in {
     system = {
       # plugins = [ "x-os" "clash" ];
       plugins = [ "x-os" ];
-      stateVersion = "19.09";
+      stateVersion = "20.03";
       configs = {
         x-os = {
           enable = true;
