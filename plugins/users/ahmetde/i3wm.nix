@@ -14,6 +14,8 @@ in {
       (system.bluetooth.enable && (system.bluetooth.service == "blueman"))
       true);
 
+    services.network-manager-applet.enable = true;
+
     # Picom (Compton) compositor
     services.picom = {
       enable = true;
@@ -85,6 +87,17 @@ in {
           timeout = 0;
         };
       };
+    };
+
+    services.redshift = {
+      enable = true;
+      brightness.day = "1.0";
+      brightness.night = "0.9";
+      latitude = "41.015137";
+      longitude = "28.979530";
+      temperature.day = 5800;
+      temperature.night = 3800;
+      tray = true;
     };
 
     services.screen-locker = {

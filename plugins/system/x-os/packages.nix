@@ -21,6 +21,7 @@ in mkIf cfg.enable {
     smartmontools
     efibootmgr
     ncdu
+    gnome3.adwaita-icon-theme
   ];
 
   # Fonts

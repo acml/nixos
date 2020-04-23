@@ -134,7 +134,7 @@ in {
 
     # Handwritten configs
     home.file = {
-      ".config/gtk-3.0/settings.ini".source = (system.dirs.dotfiles + "/${name}/gtk-settings.ini");
+      # ".config/gtk-3.0/settings.ini".source = (system.dirs.dotfiles + "/${name}/gtk-settings.ini");
       # Handle multiple emacs installs
       ".emacs".source = (system.dirs.dotfiles + "/${name}/emacs/.emacs");
       ".emacs-profiles.el".source = (system.dirs.dotfiles + "/${name}/emacs/emacs-profiles.el");
@@ -148,6 +148,29 @@ in {
     home.keyboard = {
       # options = [ "caps:escape" "esperanto:colemak" ];
       variant = "colemak";
+    };
+
+    # GTK theme configs
+    gtk = {
+      enable = true;
+      theme = {
+        package = pkgs.gnome3.gnome-themes-standard;
+        name = "Adwaita";
+      };
+      font = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans 10";
+      };
+      iconTheme = {
+        package = pkgs.gnome3.adwaita-icon-theme;
+        name = "Adwaita";
+      };
+    };
+
+    # # Set up qt theme as well
+    qt = {
+      enable = true;
+      platformTheme = "gtk";
     };
 
     # Dconf settings

@@ -47,4 +47,6 @@ in lib.mkIf cfg.enable {
 
   # Enable `light` brightness controller
   programs.light.enable = true;
+
+  programs.dconf.enable = true;
 }
