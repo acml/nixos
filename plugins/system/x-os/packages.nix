@@ -22,7 +22,10 @@ in mkIf cfg.enable {
     efibootmgr
     ncdu
     gnome3.adwaita-icon-theme
+    hicolor-icon-theme #fixes missing redshift tray icon
   ];
+
+  # xdg.icons.enable = true;
 
   # Fonts
   fonts.fonts = with pkgs; [

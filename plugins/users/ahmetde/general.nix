@@ -153,23 +153,23 @@ in {
     # GTK theme configs
     gtk = {
       enable = true;
-      theme = {
-        package = pkgs.gnome3.gnome-themes-standard;
-        name = "Adwaita";
-      };
       font = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans 10";
+        name    = "Cantarell 11";
+        package = pkgs.cantarell-fonts;
       };
       iconTheme = {
+        name    = "Adwaita";
         package = pkgs.gnome3.adwaita-icon-theme;
-        name = "Adwaita";
       };
+      theme = {
+        name    = "Adementary-dark";
+        package = pkgs.adementary-theme;
+      };
+      # gtk3.extraConfig = { gtk-application-prefer-dark-theme = 1; };
     };
 
-    # # Set up qt theme as well
     qt = {
-      enable = true;
+      enable = false;
       platformTheme = "gtk";
     };
 
