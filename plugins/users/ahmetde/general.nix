@@ -60,9 +60,6 @@ in {
         my.ripcord
       ] ++ cfg.extraPackages;
 
-    # Fontconfig
-    fonts.fontconfig.enable = true;
-
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {

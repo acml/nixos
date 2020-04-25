@@ -28,13 +28,29 @@ in mkIf cfg.enable {
   # xdg.icons.enable = true;
 
   # Fonts
-  fonts.fonts = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    fira-code
-    fira-code-symbols
-  ];
+  fonts = {
+    enableFontDir = true;
+    enableGhostscriptFonts = true;
+    fonts = with pkgs; [
+      dejavu_fonts
+      fira-code
+      fira-code-symbols
+      font-awesome-ttf
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      siji
+      symbola
+      ubuntu_font_family
+    ];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        sansSerif = ["Ubuntu"];
+        monospace = ["Fira Code"];
+      };
+    };
+  };
 
   # Setup zsh
   programs.zsh.enable = true;
