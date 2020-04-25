@@ -49,7 +49,7 @@ in {
       [
         hunspell
         hunspellDicts.en-us-large
-        emacs
+        emacsUnstable
         i3lock
         xss-lock
         xautolock

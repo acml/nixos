@@ -14,6 +14,8 @@ in {
     "${home-manager}/nixos"
   ];
 
+  nixpkgs.overlays = import ./packages;
+
   home-manager.useUserPackages = true;
 
   systemd.user.services."setup-keyboard" = {
