@@ -29,7 +29,6 @@ in mkIf cfg.enable {
 
   # Fonts
   fonts.fonts = with pkgs; [
-    emacs-all-the-icons-fonts
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji

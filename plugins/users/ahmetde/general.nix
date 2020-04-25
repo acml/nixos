@@ -47,9 +47,6 @@ in {
     # User-layer packages
     home.packages = with pkgs;
       [
-        hunspell
-        hunspellDicts.en-us-large
-        emacsUnstable
         i3lock
         xss-lock
         xautolock
@@ -60,6 +57,7 @@ in {
         gnome3.nautilus
         gnome3.eog
         evince
+        my.ripcord
       ] ++ cfg.extraPackages;
 
     # Fontconfig
