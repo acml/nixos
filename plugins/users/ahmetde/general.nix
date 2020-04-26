@@ -149,17 +149,23 @@ in {
     # GTK theme configs
     gtk = {
       enable = true;
-      font = {
-        name    = "Cantarell 11";
-        package = pkgs.cantarell-fonts;
-      };
+      # font = {
+      #   name    = "Cantarell 11";
+      #   package = pkgs.cantarell-fonts;
+      # };
       iconTheme = {
-        name    = "Adwaita";
-        package = pkgs.gnome3.adwaita-icon-theme;
+        # name    = "Paper";
+        # package = pkgs.paper-icon-theme;
+        name    = "Papirus";
+        package = pkgs.papirus-icon-theme;
       };
       theme = {
-        name    = "Adementary-dark";
-        package = pkgs.adementary-theme;
+        # name    = "Adementary-dark";
+        # package = pkgs.adementary-theme;
+        # name    = "Ant-Dracula";
+        # package = pkgs.ant-dracula-theme;
+        name    = "Materia-dark-compact";
+        package = pkgs.materia-theme;
       };
       # gtk3.extraConfig = { gtk-application-prefer-dark-theme = 1; };
     };
