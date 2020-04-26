@@ -190,6 +190,31 @@ in {
         };
       in {
         enable = true;
+        extraConfig = ''
+                        systemctl --user restart polybar
+                      '';
+        monitors = { eDP-1 = [ "1" "2" "3" "4" "5"] ; };
+        settings = {
+          normal_border_color = "#F9F9F9";
+          active_border_color = "#CCFF00";
+          focused_border_color = "#00CCFF";
+          presel_feedback_color = "#FFCC33";
+
+          initial_polarity = "first_child";
+
+          remove_unplugged_monitors = true;
+          remove_disabled_monitors = true;
+          border_width = 3;
+          window_gap = 10;
+          top_padding = 32;
+
+          split_ratio = 0.5;
+          borderless_monocle = true;
+          gapless_monocle = true;
+
+          focus_follows_pointer = true;
+          pointer_follows_monitor = true;
+        };
       };
 
       # Setup cursor

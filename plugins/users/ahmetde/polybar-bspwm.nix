@@ -204,7 +204,7 @@ in {
               menu-3-0-underline = "\${colors.green}";
               menu-3-1 = "Exit bspwm";
               menu-3-1-underline = "\${colors.red}";
-              menu-3-1-exec = "bspc quit";
+              menu-3-1-exec = "${pkgs.bspwm}/bin/bspc quit";
             }
 
             # If hibernation is supported, add a new menu that hibernates the machine.
