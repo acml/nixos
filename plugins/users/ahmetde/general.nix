@@ -118,6 +118,15 @@ in {
           export GDK_DPI_SCALE=${toString (1.0 / system.scale)}
           export QT_AUTO_SCREEN_SCALE_FACTOR=1
         '';
+        profileExtra =
+          ''
+          if [ -d "$HOME/.local/bin" ]; then
+             export PATH="$PATH:$HOME/.local/bin"
+          fi
+          if [ -d "$HOME/.emacs.d/doom/bin" ]; then
+             export PATH="$PATH:$HOME/.emacs.d/doom/bin"
+          fi
+        '';
         defaultKeymap = "emacs";
         oh-my-zsh = {
           enable = true;
@@ -130,14 +139,6 @@ in {
     # Handwritten configs
     home.file = {
       # ".config/gtk-3.0/settings.ini".source = (system.dirs.dotfiles + "/${name}/gtk-settings.ini");
-      # Handle multiple emacs installs
-      ".emacs".source = (system.dirs.dotfiles + "/${name}/emacs/.emacs");
-      ".emacs-profiles.el".source = (system.dirs.dotfiles + "/${name}/emacs/emacs-profiles.el");
-      ".emacs.d/config.spacemacs/init.el".source = (system.dirs.dotfiles + "/${name}/emacs/spacemacs");
-      ".emacs.d/config.doom/" = {
-        source = (system.dirs.dotfiles + "/${name}/emacs/doom.d");
-        recursive = true;
-      };
     };
 
     home.keyboard = {

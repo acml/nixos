@@ -46,6 +46,22 @@ in {
         rls
       ];
 
+    # Handwritten configs
+    home.file = {
+      # Handle multiple emacs installs
+      ".emacs".source = (system.dirs.dotfiles + "/${name}/emacs/.emacs");
+      ".emacs-profiles.el".source = (system.dirs.dotfiles + "/${name}/emacs/emacs-profiles.el");
+    };
+
+    xdg.configFile = {
+      "doom" = { source = (system.dirs.dotfiles + "/${name}/emacs/doom"); recursive = true; };
+      "spacemacs" = { source = (system.dirs.dotfiles + "/${name}/emacs/spacemacs"); recursive = true; };
+    };
+
+    home.sessionVariables = {
+      SPACEMACSDIR="\${HOME}/.config/spacemacs";
+      DOOMDIR="\${HOME}/.config/doom";
+    };
   }) config.icebox.static.users.ahmetde;
 
   config.fonts.fonts = [
