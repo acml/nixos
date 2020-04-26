@@ -55,6 +55,8 @@ in {
         # :lang rust
         rustfmt
         rls
+        # :ui treemacs
+        python3 # advanced git-mode and directory flattening features require python3
       ];
 
     # Handwritten configs

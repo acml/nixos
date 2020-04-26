@@ -26,76 +26,183 @@ This function should only modify configuration layer settings."
    ;; a layer lazily. (default t)
    dotspacemacs-ask-for-lazy-installation t
 
-   ;; If non-nil layers with lazy install support are lazy installed.
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(ruby
-     elm
-     (auto-completion :variables auto-completion-enable-snippets-in-popup t)
+   '(
+     ;; ----------------------------------------------------------------
+     ;; Example of useful layers you may want to use right away.
+     ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
+     ;; `M-m f e R' (Emacs style) to install them.
+     ;; ----------------------------------------------------------------
+     (spacemacs-layouts :variables spacemacs-layouts-restrict-spc-tab t)
+     ;; (ivy :variables ivy-enable-advanced-buffer-information t)
+     (helm :variables
+           helm-position 'bottom
+           helm-enable-auto-resize t)
+     (auto-completion :variables
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-sort-by-usage t
+                      auto-completion-enable-snippets-in-popup t)
+     better-defaults
+     bm
+     (c-c++ :variables
+
+            c-c++-adopt-subprojects t
+
+            c-c++-backend 'lsp-ccls
+            ;; c-c++-lsp-enable-semantic-highlight 'rainbow
+
+            c-c++-default-mode-for-headers 'c-mode)
+     (cmake :variables cmake-enable-cmake-ide-support t)
+     ;; (colors :variables colors-colorize-identifiers 'all)
+     colors
      csv
-     yaml
-     shell-scripts
-     javascript
-     html
-     helm
-     nixos
-     (haskell :variables haskell-font-lock-symbols t
-              haskell-completion-backend 'dante
-              dante-command-line '("nix-shell" "--run" "ghci"))
-     ;; hie-nix
-     (keyboard-layout :variables kl-layout 'colemak-hnei)
+     (elfeed :variables rmh-elfeed-org-files (list "~/.emacs.d/private/elfeed.org"))
      emacs-lisp
-     ;; google-calendar
-     bibtex
-     ;ipython-notebook
-     (mu4e :variables mu4e-account-alist t)
-     (elfeed :variables rmh-elfeed-org-files (list "~/Dropbox/Org/RSS.org"))
+     epub
+     (erc :variables
+          erc-autojoin-channels-alist '(("freenode.net" "#emacs" "#guix" "#i3")
+                                        ("gitter.im" "#syl20bnr/spacemacs"))
+          erc-enable-notifications nil
+          erc-enable-sasl-auth t
+          erc-hide-list '("JOIN" "PART" "QUIT")
+          erc-server-list '(("irc.freenode.net"
+                             :port "6667"
+                             :nick "aaccmmll")
+                            ("irc.gitter.im"
+                             :port "6667"
+                             :ssl t
+                             :nick "acml")))
      git
+     gtags
+     helpful
+     html
+     javascript
+     ;; (keyboard-layout :variables kl-layout 'colemak-hnei)
+     ;; (keyboard-layout :variables kl-layout 'colemak-jkhl)
+     (lsp :variables
+          lsp-enable-indentation nil
+          lsp-ui-doc-enable nil)
+     lua
      markdown
-     python
-     ipython-notebook
+     ;; (mu4e :variables
+     ;;       mu4e-enable-async-operations t
+     ;;       mu4e-enable-mode-line t
+     ;;       mu4e-enable-notifications t
+     ;;       mu4e-use-maildirs-extension t)
+     multiple-cursors
+     nginx
+     nixos
      org
+     osx
+     pass
+     pdf
+     perl5
+     php
+     python
      ranger
-     ;; pdf
+     rebox
+     ruby
+     rust
+     scheme
+     search-engine
+     ;; semantic
      (shell :variables
-             ;; shell-default-height 30
-             shell-default-shell 'ansi-term
-             ;; shell-default-position 'bottom
-             )
-     (spell-checking :variables spell-checking-enable-by-default nil)
+            shell-default-height 30
+            shell-default-position 'bottom
+            shell-default-shell 'vterm
+            shell-enable-smart-eshell t)
+     shell-scripts
+     (slack :variables
+            slack-spacemacs-layout-name "@Slack"
+            slack-spacemacs-layout-binding "s")
+     ;; spell-checking
+     spotify
+     sql
      syntax-checking
-     themes-megapack
-     ;; Private layers
-     hie-nix
+     systemd
+     (treemacs :variables
+               treemacs-use-scope-type 'Perspectives)
+     version-control
+     vimscript
+     ;; (vinegar :variables vinegar-reuse-dired-buffer t)
+     windows-scripts
+     yaml
      )
 
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(
-                                      ;(ereader :location (recipe :fetcher github :repo "bddean/emacs-ereader"))
-                                      base16-theme
-                                      password-store
-                                      ;; direnv
-                                      ;; org-gcal
-                                      gotham-theme
-                                      org-brain
-                                      ;; org-gnome
-                                      ;; ewal
-                                      ;; ewal-spacemacs-themes
-                                      ;; ewal-evil-cursors
-                                      flycheck-vale
-                                      )
+   ;; To use a local version of a package, use the `:location' property:
+   ;; '(your-package :location "~/path/to/your-package/")
+   ;; Also include the dependencies as they will not be resolved automatically.
+   dotspacemacs-additional-packages
+   '(
+     beacon
+     beginend
+     charmap
+     (declutter :location (recipe :fetcher github :repo "sanel/declutter"))
+     ;; dimmer
+     diredfl
+     dired-filter
+     dired-git-info
+     dired-hacks-utils
+     dired-quick-sort
+     ;; dired-rainbow
+     (dired-show-readme :location (recipe :fetcher gitlab :repo "kisaragi-hiu/dired-show-readme"))
+     dired-sidebar
+     dired-subtree
+     ;; dired-toggle
+     direnv
+     disk-usage
+     docker
+     docker-tramp
+     dropbox
+     dts-mode
+     emms
+     exec-path-from-shell
+     exwm
+     xelb
+     guix
+     hackernews
+     helm-emms
+     ;; (helm-spotify :location (recipe :fetcher github :repo "jodonnell/helm-spotify"))
+     helm-system-packages
+     (helm-treemacs-icons :location (recipe :fetcher github :repo "yyoncho/helm-treemacs-icons"))
+     ;; highlight-indent-guides
+     (i3wm-config-mode :location (recipe :fetcher github :repo "Alexander-Miller/i3wm-Config-Mode"))
+     ;; magit-todos
+     minimap
+     mu4e-conversation
+     nimbus-theme
+     ov
+     posix-manual
+     rg
+     rmsbolt
+     (bufler :location (recipe :fetcher github :repo "alphapapa/bufler.el"))
+     (somafm :location (recipe :fetcher github :repo "artenator/somafm.el"))
+     sx
+     system-packages
+     treemacs-icons-dired
+     trashed
+     turkish
+     vlf
+     wttrin
+     (youtube-dl :location (recipe :fetcher github :repo "skeeto/youtube-dl-emacs"))
+     ztree
+     )
+
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(adaptive-wrap smartparens exec-path-from-shell)
+   dotspacemacs-excluded-packages '()
+
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and deletes any unused
@@ -153,11 +260,11 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
    ;; latest version of packages from MELPA. (default nil)
-   dotspacemacs-use-spacelpa t
+   dotspacemacs-use-spacelpa nil
 
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
-   ;; (default nil)
-   dotspacemacs-verify-spacelpa-archives nil
+   ;; (default t)
+   dotspacemacs-verify-spacelpa-archives t
 
    ;; If non-nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
@@ -176,10 +283,17 @@ It should only modify the values of Spacemacs settings."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style '(hybrid :variables
+                                       hybrid-style-visual-feedback t
+                                       hybrid-style-enable-evilified-state t
+                                       hybrid-style-enable-hjkl-bindings t
+                                       hybrid-style-use-evil-search-module nil
+                                       hybrid-style-default-state 'normal)
 
-   ;; If non-nil output loading progress in `*Messages*' buffer. (default nil)
-   dotspacemacs-verbose-loading nil
+   ;; If non-nil show the version string in the Spacemacs buffer. It will
+   ;; appear as (spacemacs version)@(emacs version)
+   ;; (default t)
+   dotspacemacs-startup-buffer-show-version t
 
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
@@ -195,11 +309,17 @@ It should only modify the values of Spacemacs settings."
    ;; `recents' `bookmarks' `projects' `agenda' `todos'.
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   dotspacemacs-startup-lists '((recents . 5)
+   dotspacemacs-startup-lists '((bookmarks . 5)
+                                (recents . 5)
                                 (projects . 7))
 
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
+
+   ;; Default major mode for a new empty buffer. Possible values are mode
+   ;; names such as `text-mode'; and `nil' to use Fundamental mode.
+   ;; (default `text-mode')
+   dotspacemacs-new-empty-buffer-major-mode 'text-mode
 
    ;; Default major mode of the scratch buffer (default `text-mode')
    dotspacemacs-scratch-mode 'text-mode
@@ -211,15 +331,80 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(;;ewal-spacemacs-modern
-                         doom-spacegrey
+   dotspacemacs-themes '(
+                         ;; day and night themes
+                         modus-operandi
+                         modus-vivendi
+                         doom-one
                          spacemacs-dark
-                         gotham
-                         base16-apathy
-                         base16-eighties
-                         base16-atelier-cave
-                         base16-atelier-lakeside
+                         spacemacs-light
+                         ;; dark themes
+                         darkburn ;; guix-help title
+                         darktooth
+                         doom-city-lights
+                         doom-opera
+                         doom-peacock
+                         doom-tomorrow-night
+                         dracula
+                         gruber-darker
+                         gruvbox-dark-hard
+                         immaterial
+                         kaolin-galaxy ;; guix-help title
+                         omtose-softer
+                         naquadah
+                         nimbus
+                         nord
+                         planet
+                         sanityinc-tomorrow-eighties
+                         solarized-dark
+                         zenburn ;; guix-help title
+                         zerodark
+                         ;; light themes
+                         dichromacy
+                         ;; doom-one-light
+                         ;; doom-solarized-light
+                         farmhouse-light
+                         gruvbox-light-medium
+                         light-soap
+                         material-light
+                         solarized-light
+                         ;; console themes
+                         dracula
+                         naquadah
+                         kaolin-aurora
+                         kaolin-galaxy
+                         kaolin-mono-dark
+                         kaolin-valley-dark
+                         ;; tsdh-light ;; insignificant active window modeline
+                         ;; tried and retired themes
+                         ;; afternoon ;; find-file
+                         ;; ample-zen ;; find-file
+                         ;; badwolf ;; find-file
+                         ;; bubbleberry ;; unreadable guix-help title
+                         ;; clues ;; find-file
+                         ;; doom-molokai ;; comments too dark
+                         ;; doom-nord ;; colors are washed out
+                         ;; doom-sourcerer
+                         ;; exotica ;; guix-help title
+                         ;; farmhouse-dark ;; prog mode - unreadable red variable type
+                         ;; flatland ;; guix-help title
+                         ;; hc-zenburn ;; guix-help title, insignificant selection color
+                         ;; inkpot ;; find-file
+                         ;; kaolin-light ;; insignificant selection color
+                         ;; lush ;; find-file
+                         ;; majapahit-dark ;; find-file, avy-jump
+                         ;; minimal-light ;; insignificant selection color
+                         ;; mustang ;; find-file
+                         ;; obsidian ;; find-file
+                         ;; odersky ;; find-file
+                         ;; sanityinc-tomorrow-bright ;; avy-jump
+                         ;; sanityinc-tomorrow-night ;; avy-jump
+                         ;; soft-charcoal ;; find-file, avy-jump
+                         ;; tsdh-dark ;; find-file
+                         ;; wombat  ;; find-file, hl-current-line
+                         ;; kaolin-fusion
                          )
+
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
    ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
@@ -227,17 +412,45 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   ;; dotspacemacs-mode-line-theme '(spacemacs :separator arrow-fade :separator-scale 1.5)
    dotspacemacs-mode-line-theme 'doom
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
    dotspacemacs-colorize-cursor-according-to-state t
 
-   ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
-   ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Fira Code" :size 16)
-   ;; The leader key
+   ;; Default font or prioritized list of fonts.
+   dotspacemacs-default-font '(
+                               ("DejaVu Sans Mono"
+                                :size 10.5
+                                :weight normal
+                                :width normal)
+                               ("Iosevka Regular"
+                                :size 10.0
+                                :weight normal
+                                :width normal)
+                               ("Source Code Pro"
+                                :size 10.0
+                                :weight normal
+                                :width normal)
+                               ("Monospace"
+                                :size 10.0
+                                :weight normal
+                                :width normal)
+                               ("IBM Plex Mono"
+                                :size 10.0
+                                :weight normal
+                                :width normal)
+                               ("Ubuntu Mono"
+                                :size 10.0
+                                :weight normal
+                                :width normal)
+                               ("Fira Code"
+                                :size 10.0
+                                :weight normal
+                                :width normal)
+                               )
+
+   ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
 
    ;; The key used for Emacs commands `M-x' (after pressing on the leader key).
@@ -256,8 +469,10 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-major-mode-leader-key ","
 
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
-   ;; (default "C-M-m")
-   dotspacemacs-major-mode-emacs-leader-key "C-M-m"
+   ;; (default "C-M-m" for terminal mode, "<M-return>" for GUI mode).
+   ;; Thus M-RET should work as leader key in both GUI and terminal modes.
+   ;; C-M-m also should work in terminal mode, but not in GUI mode.
+   dotspacemacs-major-mode-emacs-leader-key (if window-system "<M-return>" "C-M-m")
 
    ;; These variables control whether separate commands are bound in the GUI to
    ;; the key pairs `C-i', `TAB' and `C-m', `RET'.
@@ -265,25 +480,34 @@ It should only modify the values of Spacemacs settings."
    ;; and TAB or `C-m' and `RET'.
    ;; In the terminal, these pairs are generally indistinguishable, so this only
    ;; works in the GUI. (default nil)
-   dotspacemacs-distinguish-gui-tab nil
+   dotspacemacs-distinguish-gui-tab t
 
    ;; Name of the default layout (default "Default")
    dotspacemacs-default-layout-name "Default"
+
    ;; If non-nil the default layout name is displayed in the mode-line.
    ;; (default nil)
    dotspacemacs-display-default-layout nil
+
    ;; If non-nil then the last auto saved layouts are resumed automatically upon
    ;; start. (default nil)
    dotspacemacs-auto-resume-layouts nil
+
+   ;; If non-nil, auto-generate layout name when creating new layouts. Only has
+   ;; effect when using the "jump to layout by number" commands. (default nil)
+   dotspacemacs-auto-generate-layout-names nil
+
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
-   dotspacemacs-large-file-size 5
+   dotspacemacs-large-file-size 10
+
    ;; Location where to auto-save files. Possible values are `original' to
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   dotspacemacs-auto-save-file-location 'original
+   dotspacemacs-auto-save-file-location 'cache
+
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
 
@@ -291,57 +515,82 @@ It should only modify the values of Spacemacs settings."
    ;; paste something, pressing `C-j' and `C-k' several times cycles through the
    ;; elements in the `kill-ring'. (default nil)
    dotspacemacs-enable-paste-transient-state nil
+
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
    dotspacemacs-which-key-delay 0.4
+
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
    ;; (default 'bottom)
    dotspacemacs-which-key-position 'bottom
+
    ;; Control where `switch-to-buffer' displays the buffer. If nil,
    ;; `switch-to-buffer' displays the buffer in the current window even if
    ;; another same-purpose window is available. If non-nil, `switch-to-buffer'
    ;; displays the buffer in a same-purpose window even if the buffer can be
    ;; displayed in the current window. (default nil)
    dotspacemacs-switch-to-buffer-prefers-purpose nil
+
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
    dotspacemacs-loading-progress-bar t
+
    ;; If non-nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
    dotspacemacs-fullscreen-at-startup nil
+
    ;; If non-nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
+
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
+
+   ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
+   ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
+   ;; borderless fullscreen. (default nil)
+   dotspacemacs-undecorated-at-startup nil
+
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
    dotspacemacs-active-transparency 90
+
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's inactive or deselected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
    dotspacemacs-inactive-transparency 90
+
    ;; If non-nil show the titles of transient states. (default t)
    dotspacemacs-show-transient-state-title t
+
    ;; If non-nil show the color guide hint for transient state keys. (default t)
    dotspacemacs-show-transient-state-color-guide t
-   ;; If non-nil unicode symbols are displayed in the mode line. (default t)
+
+   ;; If non-nil unicode symbols are displayed in the mode line.
+   ;; If you use Emacs as a daemon and wants unicode characters only in GUI set
+   ;; the value to quoted `display-graphic-p'. (default t)
    dotspacemacs-mode-line-unicode-symbols t
+
    ;; If non-nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters point
    ;; when it reaches the top or bottom of the screen. (default t)
-   dotspacemacs-smooth-scrolling nil
+   dotspacemacs-smooth-scrolling t
+
    ;; Control line numbers activation.
-   ;; If set to `t' or `relative' line numbers are turned on in all `prog-mode' and
-   ;; `text-mode' derivatives. If set to `relative', line numbers are relative.
+   ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
+   ;; `prog-mode' and `text-mode' derivatives. If set to `relative', line
+   ;; numbers are relative. If set to `visual', line numbers are also relative,
+   ;; but lines are only visual lines are counted. For example, folded lines
+   ;; will not be counted and wrapped lines are counted as multiple lines.
    ;; This variable can also be set to a property list for finer control:
    ;; '(:relative nil
+   ;;   :visual nil
    ;;   :disabled-for-modes dired-mode
    ;;                       doc-view-mode
    ;;                       markdown-mode
@@ -349,6 +598,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       pdf-view-mode
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
+   ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
    dotspacemacs-line-numbers nil
 
@@ -361,7 +611,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-smartparens-strict-mode nil
 
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
-   ;; over any automatically added closing parenthesis, bracket, quote, etc…
+   ;; over any automatically added closing parenthesis, bracket, quote, etc...
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
    dotspacemacs-smart-closing-parenthesis nil
 
@@ -372,7 +622,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, start an Emacs server if one is not already running.
    ;; (default nil)
-   dotspacemacs-enable-server t
+   dotspacemacs-enable-server nil
 
    ;; Set the emacs server socket location.
    ;; If nil, uses whatever the Emacs default is, otherwise a directory path
@@ -384,6 +634,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
    dotspacemacs-persistent-server nil
+
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
@@ -406,7 +657,7 @@ It should only modify the values of Spacemacs settings."
    ;; %z - mnemonics of buffer, terminal, and keyboard coding systems
    ;; %Z - like %z, but including the end-of-line format
    ;; (default "%I@%S")
-   dotspacemacs-frame-title-format "%t@%a"
+   dotspacemacs-frame-title-format "%I@%S %a"
 
    ;; Format specification for setting the icon title format
    ;; (default nil - same as frame-title-format)
@@ -417,7 +668,14 @@ It should only modify the values of Spacemacs settings."
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'changed
+
+   ;; If non nil activate `clean-aindent-mode' which tries to correct
+   ;; virtual indentation of simple modes. This can interfer with mode specific
+   ;; indent handling like has been reported for `go-mode'.
+   ;; If it does deactivate it here.
+   ;; (default t)
+   dotspacemacs-use-clean-aindent-mode t
 
    ;; Either nil or a number of seconds. If non-nil zone out after the specified
    ;; number of seconds. (default nil)
@@ -437,414 +695,1034 @@ See the header of this file for more information."
   (spacemacs/load-spacemacs-env))
 
 (defun dotspacemacs/user-init ()
-  "Initialization function for user code.
-It is called immediately after `dotspacemacs/init', before layer configuration
-executes.
- This function is mostly useful for variables that need to be set
-before packages are loaded. If you are unsure, you should try in setting them in
-`dotspacemacs/user-config' first."
+  "Initialization for user code:
+This function is called immediately after `dotspacemacs/init', before layer
+configuration.
+It is mostly for variables that should be set before packages are loaded.
+If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
-  (add-to-list 'load-path "~/Dotfiles/scripts/ewal")
-  (add-to-list 'load-path "~/Dotfiles/scripts/ewal/spacemacs-themes/")
-  (require 'ewal-spacemacs-modern-theme)
-  (load-theme 'ewal-spacemacs-modern t)
+  (set-face-background 'mouse "white")
+
+  ;; ;; (add-to-list 'default-frame-alist
+  ;; ;;              '(font . "-CYEL-Iosevka-normal-normal-normal-*-14-*-*-*-*-0-iso10646-1"))
+
+  ;; (set-face-attribute 'default nil :font "Ubuntu Mono-13")
+
+  ;; ;; Latin
+  ;; (set-fontset-font t 'latin "Noto Sans")
+
+  ;; ;; East Asia: 你好, 早晨, こんにちは, 안녕하세요
+  ;; ;;
+  ;; ;; Make sure you use the right font. See
+  ;; ;; https://www.google.com/get/noto/help/cjk/.
+  ;; ;;
+  ;; ;; This font requires "Regular". Other Noto fonts dont.
+  ;; ;; ¯\_(ツ)_/¯
+  ;; (set-fontset-font t 'han "Noto Sans CJK SC Regular")
+  ;; (set-fontset-font t 'kana "Noto Sans CJK JP Regular")
+  ;; (set-fontset-font t 'hangul "Noto Sans CJK KR Regular")
+  ;; (set-fontset-font t 'cjk-misc "Noto Sans CJK KR Regular")
+
+  ;; ;; South East Asia: ជំរាបសួរ, ສະບາຍດີ, မင်္ဂလာပါ, สวัสดีครับ
+  ;; (set-fontset-font t 'khmer "Noto Sans Khmer")
+  ;; (set-fontset-font t 'lao "Noto Sans Lao")
+  ;; (set-fontset-font t 'burmese "Noto Sans Myanmar")
+  ;; (set-fontset-font t 'thai "Noto Sans Thai")
+
+  ;; ;; Africa: ሠላም
+  ;; (set-fontset-font t 'ethiopic "Noto Sans Ethiopic")
+
+  ;; ;; Middle/Near East: שלום, السّلام عليكم
+  ;; (set-fontset-font t 'hebrew "Noto Sans Hebrew")
+  ;; (set-fontset-font t 'arabic "Noto Sans Arabic")
+
+  ;; ;;  South Asia: નમસ્તે, नमस्ते, ನಮಸ್ಕಾರ, നമസ്കാരം, ଶୁଣିବେ,
+  ;; ;;              ආයුබෝවන්, வணக்கம், నమస్కారం, བཀྲ་ཤིས་བདེ་ལེགས༎
+  ;; (set-fontset-font t 'gujarati "Noto Sans Gujarati")
+  ;; (set-fontset-font t 'devanagari "Noto Sans Devanagari")
+  ;; (set-fontset-font t 'kannada "Noto Sans Kannada")
+  ;; (set-fontset-font t 'malayalam "Noto Sans Malayalam")
+  ;; (set-fontset-font t 'oriya "Noto Sans Oriya")
+  ;; (set-fontset-font t 'sinhala "Noto Sans Sinhala")
+  ;; (set-fontset-font t 'tamil "Noto Sans Tamil")
+  ;; (set-fontset-font t 'telugu "Noto Sans Telugu")
+  ;; (set-fontset-font t 'tibetan "Noto Sans Tibetan")
+
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file 'noerror)
+
+  (add-to-list 'load-path "~/.nix-profile/share/emacs/site-lisp/mu4e")
+
+  (when (spacemacs/system-is-mac)
+    (setq mu4e-mu-binary "/usr/local/bin/mu"))
+  (setq
+   auto-window-vscroll nil
+   browse-url-browser-function 'eww-browse-url
+   calendar-location-name "Istanbul, Turkey"
+   calendar-latitude 41.168602
+   calendar-longitude 29.047024
+   vc-follow-symlinks t)
+
+  ;; (setq evil-default-state 'emacs
+  ;;       evil-emacs-state-modes nil
+  ;;       evil-insert-state-modes nil
+  ;;       evil-motion-state-modes nil
+  ;;       evil-normal-state-modes '(text-mode prog-mode fundamental-mode
+  ;;                                           css-mode conf-mode
+  ;;                                           TeX-mode LaTeX-mode
+  ;;                                           diff-mode))
+  (prefer-coding-system 'windows-1254)
+  (prefer-coding-system 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+
+  ;; (setenv "ANT_HOME" "C:\\GNU\\apache-ant-1.10.1")
+  ;; (setenv "JAVACMD" "C:\\Program Files\\Java\\jdk1.8.0_77\\bin\\java")
+  ;; (setenv "PATH" (concat (getenv "PATH") ";C:\\GNU\\apache-ant-1.10.1\\bin"))
+  ;; (setq exec-path (append exec-path '("C:/GNU\apache-ant-1.10.1/bin")))
+
+
+  (setq org-src-block-faces '(("emacs-lisp" (:background "#fef2f2" :extend t))
+                              ("python" (:background "#f4f4ff" :extend t)))
+        modus-operandi-theme-distinct-org-blocks t
+        modus-operandi-theme-rainbow-headings t
+        ;; modus-operandi-theme-section-headings t
+        modus-operandi-theme-scale-headings t
+        ;; modus-operandi-theme-visible-fringes t
+        modus-operandi-theme-slanted-constructs t
+        modus-operandi-theme-bold-constructs t
+        modus-operandi-theme-3d-modeline t
+        modus-operandi-theme-subtle-diffs t
+        modus-operandi-theme-proportional-fonts t)
+
+  )
+
+(defun dotspacemacs/user-load ()
+  "Library to load while dumping.
+This function is called only while dumping Spacemacs configuration. You can
+`require' or `load' the libraries of your choice that will be included in the
+dump."
   )
 
 (defun dotspacemacs/user-config ()
-  "Configuration function for user code.
-This function is called at the very end of Spacemacs initialization after
-layers configuration.
-This is the place where most of your configurations should be done. Unless it is
-explicitly specified that a variable should be set before a package is loaded,
-you should place your code here."
+  "Configuration for user code:
+This function is called at the very end of Spacemacs startup, after layer
+configuration.
+Put your configuration code here, except for variables that should be set
+before packages are loaded."
 
-  ;; General
-  (setq vc-follow-symlinks t) ;; Always follow symlinks.
+  (use-package treemacs-icons)
+  (treemacs--setup-icon-background-colors)
+  (helm-treemacs-icons-enable)
 
-  ;; Get system notifications through libnotify
-  (setq alert-default-style 'libnotify)
+  (setq focus-follows-mouse t
+        gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"
+        ido-mode -1
+        paradox-github-token "1270899b8bbfb19871fb6192c44f768c1817e490")
 
-  ;; Terminal stuff
-  (add-hook 'term-mode-hook 'spacemacs/toggle-truncate-lines-on)
+  (push '("*charmap*" . emacs) evil-buffer-regexps)
 
-  ;; Don't prompt when opening journal or other large files
-  ;(setq large-file-warning-threshold 20000000)
+  (add-hook 'after-save-hook
+            'executable-make-buffer-file-executable-if-script-p)
 
-  ;; Org Mode
-  (setq org-startup-indented t
-        org-adapt-indentation nil)
-  (setq org-todo-keywords
-        '((sequence "TODO" "WAITING" "|" "DONE" "CANCELED")))
-  (setq evil-org-key-theme '(textobjects navigation additional insert todo))
-  (setq org-default-priority ?C)
-  (setq org-lowest-priority ?G)
-  ;; Show clock tables in hours, not days.
-  (setq org-duration-format 'h:mm)
+  (use-package exec-path-from-shell ;; if not using the ELPA package
+    :init (exec-path-from-shell-initialize)
+    (exec-path-from-shell-copy-env "STAGING_DIR"))
 
-  ;; Clock break time in pomodoro
-  (setq org-pomodoro-clock-break t)
+  (use-package vlf
+    :config (require 'vlf-setup))
 
-  (defun org-journal-new-entry ()
-    "Inserts header with inactive timestamp, hours and minutes.
-A custom journal helper function."
-    (interactive)
-    (org-insert-heading)
-    (org-insert-time-stamp (current-time) t t))
+  (use-package calc
+    :commands (calc)
+    :init
+    (setq math-additional-units
+          '((GiB "1024 * MiB" "Giga Byte")
+            (MiB "1024 * KiB" "Mega Byte")
+            (KiB "1024 * B"   "Kilo Byte")
+            (B   nil          "Byte")
+            (Gib "1024 * Mib" "Giga bit")
+            (Mib "1024 * Kib" "Mega bit")
+            (Kib "1024 * b"   "Kilo bit")
+            (b   nil          "bit")
+            )))
 
-  ;; Enable visual-line-mode by default in Org Mode.
-  (add-hook 'org-mode-hook 'visual-line-mode)
-  ;; Make evil-mode up/down operate in screen lines instead of logical lines
-  (define-key evil-normal-state-map "n" 'evil-next-visual-line)
-  (define-key evil-normal-state-map "e" 'evil-previous-visual-line)
-  ;; Also in visual mode
-  (define-key evil-visual-state-map "n" 'evil-next-visual-line)
-  (define-key evil-visual-state-map "e" 'evil-previous-visual-line)
+  ;; (defun turn-off-mouse (&optional frame)
+  ;;   (interactive)
+  ;;   (shell-command "xinput --disable \"bcm5974\""))
 
-  ;; Python in Org Mode
-  (setq python-shell-completion-native-disabled-interpreters "python")
-  ;; (setq org-babel-python-command "nix-shell --run python")
+  ;; (defun turn-on-mouse (&optional frame)
+  ;;   (interactive)
+  ;;   (shell-command "xinput --enable \"bcm5974\""))
 
-  ;; Org Code Execution
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((python . t)
-     (haskell . t)
-     (dot . t)
-     (emacs-lisp . t)
-     (shell . t)))
+  ;; (defun turn-off-mouse (&optional frame)
+  ;;   (interactive)
+  ;;   (shell-command "xinput --disable \"DELL07FA:00 06CB:7E92 Touchpad\""))
 
-  ;; Make it so org has correct indentation inside code blocks, see
-  ;; https://github.com/syl20bnr/spacemacs/issues/13255#issuecomment-585796146
-  (setq org-edit-src-content-indentation 0)
+  ;; (defun turn-on-mouse (&optional frame)
+  ;;   (interactive)
+  ;;   (shell-command "xinput --enable \"DELL07FA:00 06CB:7E92 Touchpad\""))
 
-  ;; Put state changes into the LOGBOOK drawer, to clean up a bit
-  (setq org-log-into-drawer t)
+  ;; (add-hook 'focus-in-hook #'turn-off-mouse)
+  ;; (add-hook 'focus-out-hook #'turn-on-mouse)
+  ;; (add-hook 'delete-frame-functions #'turn-on-mouse)
 
-  ;; Org Calendar and Diary
-  (setq diary-file "~/Dropbox/Org/diary")
-  (setq org-agenda-include-diary t)
-  ;;(setq org-agenda-window-setup 'only-window)
-  (add-hook 'org-agenda-mode-hook
+  ;; cedet
+  ;; (global-ede-mode t)
+  ;; (ede-enable-generic-projects)
+
+  ;; (setq project-linux-build-directory-default "~/Projects/gimsa/linux/am43xx_evm/"
+  ;;       project-linux-architecture-default "arm")
+  ;; (require 'ede/linux)
+  ;; (ede-linux-project
+  ;;  :directory "~/Projects/gimsa/linux/"
+  ;;  :architecture "arm"
+  ;;  :build-directory "~/Projects/gimsa/linux/am43xx_evm/"
+  ;;  )
+
+  ;; (setq semantic-default-submodes
+  ;;       '(
+  ;;         global-semanticdb-minor-mode                     ;; Maintain tag database.
+  ;;         ;; global-semantic-idle-breadcrumbs-mode            ;; Show a breadcrumb of location during idle time
+  ;;         global-semantic-idle-local-symbol-highlight-mode ;; Highlight references of the symbol under point.
+  ;;         global-semantic-idle-scheduler-mode              ;; Reparse buffer when idle.
+  ;;         global-semantic-idle-summary-mode                ;; Show summary of tag at point.
+  ;;         ;; global-semantic-idle-completions-mode            ;; Show completions when idle.
+  ;;         global-semantic-decoration-mode                  ;; Additional tag decorations.
+  ;;         global-semantic-highlight-func-mode              ;; Highlight the current tag.
+  ;;         global-semantic-stickyfunc-mode                  ;; Show current fun in header line.
+  ;;         ;; global-semantic-mru-bookmark-mode                ;; Provide switch-to-buffer-like keybinding for tag names.
+  ;;         global-cedet-m3-minor-mode                       ;; A mouse 3 context menu.
+  ;;         ))
+
+  ;; use snmpv2-mode for *-MIB.txt files
+  (add-to-list 'auto-mode-alist '("-MIB\\.txt" . snmpv2-mode))
+  (font-lock-add-keywords 'snmpv2-mode
+                          '(
+                            ("CONTACT-INFO" . font-lock-keyword-face)
+                            ("GROUP" . font-lock-keyword-face)
+                            ("MANDATORY-GROUPS)" . font-lock-keyword-face)
+                            ("LAST-UPDATED" . font-lock-keyword-face)
+                            ("M\\(AX-ACCESS\\|ODULE-COMPLIANCE\\)" . font-lock-keyword-face)
+                            ("MODULE-IDENTITY" . font-lock-keyword-face)
+                            ("MODULE" . font-lock-keyword-face)
+                            ("O\\(BJECTS\\|RGANIZATION\\)" . font-lock-keyword-face)
+                            ("OBJECT-GROUP" . font-lock-keyword-face)
+                            ("REVISION" . font-lock-keyword-face)
+                            )
+                          )
+  (add-hook 'snmpv2-mode-hook
             (lambda ()
-              (calendar-set-date-style 'iso)))
-  (add-hook 'diary-mode-hook 'diary-fancy-display-mode)
+              (setq snmp-font-lock-keywords snmp-font-lock-keywords-3)))
 
-  ;; Prose linting
-  (require 'flycheck-vale)
-  (flycheck-vale-setup)
+  ;;;###autoload
+  ;; Author: Zane Ashby
+  ;; (http://demonastery.org/2013/04/emacs-narrow-to-region-indirect/)
+  (defun narrow-to-region-indirect (start end &optional prefix)
+    "Restrict editing in this buffer to the current region, indirectly.
+ To deactivate indirect region when you're done, just kill the buffer.
+ The new buffer is named as [wide-buffer-name].
+ If non-nil, optional argument `prefix' is put ahead of indirect
+buffer's name.
+ If invoked with C-u, prompt user for `prefix' value."
+    (interactive
+     (cond
+      ((eq current-prefix-arg nil)             ;; normal invocation
+       (list (region-beginning) (region-end)))
+      (t                                       ;; universal argument invocation
+       (let ((prefix-readed (read-string "Prefix: ")))
+         (list (region-beginning) (region-end) prefix-readed)))))
 
-  ;; Attempt to make custom links
-  ;; (add-hook 'org-mode-hook
+    (deactivate-mark)
+    (let ((indirect-buffer-name (format "%s[%s]"
+                                        (or prefix "") (buffer-name)))
+          (buf (clone-indirect-buffer nil nil)))
+      (with-current-buffer buf
+        (narrow-to-region start end)
+        (rename-buffer indirect-buffer-name t))
+      (switch-to-buffer buf)))
+  (evil-leader/set-key (kbd "on") 'narrow-to-region-indirect)
+
+  ;; ;; C/C++ styles
+  ;; (defun c-lineup-arglist-tabs-only (ignored)
+  ;;   "Line up argument lists by tabs, not spaces"
+  ;;   (let* ((anchor (c-langelem-pos c-syntactic-element))
+  ;;          (column (c-langelem-2nd-pos c-syntactic-element))
+  ;;          (offset (- (1+ column) anchor))
+  ;;          (steps (floor offset c-basic-offset)))
+  ;;     (* (max steps 1)
+  ;;        c-basic-offset)))
+
+  ;; ;; Add Linux kernel style
+  ;; (add-hook 'c-mode-common-hook
   ;;           (lambda ()
-  ;;             (font-lock-add-keywords nil '(("\\[\\(\\@.*?\\)\\]" 1 font-lock-constant-face prepend)))))
+  ;;             (c-add-style "linux-kernel"
+  ;;                          '("linux" (c-offsets-alist
+  ;;                                     (arglist-cont-nonempty
+  ;;                                      c-lineup-gcc-asm-reg
+  ;;                                      c-lineup-arglist-tabs-only))))))
 
-  ;; (add-hook 'org-mode-hook
-  ;;           (lambda ()
-  ;;             (font-lock-add-keywords nil '(("w\\(hi\\)ch" 1 font-lock-constant-face prepend)))))
+  ;; (defun linux-kernel-development-setup ()
+  ;;   (let ((filename (buffer-file-name)))
+  ;;     ;; Enable kernel mode for the appropriate files
+  ;;     (when (and filename
+  ;;                (or (locate-dominating-file filename "Kbuild")
+  ;;                    (locate-dominating-file filename "Kconfig")
+  ;;                    (save-excursion (goto-char 0)
+  ;;                                    (search-forward-regexp "^#include <linux/\\(module\\|kernel\\)\\.h>$" nil t))))
+  ;;       ;; (setq indent-tabs-mode t)
+  ;;       ;; (setq show-trailing-whitespace t)
+  ;;       (c-set-style "linux-kernel")
+  ;;       (message "Setting up indentation for the linux kernel"))))
 
+  ;; (add-hook 'c-mode-hook 'linux-kernel-development-setup)
 
-  ;; (add-hook 'org-mode-hook
-  ;;           (lambda ()
-  ;;             (font-lock-add-keywords nil
-  ;;                                     '(("\\<\\(FIXME\\):" 1 'font-lock-warning-face prepend)
-  ;;                                       ("\\<\\(and\\|or\\|not\\)\\>" .
-  ;;                                        'font-lock-keyword-face)))))
+  (c-add-style "acml"
+               '((indent-tabs-mode . nil)
+                 (c-basic-offset . 2)
+                 (c-offsets-alist
+                  (substatement-open . 0)
+                  (inline-open . 0)
+                  (statement-cont . c-lineup-assignments)
+                  (inextern-lang . 0)
+                  (innamespace . 0))))
 
-  ;; Google Calendar
-  ;; (setq org-gcal-up-days 60
-  ;;       org-gcal-file-alist '(("jon.reeve@gmail.com" . "/home/jon/Dropbox/Org/Projects/schedule.org"))
-  ;;       org-gcal-client-id (password-store-get "org-gcal-client-id")
-  ;;       org-gcal-client-secret (password-store-get "org-gcal-client-secret")
-  ;;       cfw:org-capture-template '("s" "Schedule an event" entry
-  ;;                                  (file "/home/jon/Dropbox/Org/Projects/schedule.org")
-  ;;                                  "* %^{Description}\n%^{LOCATION}p\n%(cfw:org-capture-day)\n%?"))
+  (add-hook 'c-mode-common-hook
+            (defun acml/c-style ()
+              (c-set-style "acml")
+              (setq c-macro-names-with-semicolon
+                    '("Q_OBJECT"
+                      "Q_PROPERTY"
+                      "Q_DECLARE"
+                      "Q_ENUMS"
+                      "Q_INTERFACES"))
+              (c-make-macro-with-semi-re)) t)
 
-  ;; Load from .authinfo. Adapted from https://github.com/myuhe/org-gcal.el/issues/47
-  ;; (require 'netrc)
-  ;; (defun get-authinfo (host port)
-  ;;   (let* ((netrc (netrc-parse (expand-file-name "~/.authinfo")))
-  ;;          (hostentry (netrc-machine netrc host port port)))
-  ;;     (when hostentry (netrc-get hostentry "password"))))
+  ;; (defun c++-header-file-p ()
+  ;;   "Return non-nil, if in a C++ header."
+  ;;   (and (string-match "\\.h$"
+  ;;                      (or (buffer-file-name)
+  ;;                          (buffer-name)))
+  ;;        (let ((case-fold-search nil))
+  ;;          (save-excursion
+  ;;            (re-search-forward
+  ;;             "^ *\\_<\\(namespace\\|template\\|class\\|public\\|private\\|protected\\)\\_>" nil t)))))
 
+  ;; (add-to-list 'magic-mode-alist
+  ;;              '(c++-header-file-p . c++-mode))
 
-  (setq org-modules '(org-bibtex org-gnus org-habit org-info org-irc org-mhe org-rmail org-w3m org-protocol))
+  ;; (setq auto-mode-alist
+  ;;       (append '(("\\.[Cc][Xx][Xx]$" . c++-mode)
+  ;;                 ("\\.[Cc][Pp][Pp]$" . c++-mode)
+  ;;                 ("\\.[Hh][Xx][Xx]$" . c++-mode)
+  ;;                 ("\\.[Tt][Cc][Cc]$" . c++-mode)
+  ;;                 ;; ("\\.i$" . c++-mode)    ; SWIG
+  ;;                 ) auto-mode-alist))
 
-  ;;(setq org-caldav-oauth2-client-id (password-store-get "org-gcal-client-id")
-  ;;      org-caldav-oauth2-client-secret (password-store-get "org-gcal-client-secret")
-  ;;      org-caldav-url 'google
-  ;;      org-caldav-inbox "~/Dropbox/Org/Projects/inbox.org"
-  ;;      org-caldav-files (list "~/Dropbox/Org/schedule2.org"))
+  ;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
-  ;; My Autolinks mode.
-  ;; (setq org-directory "~/Dropbox/Org")
-  ;; (load-file "~/.emacs.d/private/org-autolinks/org-autolinks-mode.el")
+  ;; to fix performance penalty of setting c-c++-lsp-sem-highlight-method to 'overlay
+  ;; (set-buffer-multibyte nil)
 
-  ;; Org Agenda
-  (setq org-agenda-files (list "~/Dropbox/Org/Projects/")
-        org-projectile-file "~/Dropbox/Org/Projects/todo.org")
+  (use-package beacon
+    :config
+    (beacon-mode 1))
 
-  ;; (with-eval-after-load 'org-agenda
-  ;;   (require 'org-projectile)
-  ;;   (mapcar '(lambda (file)
-  ;;              (when (file-exists-p file)
-  ;;                (push file org-agenda-files)))
-  ;;           (org-projectile-todo-files)))
+  ;; (use-package beacon
+  ;;   :init
+  ;;   (beacon-mode 1)
+  ;;   (evil-leader/set-key (kbd "ob") 'beacon-blink)
+  ;;   :config
+  ;;   (setq beacon-blink-when-point-moves-vertically 7)
+  ;;   :diminish beacon-mode)
 
-  ;; (with-eval-after-load 'org-agenda
-  ;;   (require 'org-projectile)
-  ;;   (push (org-projectile:todo-files) org-agenda-files))
+  (setq ccls-initialization-options
+        `(:cache (:directory ,(file-truename "~/.cache/ccls"))))
 
-  (setq org-refile-targets '((nil :maxlevel . 9)
-                             (org-agenda-files :maxlevel . 9)))
-  (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
-  (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
+  (with-eval-after-load 'cmake-ide
+    (setq cmake-ide-build-dir "build/"))
 
-  ;; This doesn't seem to work?
-  ;; (require 'org-gnome)
-  ;; (setq org-gnome-integrate-with-calendar t)
-  ;; (org-gnome-turn-on)
+  (use-package evil
+    :init
+    (defun acml/man ()
+      (if (executable-find "man")
+          (man (word-at-point))
+        (woman)))
+    (setq evil-lookup-func #'acml/man))
 
-  ;; Adapted from http://stackoverflow.com/a/12751732/584121
-  (require 'org-protocol)
-  (setq org-protocol-default-template-key "l")
-  (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline "/home/jon/Dropbox/Org/notes.org" "Tasks")
-           "* TODO %?  %i\n  %a")
-          ("m" "Movie" entry (file+headline "/home/jon/Dropbox/Org/movies.org" "To Watch")
-           "* %a\n %?\n %i")
-          ("l" "Link" entry (file+olp "/home/jon/Dropbox/Org/notes.org" "Web Links")
-           "* %a\n %?\n %i")
-          ("s" "Schedule" entry (file "/home/jon/Dropbox/Org/Projects/schedule.org")
-           "* %?\n :PROPERTIES:\n :LOCATION:\n :END:\n %a\n %i")
-          ))
+  (use-package beginend
+    :init (beginend-global-mode))
 
-  ;; Disable holidays. Is there an easier way of doing this?
-  (setq holiday-christian-holidays nil
-        holiday-islamic-holidays nil
-        holiday-bahai-holidays nil
-        holiday-oriental-holidays nil
-        holiday-hebrew-holidays nil)
+  ;; (use-package dimmer
+  ;;   :config
+  ;;   (setq dimmer-fraction 0.4)
+  ;;   (dimmer-configure-helm)
+  ;;   (dimmer-configure-hydra)
+  ;;   (dimmer-configure-magit)
+  ;;   (dimmer-configure-org)
+  ;;   (dimmer-configure-which-key)
+  ;;   (dimmer-mode t))
 
-  ;; Bibliography
-  (setq reftex-default-bibliography '("~/Dropbox/Columbia/Dissertation/references.bib"
-                                      "~/Dropbox/Papers/library.bib" "~/Dropbox/Papers/zotero.bib")
-        org-ref-default-bibliography '("~/Dropbox/Papers/library.bib"
-          "~/Dropbox/Columbia/Dissertation/references.bib")
-        org-ref-pdf-directory "~/Dropbox/Papers" ;; keep the final slash off
-        org-ref-bibliography-notes "~/Dropbox/Org/Projects/books.org"
-        bibtex-completion-pdf-field "file"
-        org-ref-get-pdf-filename-function 'org-ref-get-zotero-pdf-filename)
+  (use-package dired-aux
+    :commands dired-dwim-target-directory)
 
-  (setq org-ref-note-title-format
-    "** TODO %y - %9a - %t
- :PROPERTIES:
-  :Custom_ID: %k
-  :AUTHOR: %9a
-  :JOURNAL: %j
-  :AVAILABILITY:
-  :YEAR: %y
- :END:
-")
-  (setq org-ref-open-pdf-function
-        (lambda (fpath)
-          (start-process "zathura" "*helm-bibtex-zathura*" "/usr/bin/zathura" fpath)))
+  (use-package dired
 
-  (defun org-ref-get-zotero-pdf-filename (key)
-    "Return the pdf filename indicated by zotero file field.
-Argument KEY is the bibtex key."
-    (let* ((results (org-ref-get-bibtex-key-and-file key))
-           (bibfile (cdr results))
-           entry)
-      (with-temp-buffer
-        (insert-file-contents bibfile)
-        (bibtex-set-dialect (parsebib-find-bibtex-dialect) t)
-        (bibtex-search-entry key nil 0)
-        (setq entry (bibtex-parse-entry))
-        (let ((e (org-ref-reftex-get-bib-field "file" entry)))
-          (if (> (length e) 4)
-              (let ((clean-field (replace-regexp-in-string "/+" "/" e)))
-                (let ((first-file (car (split-string clean-field ";" t))))
-                  (concat "" first-file)))
-            (message "PDF filename not found.")
-            )))))
+    :hook
+    (dired-mode . dired-hide-details-mode)
+    (dired-mode . (lambda () (rename-buffer (generate-new-buffer-name (format "*dired: %s*" dired-directory)))))
 
-  ;; Override this function.
-  (defun org-ref-open-bibtex-pdf ()
-    "Open pdf for a bibtex entry, if it exists.
-assumes point is in
-the entry of interest in the bibfile.  but does not check that."
+    :config
+    (when (spacemacs/system-is-mac)
+      (setq insert-directory-program "/usr/local/bin/gls"))
+
+    (setq ;; Details information
+          dired-listing-switches "--group-directories-first -ahl"
+
+          ;; delete and copy recursively
+          dired-recursive-copies 'always
+          dired-recursive-deletes 'top
+
+          ;; Quickly copy/move file in Dired
+          dired-dwim-target t
+
+          delete-by-moving-to-trash t
+
+          wdired-allow-to-change-permissions t)
+
+    (use-package dired-async
+      :config
+      (dired-async-mode 1))
+
+    ;; Colourful columns.
+    (use-package diredfl
+      :config
+      (diredfl-global-mode 1))
+
+    ;; (use-package dired-rainbow
+    ;;   :after diredfl
+    ;;   :config
+    ;;   (progn
+    ;;     (dired-rainbow-define-chmod directory "#6cb2eb" "d.*")
+    ;;     (dired-rainbow-define html "#eb5286" ("css" "less" "sass" "scss" "htm" "html" "jhtm" "mht" "eml" "mustache" "xhtml"))
+    ;;     (dired-rainbow-define xml "#f2d024" ("xml" "xsd" "xsl" "xslt" "wsdl" "bib" "json" "msg" "pgn" "rss" "yaml" "yml" "rdata"))
+    ;;     (dired-rainbow-define document "#9561e2" ("docm" "doc" "docx" "odb" "odt" "pdb" "pdf" "ps" "rtf" "djvu" "epub" "odp" "ppt" "pptx"))
+    ;;     (dired-rainbow-define markdown "#ffed4a" ("org" "etx" "info" "markdown" "md" "mkd" "nfo" "pod" "rst" "tex" "textfile" "txt"))
+    ;;     (dired-rainbow-define database "#6574cd" ("xlsx" "xls" "csv" "accdb" "db" "mdb" "sqlite" "nc"))
+    ;;     (dired-rainbow-define media "#de751f" ("mp3" "mp4" "MP3" "MP4" "avi" "mpeg" "mpg" "flv" "ogg" "mov" "mid" "midi" "wav" "aiff" "flac"))
+    ;;     (dired-rainbow-define image "#f66d9b" ("tiff" "tif" "cdr" "gif" "ico" "jpeg" "jpg" "png" "psd" "eps" "svg"))
+    ;;     (dired-rainbow-define log "#c17d11" ("log"))
+    ;;     (dired-rainbow-define shell "#f6993f" ("awk" "bash" "bat" "sed" "sh" "zsh" "vim"))
+    ;;     (dired-rainbow-define interpreted "#38c172" ("py" "ipynb" "rb" "pl" "t" "msql" "mysql" "pgsql" "sql" "r" "clj" "cljs" "scala" "js"))
+    ;;     (dired-rainbow-define compiled "#4dc0b5" ("asm" "cl" "lisp" "el" "c" "h" "c++" "h++" "hpp" "hxx" "m" "cc" "cs" "cp" "cpp" "go" "f" "for" "ftn" "f90" "f95" "f03" "f08" "s" "rs" "hi" "hs" "pyc" ".java"))
+    ;;     (dired-rainbow-define executable "#8cc4ff" ("exe" "msi"))
+    ;;     (dired-rainbow-define compressed "#51d88a" ("7z" "zip" "bz2" "tgz" "txz" "gz" "xz" "z" "Z" "jar" "war" "ear" "rar" "sar" "xpi" "apk" "xz" "tar"))
+    ;;     (dired-rainbow-define packaged "#faad63" ("deb" "rpm" "apk" "jad" "jar" "cab" "pak" "pk3" "vdf" "vpk" "bsp"))
+    ;;     (dired-rainbow-define encrypted "#ffed4a" ("gpg" "pgp" "asc" "bfe" "enc" "signature" "sig" "p12" "pem"))
+    ;;     (dired-rainbow-define fonts "#6cb2eb" ("afm" "fon" "fnt" "pfb" "pfm" "ttf" "otf"))
+    ;;     (dired-rainbow-define partition "#e3342f" ("dmg" "iso" "bin" "nrg" "qcow" "toast" "vcd" "vmdk" "bak"))
+    ;;     (dired-rainbow-define vc "#0074d9" ("git" "gitignore" "gitattributes" "gitmodules"))
+    ;;     (dired-rainbow-define-chmod executable-unix "#38c172" "-.*x.*")))
+
+    ;; When activated after creating a new entry (e.g. a directory) cursor jumps
+    ;; to beginning of the listing. Annoys me to no end. Disabled for now.
+    (use-package dired-filter
+      :disabled
+      :config
+      (setq dired-filter-group-saved-groups
+            '(("default" ("Directories" (directory)))))
+      :hook (dired-mode . dired-filter-group-mode))
+
+    (use-package dired-git-info
+      :bind (:map dired-mode-map
+                  (")" . dired-git-info-mode)))
+
+    (use-package dired-hacks-utils
+      :config
+      (dired-utils-format-information-line-mode t))
+
+    ;; Quick sort dired buffers via hydra
+    (use-package dired-quick-sort
+      :bind (:map dired-mode-map ("s" . hydra-dired-quick-sort/body))
+      :hook (dired-initial-position . dired-quick-sort))
+
+    (use-package dired-subtree
+      :bind (:map dired-mode-map
+                  ("<tab>" . acml/dired-subtree-toggle)
+                  ("<backtab>" . dired-subtree-cycle))
+      :init
+      (defun acml/dired-subtree-toggle ()
+        "Insert subtree at point or remove it if it was not present."
+        (interactive)
+        (dired-subtree-toggle)
+        (dired-revert))
+      (autoload 'dired-subtree--is-expanded-p "dired-subtree")
+      :config
+      (setq dired-subtree-use-backgrounds nil))
+
+    (use-package treemacs-icons-dired
+      :config (use-package treemacs-icons)
+      :init
+      (defun acml/dired-setup ()
+        (unless (eq major-mode 'dired-sidebar-mode)
+          (treemacs-icons-dired-mode)
+          (treemacs--select-icon-set)))
+      :hook (dired-mode . acml/dired-setup))
+
+    :bind (:map dired-mode-map
+                ("<left>" . dired-up-directory)
+                ("<right>" . dired-find-file)))
+
+  (use-package dired-show-readme)
+
+  (use-package dired-sidebar
+    :bind (("<f3>" . dired-sidebar-toggle-sidebar))
+    :commands (dired-sidebar-toggle-sidebar)
+    :hook (dired-sidebar-mode . (lambda ()
+                                  (unless (file-remote-p default-directory)
+                                    (auto-revert-mode))))
+    :config
+    (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
+    (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
+
+    ;; (setq dired-sidebar-subtree-line-prefix "__")
+    (setq dired-sidebar-theme 'none)
+    (setq dired-sidebar-use-term-integration t)
+    (setq dired-sidebar-use-custom-font t))
+
+  ;; (use-package dired-toggle
+  ;;   :bind (("<f3>" . #'dired-toggle)
+  ;;          :map dired-mode-map
+  ;;          ("q" . #'dired-toggle-quit)
+  ;;          ([remap dired-find-file] . #'dired-toggle-find-file)
+  ;;          ([remap dired-up-directory] . #'dired-toggle-up-directory)
+  ;;          ("C-c C-u" . #'dired-toggle-up-directory))
+  ;;   :config
+  ;;   (setq dired-toggle-window-size 32)
+  ;;   (setq dired-toggle-window-side 'left)
+
+  ;;   ;; Optional, enable =visual-line-mode= for our narrow dired buffer:
+  ;;   (add-hook 'dired-toggle-mode-hook
+  ;;             (lambda () (interactive)
+  ;;               (visual-line-mode 1)
+  ;;               (setq-local visual-line-fringe-indicators '(nil right-curly-arrow))
+  ;;               (setq-local word-wrap nil))))
+
+  (use-package direnv
+    :if (executable-find "direnv")
+    :config
+    (add-to-list 'warning-suppress-types '(direnv))
+    (direnv-mode))
+
+  (use-package trashed)
+
+  (use-package disk-usage)
+  (evil-set-initial-state 'disk-usage-mode 'emacs)
+
+  (use-package docker)
+  (use-package docker-tramp)
+
+  (use-package dropbox
+    :ensure t
+    :custom
+    (dropbox-access-token "B5C6qTZzoFEAAAAAAAAkZZNmIc6x425AYR-bsS46qJDdrsd4B_EVHXh3ObOeoWZ2")
+    (dropbox-verbose t)
+    :config
+    (dropbox-connect)
+    :demand t)
+
+  (use-package dts-mode
+    :mode "\\.dts\\'")
+
+  (with-eval-after-load 'ediff
+    (add-hook 'ediff-startup-hook
+              (lambda ()
+                (local-set-key (kbd "q") 'my-ediff-quit)))
+
+    (defun my-ediff-quit ()
+      "If any of the ediff buffers have been modified, ask if changes
+should be saved. Then quit ediff normally, without asking for
+confirmation"
+      (interactive)
+      (ediff-barf-if-not-control-buffer)
+      (let* ((buf-a ediff-buffer-A)
+             (buf-b ediff-buffer-B)
+             (buf-c ediff-buffer-C)
+             (ctl-buf (current-buffer))
+             (modified (remove-if-not 'buffer-modified-p
+                                      (list buf-a buf-b buf-c))))
+        (let ((save (if modified (yes-or-no-p "Save changes?")nil)))
+          (loop for buf in modified do
+                (progn
+                  (set-buffer buf)
+                  (if save
+                      (save-buffer)
+                    (set-buffer-modified-p nil))))
+          (set-buffer ctl-buf)
+          (ediff-really-quit nil))))
+
+    (advice-add 'ediff-quit :around 'ct//no-confirm)
+
+    (defun ediff-copy-both-to-C ()
+      (interactive)
+      (ediff-copy-diff ediff-current-difference nil 'C nil
+                       (concat
+                        (ediff-get-region-contents ediff-current-difference 'A ediff-control-buffer)
+                        (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
+    (defun add-c-to-ediff-mode-map () (define-key ediff-mode-map "c" 'ediff-copy-both-to-C))
+    (add-hook 'ediff-keymap-setup-hook 'add-c-to-ediff-mode-map))
+
+  ;; EMMS
+  (use-package emms-setup
+    :ensure emms
+    :config
+    (emms-standard)
+    (use-package emms-streams)
+    (use-package emms-history)
+    (emms-history-load)
+
+    (when (version<= emms-version "5.3")
+      (setq emms-player-mpv-ipc-method 'file)) ; TODO: Remove once Emms 5.4 is out.
+
+    (setq emms-player-list (list emms-player-mpv)
+          emms-source-file-default-directory (file-truename "~/Music/")
+          emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find
+          ;; Cover thumbnails.
+          emms-browser-covers 'emms-browser-cache-thumbnail-async)
+    ;; (dolist (radio '(("SomaFM: Defcon" "https://somafm.com/defcon.pls" 1 streamlist)
+    ;;                  ("SomaFM: SF10-33" "https://somafm.com/sf1033.pls" 1 streamlist)
+    ;;                  ("SomaFM: Dub Step Beyond" "https://somafm.com/dubstep.pls" 1 streamlist)
+    ;;                  ("SomaFM: Illinois Street Lounge" "https://somafm.com/illstreet.pls" 1 streamlist)
+    ;;                  ("SomaFM: Space Station" "http://www.somafm.com/spacestation.pls" 1 streamlist)
+    ;;                  ("Classic rock radio" "http://internetradio.salue.de:8000/classicrock.mp3" 1 url)
+    ;;                  ("FIP" "http://direct.fipradio.fr/live/fip-midfi.mp3" 1 url)
+    ;;                  ("RadioJazz - Manouche" "http://jazz-wr02.ice.infomaniak.ch/jazz-wr02-128.mp3" 1 url)
+    ;;                  ("RadioJazz - Blues" "http://jazzblues.ice.infomaniak.ch/jazzblues-high.mp3" 1 url)
+    ;;                  ("RadioJazz - Groove" "http://jazz-wr08.ice.infomaniak.ch/jazz-wr08-128.mp3" 1 url)
+    ;;                  ("RadioJazz - Funk" "http://jazz-wr06.ice.infomaniak.ch/jazz-wr06-128.mp3" 1 url)))
+    ;;   (add-to-list 'emms-streams-built-in-list radio))
+    (global-set-key (kbd "<XF86AudioPlay>") 'emms-pause)
+    (global-set-key (kbd "<XF86AudioStop>") 'emms-stop)
+    (global-set-key (kbd "<XF86AudioPrev>") 'emms-previous)
+    (global-set-key (kbd "<XF86AudioNext>") 'emms-next)
+    (evil-leader/set-key (kbd "oE") 'emms))
+
+  ;; use Helm as the default EMMS interface for streams
+  (use-package helm-emms
+    :after emms-setup
+    :config
+    (setq helm-emms-dired-directories (list emms-source-file-default-directory
+                                            ;; "~/Downloads"
+                                            )
+          helm-emms-default-sources (list helm-source-emms-dired
+                                          helm-source-emms-files ; Disable for a huge speed-up.
+                                          helm-source-emms-streams))
+    (evil-leader/set-key (kbd "oe") 'helm-emms))
+
+  (with-eval-after-load 'erc
+    (setq erc-prompt-for-nickserv-password nil))
+
+  (with-eval-after-load 'eww
+    (defun my/eww-toggle-images ()
+      "Toggle whether images are loaded and reload the current page fro cache."
+      (interactive)
+      (setq-local shr-inhibit-images (not shr-inhibit-images))
+      (eww-reload t)
+      (message "Images are now %s"
+               (if shr-inhibit-images "off" "on")))
+
+    (define-key eww-mode-map (kbd "I") #'my/eww-toggle-images)
+    (define-key eww-link-keymap (kbd "I") #'my/eww-toggle-images)
+
+    (setq-default shr-inhibit-images nil)   ; toggle with `I`
+    (add-hook 'eww-after-render-hook 'eww-readable)
+    (evil-set-initial-state 'eww-mode 'emacs)
+    (evil-set-initial-state 'eww-buffers-mode 'emacs)
+    (evil-set-initial-state 'eww-bookmark-mode 'emacs)
+    )
+
+  (use-package geiser
+    :init
+    (spacemacs|define-custom-layout "SICP"
+      :binding "S"
+      :body
+      (find-file "~/Downloads/sicp.pdf")
+      (split-window-right)
+      (run-geiser 'mit)))
+
+  (with-eval-after-load 'ggtags
+    (setq-local imenu-create-index-function #'ggtags-build-imenu-index))
+
+  (use-package hackernews
+    :init
+    (evil-leader/set-key (kbd "oh") 'hackernews)
+    :config
+    (setq hackernews-items-per-page 55)
+    ;; (set 'face-remapping-alist '((hackernews-link font-lock-function-name-face)))
+    (push '("*hackernews*" . emacs) evil-buffer-regexps))
+
+  (with-eval-after-load 'helm-system-packages
+    (push '("*helm-system-packages-output*" . emacs) evil-buffer-regexps))
+
+  (defun acml/search-spacemacs-docs ()
+    "Search the spacemacs docs using helm-do-ag"
     (interactive)
-    (save-excursion
-      (bibtex-beginning-of-entry)
-      (let* ((bibtex-expand-strings t)
-             (entry (bibtex-parse-entry t))
-             (key (reftex-get-bib-field "=key=" entry))
-             (pdf (org-ref-get-zotero-pdf-filename key)))
-        (message "%s" pdf)
-        (if (file-exists-p pdf)
-            ;; (org-open-link-from-string (format "[[file:%s]]" pdf))
-            (shell-command (format "zathura %s" pdf))
-          (ding)))))
+    (helm-do-ag "~/.emacs.d/doc/"))
+  (evil-leader/set-key (kbd "oD") 'acml/search-spacemacs-docs)
 
-  ;; Open PDFs with system viewer
-  (delete '("\\.pdf\\'" . default) org-file-apps)
-  (add-to-list 'org-file-apps '("\\.pdf\\'" . system))
+  (with-eval-after-load 'conf-mode
+    (use-package i3wm-config-mode))
 
-  (setq neo-theme 'nerd)
+  (setq magit-repository-directories '(( "~/Projects/" . 2)))
 
-  ;; Jupyter
-  ;(setq ein:use-auto-complete t)
-  ; Or, to enable "superpack" (a little bit hacky improvements):
-  ;(setq ein:use-auto-complete-superpack t)
-  ;; More autocomplete for jupyter
-  ;(add-to-list 'company-backends #'user-company-ein-backend)
+  ;; (use-package magit-todos
+  ;;   :after magit
+  ;;   :config
+  ;;   (setq magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:?")
+  ;;   (setq magit-todos-rg-extra-args '("-M 120"))
+  ;;   (define-key magit-todos-section-map "j" nil)
+  ;;   (magit-todos-mode +1))
 
-  ;(spacemacs|add-company-backends
-  ; :backends ein:company-backend
-  ; :modes ein:notebook-mode)
+  ;; (use-package magit
+  ;;   :config
+  ;;   (magit-add-section-hook 'magit-status-sections-hook
+  ;;                           'magit-insert-ignored-files
+  ;;                           'magit-insert-untracked-files t))
 
-  ;; Org-brain
-  (setq org-brain-path "~/Dropbox/Org/Brain")
+  (use-package minimap
+    :init
+    (evil-leader/set-key (kbd "om") 'minimap-mode)
+    ;; (minimap-mode 1)
+    :config (setq minimap-window-location 'right))
 
-  ;; Markdown
-  (add-hook 'markdown-mode 'visual-line-mode)
+  ;; (use-package mu4e-conversation
+  ;;   :after mu4e)
 
-  (require 'auth-source-pass)
-  (auth-source-pass-enable)
+  ;; (with-eval-after-load 'mu4e
+  ;;   (setq mu4e-attachment-dir "~/Documents/Attachments"
+  ;;       mu4e-maildir "~/.mail"
+  ;;       mu4e-get-mail-command "mbsync -q -a"
+  ;;       mu4e-update-interval nil
+  ;;       mu4e-user-mail-address-list '("ahmet.ozgezer@andasis.com"
+  ;;                                     "a_c_o@aof.anadolu.edu.tr"
+  ;;                                     "ozgezer@gmail.com"
+  ;;                                     "ozgezer@mail333.com"
+  ;;                                     "ozgezer@msn.com"
+  ;;                                     "ozgezer@yaho.com")
+  ;;       mu4e-compose-signature-auto-include nil
 
-  ;; Mail
-  ;; Send email via Gmail:
-  (setq smtpmail-smtp-server "smtp.gmail.com"
-        smtpmail-smtp-service 587
-        message-send-mail-function 'smtpmail-send-it
-        smtpmail-default-smtp-server "smtp.gmail.com"
-        smtpmail-queue-dir "~/Mail/queue/cur")
+  ;;       ;; set `mu4e-context-policy` and `mu4e-compose-policy` to tweak when mu4e should
+  ;;       ;; guess or ask the correct context, e.g.
 
-  (add-hook 'mu4e-view-mode-hook 'visual-line-mode)
-  (setq mu4e-html2text-command "w3m -T text/html")
-  (setq mu4e-view-use-gnus t) ;; Open .eml attachments
+  ;;       ;; start with the first (default) context;
+  ;;       ;; default is to ask-if-none (ask when there's no context yet, and none match)
+  ;;       mu4e-context-policy 'pick-first
 
-  ;; configure orgmode support in mu4e
-  ;; (require 'org-mu4e)
-  ;; when mail is sent, automatically convert org body to HTML
-  (setq org-mu4e-convert-to-html t)
+  ;;       ;; compose with the current context is no context matches;
+  ;;       ;; default is to ask
+  ;;       mu4e-compose-context-policy nil
 
-  ;; Better looking HTML mail
-  (setq shr-color-visible-luminance-min 80
-        shr-max-image-proportion 0.6
-        shr-use-colors nil
-        shr-use-fonts nil)
+  ;;       mu4e-view-show-images t
+  ;;       mu4e-view-show-addresses t
+  ;;       mu4e-bookmarks
+  ;;       `(("flag:unread AND NOT flag:trashed" "Unread messages" ?u)
+  ;;         ("date:today..now" "Today's messages" ?t)
+  ;;         ("date:7d..now" "Last 7 days" ?w)
+  ;;         ("mime:image/*" "Messages with images" ?p)
+  ;;         (,(mapconcat 'identity
+  ;;                      (mapcar
+  ;;                       (lambda (maildir)
+  ;;                         (concat "maildir:" (car maildir)))
+  ;;                       mu4e-maildir-shortcuts) " OR ")
+  ;;          "All inboxes" ?i))
+  ;;       mu4e-contexts
+  ;;       `(,(make-mu4e-context
+  ;;           :name "andasis"
+  ;;           :enter-func (lambda () (mu4e-message "Switch to the andasis context"))
+  ;;           ;; leave-func not defined
+  ;;           :match-func (lambda (msg)
+  ;;                         (when msg
+  ;;                           (mu4e-message-contact-field-matches msg :to "ahmet.ozgezer@andasis.com")))
+  ;;           :vars '((user-mail-address      . "ahmet.ozgezer@andasis.com")
+  ;;                   (user-full-name         . "Ahmet Cemal Ozgezer")
+  ;;                   (mu4e-drafts-folder     . "/andasis/drafts")
+  ;;                   (mu4e-sent-folder       . "/andasis/sent")
+  ;;                   (mu4e-trash-folder      . "/andasis/trash")
+  ;;                   (mu4e-maildir-shortcuts . (("/andasis/inbox" . ?i)
+  ;;                                              ("/andasis/sent"  . ?s)
+  ;;                                              ("/andasis/trash" . ?t)))
+  ;;                   (smtpmail-mail-address . "ahmet.ozgezer@andasis.com")
+  ;;                   (mu4e-compose-signature . (concat
+  ;;                                              "Ahmet Cemal Ozgezer\n"
+  ;;                                              "Andasis Elektronik San. ve Tic. A.Ş.\n"
+  ;;                                              "Teknopark İstanbul, No: 1/1C 1206 Kat:2\n"
+  ;;                                              "Pendik İstanbul / Türkiye\n"
+  ;;                                              "Tel: +90 216 510 20 01\n"))))
+  ;;         ,(make-mu4e-context
+  ;;           :name "gmail"
+  ;;           :enter-func (lambda () (mu4e-message "Switch to the gmail context"))
+  ;;           ;; leave-fun not defined
+  ;;           :match-func (lambda (msg)
+  ;;                         (when msg
+  ;;                           (mu4e-message-contact-field-matches msg :to "ozgezer@gmail.com")))
+  ;;           :vars '((user-mail-address      . "ozgezer@gmail.com")
+  ;;                   (user-full-name         . "Ahmet Cemal Ozgezer")
+  ;;                   (mu4e-drafts-folder     . "/gmail/drafts")
+  ;;                   (mu4e-sent-folder       . "/gmail/sent")
+  ;;                   (mu4e-trash-folder      . "/gmail/trash")
+  ;;                   (mu4e-maildir-shortcuts . (("/gmail/inbox" . ?i)
+  ;;                                              ("/gmail/sent"  . ?s)
+  ;;                                              ("/gmail/trash" . ?t)))
+  ;;                   (smtpmail-mail-address . "ozgezer@gmail.com")
+  ;;                   (mu4e-compose-signature . (concat "Ahmet Cemal Ozgezer\n"))))
+  ;;         ,(make-mu4e-context
+  ;;           :name "yahoo"
+  ;;           :enter-func (lambda () (mu4e-message "Switch to the yahoo context"))
+  ;;           ;; leave-fun not defined
+  ;;           :match-func (lambda (msg)
+  ;;                         (when msg
+  ;;                           (mu4e-message-contact-field-matches msg :to "ozgezer@yahoo.com")))
+  ;;           :vars '((user-mail-address      . "ozgezer@yahoo.com")
+  ;;                   (user-full-name         . "Ahmet Cemal Ozgezer")
+  ;;                   (mu4e-drafts-folder     . "/yahoo/drafts")
+  ;;                   (mu4e-sent-folder       . "/yahoo/sent")
+  ;;                   (mu4e-trash-folder      . "/yahoo/trash")
+  ;;                   (mu4e-maildir-shortcuts . (("/yahoo/inbox" . ?i)
+  ;;                                              ("/yahoo/sent"  . ?s)
+  ;;                                              ("/yahoo/trash" . ?t)))
+  ;;                   (smtpmail-mail-address . "ozgezer@yahoo.com")
+  ;;                   (mu4e-compose-signature . (concat "Ahmet Cemal Ozgezer\n"))))
+  ;;         ,(make-mu4e-context
+  ;;           :name "msn"
+  ;;           :enter-func (lambda () (mu4e-message "Switch to the msn context"))
+  ;;           ;; leave-fun not defined
+  ;;           :match-func (lambda (msg)
+  ;;                         (when msg
+  ;;                           (mu4e-message-contact-field-matches msg :to "ozgezer@msn.com")))
+  ;;           :vars '((user-mail-address      . "ozgezer@msn.com")
+  ;;                   (user-full-name         . "Ahmet Cemal Ozgezer")
+  ;;                   (mu4e-drafts-folder     . "/msn/drafts")
+  ;;                   (mu4e-sent-folder       . "/msn/sent")
+  ;;                   (mu4e-trash-folder      . "/msn/trash")
+  ;;                   (mu4e-maildir-shortcuts . (("/msn/inbox" . ?i)
+  ;;                                              ("/msn/sent"  . ?s)
+  ;;                                              ("/msn/trash" . ?t)))
+  ;;                   (smtpmail-mail-address . "ozgezer@msn.com")
+  ;;                   (mu4e-compose-signature . (concat "Ahmet Cemal Ozgezer\n"))))
+  ;;         ,(make-mu4e-context
+  ;;           :name "aof"
+  ;;           :enter-func (lambda () (mu4e-message "Switch to the aof context"))
+  ;;           ;; leave-fun not defined
+  ;;           :match-func (lambda (msg)
+  ;;                         (when msg
+  ;;                           (mu4e-message-contact-field-matches msg :to "a_c_o@aof.anadolu.edu.tr")))
+  ;;           :vars '((user-mail-address      . "a_c_o@aof.anadolu.edu.tr")
+  ;;                   (user-full-name         . "Ahmet Cemal Ozgezer")
+  ;;                   (mu4e-drafts-folder     . "/aof/drafts")
+  ;;                   (mu4e-sent-folder       . "/aof/sent")
+  ;;                   (mu4e-trash-folder      . "/aof/trash")
+  ;;                   (mu4e-maildir-shortcuts . (("/aof/inbox" . ?i)
+  ;;                                              ("/aof/sent"  . ?s)
+  ;;                                              ("/aof/trash" . ?t)))
+  ;;                   (smtpmail-mail-address . "a_c_o@aof.anadolu.edu.tr")
+  ;;                   (mu4e-compose-signature . (concat "Ahmet Cemal Ozgezer\n"))))
+  ;;         ,(make-mu4e-context
+  ;;           :name "qip"
+  ;;           :enter-func (lambda () (mu4e-message "Switch to the qip context"))
+  ;;           ;; leave-fun not defined
+  ;;           :match-func (lambda (msg)
+  ;;                         (when msg
+  ;;                           (mu4e-message-contact-field-matches msg :to "ozgezer@mail333.com")))
+  ;;           :vars '((user-mail-address      . "ozgezer@mail333.com")
+  ;;                   (user-full-name         . "Ahmet Cemal Ozgezer")
+  ;;                   (mu4e-drafts-folder     . "/qip/drafts")
+  ;;                   (mu4e-sent-folder       . "/qip/sent")
+  ;;                   (mu4e-trash-folder      . "/qip/trash")
+  ;;                   (mu4e-maildir-shortcuts . (("/qip/inbox" . ?i)
+  ;;                                              ("/qip/sent"  . ?s)
+  ;;                                              ("/qip/trash" . ?t)))
+  ;;                   (smtpmail-mail-address . "ozgezer@mail333.com")
+  ;;                   (mu4e-compose-signature . (concat "Ahmet Cemal Ozgezer\n"))))))
+  ;;   ;; (require 'mu4e-conversation)
+  ;;   ;; (global-mu4e-conversation-mode)
+  ;;   )
 
-  (require 'mu4e)
-  (setq mu4e-contexts
-        `( ,(make-mu4e-context
-             :name "Gmail"
-             :enter-func (lambda () (mu4e-message "Switch to Gmail."))
-             ;; leave-func not defined
-             :match-func (lambda (msg)
-                           (when msg
-                             (mu4e-message-contact-field-matches msg
-                                                                 :to "jon.reeve@gmail.com")))
-             :vars '(  ( user-mail-address  . "jon.reeve@gmail.com" )
-                       ( user-full-name     . "Jonathan Reeve" )
-                       ( mu4e-sent-folder   . "/gmail/[Gmail]/.Sent Mail" )
-                       ( mu4e-drafts-folder . "/gmail/[Gmail]/.Drafts" )
-                       ( smtpmail-smtp-user . "jon.reeve@gmail.com" )
+  ;; (with-eval-after-load 'mu4e-alert
+  ;;   ;; Enable Desktop notifications
+  ;;   (mu4e-alert-set-default-style (cond
+  ;;                                  ((spacemacs/system-is-mac) 'notifier) ; For Mac OSX (through the terminal notifier app)
+  ;;                                  ;; ((spacemacs/system-is-mac) 'growl) ; Alternative for Mac OSX
+  ;;                                  ;; ((spacemacs/system-is-linux) 'notifications) ; For linux
+  ;;                                  ((spacemacs/system-is-linux) 'libnotify)   ; Alternative for linux
+  ;;                                  (t 'ignore))))
 
-                       ;; ( mu4e-compose-signature .
-                       ;;                          (concat
-                       ;;                           "Alice Derleth\n"
-                       ;;                           "Lauttasaari, Finland\n"))
-                       ))
-           ,(make-mu4e-context
-             :name "Columbia"
-             :enter-func (lambda () (mu4e-message "Switch to Columbia."))
-             ;; leave-fun not defined
-             :match-func (lambda (msg)
-                           (when msg
-                             (or
-                              (mu4e-message-contact-field-matches msg
-                                                                  :to "jonathan.reeve@columbia.edu")
-                              (mu4e-message-contact-field-matches msg
-                                                                  :to "jpr2152@columbia.edu"))
-                             ))
-             :vars '(  ( user-mail-address   . "jonathan.reeve@columbia.edu" )
-                       ( user-full-name      . "Jonathan Reeve" )
-                       ( mu4e-sent-folder    . "/columbia/[Gmail]/.Sent Mail" )
-                       ( mu4e-drafts-folder  . "/columbia/[Gmail]/.Drafts" )
-                       ( smtpmail-smtp-user  . "jpr2152@columbia.edu" )
+  ;; ;; reading mailing lists
+  ;; (setq gnus-select-method '(nnml "")   ; this depends on how you want
+  ;;                                       ; to get your mail
+  ;;       gnus-secondary-select-methods '((nntp "news.gmane.org")
+  ;;                                       ; (nntp "news.eternal-september.org")
+  ;;                                       )
+  ;;       message-directory  "~/.emacs.d/mail/"
+  ;;       gnus-directory     "~/.emacs.d/news/"
+  ;;       nnfolder-directory "~/.emacs.d/mail/archive")
 
-                       ;; ( mu4e-compose-signature .
-                       ;;                          (concat
-                       ;;                           "Prof. Alice Derleth\n"
-                       ;;                           "Miskatonic University, Dept. of Occult Sciences\n"))
-                       ))))
+  ;; mpc
+  (evil-set-initial-state 'mpc-mode 'emacs)
+  (evil-set-initial-state 'mpc-status-mode 'emacs)
+  (evil-set-initial-state 'mpc-tagbrowser-mode 'emacs)
+  (evil-set-initial-state 'mpc-songs-mode 'emacs)
 
-  ;; start with the first (default) context;
-  ;; default is to ask-if-none (ask when there's no context yet, and none match)
-  (setq mu4e-context-policy 'pick-first)
+  (use-package proced
+    :commands proced
+    :custom
+    (proced-auto-update-flag t)
+    (proced-auto-update-interval 1)
+    (proced-descend t)
+    (proced-filter 'user))
 
-  ;; compose with the current context is no context matches;
-  ;; default is to ask
-  (setq mu4e-compose-context-policy nil)
+  (use-package helm-sys
+    :commands (helm-top)
+    :config (helm-top-poll-mode 1))
 
-  (setq mu4e-maildir "~/Mail"
-        mu4e-trash-folder "/Trash"
-        mu4e-refile-folder "/Archive"
-        mu4e-get-mail-command "mbsync -a"
-        ;mu4e-update-interval 900
-        mu4e-view-show-images t
-        mu4e-view-show-addresses t
-        mu4e-compose-dont-reply-to-self t
-        mu4e-user-mail-address-list '("jon.reeve@gmail.com" "jonathan.reeve@columbia.edu" "jpr2152@columbia.edu"))
+  (use-package org
+    :config
+    (setq org-directory "~/Dropbox/Documents/org"
+          org-agenda-files (list org-directory)
+          org-default-notes-file (concat org-directory "/notes.org")))
 
-  ;; Bookmarks
-  (setq mu4e-bookmarks
-        `(("flag:unread AND NOT flag:trashed" "Unread messages" ?u)
-          ("date:7d..now NOT flag:trashed AND NOT flag:replied" "Last 7 days unreplied" ?w)
-          ("maildir:/columbia/Inbox NOT flag:trashed AND NOT flag:replied" "Columbia" ?c)
-          ("maildir:/gmail/Inbox NOT flag:trashed AND NOT flag:replied" "Gmail" ?g)
-          ("maildir:/gmail/Lists NOT flag:trashed AND NOT flag:replied" "Lists" ?l)))
+  (use-package posix-manual)
 
-  ;; Set browser
-  (setq browse-url-browser-function 'browse-url-generic
-        browse-url-generic-program "qutebrowser")
+  (use-package projectile
+    :config
+    (projectile-register-project-type
+     'gimsa '("build.sh")
+     :compile "./build.sh"
+     :compilation-dir ".")
+    (projectile-register-project-type
+     'linux '("COPYING" "CREDITS" "Kbuild" "Kconfig" "MAINTAINERS" "Makefile" "README")
+     :compile "make O=am43xx_evm ARCH=arm CROSS_COMPILE=arm-openwrt-linux-gnueabi- all"
+     :compilation-dir ".")
+    (projectile-register-project-type
+     'openwrt '("BSDmakefile" "Config.in" "feeds.conf.default" "LICENSE" "Makefile" "README" "rules.mk" "version.date")
+     :compile "make world"
+     :compilation-dir ".")
+    (projectile-register-project-type
+     'u-boot '("config.mk" "Kbuild" "Kconfig" "MAINTAINERS" "MAKEALL" "Makefile" "README" "snapshot.commit")
+     :compile "make O=am43xx_evm ARCH=arm CROSS_COMPILE=arm-openwrt-linux-gnueabi- all"
+     :compilation-dir "."))
 
-  ;; RSS
-  (eval-after-load 'shr
-    '(progn (setq shr-width -1)
-            (defun shr-fill-text (text) text)
-            (defun shr-fill-lines (start end) nil)
-            (defun shr-fill-line () nil)))
-  (add-hook 'elfeed-show-mode-hook 'visual-line-mode)
+  (use-package rainbow-mode
+    :hook
+    (prog-mode . rainbow-mode))
 
-  ;; Keybindings
-  (global-set-key (kbd "<f2>") 'org-agenda-list)
-  (global-set-key (kbd "<f3>") 'org-todo-list)
-  (global-set-key (kbd "<f4>") 'mu4e)
-  (with-eval-after-load 'evil-maps
-    (define-key evil-normal-state-map (kbd "C-h") nil)
-    (define-key evil-normal-state-map (kbd "C-n") nil)
-    (define-key evil-motion-state-map (kbd "C-e") nil)
-    (define-key evil-normal-state-map (kbd "C-i") nil)
+  (use-package rg
+    :if (executable-find "rg")
+    :init
+    (evil-leader/set-key (kbd "or") 'rg-dwim)
+    (evil-leader/set-key (kbd "oR") 'rg))
+
+  (slack-register-team
+   :name "andasis"
+   :default t
+   :token "xoxs-663392975270-684611065526-682007404980-d820b61e4ce976caf02228e34b5d0f7efdae153b08a41b992dd524dcebe4834b"
+   :subscribed-channels '(general nms random))
+
+  (use-package bufler)
+
+  (use-package somafm)
+
+  (use-package sx
+    :init
+    (evil-leader/set-key (kbd "os") 'sx-tab-all-questions)
+    :config
+    (evil-set-initial-state 'sx-question-list-mode 'emacs)
+    (evil-set-initial-state 'sx-question-mode 'emacs))
+
+  (use-package treemacs
+    :config
+    (define-key treemacs-mode-map (kbd ".") (lambda () (interactive) (treemacs-visit-node-no-split t)))
+    (defun acml/treemacs-ignore-gitignore (file _)
+      (s-matches? (rx bol
+                      (or (or ".git")
+                          (or "GPATH" "GRTAGS" "GTAGS" "ID")
+                          (seq (1+ any) ".dll")
+                          (seq (1+ any) ".dwo")
+                          (seq (1+ any) ".exe")
+                          (seq (1+ any) ".o")
+                          (seq (1+ any) ".o.cmd")
+                          (seq (1+ any) ".o.d"))
+                      eol)
+                  file))
+    (push #'acml/treemacs-ignore-gitignore treemacs-ignored-file-predicates))
+
+  (use-package turkish
+    :commands (turkish-mode)
+    :init (evil-leader/set-key (kbd "ot") 'turkish-mode))
+
+  (use-package undo-tree
+    :config
+    (setq undo-tree-enable-undo-in-region t))
+
+  (use-package which-func
+    :commands which-function-mode
+    :init
+    (defun acml/which-func-setup ()
+      (setq header-line-format
+            '((which-function-mode ("" which-func-format " ")))
+            mode-line-misc-info
+            ;; We remove Which Function Mode from the mode line, because it's mostly
+            ;; invisible here anyway.
+            (assq-delete-all 'which-function-mode mode-line-misc-info))
+      (which-function-mode))
+    :hook (prog-mode . acml/which-func-setup)
+    )
+
+  (use-package wttrin
+    :commands (wttrin wttrin-query)
+    :init
+    (setq wttrin-default-cities '("Istanbul"
+                                  "Diyarbakir"
+                                  "Didim,Turkey")
+          wttrin-default-accept-language '("Accept-Language" . "tr-TR"))
+    ;; function to open wttrin with first city on list
+    (defun acml/wttrin ()
+      "Open `wttrin' without prompting, using first city in `wttrin-default-cities'"
+      (interactive)
+      (wttrin-query (car wttrin-default-cities)))
+
+    (defun my-wttrin-fetch-raw-string (args)
+      (if (eq (frame-parameter nil 'background-mode) 'light)
+          (list (concat (car args) "?T"))
+        args))
+    (advice-add 'wttrin-fetch-raw-string :filter-args #'my-wttrin-fetch-raw-string)
+    (advice-add 'wttrin-query :after #'(lambda (&rest args)
+                                         (face-remap-add-relative 'default '(:family "Source Code Pro"))))
+
+    (evil-leader/set-key (kbd "ow") 'acml/wttrin)
+    :config
+    (push '("*wttr.in" . emacs) evil-buffer-regexps))
+
+  (use-package ztree
+    :init
+    (evil-set-initial-state 'ztree-mode 'emacs)
+    (evil-set-initial-state 'ztreediff-mode 'emacs)
+    (evil-set-initial-state 'ztreedir-mode 'emacs)
+    (evil-leader/set-key (kbd "oz") 'ztree-diff)
+    :config
+    (setq ediff-keep-variants nil))
+
+  (use-package ztree-view
+    :bind (:map ztree-mode-map
+                ("n" . next-line)
+                ("p" . previous-line))
+    :config
+    (setq-default ztree-diff-filter-list (list "^\\." "^.*\\.o")))
   )
-  (global-unset-key (kbd "C-h"))
-  (global-unset-key (kbd "C-n"))
-  (global-unset-key (kbd "C-e"))
-  (global-unset-key (kbd "C-i"))
-  (global-set-key (kbd "C-h") 'evil-window-left)
-  (global-set-key (kbd "C-n") 'evil-window-down)
-  (global-set-key (kbd "C-e") 'evil-window-up)
-  (global-set-key (kbd "C-i") 'evil-window-right)
 
-  ;; (enable-theme 'ewal-spacemacs-modern)
-
-  ;; Not working. Attempt at toggl integration.
-  ;;(setq org-toggl-inherit-toggl-properties t)
-  ;;(load-file "~/.emacs.d/private/org-toggl.el")
-  ;;(require 'org-toggl)
-  ;;(toggl-get-projects)
-  ;;(org-toggl-integration-mode)
-  ;;(setq toggl-auth-token (password-store-get "toggl-api"))
-
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
 )
