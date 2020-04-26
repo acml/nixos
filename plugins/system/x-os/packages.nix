@@ -36,6 +36,7 @@ in mkIf cfg.enable {
       fira-code
       fira-code-symbols
       font-awesome-ttf
+      nerdfonts
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
