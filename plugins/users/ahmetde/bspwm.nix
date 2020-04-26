@@ -35,7 +35,7 @@ in {
         "super + shift + grave" = "emacsclient -e '(open-scratch-frame)'";
         # "super + space" = "~/.dotfiles/bin/rofi/appmenu";
         "super + space" = "rofi -show drun -modi drun,run -show-icons -theme theme/appmenu.rasi";
-        "super + Tab" = "~/.dotfiles/bin/rofi/windowmenu";
+        "super + Tab" = "rofi -show window -show-icons -theme theme/windowmenu.rasi";
         "super + backslash" = "~/.dotfiles/bin/rofi/passmenu";
         "super + slash" = "~/.dotfiles/bin/rofi/filemenu -x";
         "super + Escape" = "pkill -USR1 -x sxhkd";
@@ -191,9 +191,20 @@ in {
       in {
         enable = true;
         extraConfig = ''
+                        bspc rule -a '*:scratch' state=floating sticky=on center=on border=off rectangle=1000x800+0+0
                         systemctl --user restart polybar
                       '';
         monitors = { eDP-1 = [ "1" "2" "3" "4" "5"] ; };
+        rules = {
+          Pinentry = {
+            state = "floating";
+            center = true;
+          };
+          Emacs = { state = "tiled"; };
+          "Emacs:org*" = { state = "floating"; };
+          "Emacs:scratch" = { state = "floating"; };
+          feh = { state = "fullscreen"; };
+        };
         settings = {
           normal_border_color = "#F9F9F9";
           active_border_color = "#CCFF00";

@@ -5,12 +5,23 @@ let
   iceLib = config.icebox.static.lib;
 in {
   config.home-manager.users = iceLib.functions.mkUserConfigs' (name: cfg: {
+
+    programs.emacs = {
+      enable = true;
+      # Compile with imagemagick support so I can resize images.
+      package = pkgs.emacsUnstable.override { inherit (pkgs) imagemagick; };
+      extraPackages = (epkgs:
+        (with epkgs; [
+          emacs-libvterm
+          pdf-tools
+        ]));
+    };
+
     # Home-manager settings.
     # User-layer packages
     home.packages = with pkgs;
       [
         ## Doom dependencies
-        emacsUnstable
         git
         (ripgrep.override {withPCRE2 = true;})
         gnutls              # for TLS connectivity
