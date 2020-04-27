@@ -153,6 +153,8 @@
 (use-package! docker-tramp)
 (use-package! docker)
 
-(use-package! trashed)
+(use-package! trashed
+  :config
+  (add-to-list 'evil-emacs-state-modes 'trashed-mode))
 
 ;; (use-package! shrface)
