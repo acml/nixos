@@ -66,7 +66,7 @@ in {
         "super + Tab" = "rofi -show window -show-icons -theme theme/windowmenu.rasi";
         "super + backslash" = "~/.dotfiles/bin/rofi/passmenu";
         "super + slash" = "~/.dotfiles/bin/rofi/filemenu -x";
-        "ctrl + alt + Delete" = "rofi -show power-menu -modi power-menu:${rofi-power-menu}/bin/rofi-power-menu -matching fuzzy -show-icons -theme theme/appmenu.rasi";
+        "ctrl + alt + Delete" = "rofi -show p -modi p:${rofi-power-menu}/bin/rofi-power-menu -matching fuzzy -show-icons -icon-theme Adwaita -theme theme/appmenu.rasi";
         "super + Escape" = "pkill -USR1 -x sxhkd";
         "{Prior,Next}" = ":";
 
