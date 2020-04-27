@@ -58,6 +58,10 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
+ (when (window-system)
+    (add-to-list 'default-frame-alist '(alpha . (100)))
+    (set-frame-parameter (selected-frame) 'alpha '(100)))
+
 (setq-default
  delete-by-moving-to-trash t)
 
@@ -65,7 +69,8 @@
       "M-l" #'downcase-dwim
       "M-u" #'upcase-dwim)
 
-;; (load! (concat user-emacs-directory "modules/spacemacs/+spacemacs"))
+;; (setq spacemacs-path doom-modules-dir)
+;; (load! (concat spacemacs-path "spacemacs/+spacemacs"))
 
 (setq ccls-initialization-options
       `(:cache (:directory ,(file-truename "~/.cache/ccls"))))
@@ -135,16 +140,18 @@
 
 (use-package! modus-operandi-theme
   :init
-  (setq org-src-block-faces '(("c" (:background "#fef2f2" :extend t))
-                              ("python" (:background "#f4f4ff" :extend t))))
-  (setq modus-operandi-theme-slanted-constructs t
-        modus-operandi-theme-bold-constructs t
-        modus-operandi-theme-proportional-fonts t
-        modus-operandi-theme-scale-headings t
-        modus-operandi-theme-visible-fringes t
+  (setq org-src-block-faces '(("emacs-lisp" (:background "#fef2f2" :extend t))
+                              ("python" (:background "#f4f4ff" :extend t)))
         modus-operandi-theme-distinct-org-blocks t
+        modus-operandi-theme-rainbow-headings t
+        ;; modus-operandi-theme-section-headings t
+        modus-operandi-theme-scale-headings t
+        ;; modus-operandi-theme-visible-fringes t
+        modus-operandi-theme-slanted-constructs t
+        modus-operandi-theme-bold-constructs t
+        modus-operandi-theme-3d-modeline t
         modus-operandi-theme-subtle-diffs t
-        modus-operandi-theme-3d-modeline t))
+        modus-operandi-theme-proportional-fonts t))
 
 (use-package! rainbow-mode
   :config
