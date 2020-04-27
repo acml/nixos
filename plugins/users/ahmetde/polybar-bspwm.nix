@@ -51,7 +51,7 @@ in {
 
           bottom = true;
 
-          modules-left = "cpu filesystem-root filesystem-home pulseaudio power";
+          modules-left = "cpu filesystem-root filesystem-home pulseaudio";
           tray-position = "right";
           # Number of spaces between modules
           module-margin = 2;
@@ -161,66 +161,6 @@ in {
           label-charging = "%percentage%% (%time%)";
           label-discharging = "%percentage%% (%time%)";
         };
-
-        # Absolute path for systemctl is required because polybar uses `/bin/sh`.
-        "module/power" = with lib;
-          mkMerge [
-            {
-              type = "custom/menu";
-              expand-right = true;
-              format-spacing = 1;
-              label-separator = "|";
-              label-open = "Power";
-              label-open-underline = "\${colors.red}";
-              label-close = "Cancel";
-              label-close-underline = "\${colors.green}";
-
-              menu-0-0 = "Reboot";
-              menu-0-0-exec = "menu-open-1";
-              menu-0-0-underline = "\${colors.red}";
-              menu-0-1 = "Power off";
-              menu-0-1-exec = "menu-open-2";
-              menu-0-1-underline = "\${colors.red}";
-              menu-0-2 = "Exit bspwm";
-              menu-0-2-exec = "menu-open-3";
-              menu-0-2-underline = "\${colors.red}";
-
-              menu-1-0 = "Back";
-              menu-1-0-exec = "menu-open-0";
-              menu-1-0-underline = "\${colors.green}";
-              menu-1-1 = "Reboot";
-              menu-1-1-underline = "\${colors.red}";
-              menu-1-1-exec = "${pkgs.systemd}/bin/systemctl reboot";
-
-              menu-2-0 = "Back";
-              menu-2-0-exec = "menu-open-0";
-              menu-2-0-underline = "\${colors.green}";
-              menu-2-1 = "Power off";
-              menu-2-1-underline = "\${colors.red}";
-              menu-2-1-exec = "${pkgs.systemd}/bin/systemctl poweroff";
-
-              menu-3-0 = "Back";
-              menu-3-0-exec = "menu-open-0";
-              menu-3-0-underline = "\${colors.green}";
-              menu-3-1 = "Exit bspwm";
-              menu-3-1-underline = "\${colors.red}";
-              menu-3-1-exec = "${pkgs.bspwm}/bin/bspc quit";
-            }
-
-            # If hibernation is supported, add a new menu that hibernates the machine.
-            (mkIf (devices.swapResumeOffset != null) {
-              menu-0-3 = "Hibernate";
-              menu-0-3-exec = "menu-open-4";
-              menu-0-3-underline = "\${colors.red}";
-
-              menu-4-0 = "Back";
-              menu-4-0-exec = "menu-open-0";
-              menu-4-0-underline = "\${colors.green}";
-              menu-4-1 = "Hibernate";
-              menu-4-1-underline = "\${colors.red}";
-              menu-4-1-exec = "${pkgs.systemd}/bin/systemctl hibernate";
-            })
-          ];
       };
 
       # Start up script for polybar

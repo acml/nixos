@@ -7,6 +7,34 @@ let
 
   iceLib = config.icebox.static.lib;
   lock = "${pkgs.i3lock}/bin/i3lock -c 000000";
+
+  rofi-power-menu = pkgs.stdenv.mkDerivation rec {
+    pname = "rofi-power-menu";
+    version = "2.4.0";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "jluttine";
+      repo = pname;
+      rev = version;
+      sha256 = "1cfk6sapbaczk6viczp6ay4kfah5vx6vssa7x8d0vwblk4xxp44l";
+    };
+
+    # doCheck = false;
+
+    installPhase = ''
+      mkdir -p $out/bin
+      install -Dm755 ./rofi-power-menu $out/bin/rofi-power-menu
+    '';
+
+    meta = with lib; {
+      description = "Power-menu mode for Rofi";
+      homepage = "https://github.com/jluttine/rofi-power-menu";
+      license = licenses.mit;
+      platforms = platforms.linux;
+      maintainers = with maintainers; [ jluttine ];
+    };
+  };
+
 in {
   config.home-manager.users = iceLib.functions.mkUserConfigs' (name: cfg: {
     # Blueman
@@ -243,6 +271,8 @@ in {
             # Rofi run by zsh because we need environments
             "${modifier}+d" = ''
               exec --no-startup-id "zsh -c 'rofi -combi-modi window,drun -show combi -modi combi'"'';
+            "Control+Mod1+Delete" = ''
+              exec --no-startup-id "zsh -c 'rofi -show p -modi p:${rofi-power-menu}/bin/rofi-power-menu -matching fuzzy -show-icons -icon-theme Papirus-Dark -theme theme/appmenu.rasi'"'';
 
             # Screenshot
             "--release Shift+Print" =
