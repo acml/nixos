@@ -56,7 +56,10 @@ in {
         gnome3.file-roller
         gnome3.nautilus
         gnome3.eog
-        evince
+        evince    # pdf reader
+        feh       # image viewer
+        mpv       # video player
+        font-manager
         my.ripcord
       ] ++ cfg.extraPackages;
 
