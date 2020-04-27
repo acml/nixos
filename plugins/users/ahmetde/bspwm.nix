@@ -10,16 +10,16 @@ let
 
   rofi-power-menu = pkgs.stdenv.mkDerivation rec {
     pname = "rofi-power-menu";
-    version = "2.0.2";
+    version = "2.4.0";
 
     src = pkgs.fetchFromGitHub {
       owner = "jluttine";
       repo = pname;
       rev = version;
-      sha256 = "10dj5zr32d1mrg57pxbl884d2z8ndmxk05n2a3f6gxcv1rd4ci90";
+      sha256 = "1cfk6sapbaczk6viczp6ay4kfah5vx6vssa7x8d0vwblk4xxp44l";
     };
 
-    doCheck = false;
+    # doCheck = false;
 
     installPhase = ''
       mkdir -p $out/bin
@@ -66,7 +66,7 @@ in {
         "super + Tab" = "rofi -show window -show-icons -theme theme/windowmenu.rasi";
         "super + backslash" = "~/.dotfiles/bin/rofi/passmenu";
         "super + slash" = "~/.dotfiles/bin/rofi/filemenu -x";
-        "ctrl + alt + Delete" = "rofi -show p -modi p:${rofi-power-menu}/bin/rofi-power-menu -matching fuzzy -show-icons -icon-theme Adwaita -theme theme/appmenu.rasi";
+        "ctrl + alt + Delete" = "rofi -show p -modi p:${rofi-power-menu}/bin/rofi-power-menu -matching fuzzy -show-icons -icon-theme Papirus-Dark -theme theme/appmenu.rasi";
         "super + Escape" = "pkill -USR1 -x sxhkd";
         "{Prior,Next}" = ":";
 
