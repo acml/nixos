@@ -7,6 +7,34 @@ let
 
   iceLib = config.icebox.static.lib;
   lock = "${pkgs.i3lock}/bin/i3lock -c 000000";
+
+  rofi-power-menu = pkgs.stdenv.mkDerivation rec {
+    pname = "rofi-power-menu";
+    version = "2.0.2";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "jluttine";
+      repo = pname;
+      rev = version;
+      sha256 = "10dj5zr32d1mrg57pxbl884d2z8ndmxk05n2a3f6gxcv1rd4ci90";
+    };
+
+    doCheck = false;
+
+    installPhase = ''
+      mkdir -p $out/bin
+      install -Dm755 ./rofi-power-menu $out/bin/rofi-power-menu
+    '';
+
+    meta = with lib; {
+      description = "Power-menu mode for Rofi";
+      homepage = "https://github.com/jluttine/rofi-power-menu";
+      license = licenses.mit;
+      platforms = platforms.linux;
+      maintainers = with maintainers; [ jluttine ];
+    };
+  };
+
 in {
   config.home-manager.users = iceLib.functions.mkUserConfigs' (name: cfg: {
     # Blueman
@@ -38,6 +66,7 @@ in {
         "super + Tab" = "rofi -show window -show-icons -theme theme/windowmenu.rasi";
         "super + backslash" = "~/.dotfiles/bin/rofi/passmenu";
         "super + slash" = "~/.dotfiles/bin/rofi/filemenu -x";
+        "ctrl + alt + Delete" = "rofi -show power-menu -modi power-menu:${rofi-power-menu}/bin/rofi-power-menu -matching fuzzy -show-icons -theme theme/appmenu.rasi";
         "super + Escape" = "pkill -USR1 -x sxhkd";
         "{Prior,Next}" = ":";
 
