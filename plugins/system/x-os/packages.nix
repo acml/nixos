@@ -52,7 +52,4 @@ in mkIf cfg.enable {
       };
     };
   };
-
-  # Setup zsh
-  programs.zsh.enable = true;
 }
