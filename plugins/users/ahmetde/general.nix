@@ -104,6 +104,7 @@ in {
         extraConfig = { credential = { helper = "store"; }; };
       };
 
+      # enhances zsh (C-r: history search C-t: file search M-c: change directory)
       fzf = {
         enable = true;
         changeDirWidgetCommand = "${pkgs.fd}/bin/fd --type d";
@@ -114,11 +115,10 @@ in {
       # zsh
       zsh = {
         enable = true;
-        # This would make C-p, C-n act exactly the same as what up/down arrows do.
-        initExtra = ''
-          bindkey "^P" up-line-or-search
-          bindkey "^N" down-line-or-search
-        '';
+        enableCompletion = true;
+        enableAutosuggestions = true;
+        autocd = true;
+        dotDir = ".config/zsh";
         # NOTE: We don't use the sessionVar option provided by home-manager, because the former one only make it available in zshrc. We need env vars everywhere.
         # GDK_SCALE: Scale the whole UI for GTK applications
         # GDK_DPI_SCALE: Scale the fonts back for GTK applications to avoid double scaling
@@ -140,10 +140,67 @@ in {
         defaultKeymap = "emacs";
         oh-my-zsh = {
           enable = true;
-          theme = "agnoster";
-          plugins = [ "git" ];
+          plugins = [
+            ## appearence
+            "common-aliases"
+
+            "extract"
+
+            ## programs
+            "git"
+            "pass"
+
+            "gitignore"
+            "sudo"
+          ];
+          # theme = "agnoster";
+        };
+        plugins = [
+          {
+            name = "zsh-syntax-highlighting";
+            src = pkgs.fetchFromGitHub {
+              owner = "zsh-users";
+              repo = "zsh-syntax-highlighting";
+              rev = "0.7.0-beta1";
+              sha256 = "0xk9fwii31zrwvhd441p3c0cr7lqhf97fqif3nys4wkgnvhd5s4x";
+            };
+          }
+        ];
+      };
+
+      direnv.enable = true;
+
+      starship = {
+        enable = true;
+        settings = {
+          # aws.disabled = true;
+          # battery.disabled = true;
+          # cmd_duration.disabled = true;
+          # conda.disabled = true;
+          # dotnet.disabled = true;
+          # env_var.disabled = true;
+          # git_branch.disabled = true;
+          # git_commit.disabled = true;
+          # git_state.disabled = true;
+          git_status = {
+            disabled = true;
+          };
+          # golang.disabled = true;
+          # hg_branch.disabled = true;
+          java.disabled = true;
+          # kubernetes.disabled = true;
+          # memory_usage.disabled = true;
+          # nodejs.disabled = true;
+          # package.disabled = true;
+          # php.disabled = true;
+          # python.disabled = true;
+          # ruby.disabled = true;
+          # rust.disabled = true;
+          # terraform.disabled = true;
+          # time.disabled = true;
         };
       };
+
     };
 
     # Handwritten configs
