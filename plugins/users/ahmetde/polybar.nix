@@ -30,7 +30,7 @@ in {
         "bar/base" = {
           dpi = system.scale * system.dpi;
           width = "100%";
-          height = "2.7%";
+          height = 24;
 
           # Number of spaces between modules
           module-margin = 2;
@@ -172,6 +172,7 @@ in {
           #   %index%
           # Default: %icon%  %name%
           label-occupied = "%icon% %name%";
+          label-occupied-underline = "\${colors.green}";
 
           # Available tokens:
           #   %name%
