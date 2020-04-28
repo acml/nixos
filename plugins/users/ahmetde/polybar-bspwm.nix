@@ -24,14 +24,11 @@ in {
           red = "#ff0000";
         };
 
-        "bar/top" = {
+        "bar/base" = {
           dpi = system.scale * system.dpi;
           width = "100%";
           height = "2.7%";
 
-          modules-left = "bspwm";
-          modules-center = "date";
-          modules-right = "memory wlan battery";
           # Number of spaces between modules
           module-margin = 2;
 
@@ -44,25 +41,21 @@ in {
           wm-restack = "bspwm";
         };
 
+        "bar/top" = {
+          inherit = "bar/base";
+
+          modules-left = "bspwm";
+          modules-center = "date";
+          modules-right = "memory wlan battery";
+        };
+
         "bar/bottom" = {
-          dpi = system.scale * system.dpi;
-          width = "100%";
-          height = "2.7%";
+          inherit = "bar/base";
 
           bottom = true;
 
           modules-left = "cpu filesystem-root filesystem-home pulseaudio";
           tray-position = "right";
-          # Number of spaces between modules
-          module-margin = 2;
-
-          font-0 = "Fira Code:style=regular:size=10:antialias=true;1";
-          font-1 = "Material Icons:size=10;4";
-
-          line-size = 3;
-
-          background = "\${colors.black}";
-          wm-restack = "bspwm";
         };
 
         "module/date" = {
