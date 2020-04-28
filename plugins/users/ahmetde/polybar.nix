@@ -52,7 +52,8 @@ in {
 
           modules-left = "bspwm i3";
           modules-center = "date";
-          modules-right = "memory wlan battery";
+          modules-right = "memory";
+          tray-position = "right";
         };
 
         "bar/bottom" = {
@@ -60,8 +61,7 @@ in {
 
           bottom = true;
 
-          modules-left = "cpu filesystem-root filesystem-home pulseaudio";
-          tray-position = "right";
+          modules-left = "cpu filesystem-root filesystem-home";
         };
 
         "module/date" = {

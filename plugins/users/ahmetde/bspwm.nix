@@ -42,6 +42,19 @@ in {
       (system.bluetooth.enable && (system.bluetooth.service == "blueman"))
       true);
 
+    services.cbatticon.enable = true;
+    services.pasystray.enable = true;
+    services.udiskie = {
+      enable = true;
+      automount = true;
+      tray = "always";
+    };
+    services.unclutter = {
+      enable = true;
+      package = pkgs.unclutter-xfixes;
+      timeout = 5;
+    };
+
     services.network-manager-applet.enable = true;
 
     # Picom (Compton) compositor
