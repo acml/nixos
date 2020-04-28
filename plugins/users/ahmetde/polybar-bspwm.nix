@@ -42,7 +42,7 @@ in {
         };
 
         "bar/top" = {
-          inherit = "bar/base";
+          "inherit" = "bar/base";
 
           modules-left = "bspwm";
           modules-center = "date";
@@ -50,7 +50,7 @@ in {
         };
 
         "bar/bottom" = {
-          inherit = "bar/base";
+          "inherit" = "bar/base";
 
           bottom = true;
 
