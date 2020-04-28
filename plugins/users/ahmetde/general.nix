@@ -104,6 +104,13 @@ in {
         extraConfig = { credential = { helper = "store"; }; };
       };
 
+      fzf = {
+        enable = true;
+        changeDirWidgetCommand = "${pkgs.fd}/bin/fd --type d";
+        # defaultCommand = "rg --files --no-ignore --hidden --follow --glob \"!.git\"";
+        defaultCommand = "${pkgs.fd}/bin/fd --type f";
+      };
+
       # zsh
       zsh = {
         enable = true;
