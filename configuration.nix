@@ -17,6 +17,8 @@ in {
   nixpkgs.overlays = import ./packages;
 
   home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+
 
   systemd.user.services."setup-keyboard" = {
     enable = true;
