@@ -10,6 +10,9 @@ in {
       enable = true;
 
       package = pkgs.polybar.override {
+        githubSupport = true;
+        mpdSupport = true;
+        nlSupport = true;
         i3GapsSupport = true;
         pulseSupport = true;
       };
@@ -24,14 +27,11 @@ in {
           red = "#ff0000";
         };
 
-        "bar/top" = {
+        "bar/base" = {
           dpi = system.scale * system.dpi;
           width = "100%";
           height = "2.7%";
 
-          modules-left = "i3";
-          modules-center = "date";
-          modules-right = "memory wlan battery";
           # Number of spaces between modules
           module-margin = 2;
 
@@ -41,26 +41,25 @@ in {
           line-size = 3;
 
           background = "\${colors.black}";
+          locale = "tr_TR.UTF-8";
+          wm-restack = "bspwm";
+        };
+
+        "bar/top" = {
+          "inherit" = "bar/base";
+
+          modules-left = "bspwm i3";
+          modules-center = "date";
+          modules-right = "memory wlan battery";
         };
 
         "bar/bottom" = {
-          dpi = system.scale * system.dpi;
-          width = "100%";
-          height = "2.7%";
+          "inherit" = "bar/base";
 
           bottom = true;
 
           modules-left = "cpu filesystem-root filesystem-home pulseaudio";
           tray-position = "right";
-          # Number of spaces between modules
-          module-margin = 2;
-
-          font-0 = "Fira Code:style=regular:size=10:antialias=true;1";
-          font-1 = "Material Icons:size=10;4";
-
-          line-size = 3;
-
-          background = "\${colors.black}";
         };
 
         "module/date" = {
@@ -83,6 +82,123 @@ in {
           label-volume = "VOL %percentage%%";
           label-volume-underline = "\${colors.green}";
           label-muted = "Muted";
+        };
+
+        "module/bspwm" = {
+          type = "internal/bspwm";
+
+          # Only show workspaces defined on the same output as the bar
+          # NOTE: The bspwm and XRandR monitor names must match, which they do by default.
+          # But if you rename your bspwm monitors with bspc -n this option will no longer
+          # behave correctly.
+          # Default: true
+          pin-workspaces = true;
+
+          # Output mode flags after focused state label
+          # Default: false
+          inline-mode = false;
+
+          # Create click handler used to focus workspace
+          # Default: true
+          enable-click = false;
+
+          # Create scroll handlers used to cycle workspaces
+          # Default: true
+          enable-scroll = false;
+
+          # Set the scroll cycle direction
+          # Default: true
+          reverse-scroll = false;
+
+          # Use fuzzy (partial) matching on labels when assigning
+          # icons to workspaces
+          # Example: code;♚ will apply the icon to all workspaces
+          # containing 'code' in the label
+          # Default: false
+          fuzzy-match = false;
+
+          # ws-icon-[0-9]+ = <label>;<icon>
+          # Note that the <label> needs to correspond with the bspwm workspace name
+          # Neither <label> nor <icon> can contain a semicolon (;)
+          ws-icon-0 = "1;";
+          ws-icon-1 = "2;";
+          ws-icon-2 = "3;";
+          ws-icon-3 = "4;4";
+          ws-icon-4 = "5;♞";
+          ws-icon-5 = "6;";
+          ws-icon-6 = "7;";
+          ws-icon-7 = "8;";
+          ws-icon-8 = "9;";
+          ws-icon-9 = "10;";
+          ws-icon-default = "";
+
+          # Available tags:
+          #   <label-monitor>
+          #   <label-state> - gets replaced with <label-(focused|urgent|occupied|empty)>
+          #   <label-mode> - gets replaced with <label-(monocle|tiled|fullscreen|floating|locked|sticky|private)>
+          # Default: <label-state>
+          format = "<label-state> <label-mode>";
+
+          # Available tokens:
+          #   %name%
+          # Default: %name%
+          label-monitor = "%name%";
+
+          # If any values for label-dimmed-N are defined, the workspace/mode
+          # colors will get overridden with those values if the monitor is out of focus
+          # To only override workspaces in a specific state, use:
+          #   label-dimmed-focused
+          #   label-dimmed-occupied
+          #   label-dimmed-urgent
+          #   label-dimmed-empty
+          label-dimmed-foreground = "#555";
+          label-dimmed-underline = ${bar/top.background};
+          label-dimmed-focused-background = "#f00";
+
+          # Available tokens:
+          #   %name%
+          #   %icon%
+          #   %index%
+          # Default: %icon%  %name%
+          label-focused = "%icon% %name%";
+          label-focused-background = "\${colors.grey}";
+          label-focused-underline = "\${colors.azure}";
+
+          # Available tokens:
+          #   %name%
+          #   %icon%
+          #   %index%
+          # Default: %icon%  %name%
+          label-occupied = "%icon% %name%";
+
+          # Available tokens:
+          #   %name%
+          #   %icon%
+          #   %index%
+          # Default: %icon%  %name%
+          label-urgent = "%icon% %name%";
+          label-urgent-background = "\${colors.red}";
+
+          # label-monocle = "M";
+          # label-floating = "S";
+
+          # The following labels will be used to indicate the layout/mode
+          # for the focused workspace. Requires <label-mode>
+          #
+          # Available tokens:
+          #   None
+          label-monocle = "";
+          label-tiled = "";
+          label-fullscreen = "";
+          label-floating = "";
+          label-pseudotiled = "P";
+          label-locked = "";
+          label-locked-foreground = "#bd2c40";
+          label-sticky = "";
+          label-sticky-foreground = "#fba922";
+          label-private = "";
+          label-private-foreground = "#bd2c40";
+          label-marked = "M";
         };
 
         "module/i3" = {
