@@ -23,6 +23,7 @@ in mkIf cfg.enable {
     ncdu
     gnome3.adwaita-icon-theme
     hicolor-icon-theme #fixes missing redshift tray icon
+    zsh
   ];
 
   # xdg.icons.enable = true;
@@ -55,5 +56,4 @@ in mkIf cfg.enable {
 
   # Setup zsh
   # programs.zsh.enable = true;
-  environment.systemPackages = with pkgs; [ zsh ];
 }
