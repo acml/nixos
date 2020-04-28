@@ -35,7 +35,7 @@ in {
           # Number of spaces between modules
           module-margin = 2;
 
-          font-0 = "Fira Code:style=regular:size=10:antialias=true;1";
+          font-0 = "Fira Code:style=regular:size=11:antialias=true;1";
           font-1 = "FontAwesome:size=11;1";
           font-2 = "Material Icons:size=10;4";
           font-3 = "Symbola:size=11;1";
