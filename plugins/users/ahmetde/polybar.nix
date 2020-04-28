@@ -124,9 +124,9 @@ in {
           # Neither <label> nor <icon> can contain a semicolon (;)
           ws-icon-0 = "1;";
           ws-icon-1 = "2;";
-          ws-icon-2 = "3;";
-          ws-icon-3 = "4;4";
-          ws-icon-4 = "5;♞";
+          ws-icon-2 = "3;";
+          ws-icon-3 = "4;";
+          ws-icon-4 = "5;";
           ws-icon-5 = "6;";
           ws-icon-6 = "7;";
           ws-icon-7 = "8;";
@@ -181,6 +181,9 @@ in {
           # Default: %icon%  %name%
           label-urgent = "%icon% %name%";
           label-urgent-background = "\${colors.red}";
+
+          # Hide empty workspaces
+          label-empty = '''';
 
           # label-monocle = "M";
           # label-floating = "S";
