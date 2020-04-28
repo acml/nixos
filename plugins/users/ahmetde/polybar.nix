@@ -152,7 +152,7 @@ in {
           #   label-dimmed-urgent
           #   label-dimmed-empty
           label-dimmed-foreground = "#555";
-          label-dimmed-underline = ${bar/top.background};
+          label-dimmed-underline = "${bar/top.background}";
           label-dimmed-focused-background = "#f00";
 
           # Available tokens:
