@@ -119,9 +119,7 @@ in {
         enableAutosuggestions = true;
         autocd = true;
         dotDir = ".config/zsh";
-        initExtra = ''
-                      prompt off
-                    '';
+        initExtra = '' prompt off '';
         # NOTE: We don't use the sessionVar option provided by home-manager, because the former one only make it available in zshrc. We need env vars everywhere.
         # GDK_SCALE: Scale the whole UI for GTK applications
         # GDK_DPI_SCALE: Scale the fonts back for GTK applications to avoid double scaling
