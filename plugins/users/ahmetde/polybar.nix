@@ -130,7 +130,7 @@ in {
           ws-icon-5 = "6;";
           ws-icon-6 = "7;";
           ws-icon-7 = "8;";
-          ws-icon-8 = "9;";
+          ws-icon-8 = "9;";
           ws-icon-9 = "10;";
           ws-icon-default = "";
 
@@ -254,7 +254,7 @@ in {
         "module/filesystem-home" = {
           type = "internal/fs";
           mount-0 = "/home";
-          label-mounted = "%mountpoint%:%free%";
+          label-mounted = ":%free%";
           format-mounted-underline = "\${colors.green}";
         };
 
@@ -281,6 +281,7 @@ in {
           label-charging = "%percentage%% (%time%)";
           label-discharging = "%percentage%% (%time%)";
         };
+        "settings" = { screenchange-reload = "true"; };
       };
 
       # Start up script for polybar
