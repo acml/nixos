@@ -60,8 +60,64 @@ in {
     # Picom (Compton) compositor
     services.picom = {
       enable = true;
-      # vertical sync to avoid screen tearing
+
+      experimentalBackends = true;
+
+      blur = true;
+      blurExclude = [
+        "window_type = 'dock'"
+        "window_type = 'desktop'"
+        "_GTK_FRAME_EXTENTS@:c"
+      ];
+
+      fade = true;
+      fadeDelta = 5;
+      fadeExclude = [ "window_type *= 'menu'" "name ~= 'Firefox\$'" "focused = 1" ];
+
+      shadow = true;
+      shadowOffsets = [ (-7) (-7) ];
+      shadowOpacity = "0.7";
+      shadowExclude = [
+        # Put shadows on notifications, the scratch popup and rofi only
+        "! name~='(rofi|scratch|Dunst)$'"
+      ];
+      noDockShadow = true;
+      noDNDShadow = true;
+
+      activeOpacity = "1.0";
+      inactiveOpacity = "0.8";
+      menuOpacity = "0.8";
+
+      backend = "glx";
       vSync = true;
+
+      opacityRule = [
+        "15:class_g ?= 'Bspwm' && class_i ?= 'presel_feedback'"
+        "99:_NET_WM_STATE@:32a = '_NET_WM_STATE_FULLSCREEN'"
+      ];
+
+      # opacityRule = [
+      #   "90:class_g ?= 'emacs' && focused"
+      #   "75:class_g ?= 'emacs' && !focused"
+      #   "90:class_g ?= 'alacritty' && focused"
+      #   "75:class_g ?= 'alacritty' && !focused"
+      # ];
+
+      extraOptions = ''
+      shadow-radius = 7;
+      clear-shadow = true;
+      # frame-opacity = 0.7;
+      blur-method = "dual_kawase";
+      blur-strength = 5;
+      alpha-step = 0.06;
+
+      detect-client-opacity = true;
+      detect-rounded-corners = true;
+      paint-on-overlay = true;
+      detect-transient = true;
+      mark-wmwin-focused = true;
+      mark-ovredir-focused = true;
+    '';
     };
 
     services.sxhkd = {
@@ -69,42 +125,55 @@ in {
       keybindings = {
         "super + alt + Escape" = "bspc quit";
         "super + {_,shift + }q" = "bspc node -{c,k}";
-        "super + t" = "bspc desktop -l next";
-        "super + apostrophe" = "bspc window -s last";
+
+        # Toggle monocle layout (maximise focused node).
+        "super + m" = "bspc desktop -l next";
+
+        # Toggle floating, tiled, fullscreen view.
+        "super + {t,shift + f,f}" = "bspc node -t \"~{tiled,floating,fullscreen}\"";
+
         "super + Return" = "${pkgs.alacritty}/bin/alacritty";
-        "super + grave" = "scratch";
-        "super + shift + grave" = "emacsclient -e '(open-scratch-frame)'";
-        # "super + space" = "~/.dotfiles/bin/rofi/appmenu";
+        #"super + grave" = "scratch";
+        #"super + shift + grave" = "emacsclient -e '(open-scratch-frame)'";
+
         "super + space" = "rofi -show drun -modi drun,run -show-icons -theme theme/appmenu.rasi";
         "super + Tab" = "rofi -show window -show-icons -theme theme/windowmenu.rasi";
-        "super + backslash" = "~/.dotfiles/bin/rofi/passmenu";
-        "super + slash" = "~/.dotfiles/bin/rofi/filemenu -x";
+        #"super + backslash" = "~/.dotfiles/bin/rofi/passmenu";
+        #"super + slash" = "~/.dotfiles/bin/rofi/filemenu -x";
         "ctrl + alt + Delete" = "rofi -show p -modi p:${rofi-power-menu}/bin/rofi-power-menu -matching fuzzy -show-icons -icon-theme Papirus-Dark -theme theme/appmenu.rasi";
+
         "super + Escape" = "pkill -USR1 -x sxhkd";
         "{Prior,Next}" = ":";
 
-        ## Toggle floating/fullscreen
-        "super + {_,ctrl + }f" = "bspc node -t ~{floating,fullscreen}";
+        # Focus the node in the given direction.
+        "super + {n,e,i,o}" = "bspc node -f {west,south,north,east}";
+        "super + {Left,Down,Up,Right}" = "bspc node -f {west,south,north,east}";
 
-        "super + {_,ctrl +}{h,j,k,l}" = "~/.dotfiles/bin/bspwm/focus {_,-m }{west,south,north,east}";
-        "super + shift + {_,ctrl +}{h,j,k,l}" = "~/.dotfiles/bin/bspwm/swap {_,-m }{west,south,north,east}";
+        # Swap focused window with the one in the given direction.
+        "super + shift + {n,e,i,o}" = "bspwm_smart_move {west,south,north,east}";
+        "super + shift + {Left,Down,Up,Right}" = "bspwm_smart_move {west,south,north,east}";
+
+        # Expand or contract node in the given direction.
+        "super + alt + {n,e,i,o}" = "bspwm_resize {west,south,north,east} 50";
+        "super + alt + {Left,Down,Up,Right}" = "bspwm_resize {west,south,north,east} 50";
+
+        # Preselect the direction or insert again to cancel the preselection.
+        # This enters the manual tiling mode that splits the currently focused
+        # window.
+        "super + ctrl + {n,e,i,o}" = "bspc node --presel-dir '~{west,south,north,east}'";
+        "super + ctrl + {Left,Down,Up,Right}" = "bspc node --presel-dir '~{west,south,north,east}'";
+
+        # Preselect the ratio.  The default value is 0.5, defined in `bspwmrc`.
+        "super + ctrl + {1-9}" = "bspc node -o 0.{1-9}";
 
         ## Resize by preselection
         "super + alt + {1-9}" = "~/.dotfiles/bin/bspwm/presel 0.{1-9}";
 
-        "super + alt + {h,j,k,l}" = "bspc node -p {west,south,north,east}";
-        "super + alt + Return" = "~/.dotfiles/bin/bspwm/subtract-presel";
-        "super + alt + Delete" = "bspc node -p cancel";
-        "super + {_,shift +}{1-9,0}" = "bspc {desktop -f,node -d} {1-9,10};";
+        # Rotate all windows {counter-}clockwise by 90 degrees.
+        "super + {_,shift + }r" = "bspc node @/ --rotate {90,-90}";
 
-        # expand a window by moving one of its side outward
-        "super + {Left,Down,Up,Right}" = "bspc node -z {left -40 0,bottom 0 40,top 0 -40,right 40 0}";
-
-        # contract a window by moving one of its side inward
-        "super + ctrl + {Left,Down,Up,Right}" = "bspc node -z {right -40 0,top 0 40,bottom 0 -40,left 40 0}";
-
-        # move a floating window
-        "super + shift + {Left,Down,Up,Right}" = "bspc node -v {-40 0,0 40,0 -40,40 0}";
+        # Dynamic gaps.
+        "super + shift + bracket{left,right}" = "bspc config -d focused window_gap \"$(($(bspc config -d focused window_gap) {-,+} 5 ))\"";
 
         #
         ## Media keys
@@ -129,12 +198,63 @@ in {
       };
     };
 
+    home.packages = with pkgs; [
+        (writeScriptBin "bspwm_resize" ''
+                        #!${stdenv.shell}
+                        size=''${2:-'10'}
+                        direction=$1
+
+                        ${pkgs.bspwm}/bin/bspc query -N -n focused.floating
+                        floating=$?
+
+                        case "$direction" in
+                             west)  [ $floating = 0 ] && bspc node -z right -"$size" 0 || bspc node @west  -r -"$size" || bspc node @east  -r -"$size" ;;
+                             east)  [ $floating = 0 ] && bspc node -z right +"$size" 0 || bspc node @west  -r +"$size" || bspc node @east  -r +"$size" ;;
+                             north) [ $floating = 0 ] && bspc node -z bottom 0 -"$size" || bspc node @south -r -"$size" || bspc node @north -r -"$size" ;;
+                             south) [ $floating = 0 ] && bspc node -z bottom 0 +"$size" || bspc node @south -r +"$size" || bspc node @north -r +"$size" ;;
+                        esac
+                        '')
+        (writeScriptBin "bspwm_smart_move" ''
+                        #!${stdenv.shell}
+                        [ "$#" -eq 1 ] || { echo "Pass only one argument: north,east,south,west"; exit 1; }
+
+                        # Check if argument is a valid direction.
+                        case "$1" in
+                             north|east|south|west)
+                              dir="$1"
+                              ;;
+                             *)
+                              echo "Not a valid argument."
+                              echo "Use one of: north,east,south,west"
+                              exit 1
+                              ;;
+                        esac
+
+                        _query_nodes() {
+                          bspc query -N -n "$@"
+                        }
+
+                        # Do not operate on floating windows!
+                        [ -z "$(_query_nodes focused.floating)" ] || { echo "Only move tiled windows."; exit 1; }
+
+                        receptacle="$(_query_nodes 'any.leaf.!window')"
+
+                        # This regulates the behaviour documented in the description.
+                        if [ -n "$(_query_nodes "''${dir}.!floating")" ]; then
+                           bspc node -s "$dir"
+                        elif [ -n "$receptacle" ]; then
+                           bspc node focused -n "$receptacle" --follow
+                        else
+                          bspc node @/ -p "$dir" -i && bspc node -n "$receptacle" --follow
+                        fi
+                        '')
+    ];
     # Rofi
     programs.rofi = {
       enable = true;
       # font = "Fira Code 10";
       # theme = "glue_pro_blue";
-      theme = (system.dirs.dotfiles + "/${name}/gtk-settings.ini");
+      # theme = (system.dirs.dotfiles + "/${name}/rofi/appmenu.rasi");
       # extraConfig = ''
       #   rofi.show-icons: true
       #   rofi.dpi: ${toString (system.scale * system.dpi)}
@@ -234,7 +354,6 @@ in {
         enable = true;
         extraConfig = ''
                         bspc rule -a '*:scratch' state=floating sticky=on center=on border=off rectangle=1000x800+0+0
-                        systemctl --user restart polybar
                       '';
         monitors = { eDP-1 = [ "1" "2" "3" "4" "5"] ; };
         rules = {
@@ -268,6 +387,8 @@ in {
           focus_follows_pointer = true;
           pointer_follows_monitor = true;
         };
+        startupPrograms = [ "pkill polybar; while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done; polybar -q rome" ];
+        # startupPrograms = [ "/home/ahmet/.config/polybar/launch.sh" ];
       };
 
       # Setup cursor

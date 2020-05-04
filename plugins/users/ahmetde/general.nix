@@ -78,7 +78,7 @@ in {
         settings = {
           font = {
             normal = {
-              family = "Fira Code Retina";
+              family = "Fira Code";
               style = "Regular";
             };
             size = 7.0;
@@ -209,9 +209,30 @@ in {
       # ".config/gtk-3.0/settings.ini".source = (system.dirs.dotfiles + "/${name}/gtk-settings.ini");
     };
 
-    home.keyboard = {
-      # options = [ "caps:escape" "esperanto:colemak" ];
-      variant = "colemak";
+    home.keyboard = null;
+    # home.keyboard = {
+    #   # options = [ "caps:escape" "esperanto:colemak" ];
+    #   variant = "colemak";
+    # };
+
+    systemd.user.startServices = true;
+
+    xresources = {
+      extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
+        owner  = "dracula";
+        repo   = "xresources";
+        rev    = "ca0d05cf2b7e5c37104c6ad1a3f5378b72c705db";
+        sha256 = "0ywkf2bzxkr45a0nmrmb2j3pp7igx6qvq6ar0kk7d5wigmkr9m5n";
+      } + "/Xresources");
+      properties = {
+        # Everything
+        # "*.font" = "Hack Nerd Font:pixelsize=13:antialias=true:autohint=true";
+        # XTerm stuff
+        "XTerm.termName"          = "xterm-256color";
+        "XTerm.vt100.faceName"    = "Hack Nerd Font Mono:size=10";
+        "XTerm*decTerminalID"     = "vt340";
+        "XTerm*numColorRegisters" = 256;
+      };
     };
 
     # GTK theme configs

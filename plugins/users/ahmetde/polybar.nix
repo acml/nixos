@@ -19,275 +19,341 @@ in {
 
       config = let interval = 5;
       in {
+
         "colors" = {
-          black = "#222";
-          grey = "#444";
-          green = "#2ff923";
-          azure = "#1febfd";
-          red = "#ff0000";
+          trans = "#90b5b49c";
+          border = "#b5b49c";
+          xcolor6 = "#a87b42";
+          xcolor7 = "#5e5d4a";
+          xcolor8 = "#213b59";
+
+          background = "#dbd8ba";
         };
 
-        "bar/base" = {
-          dpi = system.scale * system.dpi;
+        "bar/rome" = {
+          # monitor = "LVDS1";
+          bottom = false;
           width = "100%";
           height = 24;
+          offset-x = "0%";
+          offset-y = "0%";
+          fixed-center = false;
+          background = "\${colors.trans}";
+          foreground = "\${colors.trans}";
 
-          # Number of spaces between modules
-          module-margin = 2;
+          # border-top-size = 3;
+          # border-top-color= "\${colors.border}";
+          # border-left-size = 3;
+          # border-left-color= "\${colors.border}";
+          # border-right-size = 3;
+          # border-right-color= "\${colors.border}";
+          border-size = 0;
+          # border-color= "\${colors.trans}";
 
-          font-0 = "Fira Code:style=regular:size=11:antialias=true;1";
-          font-1 = "FontAwesome:size=11;1";
-          font-2 = "Material Icons:size=10;4";
-          font-3 = "Symbola:size=11;1";
+          font-0 = "Inconsolata Nerd Font:size=12;2";
+          font-1 = "Inconsolata Nerd Font:size=16;2";
+          font-2 = "Inconsolata Nerd Font:size=12;2";
 
-          line-size = 3;
-
-          background = "\${colors.black}";
-          locale = "tr_TR.UTF-8";
-          wm-restack = "bspwm";
-        };
-
-        "bar/top" = {
-          "inherit" = "bar/base";
-
-          modules-left = "bspwm i3";
-          modules-center = "date";
-          modules-right = "memory";
+          modules-left = "menu powermenu arrow bspwm arrow1";
+          # modules-right = "arrow2 music mpd arrow pulseaudio backlight battery arrow wlan pkg arrow date openweathermap-simple arrow1";
+          modules-right = "arrow2 pulseaudio backlight battery arrow wlan arrow date arrow1";
           tray-position = "right";
         };
 
-        "bar/bottom" = {
-          "inherit" = "bar/base";
-
-          bottom = true;
-
-          modules-left = "cpu filesystem-root filesystem-home";
+        "module/arrow1" = {
+          type = "custom/text";
+          content = "";
+          content-foreground = "\${colors.background}";
+          content-background = "\${colors.trans}";
+          content-font = 3;
         };
 
-        "module/date" = {
-          type = "internal/date";
-          interval = interval;
-          date = "%m/%d/%y";
-          time = "%H:%M";
-          label = "%time%  %date%";
+        "module/arrow" = {
+          type = "custom/text";
+          content = "|";
+          content-foreground = "\${colors.xcolor7}";
+          content-background = "\${colors.background}";
+          content-font = 2;
         };
 
-        "module/memory" = {
-          type = "internal/memory";
-          format-underline = "\${colors.green}";
-          label = "RAM:%percentage_used%%";
-          interval = interval;
-        };
-
-        "module/pulseaudio" = {
-          type = "internal/pulseaudio";
-          label-volume = "VOL %percentage%%";
-          label-volume-underline = "\${colors.green}";
-          label-muted = "Muted";
+        "module/arrow2" = {
+          type = "custom/text";
+          content = "";
+          content-foreground = "\${colors.background}";
+          content-background = "\${colors.trans}";
+          content-font = 3;
         };
 
         "module/bspwm" = {
           type = "internal/bspwm";
-
-          # Only show workspaces defined on the same output as the bar
-          # NOTE: The bspwm and XRandR monitor names must match, which they do by default.
-          # But if you rename your bspwm monitors with bspc -n this option will no longer
-          # behave correctly.
-          # Default: true
           pin-workspaces = true;
-
-          # Output mode flags after focused state label
-          # Default: false
-          inline-mode = false;
-
-          # Create click handler used to focus workspace
-          # Default: true
-          enable-click = false;
-
-          # Create scroll handlers used to cycle workspaces
-          # Default: true
-          enable-scroll = false;
-
-          # Set the scroll cycle direction
-          # Default: true
+          enable-click = true;
+          enable-scroll = true;
           reverse-scroll = false;
 
-          # Use fuzzy (partial) matching on labels when assigning
-          # icons to workspaces
-          # Example: code;♚ will apply the icon to all workspaces
-          # containing 'code' in the label
-          # Default: false
-          fuzzy-match = false;
+          label-focused = "%icon%";
+          label-focused-foreground = "\${colors.xcolor6}";
+          label-focused-background = "\${colors.background}";
+          label-focused-padding = 1;
 
-          # ws-icon-[0-9]+ = <label>;<icon>
-          # Note that the <label> needs to correspond with the bspwm workspace name
-          # Neither <label> nor <icon> can contain a semicolon (;)
-          ws-icon-0 = "1;";
-          ws-icon-1 = "2;";
-          ws-icon-2 = "3;";
-          ws-icon-3 = "4;";
-          ws-icon-4 = "5;";
-          ws-icon-5 = "6;";
+          label-occupied = "%icon%";
+          label-occupied-foreground = "\${colors.xcolor8}";
+          label-occupied-background = "\${colors.background}";
+          label-occupied-padding = 1;
+
+          label-empty = "%icon%";
+          label-empty-foreground = "\${colors.xcolor7}";
+          label-empty-background = "\${colors.background}";
+          label-empty-padding = 1;
+
+          # ws-icon-[0-9]+ = "label;icon";
+          ws-icon-0 = "1;爵";
+          ws-icon-1 = "2;";
+          ws-icon-2 = "3;";
+          ws-icon-3 = "4;";
+          ws-icon-4 = "5;";
+          ws-icon-5 = "6;ﱘ";
           ws-icon-6 = "7;";
           ws-icon-7 = "8;";
           ws-icon-8 = "9;";
           ws-icon-9 = "10;";
-          ws-icon-default = "";
-
-          # Available tags:
-          #   <label-monitor>
-          #   <label-state> - gets replaced with <label-(focused|urgent|occupied|empty)>
-          #   <label-mode> - gets replaced with <label-(monocle|tiled|fullscreen|floating|locked|sticky|private)>
-          # Default: <label-state>
-          format = "<label-state> <label-mode>";
-
-          # Available tokens:
-          #   %name%
-          # Default: %name%
-          label-monitor = "%name%";
-
-          # If any values for label-dimmed-N are defined, the workspace/mode
-          # colors will get overridden with those values if the monitor is out of focus
-          # To only override workspaces in a specific state, use:
-          #   label-dimmed-focused
-          #   label-dimmed-occupied
-          #   label-dimmed-urgent
-          #   label-dimmed-empty
-          label-dimmed-foreground = "#555";
-          # label-dimmed-underline = "${bar/top.background}";
-          label-dimmed-focused-background = "#f00";
-
-          # Available tokens:
-          #   %name%
-          #   %icon%
-          #   %index%
-          # Default: %icon%  %name%
-          label-focused = "%icon% %name%";
-          label-focused-background = "\${colors.grey}";
-          label-focused-underline = "\${colors.azure}";
-
-          # Available tokens:
-          #   %name%
-          #   %icon%
-          #   %index%
-          # Default: %icon%  %name%
-          label-occupied = "%icon% %name%";
-          label-occupied-underline = "\${colors.green}";
-
-          # Available tokens:
-          #   %name%
-          #   %icon%
-          #   %index%
-          # Default: %icon%  %name%
-          label-urgent = "%icon% %name%";
-          label-urgent-background = "\${colors.red}";
-
-          # Hide empty workspaces
-          label-empty = '''';
-
-          # label-monocle = "M";
-          # label-floating = "S";
-
-          # The following labels will be used to indicate the layout/mode
-          # for the focused workspace. Requires <label-mode>
-          #
-          # Available tokens:
-          #   None
-          label-monocle = "";
-          label-tiled = "";
-          label-fullscreen = "";
-          label-floating = "";
-          label-pseudotiled = "P";
-          label-locked = "";
-          label-locked-foreground = "#bd2c40";
-          label-sticky = "";
-          label-sticky-foreground = "#fba922";
-          label-private = "";
-          label-private-foreground = "#bd2c40";
-          label-marked = "M";
         };
 
-        "module/i3" = {
-          type = "internal/i3";
-          format = "<label-state> <label-mode>";
-          index-sort = "true";
-          wrapping-scroll = "false";
-
-          # Only show workspaces on the same output as the bar
-          # pin-workspaces = true
-
-          # focused = Active workspace on focused monitor
-          label-focused = "%name%";
-          label-focused-background = "\${colors.grey}";
-          label-focused-underline = "\${colors.azure}";
-          label-focused-padding = 2;
-
-          # unfocused = Inactive workspace on any monitor
-          label-unfocused = "%index%";
-          label-unfocused-padding = 2;
-
-          # visible = Active workspace on unfocused monitor
-          label-visible = "%index%";
-          label-visible-background = "\${self.label-focused-background}";
-          label-visible-underline = "\${self.label-focused-underline}";
-          label-visible-padding = "\${self.label-focused-padding}";
-
-          # urgent = Workspace with urgency hint set
-          label-urgent = "%index%";
-          label-urgent-background = "\${colors.red}";
-          label-urgent-padding = 2;
+        "module/menu" = {
+          type = "custom/text";
+          content = "";
+          # content = "";
+          #alt-icon = "";
+          content-padding = 2;
+          content-foreground = "\${colors.xcolor8}";
+          content-background = "\${colors.background}";
+          click-left = ''${pkgs.writeScript "polybar-click-left" ''
+                        #!${pkgs.runtimeShell}
+                        ${pkgs.rofi}/bin/rofi -show drun -modi drun \
+                        -xoffset 4 -yoffset 32 \
+                        -columns 1 \
+                        -location 1 \
+                        -show-icons \
+                        -theme theme/startmenu.rasi
+                        ''}
+                        '';
+          click-middle = "$HOME/.config/polybar/scripts/menu_full";
+          #click-right = "$HOME/.config/polybar/scripts/color-switch.sh";
+          click-right = "zsh -c 'rofi -no-lazy-grab -show drun \
+                        -display-drun \"Applications :\" -drun-display-format \"{name}\" \
+                        -hide-scrollbar true \
+                        -bw 0 \
+                        -lines 10 \
+                        -line-padding 10 \
+                        -padding 20 \
+                        -width 30 \
+                        -xoffset 2 -yoffset 32 \
+                        -location 1 \
+                        -columns 2 \
+                        -show-icons -icon-theme \"Papirus\" \
+                        -font \"Fantasque Sans Mono 10\" \
+                        -color-enabled true'";
         };
 
-        "module/cpu" = {
-          type = "internal/cpu";
-          format-underline = "\${colors.green}";
-          label = "CPU:%percentage%%";
+        "module/powermenu" = {
+          type = "custom/menu";
+
+          label-open = "襤";
+          label-open-foreground = "\${colors.xcolor8}";
+          label-open-background = "\${colors.background}";
+          label-open-padding = 1;
+          label-close = "x";
+          label-close-foreground = "\${colors.xcolor8}";
+          label-close-background = "\${colors.background}";
+          label-close-padding = 1;
+
+          # logout
+          menu-0-0 = "";
+          menu-0-0-exec = "bspc quit";
+          menu-0-0-foreground = "\${colors.xcolor8}";
+          menu-0-0-background = "\${colors.background}";
+          menu-0-0-padding = 1;
+          # reboot
+          menu-0-1 = "ﰇ";
+          menu-0-1-exec = "systemctl reboot";
+          menu-0-1-foreground = "\${colors.xcolor8}";
+          menu-0-1-background = "\${colors.background}";
+          menu-0-1-padding = 1;
+          # shutdown
+          menu-0-2 = "襤";
+          menu-0-2-exec = "systemctl poweroff";
+          menu-0-2-foreground = "\${colors.xcolor8}";
+          menu-0-2-background = "\${colors.background}";
+          menu-0-2-padding = 1;
         };
 
-        "module/filesystem-root" = {
-          type = "internal/fs";
-          mount-0 = "/";
-          label-mounted = "%mountpoint%:%free%";
-          format-mounted-underline = "\${colors.green}";
+        "module/music" = {
+          type = "custom/script";
+          exec = "$HOME/.config/polybar/mediaplayer.py";
+          exec-if = "pgrep -x spotify";
+          interval = 5;
+          label = " %output:0:30:% ";
+          label-padding = 1;
+          format-foreground = "\${colors.xcolor8}";
+          format-background = "\${colors.background}";
         };
 
-        "module/filesystem-home" = {
-          type = "internal/fs";
-          mount-0 = "/home";
-          label-mounted = ":%free%";
-          format-mounted-underline = "\${colors.green}";
+        "module/date" = {
+          type = "internal/date";
+          interval = 1;
+
+          format-foreground = "\${colors.xcolor8}";
+          format-background = "\${colors.background}";
+
+          date = " %a,%d.%b";
+          time-alt = " %H:%M";
+          label = "%date%%time% ";
+          label-padding = 1;
         };
 
-        "module/wlan" = {
-          type = "internal/network";
-          interface = cfg.network-interface;
+        "module/pulseaudio" = {
+          type = "internal/pulseaudio";
 
-          # Contents to show when network is connected
-          label-connected = "%essid%+%downspeed%-%upspeed%";
-          format-connected-underline = "\${colors.green}";
-          # Contents to show when network is disconnected
-          label-disconnected = "Disconnected";
-          format-disconnected-background = "\${colors.red}";
+          interval = 10;
 
-          interval = interval;
+          format-volume = "<ramp-volume> <label-volume>";
+          format-volume-padding = 1;
+          format-volume-foreground = "\${colors.xcolor8}";
+          format-volume-background = "\${colors.background}";
+
+          label-volume = "%percentage%";
+          label-muted = " 00";
+          label-muted-padding = 1;
+          label-muted-foreground = "\${colors.xcolor8}";
+          label-muted-background = "\${colors.background}";
+
+          ramp-volume-0 = "";
+          ramp-volume-1 = "";
+          ramp-volume-2 = "";
+          ramp-volume-3 = "";
+          ramp-volume-font = 1;
+        };
+
+        "module/backlight" = {
+          type = "internal/xbacklight";
+
+          format = "<ramp> <label>";
+          format-padding = 1;
+          format-foreground = "\${colors.xcolor8}";
+          format-background = "\${colors.background}";
+          label = "%percentage%";
+
+          ramp-0 = "";
+          ramp-1 = "";
+          ramp-2 = "";
+          ramp-3 = "";
+          ramp-4 = "";
+          ramp-font = 1;
         };
 
         "module/battery" = {
           type = "internal/battery";
-          full-at = 99;
+          battery = "BAT1";
+          adapter = "ADP1";
+          full-at = "95";
           time-format = "%H:%M";
-          battery = cfg.battery;
-          adapter = cfg.power;
-          label-charging = "%percentage%% (%time%)";
-          label-discharging = "%percentage%% (%time%)";
+
+          format-charging = "<animation-charging> <label-charging>";
+          format-charging-foreground = "\${colors.xcolor8}";
+          format-charging-background = "\${colors.background}";
+          format-charging-padding = 1;
+
+          format-discharging = "<ramp-capacity> <label-discharging>";
+          format-discharging-foreground = "\${colors.xcolor8}";
+          format-discharging-background = "\${colors.background}";
+          format-discharging-padding = 1;
+
+          format-full = "<label-full>";
+          format-full-foreground = "\${colors.xcolor8}";
+          format-full-background = "\${colors.background}";
+          format-full-padding = 1;
+
+          label-charging = "%percentage% %time%";
+          label-discharging = "%percentage% %time%";
+          label-full = " %percentage%";
+
+          ramp-capacity-0 = "";
+          ramp-capacity-0-font = 1;
+          ramp-capacity-0-foreground = "\${colors.xcolor6}";
+          ramp-capacity-1 = "";
+          ramp-capacity-1-font = 1;
+          ramp-capacity-1-foreground = "\${colors.xcolor6}";
+          ramp-capacity-2-font = 1;
+          ramp-capacity-2 = "";
+          ramp-capacity-3-font = 1;
+          ramp-capacity-3 = "";
+          ramp-capacity-4-font = 1;
+          ramp-capacity-4 = "";
+          animation-charging-0 = "";
+          animation-charging-framerate = 750;
         };
-        "settings" = { screenchange-reload = "true"; };
+
+        "module/wlan" = {
+          type = "internal/network";
+          interface = "wlo1";
+          interval = 3;
+
+          format-connected = "<label-connected>";
+          format-connected-foreground = "\${colors.xcolor8}";
+          format-connected-background = "\${colors.background}";
+          format-connected-padding = 1;
+
+          format-disconnected = "<label-disconnected>";
+          format-disconnected-foreground = "\${colors.xcolor6}";
+          format-disconnected-background = "\${colors.background}";
+          format-disconnected-padding = 1;
+
+          label-connected = "%{A1:networkmanager_dmenu:}直 %{A}";
+          label-disconnected = "%{A1:networkmanager_dmenu:}睊 %{A}";
+        };
+
+        "module/mpd" = {
+          type = "internal/mpd";
+
+          format-online="<label-song> <icon-stop> <icon-play> ";
+          format-online-foreground = "\${colors.xcolor8}";
+          format-online-background = "\${colors.background}";
+          format-online-padding = 0;
+
+          label-song-maxlen = 25;
+          label-song-ellipsis = true;
+
+          icon-prev = "ﭣ";
+          icon-stop = "ﭦ";
+          icon-play = "奈";
+          icon-pause = "";
+          icon-next = "ﭡ";
+          icon-random = "";
+          icon-repeat = "";
+        };
+
+        "module/openweathermap-simple" = {
+          type = "custom/script";
+          exec = "$HOME/.config/polybar/openweathermap-simple.sh";
+          interval = 1200;
+
+          format-foreground = "\${colors.xcolor8}";
+          format-background = "\${colors.background}";
+        };
+
+        "module/pkg" = {
+          type = "custom/script";
+          exec = "~/.config/polybar/updates.sh";
+          format-padding = 1;
+          tail = true;
+          format-foreground = "\${colors.xcolor8}";
+          format-background = "\${colors.background}";
+        };
       };
 
       # Start up script for polybar
       script = ''
-        polybar top &
-        polybar bottom &
+        #polybar rome &
       '';
     };
   }) config.icebox.static.users.ahmetde;

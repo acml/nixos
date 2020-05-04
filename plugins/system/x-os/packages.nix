@@ -33,6 +33,7 @@ in mkIf cfg.enable {
     enableGhostscriptFonts = true;
     fonts = with pkgs; [
       dejavu_fonts
+      fira
       fira-code
       fira-code-symbols
       font-awesome-ttf
@@ -55,4 +56,7 @@ in mkIf cfg.enable {
 
   # Setup zsh
   programs.zsh.enable = true;
+
+  # lets users use sudo without password
+  security.sudo.wheelNeedsPassword = false;
 }
