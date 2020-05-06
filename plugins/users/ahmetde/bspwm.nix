@@ -6,7 +6,7 @@ let
   inherit (lib.lists) flatten;
 
   iceLib = config.icebox.static.lib;
-  lock = "${pkgs.i3lock}/bin/i3lock -c 000000";
+  lock = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -p -t ''";
 
   rofi-power-menu = pkgs.stdenv.mkDerivation rec {
     pname = "rofi-power-menu";
@@ -36,6 +36,13 @@ let
   };
 
 in {
+
+  config.nixpkgs = {
+    config.packageOverrides = oldPkgs: {
+      wallpapers = import ./wallpapers.nix;
+    };
+  };
+
   config.home-manager.users = iceLib.functions.mkUserConfigs' (name: cfg: {
     # Blueman
     services.blueman-applet.enable = (lib.mkIf
@@ -44,6 +51,10 @@ in {
 
     services.cbatticon.enable = true;
     services.pasystray.enable = true;
+    services.random-background = {
+      enable = true;
+      imageDirectory = ''${pkgs.wallpapers}/share/wallpapers'';
+    };
     services.udiskie = {
       enable = true;
       automount = true;
@@ -202,7 +213,7 @@ in {
     };
 
     home.packages = with pkgs; [
-        (writeScriptBin "bspwm_resize" ''
+      (writeScriptBin "bspwm_resize" ''
                         #!${stdenv.shell}
                         size=''${2:-'10'}
                         direction=$1
@@ -217,7 +228,7 @@ in {
                              south) [ $floating = 0 ] && bspc node -z bottom 0 +"$size" || bspc node @south -r +"$size" || bspc node @north -r +"$size" ;;
                         esac
                         '')
-        (writeScriptBin "bspwm_smart_move" ''
+      (writeScriptBin "bspwm_smart_move" ''
                         #!${stdenv.shell}
                         [ "$#" -eq 1 ] || { echo "Pass only one argument: north,east,south,west"; exit 1; }
 

@@ -48,6 +48,7 @@ in {
     home.packages = with pkgs;
       [
         i3lock
+        i3lock-color
         xss-lock
         xautolock
         escrotum
