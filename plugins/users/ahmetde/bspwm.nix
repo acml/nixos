@@ -145,6 +145,9 @@ in {
         "super + Escape" = "pkill -USR1 -x sxhkd";
         "{Prior,Next}" = ":";
 
+        # focus or send to the given desktop
+        "super + {_,shift + }{1-9,0}" = "bspc {desktop -f,node -d} '^{1-9,10}'";
+
         # Focus the node in the given direction.
         "super + {n,e,i,o}" = "bspc node -f {west,south,north,east}";
         "super + {Left,Down,Up,Right}" = "bspc node -f {west,south,north,east}";
