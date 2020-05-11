@@ -21,13 +21,16 @@ in lib.mkIf cfg.enable {
       naturalScrolling = true;
     };
 
+    desktopManager.session = [{
+      name = "home-manager";
+      bgSupport = true;
+      start = ''
+              ${pkgs.stdenv.shell} $HOME/.xsession-hm &
+              waitPID=$!
+              '';
+    }];
+
     displayManager = {
-      # Add one session that would start user's own xsession profile
-      session = [{
-        manage = "desktop";
-        name = "xsession";
-        start = "exec $HOME/.xsession";
-      }];
       # LightDM display manager
       lightdm = {
         enable = true;

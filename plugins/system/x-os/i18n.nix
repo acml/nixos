@@ -18,6 +18,7 @@ in {
     # Select internationalisation properties.
     console = {
       font = "Lat2-Terminus16";
+      # keyMap = "colemak";
       useXkbConfig = true;
     };
     i18n = {

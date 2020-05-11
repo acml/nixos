@@ -12,6 +12,7 @@ in {
       package = pkgs.emacsUnstable.override { inherit (pkgs) imagemagick; };
       extraPackages = (epkgs:
         (with epkgs; [
+          # exwm
           emacs-libvterm
           pdf-tools
         ]));

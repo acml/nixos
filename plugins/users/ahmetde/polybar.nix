@@ -54,9 +54,9 @@ in {
           font-1 = "Inconsolata Nerd Font:size=16;2";
           font-2 = "Inconsolata Nerd Font:size=12;2";
 
-          modules-left = "menu powermenu arrow bspwm arrow1";
+          modules-left = "menu powermenu arrow random-background arrow bspwm arrow1";
           # modules-right = "arrow2 music mpd arrow pulseaudio backlight battery arrow wlan pkg arrow date openweathermap-simple arrow1";
-          modules-right = "arrow2 pulseaudio backlight battery arrow wlan arrow date arrow1";
+          modules-right = "arrow2 pulseaudio xkeyboard backlight battery arrow wlan arrow date arrow1";
           tray-position = "right";
         };
 
@@ -82,6 +82,14 @@ in {
           content-foreground = "\${colors.background}";
           content-background = "\${colors.trans}";
           content-font = 3;
+        };
+
+        "module/random-background" = {
+          type = "custom/text";
+          content = "  ";
+          click-left = "systemctl --user restart random-background";
+          content-foreground = "\${colors.xcolor8}";
+          content-background = "\${colors.background}";
         };
 
         "module/bspwm" = {
@@ -232,6 +240,32 @@ in {
           ramp-volume-2 = "";
           ramp-volume-3 = "";
           ramp-volume-font = 1;
+        };
+
+        "module/xkeyboard" = {
+          type = "internal/xkeyboard";
+
+          # List of indicators to ignore
+          # blacklist-0 = "num lock";
+          # blacklist-1 = "scroll lock";
+
+          # Available tags:
+          #   <label-layout> (default)
+          #   <label-indicator> (default)
+          format = "<label-layout> <label-indicator>";
+          format-spacing = 0;
+
+          format-background = "\${colors.background}";
+          format-foreground = "\${colors.xcolor8}";
+
+          # Available tokens:
+          #   %layout%
+          #   %name%
+          #   %number%
+          #   %icon%
+          # Default: %layout%
+          label-layout = "%name%";
+          label-layout-padding = 2;
         };
 
         "module/backlight" = {

@@ -62,6 +62,7 @@ in {
         mpv       # video player
         font-manager
         my.ripcord
+        ytop
       ] ++ cfg.extraPackages;
 
     xdg.mimeApps = {
@@ -71,6 +72,9 @@ in {
         "application/pdf" = "org.gnome.Evince.desktop"; # `.pdf`
       };
     };
+
+    xsession.scriptPath = ".xsession-hm";
+    xsession.numlock.enable = true;
 
     # Package settings
     programs = {
@@ -210,11 +214,17 @@ in {
       # ".config/gtk-3.0/settings.ini".source = (system.dirs.dotfiles + "/${name}/gtk-settings.ini");
     };
 
-    home.keyboard = null;
+    # home.keyboard = null;
     # home.keyboard = {
     #   # options = [ "caps:escape" "esperanto:colemak" ];
     #   variant = "colemak";
     # };
+    home.keyboard = {
+      layout = "us,tr";
+      # options = [ "ctrl:swapcaps" "compose:prsc" "grp:rctrl_toggle" ];
+      options = [ "ctrl:nocaps" "grp:rctrl_toggle" ];
+      variant = "colemak,";
+    };
 
     systemd.user.startServices = true;
 
