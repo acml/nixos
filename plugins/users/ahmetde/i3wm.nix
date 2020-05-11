@@ -6,7 +6,7 @@ let
   inherit (lib.lists) flatten;
 
   iceLib = config.icebox.static.lib;
-  lock = "${pkgs.i3lock}/bin/i3lock -c 000000";
+  lock = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -p -t ''";
 
   rofi-power-menu = pkgs.stdenv.mkDerivation rec {
     pname = "rofi-power-menu";

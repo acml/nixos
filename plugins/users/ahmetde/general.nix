@@ -47,7 +47,6 @@ in {
     # User-layer packages
     home.packages = with pkgs;
       [
-        i3lock
         i3lock-color
         xss-lock
         xautolock
@@ -63,7 +62,22 @@ in {
         font-manager
         my.ripcord
         ytop
+        qtpass
+        (pass.withExtensions (p: [ p.pass-import ]))
+        # (pkgs.pass.withExtensions (exts: [ exts.pass-otp ]))
       ] ++ cfg.extraPackages;
+
+    # HACK Without this config file you get "No pinentry program" on 20.03.
+    #      program.gnupg.agent.pinentryFlavor doesn't appear to work, and this
+    #      is cleaner than overriding the systemd unit.
+    xdg.configFile."gnupg/gpg-agent.conf" = {
+      text = ''
+          enable-ssh-support
+          allow-emacs-pinentry
+          default-cache-ttl 1800
+          pinentry-program ${pkgs.pinentry.gtk2}/bin/pinentry
+        '';
+    };
 
     xdg.mimeApps = {
       enable = true;
