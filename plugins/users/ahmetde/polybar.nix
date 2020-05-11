@@ -54,7 +54,7 @@ in {
           font-1 = "Inconsolata Nerd Font:size=16;2";
           font-2 = "Inconsolata Nerd Font:size=12;2";
 
-          modules-left = "menu powermenu arrow random-background arrow bspwm arrow1";
+          modules-left = "menu arrow powermenu arrow random-background arrow bspwm arrow1";
           # modules-right = "arrow2 music mpd arrow pulseaudio backlight battery arrow wlan pkg arrow date openweathermap-simple arrow1";
           modules-right = "arrow2 pulseaudio xkeyboard backlight battery arrow wlan arrow date arrow1";
           tray-position = "right";
@@ -86,7 +86,7 @@ in {
 
         "module/random-background" = {
           type = "custom/text";
-          content = "  ";
+          content = "   ";
           click-left = "systemctl --user restart random-background";
           content-foreground = "\${colors.xcolor8}";
           content-background = "\${colors.background}";
@@ -94,6 +94,10 @@ in {
 
         "module/bspwm" = {
           type = "internal/bspwm";
+          # format = "<label-state> <label-mode>";
+          # label-monocle = "M";
+          # label-floating = "S";
+          format-background = "\${colors.background}";
           pin-workspaces = true;
           enable-click = true;
           enable-scroll = true;
@@ -101,17 +105,14 @@ in {
 
           label-focused = "%icon%";
           label-focused-foreground = "\${colors.xcolor6}";
-          label-focused-background = "\${colors.background}";
           label-focused-padding = 1;
 
           label-occupied = "%icon%";
           label-occupied-foreground = "\${colors.xcolor8}";
-          label-occupied-background = "\${colors.background}";
           label-occupied-padding = 1;
 
           label-empty = "%icon%";
           label-empty-foreground = "\${colors.xcolor7}";
-          label-empty-background = "\${colors.background}";
           label-empty-padding = 1;
 
           # ws-icon-[0-9]+ = "label;icon";
@@ -166,33 +167,39 @@ in {
         "module/powermenu" = {
           type = "custom/menu";
 
-          label-open = "襤";
+          label-open = "";
           label-open-foreground = "\${colors.xcolor8}";
           label-open-background = "\${colors.background}";
           label-open-padding = 1;
-          label-close = "x";
+          label-close = "";
           label-close-foreground = "\${colors.xcolor8}";
           label-close-background = "\${colors.background}";
           label-close-padding = 1;
 
-          # logout
-          menu-0-0 = "";
-          menu-0-0-exec = "bspc quit";
+          # lock screen
+          menu-0-0 = "";
+          menu-0-0-exec = "loginctl lock-session $XDG_SESSION_ID &> /dev/null";
           menu-0-0-foreground = "\${colors.xcolor8}";
           menu-0-0-background = "\${colors.background}";
           menu-0-0-padding = 1;
-          # reboot
-          menu-0-1 = "ﰇ";
-          menu-0-1-exec = "systemctl reboot";
+          # logout
+          menu-0-1 = "";
+          menu-0-1-exec = "loginctl terminate-session $XDG_SESSION_ID &> /dev/null";
           menu-0-1-foreground = "\${colors.xcolor8}";
           menu-0-1-background = "\${colors.background}";
           menu-0-1-padding = 1;
-          # shutdown
-          menu-0-2 = "襤";
-          menu-0-2-exec = "systemctl poweroff";
+          # reboot
+          menu-0-2 = "ﰇ";
+          menu-0-2-exec = "systemctl reboot &> /dev/null";
           menu-0-2-foreground = "\${colors.xcolor8}";
           menu-0-2-background = "\${colors.background}";
           menu-0-2-padding = 1;
+          # shutdown
+          menu-0-3 = "襤";
+          menu-0-3-exec = "systemctl poweroff &> /dev/null";
+          menu-0-3-foreground = "\${colors.xcolor8}";
+          menu-0-3-background = "\${colors.background}";
+          menu-0-3-padding = 1;
         };
 
         "module/music" = {
@@ -254,6 +261,7 @@ in {
           #   <label-indicator> (default)
           format = "<label-layout> <label-indicator>";
           format-spacing = 0;
+          format-prefix = " ";
 
           format-background = "\${colors.background}";
           format-foreground = "\${colors.xcolor8}";
