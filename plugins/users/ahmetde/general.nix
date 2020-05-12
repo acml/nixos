@@ -189,6 +189,11 @@ in {
       };
 
       direnv.enable = true;
+      direnv.stdlib = ''
+          use_nix() {
+            eval "$(lorri direnv)"
+          }
+      '';
 
       starship = {
         enable = true;
@@ -222,6 +227,8 @@ in {
       };
 
     };
+
+    services.lorri.enable = true;
 
     # Handwritten configs
     home.file = {
