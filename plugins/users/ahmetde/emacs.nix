@@ -63,7 +63,12 @@ in {
     # Handwritten configs
     home.file = {
       # Handle multiple emacs installs
-      ".emacs".source = (system.dirs.dotfiles + "/${name}/emacs/.emacs");
+      ".emacs".source = pkgs.fetchFromGitHub {
+       owner = "plexus";
+       repo = "chemacs";
+       rev = "233bb7fb4d176f81fe4e7dccbb7f1cba793010e6";
+       sha256 = "0rljwgnns38g95zdlvch63zsicdvbyaq6xfq2f2mqag051yn9pwb";
+      } + "/.emacs";
       ".emacs-profiles.el".source = (system.dirs.dotfiles + "/${name}/emacs/emacs-profiles.el");
     };
 
