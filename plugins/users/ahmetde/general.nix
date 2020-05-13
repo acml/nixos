@@ -248,6 +248,11 @@ in {
       variant = "colemak,";
     };
 
+    home.sessionVariables = {
+      BROWSER = "firefox";
+      TERMINAL = "alacritty";
+    };
+
     systemd.user.startServices = true;
 
     xresources = {
