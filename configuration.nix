@@ -19,6 +19,7 @@ in {
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
+  security.pam.services.login.enableGnomeKeyring = true;
 
   systemd.user.services."setup-keyboard" = {
     enable = true;

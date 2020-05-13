@@ -65,6 +65,7 @@ in {
         qtpass
         (pass.withExtensions (p: [ p.pass-import ]))
         # (pkgs.pass.withExtensions (exts: [ exts.pass-otp ]))
+        gnome3.seahorse
       ] ++ cfg.extraPackages;
 
     # HACK Without this config file you get "No pinentry program" on 20.03.
