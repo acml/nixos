@@ -50,6 +50,7 @@ in {
       true);
 
     services.cbatticon.enable = true;
+    security.pam.services.login.enableGnomeKeyring = true;
     services.gnome-keyring.enable = true;
     services.pasystray.enable = true;
     services.random-background = {
