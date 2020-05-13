@@ -20,16 +20,43 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "monospace" :size 14))
+;; (setq doom-font (font-spec :family "JetBrains Mono" :size 14))
+;; (setq doom-font (font-spec :family "monospace" :size 14))
+
 ;; (setq doom-font (font-spec :family "Fira Code" :size 12)
 ;;       doom-big-font (font-spec :family "Fira Code" :size 26)
 ;;       doom-variable-pitch-font (font-spec :family "Overpass" :size 14))
+(setq doom-font (font-spec :family "Hack Nerd Font" :size 14)
+      doom-big-font (font-spec :family "Hack Nerd Font" :size 26)
+      doom-variable-pitch-font (font-spec :family "DejaVu Sans" :size 14))
+
+(use-package cus-face
+  :config
+  (custom-set-faces
+   '(org-document-title ((t (:height 1.8))))
+   '(org-block-begin-line ((t (:inherit 'fixed-pitch))))
+   '(org-block-end-line ((t (:inherit 'fixed-pitch))))
+   '(org-verbatim ((t (:inherit 'fixed-pitch))))
+   '(org-code ((t (:inherit 'fixed-pitch))))
+   '(org-block ((t (:inherit 'fixed-pitch))))
+   '(org-table ((t (:inherit 'fixed-pitch))))
+   '(org-meta-line ((t (:inherit 'fixed-pitch))))
+   '(org-document-info-keyword ((t (:inherit 'fixed-pitch))))
+   '(org-indent ((t (:inherit (fixed-pitch org-hide)))))
+   '(org-level-1 ((t (:extend t))))
+   '(org-level-2 ((t (:extend t))))
+   '(org-level-3 ((t (:extend t))))
+   '(org-level-4 ((t (:extend t))))
+   '(org-level-5 ((t (:extend t))))
+   '(org-level-6 ((t (:extend t))))
+   '(org-level-7 ((t (:extend t))))
+   '(org-level-8 ((t (:extend t))))))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-one)
-(setq doom-theme 'modus-operandi)
+;; (setq doom-theme 'modus-operandi)
 ;; (setq doom-theme 'modus-vivendi)
 
 ;; If you use `org' and don't want your org files in the default location below,
@@ -140,18 +167,23 @@
 
 (use-package! modus-operandi-theme
   :init
-  (setq org-src-block-faces '(("emacs-lisp" (:background "#fef2f2" :extend t))
-                              ("python" (:background "#f4f4ff" :extend t)))
+  (setq modus-operandi-theme-slanted-constructs t
+        modus-operandi-theme-bold-constructs t
+        ;; modus-operandi-theme-visible-fringes t
+        modus-operandi-theme-3d-modeline t
+        modus-operandi-theme-subtle-diffs t
         modus-operandi-theme-distinct-org-blocks t
+        modus-operandi-theme-proportional-fonts t
         modus-operandi-theme-rainbow-headings t
         ;; modus-operandi-theme-section-headings t
         modus-operandi-theme-scale-headings t
-        ;; modus-operandi-theme-visible-fringes t
-        modus-operandi-theme-slanted-constructs t
-        modus-operandi-theme-bold-constructs t
-        modus-operandi-theme-3d-modeline t
-        modus-operandi-theme-subtle-diffs t
-        modus-operandi-theme-proportional-fonts t))
+        modus-operandi-theme-scale-1 1.05
+        modus-operandi-theme-scale-2 1.1
+        modus-operandi-theme-scale-3 1.15
+        modus-operandi-theme-scale-4 1.2
+        modus-operandi-theme-scale-5 1.3)
+  :config
+  (load-theme 'modus-operandi t))
 
 (use-package! rainbow-mode
   :config
