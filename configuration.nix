@@ -98,7 +98,6 @@ in {
                 zoom-us
                 thunderbird
                 spotify
-                firefox
                 # tdesktop
                 # minecraft
                 virtmanager
