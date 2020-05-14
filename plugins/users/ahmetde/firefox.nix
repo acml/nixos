@@ -26,9 +26,9 @@ in {
           # Disable WebRTC because it's scary
           "media.peerconnection.enabled" = false;
 
-          "browser.search.defaultenginename" = "Google";
-          "browser.search.selectedEngine" = "Google";
-          "browser.urlbar.placeholderName" = "Google";
+          "browser.search.defaultenginename" = "DuckDuckGo";
+          "browser.search.selectedEngine" = "DuckDuckGo";
+          "browser.urlbar.placeholderName" = "DuckDuckGo";
           "browser.search.region" = "US";
 
           # "font.name.monospace.x-western" = "Roboto Mono";
