@@ -25,8 +25,6 @@ in mkIf cfg.enable {
     hicolor-icon-theme #fixes missing redshift tray icon
   ];
 
-  # xdg.icons.enable = true;
-
   # Fonts
   fonts = {
     enableFontDir = true;

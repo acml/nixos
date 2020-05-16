@@ -18,15 +18,10 @@ in {
     # Select internationalisation properties.
     console = {
       font = "Lat2-Terminus16";
-      # keyMap = "colemak";
       useXkbConfig = true;
     };
     i18n = {
       defaultLocale = "en_US.UTF-8";
-      # inputMethod = {
-      #   enabled = "ibus";
-      #   ibus.engines = cfg.ibus-engines;
-      # };
     };
   };
 }

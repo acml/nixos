@@ -1,4 +1,5 @@
 { config, pkgs, lib, ... }:
+
 let
   moz_overlay = import (builtins.fetchTarball
     "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz");
@@ -71,7 +72,7 @@ in {
 
   icebox = {
     users = {
-      plugins = [ "ahmetde" "hm-fix" ];
+      plugins = [ "ahmetde" "hm-fix" "ahmet-profile" ];
       users = {
         ahmet = {
           regular = {
@@ -86,12 +87,8 @@ in {
             extraGroups = [ "wheel" "networkmanager" "video" "libvirtd" ];
           };
           configs = {
-            ahmetde = {
+            ahmet-profile = {
               enable = true;
-              # Adapt followings to what your device profile supplied
-              battery = "BAT0";
-              power = "AC";
-              network-interface = "wlo1";
               extraPackages = with pkgs; [
                 htop
                 # deluge
@@ -109,7 +106,16 @@ in {
                 # calibre
                 # tor-browser-bundle-bin
                 # latest.rustChannels.stable.rust
+                ifuse
+                libimobiledevice
               ];
+            };
+            ahmetde = {
+              enable = true;
+              # Adapt followings to what your device profile supplied
+              battery = "BAT0";
+              power = "AC";
+              network-interface = "wlo1";
             };
           };
         };
@@ -117,10 +123,10 @@ in {
     };
 
     devices = {
-      plugins = [ "g3" "howdy" ];
+      # plugins = [ "g3" "howdy" ];
+      plugins = [ "g3" ];
       configs = {
         g3 = {
-          enable = true;
           # Choose "howdy", "fprintd", or null.
           bio-auth = "fprintd";
         };
@@ -155,7 +161,7 @@ in {
     };
 
     system = {
-      # plugins = [ "x-os" "clash" ];
+      #plugins = [ "x-os" "gnome" "clash" "onlyoffice-desktop" ];
       plugins = [ "x-os" ];
       stateVersion = "20.03";
       configs = {

@@ -1,1 +1,1 @@
-{ imports = [ ./ahmetde ./hm-fix.nix ]; }
+{ imports = [ ./ahmetde ./hm-fix.nix ./ahmet-profile.nix ]; }

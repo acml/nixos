@@ -3,8 +3,9 @@
 let
   inherit (config.icebox.static.lib.configs) devices system;
   iceLib = config.icebox.static.lib;
+  cfg = config.icebox.static.users.ahmetde;
 in {
-  config.home-manager.users = iceLib.functions.mkUserConfigs' (name: cfg: {
+  config.home-manager.users = iceLib.functions.mkUserConfigs' (n: c: {
     services.polybar = {
       # Polybar
       enable = true;
@@ -398,5 +399,5 @@ in {
         #polybar rome &
       '';
     };
-  }) config.icebox.static.users.ahmetde;
+  }) cfg;
 }

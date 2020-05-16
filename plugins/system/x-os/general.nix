@@ -11,7 +11,6 @@ in {
     default = false;
   };
   config = mkIf cfg.enable {
-    # Use the latest linux kernel (temporarily we are using 5.5 branch because acpi_call is broken on 5.6.2)
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Add swap file

@@ -7,6 +7,7 @@ let
 
   iceLib = config.icebox.static.lib;
   lock = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -p -t ''";
+  cfg = config.icebox.static.users.ahmetde;
 
   rofi-power-menu = pkgs.stdenv.mkDerivation rec {
     pname = "rofi-power-menu";
@@ -43,7 +44,7 @@ in {
     };
   };
 
-  config.home-manager.users = iceLib.functions.mkUserConfigs' (name: cfg: {
+  config.home-manager.users = iceLib.functions.mkUserConfigs' (n: c: {
     # Blueman
     services.blueman-applet.enable = (lib.mkIf
       (system.bluetooth.enable && (system.bluetooth.service == "blueman"))
@@ -278,7 +279,7 @@ in {
     };
 
     xdg.configFile = {
-      "rofi/theme" = { source = (system.dirs.dotfiles + "/${name}/rofi"); recursive = true; };
+      "rofi/theme" = { source = (system.dirs.dotfiles + "/${n}/rofi"); recursive = true; };
       "sxhkd/sxhkdrc" = {
         text = ''
           super + alt + Escape
@@ -531,5 +532,5 @@ in {
       };
     };
 
-  }) config.icebox.static.users.ahmetde;
+  }) cfg;
 }
