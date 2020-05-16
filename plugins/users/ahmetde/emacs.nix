@@ -54,8 +54,19 @@ in {
         # :lang latex & :lang org (latex previews)
         texlive.combined.scheme-tetex
         # :lang rust
-        rustfmt
-        rls
+        # (pkgs.latest.rustChannels.stable.rust.override {
+        #   extensions = [
+        #     "clippy-preview"
+        #     # "miri-preview"
+        #     "rls-preview"
+        #     "rustfmt-preview"
+        #     "llvm-tools-preview"
+        #     "rust-analysis"
+        #     "rust-std"
+        #     "rustc-dev"
+        #     "rust-src"
+        #   ];
+        # })
         # :ui treemacs
         python3 # advanced git-mode and directory flattening features require python3
       ];
