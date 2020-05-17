@@ -28,7 +28,8 @@
 ;;       doom-variable-pitch-font (font-spec :family "Overpass" :size 14))
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 14)
       doom-big-font (font-spec :family "Hack Nerd Font" :size 26)
-      doom-variable-pitch-font (font-spec :family "DejaVu Sans" :size 14))
+      doom-variable-pitch-font (font-spec :family "Overpass NF" :size 14)
+      doom-serif-font (font-spec :family "BlexMono NF" :weight 'light :size 14))
 
 (use-package cus-face
   :config

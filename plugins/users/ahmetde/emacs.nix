@@ -13,7 +13,7 @@ in {
       extraPackages = (epkgs:
         (with epkgs; [
           # exwm
-          emacs-libvterm
+          vterm
           pdf-tools
         ]));
     };
@@ -23,7 +23,7 @@ in {
     home.packages = with pkgs;
       [
         ## Doom dependencies
-        git
+        global
         (ripgrep.override {withPCRE2 = true;})
         gnutls              # for TLS connectivity
 
