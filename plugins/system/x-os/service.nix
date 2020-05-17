@@ -25,6 +25,8 @@ in mkIf cfg.enable (mkMerge [
     # Enable sound.
     sound.enable = true;
 
+    # Docker
+    virtualisation.docker.enable = true;
     # Libvirtd
     virtualisation.libvirtd.enable = true;
     # FIXME: Should we let users add them to group or other way around.

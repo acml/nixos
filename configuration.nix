@@ -84,7 +84,7 @@ in {
             # networkmanager - manage network
             # video - light control
             # libvirtd - virtual manager controls.
-            extraGroups = [ "wheel" "networkmanager" "video" "libvirtd" ];
+            extraGroups = [ "wheel" "networkmanager" "video" "libvirtd" "docker" ];
           };
           configs = {
             ahmet-profile = {
