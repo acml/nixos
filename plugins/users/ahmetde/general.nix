@@ -111,6 +111,7 @@ in {
         feh       # image viewer
         mpv       # video player
         font-manager
+        minicom
         my.ripcord
         ytop
         qtpass

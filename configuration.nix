@@ -84,7 +84,8 @@ in {
             # networkmanager - manage network
             # video - light control
             # libvirtd - virtual manager controls.
-            extraGroups = [ "wheel" "networkmanager" "video" "libvirtd" "docker" ];
+            # dialout - tty
+            extraGroups = [ "wheel" "networkmanager" "video" "libvirtd" "docker" "dialout" ];
           };
           configs = {
             ahmet-profile = {
