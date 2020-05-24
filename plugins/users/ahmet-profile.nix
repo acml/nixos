@@ -77,7 +77,11 @@ in {
         enableAutosuggestions = true;
         autocd = true;
         dotDir = ".config/zsh";
-        initExtra = '' prompt off '';
+        initExtra = ''
+          prompt off
+          bindkey "^P" up-line-or-search
+          bindkey "^N" down-line-or-search
+        '';
         profileExtra =
           ''
           if [ -d "$HOME/.local/bin" ]; then
