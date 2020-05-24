@@ -118,6 +118,7 @@ in {
         (pass.withExtensions (p: [ p.pass-import ]))
         # (pkgs.pass.withExtensions (exts: [ exts.pass-otp ]))
         gnome3.seahorse
+        lazydocker
       ];
 
       # HACK Without this config file you get "No pinentry program" on 20.03.
