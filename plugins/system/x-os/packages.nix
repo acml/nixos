@@ -37,7 +37,6 @@ in mkIf cfg.enable {
       font-awesome-ttf
       nerdfonts
       noto-fonts
-      noto-fonts-cjk
       noto-fonts-emoji
       siji
       symbola
