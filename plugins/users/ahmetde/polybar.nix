@@ -225,7 +225,7 @@ in {
           format-mounted = " <ramp-capacity>";
           format-mounted-foreground = "\${colors.xcolor8}";
           format-mounted-background = "\${colors.background}";
-          interval = 25;
+          interval = 30;
           mount-0 = "/";
           ramp-capacity-7 = "▁";
           ramp-capacity-6 = "▂";
@@ -256,7 +256,7 @@ in {
 
         "module/date" = {
           type = "internal/date";
-          interval = 60;
+          interval = "60.0";
           date = "%Y %b %d (%a)";
           # time = "%I:%M%p";
           time = "%H:%M";
@@ -370,7 +370,7 @@ in {
 
         "module/temperature" = {
           type = "internal/temperature";
-          thermal-zone = 0;
+          thermal-zone = 4;
           warn-temperature = 60;
 
           format = "<ramp> <label>";
@@ -380,7 +380,7 @@ in {
 
           label = "%temperature-c%";
           label-warn = "%temperature-c%";
-          label-warn-foreground = "\${colors.xcolor8}";
+          label-warn-foreground = "\${colors.xcolor6}";
 
           ramp-0 = "";
           ramp-1 = "";
