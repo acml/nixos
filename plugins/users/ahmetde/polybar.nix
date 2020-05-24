@@ -31,8 +31,9 @@ in {
           background = "#dbd8ba";
         };
 
-        "bar/rome" = {
+        "bar/top" = {
           # monitor = "LVDS1";
+          monitor = "\${env:MONITOR:eDP-1-1}";
           bottom = false;
           width = "100%";
           height = 24;
@@ -53,11 +54,16 @@ in {
 
           font-0 = "Inconsolata Nerd Font:size=12;2";
           font-1 = "Inconsolata Nerd Font:size=16;2";
-          font-2 = "Inconsolata Nerd Font:size=12;2";
+          font-2 = "Inconsolata Nerd Font:size=13;2";
 
           modules-left = "menu arrow powermenu arrow random-background arrow bspwm arrow1";
           # modules-right = "arrow2 music mpd arrow pulseaudio backlight battery arrow wlan pkg arrow date openweathermap-simple arrow1";
-          modules-right = "arrow2 pulseaudio xkeyboard backlight battery arrow wlan arrow date arrow1";
+          modules-center = "title";
+          modules-right = "arrow2 pulseaudio arrow backlight arrow temperature arrow cpu arrow memory arrow fs_root fs_home arrow xkeyboard arrow date";
+        };
+
+        "bar/top-tray" = {
+          inherits = "bar/top";
           tray-position = "right";
         };
 
@@ -88,16 +94,27 @@ in {
         "module/random-background" = {
           type = "custom/text";
           content = "   ";
-          click-left = "systemctl --user restart random-background";
+          click-left = "${pkgs.systemd}/bin/systemctl --user restart random-background";
           content-foreground = "\${colors.xcolor8}";
           content-background = "\${colors.background}";
         };
 
         "module/bspwm" = {
           type = "internal/bspwm";
-          # format = "<label-state> <label-mode>";
-          # label-monocle = "M";
-          # label-floating = "S";
+          format = "<label-state> <label-mode>";
+          fuzzy-match = "false";
+          # ws-icon-[0-9]+ = "label;icon";
+          ws-icon-0 = "1;爵";
+          ws-icon-1 = "2;";
+          ws-icon-2 = "3;";
+          ws-icon-3 = "4;";
+          ws-icon-4 = "5;";
+          ws-icon-5 = "6;ﱘ";
+          ws-icon-6 = "7;";
+          ws-icon-7 = "8;";
+          ws-icon-8 = "9;";
+          ws-icon-9 = "0;";
+          # label-mode-background = "\${colors.background}";
           format-background = "\${colors.background}";
           pin-workspaces = true;
           enable-click = true;
@@ -116,17 +133,33 @@ in {
           label-empty-foreground = "\${colors.xcolor7}";
           label-empty-padding = 1;
 
-          # ws-icon-[0-9]+ = "label;icon";
-          ws-icon-0 = "1;爵";
-          ws-icon-1 = "2;";
-          ws-icon-2 = "3;";
-          ws-icon-3 = "4;";
-          ws-icon-4 = "5;";
-          ws-icon-5 = "6;ﱘ";
-          ws-icon-6 = "7;";
-          ws-icon-7 = "8;";
-          ws-icon-8 = "9;";
-          ws-icon-9 = "10;";
+          label-monocle = "";
+          label-monocle-foreground = "\${colors.xcolor6}";
+          label-monocle-padding = 1;
+          label-tiled = "";
+          label-tiled-foreground = "\${colors.xcolor6}";
+          label-tiled-padding = 1;
+          label-fullscreen = "";
+          label-fullscreen-foreground = "\${colors.xcolor6}";
+          label-fullscreen-padding = 1;
+          label-floating = "";
+          label-floating-foreground = "\${colors.xcolor6}";
+          label-floating-padding = 1;
+          label-pseudotiled = "P";
+          label-pseudotiled-foreground = "\${colors.xcolor6}";
+          label-pseudotiled-padding = 1;
+          label-locked = "";
+          label-locked-foreground = "#bd2c40";
+          label-locked-padding = 1;
+          label-sticky = "";
+          label-sticky-foreground = "#fba922";
+          label-sticky-padding = 1;
+          label-private = "";
+          label-private-foreground = "#bd2c40";
+          label-private-padding = 1;
+          label-marked = "M";
+          label-marked-foreground = "\${colors.xcolor6}";
+          label-marked-padding = 1;
         };
 
         "module/menu" = {
@@ -147,22 +180,6 @@ in {
                         -theme theme/startmenu.rasi
                         ''}
                         '';
-          click-middle = "$HOME/.config/polybar/scripts/menu_full";
-          #click-right = "$HOME/.config/polybar/scripts/color-switch.sh";
-          click-right = "zsh -c 'rofi -no-lazy-grab -show drun \
-                        -display-drun \"Applications :\" -drun-display-format \"{name}\" \
-                        -hide-scrollbar true \
-                        -bw 0 \
-                        -lines 10 \
-                        -line-padding 10 \
-                        -padding 20 \
-                        -width 30 \
-                        -xoffset 2 -yoffset 32 \
-                        -location 1 \
-                        -columns 2 \
-                        -show-icons -icon-theme \"Papirus\" \
-                        -font \"Fantasque Sans Mono 10\" \
-                        -color-enabled true'";
         };
 
         "module/powermenu" = {
@@ -179,28 +196,51 @@ in {
 
           # lock screen
           menu-0-0 = "";
-          menu-0-0-exec = "loginctl lock-session $XDG_SESSION_ID &> /dev/null";
+          menu-0-0-exec = "${pkgs.systemd}/bin/loginctl lock-session $XDG_SESSION_ID &> /dev/null";
           menu-0-0-foreground = "\${colors.xcolor8}";
           menu-0-0-background = "\${colors.background}";
           menu-0-0-padding = 1;
           # logout
           menu-0-1 = "";
-          menu-0-1-exec = "loginctl terminate-session $XDG_SESSION_ID &> /dev/null";
+          menu-0-1-exec = "${pkgs.systemd}/bin/loginctl terminate-session $XDG_SESSION_ID &> /dev/null";
           menu-0-1-foreground = "\${colors.xcolor8}";
           menu-0-1-background = "\${colors.background}";
           menu-0-1-padding = 1;
           # reboot
           menu-0-2 = "ﰇ";
-          menu-0-2-exec = "systemctl reboot &> /dev/null";
+          menu-0-2-exec = "${pkgs.systemd}/bin/systemctl reboot &> /dev/null";
           menu-0-2-foreground = "\${colors.xcolor8}";
           menu-0-2-background = "\${colors.background}";
           menu-0-2-padding = 1;
           # shutdown
           menu-0-3 = "襤";
-          menu-0-3-exec = "systemctl poweroff &> /dev/null";
+          menu-0-3-exec = "${pkgs.systemd}/bin/systemctl poweroff &> /dev/null";
           menu-0-3-foreground = "\${colors.xcolor8}";
           menu-0-3-background = "\${colors.background}";
           menu-0-3-padding = 1;
+        };
+
+        "module/fs_root" = {
+          type = "internal/fs";
+          format-mounted = " <ramp-capacity>";
+          format-mounted-foreground = "\${colors.xcolor8}";
+          format-mounted-background = "\${colors.background}";
+          interval = 25;
+          mount-0 = "/";
+          ramp-capacity-7 = "▁";
+          ramp-capacity-6 = "▂";
+          ramp-capacity-5 = "▃";
+          ramp-capacity-4 = "▄";
+          ramp-capacity-3 = "▅";
+          ramp-capacity-2 = "▆";
+          ramp-capacity-1 = "▇";
+          ramp-capacity-0 = "█";
+        };
+
+        "module/fs_home" = {
+          inherits = "module/fs_root";
+          format-mounted = " <ramp-capacity>";
+          mount-0 = "/home";
         };
 
         "module/music" = {
@@ -216,15 +256,42 @@ in {
 
         "module/date" = {
           type = "internal/date";
-          interval = 1;
-
+          interval = 60;
+          date = "%Y %b %d (%a)";
+          # time = "%I:%M%p";
+          time = "%H:%M";
+          # If you're not living in a country where AM and PM is used you can add -alt to the time above this line and comment it using ;, then you can remove the -alt to the time under this line and uncomment it.
+          # time = " at %H:%M";
+          #time-alt = "%H:%M:%S";
+          #time-alt = "%H:%M:%S";
+          format-prefix = " ";
+          # format-prefix-foreground = "\${colors.xcolor8}";
           format-foreground = "\${colors.xcolor8}";
           format-background = "\${colors.background}";
-
-          date = " %a,%d.%b";
-          time-alt = " %H:%M";
-          label = "%date%%time% ";
+          label = "%date% %time%";
           label-padding = 1;
+        };
+
+        "module/title" = {
+          type = "internal/xwindow";
+
+          # Available tags:
+          #   <label> (default)
+          format = "<label>";
+          format-foreground = "\${colors.xcolor8}";
+          format-padding = "4";
+
+          # Available tokens:
+          #   %title%
+          # Default: %title%
+          label = "%title%";
+          label-maxlen = "100";
+
+          # Used instead of label when there is no window title
+          # Available tokens:
+          #   None
+          label-empty = "";
+          # label-empty-foreground = "#707880";
         };
 
         "module/pulseaudio" = {
@@ -254,14 +321,15 @@ in {
           type = "internal/xkeyboard";
 
           # List of indicators to ignore
-          # blacklist-0 = "num lock";
+          # blacklist-0 = "num lock  尿";
           # blacklist-1 = "scroll lock";
+          # blacklist-2 = "caps lock  了 בּ";
 
           # Available tags:
           #   <label-layout> (default)
           #   <label-indicator> (default)
-          format = "<label-layout> <label-indicator>";
-          format-spacing = 0;
+          format = "<label-layout><label-indicator>";
+          # format-spacing = 0;
           format-prefix = " ";
 
           format-background = "\${colors.background}";
@@ -273,12 +341,18 @@ in {
           #   %number%
           #   %icon%
           # Default: %layout%
-          label-layout = "%name%";
-          label-layout-padding = 2;
+          label-layout = "%layout%";
+          label-layout-padding = 1;
+          label-indicator-on-capslock = "בּ ";
+          label-indicator-off-capslock = "";
+          label-indicator-on-numlock = " ";
+          label-indicator-off-numlock = "";
         };
 
         "module/backlight" = {
-          type = "internal/xbacklight";
+          type = "internal/backlight";
+          card = "intel_backlight";
+          enable-scroll = true;
 
           format = "<ramp> <label>";
           format-padding = 1;
@@ -294,10 +368,31 @@ in {
           ramp-font = 1;
         };
 
+        "module/temperature" = {
+          type = "internal/temperature";
+          thermal-zone = 0;
+          warn-temperature = 60;
+
+          format = "<ramp> <label>";
+          format-warn = "<ramp> <label-warn>";
+          format-foreground = "\${colors.xcolor8}";
+          format-background = "\${colors.background}";
+
+          label = "%temperature-c%";
+          label-warn = "%temperature-c%";
+          label-warn-foreground = "\${colors.xcolor8}";
+
+          ramp-0 = "";
+          ramp-1 = "";
+          ramp-2 = "";
+          ramp-3 = "";
+          ramp-4 = "";
+        };
+
         "module/battery" = {
           type = "internal/battery";
-          battery = "BAT1";
-          adapter = "ADP1";
+          battery = c.battery;
+          adapter = c.power;
           full-at = "95";
           time-format = "%H:%M";
 
@@ -336,23 +431,40 @@ in {
           animation-charging-framerate = 750;
         };
 
-        "module/wlan" = {
-          type = "internal/network";
-          interface = "wlo1";
-          interval = 3;
+        "module/cpu" =  {
+          type = "internal/cpu";
+          interval = "0.5";
+          format = "<label>  <ramp-load>";
+          format-background = "\${colors.background}";
+          format-foreground = "\${colors.xcolor8}";
+          format-prefix-foreground = "\${colors.xcolor8}";
+          label = "";
+          ramp-load-0 = "▁";
+          ramp-load-1 = "▂";
+          ramp-load-2 = "▃";
+          ramp-load-3 = "▄";
+          ramp-load-4 = "▅";
+          ramp-load-5 = "▆";
+          ramp-load-6 = "▇";
+          ramp-load-7 = "█";
+        };
 
-          format-connected = "<label-connected>";
-          format-connected-foreground = "\${colors.xcolor8}";
-          format-connected-background = "\${colors.background}";
-          format-connected-padding = 1;
-
-          format-disconnected = "<label-disconnected>";
-          format-disconnected-foreground = "\${colors.xcolor6}";
-          format-disconnected-background = "\${colors.background}";
-          format-disconnected-padding = 1;
-
-          label-connected = "%{A1:networkmanager_dmenu:}直 %{A}";
-          label-disconnected = "%{A1:networkmanager_dmenu:}睊 %{A}";
+        "module/memory" =  {
+          type = "internal/memory";
+          interval = "1";
+          format = "<label> <ramp-used>";
+          format-background = "\${colors.background}";
+          format-foreground = "\${colors.xcolor8}";
+          format-prefix-foreground = "\${colors.xcolor8}";
+          label = "";
+          ramp-used-0 = "▁";
+          ramp-used-1 = "▂";
+          ramp-used-2 = "▃";
+          ramp-used-3 = "▄";
+          ramp-used-4 = "▅";
+          ramp-used-5 = "▆";
+          ramp-used-6 = "▇";
+          ramp-used-7 = "█";
         };
 
         "module/mpd" = {

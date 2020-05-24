@@ -55,6 +55,8 @@ in {
     services.pasystray.enable = true;
     services.random-background = {
       enable = true;
+      enableXinerama = false;
+      display = "tile";
       imageDirectory = ''${pkgs.wallpapers}/share/wallpapers'';
     };
     services.udiskie = {
@@ -484,7 +486,12 @@ in {
         extraConfig = ''
                         bspc rule -a '*:scratch' state=floating sticky=on center=on border=off rectangle=1000x800+0+0
                       '';
-        monitors = { eDP-1 = [ "1" "2" "3" "4" "5"] ; };
+        monitors = {
+          eDP1 = [ "1" "2" "3" "4" "5"];
+          eDP-1 = [ "1" "2" "3" "4" "5"];
+          eDP-1-1 = [ "1" "2" "3" "4" "5"];
+          HDMI-0 = [ "6" "7" "8" "9" "0"];
+        };
         rules = {
           Pinentry = {
             state = "floating";
@@ -517,11 +524,16 @@ in {
           pointer_follows_monitor = true;
         };
         startupPrograms = [
-          "sxhkd -m 1"
-          "pkill polybar; while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done; polybar -q rome"
+          "pkill sxhkd; while pgrep -u $UID -x sxhkd >/dev/null; do sleep 1; done && sxhkd -m 1"
+          "pkill polybar; while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done && ( \
+          for monitor in $(xrandr -q | grep -w connected | awk '{print $1}'); do \
+          if [ $(xrandr -q | grep primary | awk '{print $1}') == $monitor ]; then \
+            MONITOR=$monitor polybar top-tray & \
+          else \
+            MONITOR=$monitor polybar top & \
+          fi \
+          done )"
         ];
-        # startupPrograms = [ "pkill polybar; while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done; polybar -q rome" ];
-        # startupPrograms = [ "/home/ahmet/.config/polybar/launch.sh" ];
       };
 
       # Setup cursor
