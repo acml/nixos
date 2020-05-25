@@ -104,7 +104,7 @@ in {
           format = "<label-state> <label-mode>";
           fuzzy-match = "false";
           # ws-icon-[0-9]+ = "label;icon";
-          ws-icon-0 = "1;爵";
+          ws-icon-0 = "1;";
           ws-icon-1 = "2;";
           ws-icon-2 = "3;";
           ws-icon-3 = "4;";
@@ -222,7 +222,7 @@ in {
 
         "module/fs_root" = {
           type = "internal/fs";
-          format-mounted = " <ramp-capacity>";
+          format-mounted = " <ramp-capacity>";
           format-mounted-foreground = "\${colors.xcolor8}";
           format-mounted-background = "\${colors.background}";
           interval = 30;
@@ -257,18 +257,13 @@ in {
         "module/date" = {
           type = "internal/date";
           interval = "60.0";
-          date = "%Y %b %d (%a)";
-          # time = "%I:%M%p";
-          time = "%H:%M";
-          # If you're not living in a country where AM and PM is used you can add -alt to the time above this line and comment it using ;, then you can remove the -alt to the time under this line and uncomment it.
-          # time = " at %H:%M";
-          #time-alt = "%H:%M:%S";
-          #time-alt = "%H:%M:%S";
-          format-prefix = " ";
-          # format-prefix-foreground = "\${colors.xcolor8}";
+          date-alt = "  %Y %m %d %a";
+          # space-padded hour
+          time = " %l:%M";
+          time-alt = "  %l:%M";
           format-foreground = "\${colors.xcolor8}";
           format-background = "\${colors.background}";
-          label = "%date% %time%";
+          label = "%date%%time%";
           label-padding = 1;
         };
 
@@ -297,7 +292,7 @@ in {
         "module/pulseaudio" = {
           type = "internal/pulseaudio";
 
-          interval = 10;
+          interval = 5;
 
           format-volume = "<ramp-volume> <label-volume>";
           format-volume-padding = 1;
@@ -305,7 +300,8 @@ in {
           format-volume-background = "\${colors.background}";
 
           label-volume = "%percentage%";
-          label-muted = " 00";
+          label-volume-padding = 1;
+          label-muted = "婢";
           label-muted-padding = 1;
           label-muted-foreground = "\${colors.xcolor8}";
           label-muted-background = "\${colors.background}";
@@ -313,8 +309,6 @@ in {
           ramp-volume-0 = "";
           ramp-volume-1 = "";
           ramp-volume-2 = "";
-          ramp-volume-3 = "";
-          ramp-volume-font = 1;
         };
 
         "module/xkeyboard" = {
@@ -456,7 +450,7 @@ in {
           format-background = "\${colors.background}";
           format-foreground = "\${colors.xcolor8}";
           format-prefix-foreground = "\${colors.xcolor8}";
-          label = "";
+          label = "";
           ramp-used-0 = "▁";
           ramp-used-1 = "▂";
           ramp-used-2 = "▃";
