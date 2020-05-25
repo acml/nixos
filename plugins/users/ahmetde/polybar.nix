@@ -31,9 +31,17 @@ in {
           background = "#dbd8ba";
         };
 
+        "settings" = {
+          # Reload upon receiving XCB_RANDR_SCREEN_CHANGE_NOTIFY events
+          screenchange-reload = true;
+          # Define fallback values used by all module formats
+          format-foreground = "\${colors.xcolor8}";
+          format-background = "\${colors.background}";
+        };
+
         "bar/top" = {
-          # monitor = "LVDS1";
           monitor = "\${env:MONITOR:eDP-1-1}";
+          locale = "tr_TR.UTF-8";
           bottom = false;
           width = "100%";
           height = 24;
@@ -41,7 +49,8 @@ in {
           offset-y = "0%";
           fixed-center = false;
           background = "\${colors.trans}";
-          foreground = "\${colors.trans}";
+          override-redirect = true;
+          wm-restack = true;
 
           # border-top-size = 3;
           # border-top-color= "\${colors.border}";
@@ -52,9 +61,9 @@ in {
           border-size = 0;
           # border-color= "\${colors.trans}";
 
-          font-0 = "Inconsolata Nerd Font:size=12;2";
+          font-0 = "Inconsolata Nerd Font:size=13;2";
           font-1 = "Inconsolata Nerd Font:size=16;2";
-          font-2 = "Inconsolata Nerd Font:size=13;2";
+          font-2 = "Inconsolata Nerd Font:size=14;2";
 
           modules-left = "menu arrow powermenu arrow random-background arrow bspwm arrow1";
           # modules-right = "arrow2 music mpd arrow pulseaudio backlight battery arrow wlan pkg arrow date openweathermap-simple arrow1";
@@ -75,28 +84,22 @@ in {
           content-font = 3;
         };
 
+        "module/arrow2" = {
+          inherits = "module/arrow1";
+          content = "";
+        };
+
         "module/arrow" = {
           type = "custom/text";
           content = "|";
           content-foreground = "\${colors.xcolor7}";
-          content-background = "\${colors.background}";
           content-font = 2;
-        };
-
-        "module/arrow2" = {
-          type = "custom/text";
-          content = "";
-          content-foreground = "\${colors.background}";
-          content-background = "\${colors.trans}";
-          content-font = 3;
         };
 
         "module/random-background" = {
           type = "custom/text";
           content = "   ";
           click-left = "${pkgs.systemd}/bin/systemctl --user restart random-background";
-          content-foreground = "\${colors.xcolor8}";
-          content-background = "\${colors.background}";
         };
 
         "module/bspwm" = {
@@ -114,8 +117,6 @@ in {
           ws-icon-7 = "8;";
           ws-icon-8 = "9;";
           ws-icon-9 = "0;";
-          # label-mode-background = "\${colors.background}";
-          format-background = "\${colors.background}";
           pin-workspaces = true;
           enable-click = true;
           enable-scroll = true;
@@ -169,11 +170,7 @@ in {
         "module/menu" = {
           type = "custom/text";
           content = "";
-          # content = "";
-          #alt-icon = "";
           content-padding = 2;
-          content-foreground = "\${colors.xcolor8}";
-          content-background = "\${colors.background}";
           click-left = ''${pkgs.writeScript "polybar-click-left" ''
                         #!${pkgs.runtimeShell}
                         ${pkgs.rofi}/bin/rofi -show drun -modi drun \
@@ -190,45 +187,31 @@ in {
           type = "custom/menu";
 
           label-open = "";
-          label-open-foreground = "\${colors.xcolor8}";
-          label-open-background = "\${colors.background}";
           label-open-padding = 1;
           label-close = "";
-          label-close-foreground = "\${colors.xcolor8}";
-          label-close-background = "\${colors.background}";
           label-close-padding = 1;
 
           # lock screen
           menu-0-0 = "";
           menu-0-0-exec = "${pkgs.systemd}/bin/loginctl lock-session $XDG_SESSION_ID &> /dev/null";
-          menu-0-0-foreground = "\${colors.xcolor8}";
-          menu-0-0-background = "\${colors.background}";
           menu-0-0-padding = 1;
           # logout
           menu-0-1 = "";
           menu-0-1-exec = "${pkgs.systemd}/bin/loginctl terminate-session $XDG_SESSION_ID &> /dev/null";
-          menu-0-1-foreground = "\${colors.xcolor8}";
-          menu-0-1-background = "\${colors.background}";
           menu-0-1-padding = 1;
           # reboot
           menu-0-2 = "ﰇ";
           menu-0-2-exec = "${pkgs.systemd}/bin/systemctl reboot &> /dev/null";
-          menu-0-2-foreground = "\${colors.xcolor8}";
-          menu-0-2-background = "\${colors.background}";
           menu-0-2-padding = 1;
           # shutdown
           menu-0-3 = "襤";
           menu-0-3-exec = "${pkgs.systemd}/bin/systemctl poweroff &> /dev/null";
-          menu-0-3-foreground = "\${colors.xcolor8}";
-          menu-0-3-background = "\${colors.background}";
           menu-0-3-padding = 1;
         };
 
         "module/fs_root" = {
           type = "internal/fs";
           format-mounted = " <ramp-capacity>";
-          format-mounted-foreground = "\${colors.xcolor8}";
-          format-mounted-background = "\${colors.background}";
           interval = 30;
           mount-0 = "/";
           ramp-capacity-7 = "▁";
@@ -254,8 +237,6 @@ in {
           interval = 5;
           label = " %output:0:30:% ";
           label-padding = 1;
-          format-foreground = "\${colors.xcolor8}";
-          format-background = "\${colors.background}";
         };
 
         "module/date" = {
@@ -265,8 +246,6 @@ in {
           # space-padded hour
           time = " %l:%M";
           time-alt = "  %l:%M";
-          format-foreground = "\${colors.xcolor8}";
-          format-background = "\${colors.background}";
           label = "%date%%time%";
           label-padding = 1;
         };
@@ -277,7 +256,7 @@ in {
           # Available tags:
           #   <label> (default)
           format = "<label>";
-          format-foreground = "\${colors.xcolor8}";
+          format-background = "\${colors.trans}";
           format-padding = "4";
 
           # Available tokens:
@@ -290,7 +269,6 @@ in {
           # Available tokens:
           #   None
           label-empty = "";
-          # label-empty-foreground = "#707880";
         };
 
         "module/pulseaudio" = {
@@ -300,15 +278,11 @@ in {
 
           format-volume = "<ramp-volume> <label-volume>";
           format-volume-padding = 1;
-          format-volume-foreground = "\${colors.xcolor8}";
-          format-volume-background = "\${colors.background}";
 
           label-volume = "%percentage%";
           label-volume-padding = 1;
           label-muted = "婢";
           label-muted-padding = 1;
-          label-muted-foreground = "\${colors.xcolor8}";
-          label-muted-background = "\${colors.background}";
 
           ramp-volume-0 = "";
           ramp-volume-1 = "";
@@ -329,9 +303,6 @@ in {
           format = "<label-layout><label-indicator>";
           # format-spacing = 0;
           format-prefix = " ";
-
-          format-background = "\${colors.background}";
-          format-foreground = "\${colors.xcolor8}";
 
           # Available tokens:
           #   %layout%
@@ -354,8 +325,6 @@ in {
 
           format = "<ramp> <label>";
           format-padding = 1;
-          format-foreground = "\${colors.xcolor8}";
-          format-background = "\${colors.background}";
           label = "%percentage%";
 
           ramp-0 = "";
@@ -363,7 +332,6 @@ in {
           ramp-2 = "";
           ramp-3 = "";
           ramp-4 = "";
-          ramp-font = 1;
         };
 
         "module/temperature" = {
@@ -373,8 +341,6 @@ in {
 
           format = "<ramp> <label>";
           format-warn = "<ramp> <label-warn>";
-          format-foreground = "\${colors.xcolor8}";
-          format-background = "\${colors.background}";
 
           label = "%temperature-c%";
           label-warn = "%temperature-c%";
@@ -395,18 +361,12 @@ in {
           time-format = "%H:%M";
 
           format-charging = "<animation-charging> <label-charging>";
-          format-charging-foreground = "\${colors.xcolor8}";
-          format-charging-background = "\${colors.background}";
           format-charging-padding = 1;
 
           format-discharging = "<ramp-capacity> <label-discharging>";
-          format-discharging-foreground = "\${colors.xcolor8}";
-          format-discharging-background = "\${colors.background}";
           format-discharging-padding = 1;
 
           format-full = "<label-full>";
-          format-full-foreground = "\${colors.xcolor8}";
-          format-full-background = "\${colors.background}";
           format-full-padding = 1;
 
           label-charging = "%percentage% %time%";
@@ -433,9 +393,6 @@ in {
           type = "internal/cpu";
           interval = "0.5";
           format = "<label>  <ramp-load>";
-          format-background = "\${colors.background}";
-          format-foreground = "\${colors.xcolor8}";
-          format-prefix-foreground = "\${colors.xcolor8}";
           label = "";
           ramp-load-0 = "▁";
           ramp-load-1 = "▂";
@@ -451,9 +408,6 @@ in {
           type = "internal/memory";
           interval = "1";
           format = "<label> <ramp-used>";
-          format-background = "\${colors.background}";
-          format-foreground = "\${colors.xcolor8}";
-          format-prefix-foreground = "\${colors.xcolor8}";
           label = "";
           ramp-used-0 = "▁";
           ramp-used-1 = "▂";
@@ -469,8 +423,6 @@ in {
           type = "internal/mpd";
 
           format-online="<label-song> <icon-stop> <icon-play> ";
-          format-online-foreground = "\${colors.xcolor8}";
-          format-online-background = "\${colors.background}";
           format-online-padding = 0;
 
           label-song-maxlen = 25;
@@ -489,9 +441,6 @@ in {
           type = "custom/script";
           exec = "$HOME/.config/polybar/openweathermap-simple.sh";
           interval = 1200;
-
-          format-foreground = "\${colors.xcolor8}";
-          format-background = "\${colors.background}";
         };
 
         "module/pkg" = {
@@ -499,8 +448,6 @@ in {
           exec = "~/.config/polybar/updates.sh";
           format-padding = 1;
           tail = true;
-          format-foreground = "\${colors.xcolor8}";
-          format-background = "\${colors.background}";
         };
       };
 
