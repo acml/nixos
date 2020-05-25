@@ -148,10 +148,10 @@ in {
           settings = {
             font = {
               normal = {
-                family = "Fira Code";
+                family = "NotoMono NF";
                 style = "Regular";
               };
-              size = 7.0;
+              size = 8.0;
             };
             env = { WINIT_HIDPI_FACTOR = toString system.scale; };
           };
