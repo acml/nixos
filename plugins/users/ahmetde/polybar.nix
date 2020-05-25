@@ -263,7 +263,7 @@ in {
           #   %title%
           # Default: %title%
           label = "%title%";
-          label-maxlen = "100";
+          label-maxlen = "70";
 
           # Used instead of label when there is no window title
           # Available tokens:
@@ -336,7 +336,7 @@ in {
 
         "module/temperature" = {
           type = "internal/temperature";
-          thermal-zone = 4;
+          thermal-zone = 5;
           warn-temperature = 60;
 
           format = "<ramp> <label>";
