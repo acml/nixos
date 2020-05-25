@@ -122,11 +122,11 @@ in {
           reverse-scroll = false;
 
           label-focused = "%icon%";
-          label-focused-foreground = "\${colors.xcolor8}";
+          label-focused-foreground = "\${colors.xcolor6}";
           label-focused-padding = 1;
 
           label-occupied = "%icon%";
-          label-occupied-foreground = "\${colors.xcolor6}";
+          label-occupied-foreground = "\${colors.xcolor8}";
           label-occupied-padding = 1;
 
           label-urgent = "%icon%";
@@ -138,19 +138,19 @@ in {
           label-empty-padding = 1;
 
           label-monocle = "";
-          label-monocle-foreground = "\${colors.xcolor8}";
+          label-monocle-foreground = "\${colors.xcolor6}";
           label-monocle-padding = 1;
           label-tiled = "";
-          label-tiled-foreground = "\${colors.xcolor8}";
+          label-tiled-foreground = "\${colors.xcolor6}";
           label-tiled-padding = 1;
           label-fullscreen = "";
-          label-fullscreen-foreground = "\${colors.xcolor8}";
+          label-fullscreen-foreground = "\${colors.xcolor6}";
           label-fullscreen-padding = 1;
           label-floating = "";
-          label-floating-foreground = "\${colors.xcolor8}";
+          label-floating-foreground = "\${colors.xcolor6}";
           label-floating-padding = 1;
           label-pseudotiled = "P";
-          label-pseudotiled-foreground = "\${colors.xcolor8}";
+          label-pseudotiled-foreground = "\${colors.xcolor6}";
           label-pseudotiled-padding = 1;
           label-locked = "";
           label-locked-foreground = "#bd2c40";
@@ -162,7 +162,7 @@ in {
           label-private-foreground = "#bd2c40";
           label-private-padding = 1;
           label-marked = "M";
-          label-marked-foreground = "\${colors.xcolor8}";
+          label-marked-foreground = "\${colors.xcolor6}";
           label-marked-padding = 1;
         };
 
