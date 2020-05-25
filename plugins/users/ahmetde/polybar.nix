@@ -50,7 +50,7 @@ in {
           fixed-center = false;
           background = "\${colors.trans}";
           override-redirect = true;
-          wm-restack = true;
+          wm-restack = "bspwm";
 
           # border-top-size = 3;
           # border-top-color= "\${colors.border}";
@@ -242,7 +242,7 @@ in {
         "module/date" = {
           type = "internal/date";
           interval = "60.0";
-          date-alt = "  %Y %m %d %a";
+          date-alt = "  %Y %m %d %a";
           # space-padded hour
           time = " %l:%M";
           time-alt = "  %l:%M";
