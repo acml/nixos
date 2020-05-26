@@ -27,7 +27,7 @@ in {
           xcolor7 = "#5e5d4a";
           xcolor8 = "#213b59";
           empty = "#b5b49c";
-          urgent = "#bd2c40";
+          warn = "#bd2c40";
           background = "#dbd8ba";
         };
 
@@ -131,7 +131,7 @@ in {
           label-occupied-padding = 1;
 
           label-urgent = "%icon%";
-          label-urgent-foreground = "\${colors.urgent}";
+          label-urgent-foreground = "\${colors.warn}";
           label-urgent-padding = 1;
 
           label-empty = "%icon%";
@@ -344,7 +344,7 @@ in {
 
           label = "%temperature-c%";
           label-warn = "%temperature-c%";
-          label-warn-foreground = "\${colors.xcolor6}";
+          label-warn-foreground = "\${colors.warn}";
 
           ramp-0 = "";
           ramp-1 = "";
