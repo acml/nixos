@@ -1,7 +1,7 @@
 { appimageTools, fetchurl, lib, gsettings-desktop-schemas, gtk3, makeDesktopItem }:
 
 let pname = "ripcord";
-    version = "0.4.24";
+    version = "0.4.25";
     desktopItem = makeDesktopItem {
       name = pname;
       desktopName = "Ripcord";
@@ -15,7 +15,7 @@ in appimageTools.wrapType2 rec {
   name = "${pname}-${version}";
   src = fetchurl {
     url = "https://cancel.fm/dl/Ripcord-${version}-x86_64.AppImage";
-    sha256 = "0rscmnwxvbdl0vfx1pz7x5gxs9qsjk905zmcad4f330j5l5m227z";
+    sha256 = "17s4fxqirmzdw0sn9s9zyk90gr00ivsmz4s6i6knsq354zhy5fda";
   };
 
   profile = ''
