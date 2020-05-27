@@ -64,6 +64,9 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Documents/org/")
 
+;;; :ui doom-dashboard
+(setq fancy-splash-image (concat doom-private-dir "splash.png"))
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
@@ -86,9 +89,9 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
- (when (window-system)
-    (add-to-list 'default-frame-alist '(alpha . (100)))
-    (set-frame-parameter (selected-frame) 'alpha '(100)))
+(when (window-system)
+  (add-to-list 'default-frame-alist '(alpha . (100)))
+  (set-frame-parameter (selected-frame) 'alpha '(100)))
 
 (setq-default
  delete-by-moving-to-trash t)
@@ -139,8 +142,12 @@
   ;; :init (evil-leader/set-key (kbd "ot") 'turkish-mode)
   )
 
+(after! counsel-projectile
+  (setq counsel-projectile-switch-project-action 'counsel-projectile-switch-project-action-dired))
+
 (after! projectile
-  (setq projectile-enable-caching t
+  (setq projectile-switch-project-action 'projectile-dired
+        projectile-enable-caching t
         projectile-project-search-path '("~/Projects/")
         ;; Follow suggestion to reorder root functions to find the .projectile file
         ;; https://old.reddit.com/r/emacs/comments/920psp/projectile_ignoring_projectile_files/

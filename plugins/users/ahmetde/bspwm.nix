@@ -317,8 +317,12 @@ in {
           #   :
 
           # focus or send to the given desktop
-          super + {_,shift + }{1-9,0}
-            bspc {desktop -f,node -d} '^{1-9,10}'
+          super + {1-9,0}
+            target='^{1-9,10}'; \
+            [ "$(bspc query -D -d "$target")" != "$(bspc query -D -d)" ] \
+            && bspc desktop -f "$target" || bspc desktop -f last.local
+          super + shift + {1-9,0}
+            bspc node -d '^{1-9,10}'
 
           # Focus the node in the given direction.
           super + {n,e,i,o}

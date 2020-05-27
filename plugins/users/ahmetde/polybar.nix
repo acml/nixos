@@ -273,17 +273,12 @@ in {
 
         "module/pulseaudio" = {
           type = "internal/pulseaudio";
-
           interval = 5;
-
           format-volume = "<ramp-volume> <label-volume>";
-          format-volume-padding = 1;
-
           label-volume = "%percentage%";
           label-volume-padding = 1;
           label-muted = "婢";
           label-muted-padding = 1;
-
           ramp-volume-0 = "";
           ramp-volume-1 = "";
           ramp-volume-2 = "";
