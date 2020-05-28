@@ -32,6 +32,7 @@ in {
         imagemagick         # for image-dired
         (lib.mkIf (config.programs.gnupg.agent.enable)
           pinentry_emacs)   # in-emacs gnupg prompts
+        unzip
         zstd                # for undo-fu-session/undo-tree compression
 
         ## Module dependencies

@@ -44,7 +44,7 @@ in {
           locale = "tr_TR.UTF-8";
           bottom = false;
           width = "100%";
-          height = 24;
+          height = 32;
           offset-x = "0%";
           offset-y = "0%";
           fixed-center = false;
@@ -63,11 +63,11 @@ in {
 
           font-0 = "Inconsolata Nerd Font:size=13;2";
           font-1 = "Inconsolata Nerd Font:size=16;2";
-          font-2 = "Inconsolata Nerd Font:size=14;2";
+          font-2 = "Inconsolata Nerd Font:size=18;2";
 
-          modules-left = "menu arrow powermenu arrow random-background arrow bspwm arrow1";
+          modules-left = "menu arrow powermenu arrow random-background arrow bspwm arrow1 title";
           # modules-right = "arrow2 music mpd arrow pulseaudio backlight battery arrow wlan pkg arrow date openweathermap-simple arrow1";
-          modules-center = "title";
+          # modules-center = "title";
           modules-right = "arrow2 pulseaudio arrow backlight arrow temperature arrow cpu arrow memory arrow fs_root fs_home arrow xkeyboard arrow date";
         };
 
@@ -257,13 +257,13 @@ in {
           #   <label> (default)
           format = "<label>";
           format-background = "\${colors.trans}";
-          format-padding = "4";
+          format-padding = 2;
 
           # Available tokens:
           #   %title%
           # Default: %title%
           label = "%title%";
-          label-maxlen = "70";
+          label-maxlen = 70;
 
           # Used instead of label when there is no window title
           # Available tokens:
@@ -331,7 +331,8 @@ in {
 
         "module/temperature" = {
           type = "internal/temperature";
-          thermal-zone = 5;
+          # thermal-zone = 5;
+          hwmon-path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input";
           warn-temperature = 60;
 
           format = "<ramp> <label>";
