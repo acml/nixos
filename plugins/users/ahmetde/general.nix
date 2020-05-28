@@ -148,8 +148,20 @@ in {
           settings = {
             font = {
               normal = {
-                family = "NotoMono NF";
+                family = "Iosevka Term";
                 style = "Regular";
+              };
+              bold = {
+                family = "Iosevka Term";
+                style = "Bold";
+              };
+              italic = {
+                family = "Iosevka Term";
+                style = "Italic";
+              };
+              bold_italic = {
+                family = "Iosevka Term";
+                style = "Bold Italic";
               };
               size = 8.0;
             };
