@@ -144,10 +144,10 @@ in {
           label-tiled = "";
           label-tiled-foreground = "\${colors.xcolor6}";
           label-tiled-padding = 1;
-          label-fullscreen = "";
+          label-fullscreen = "";
           label-fullscreen-foreground = "\${colors.xcolor6}";
           label-fullscreen-padding = 1;
-          label-floating = "";
+          label-floating = "益";
           label-floating-foreground = "\${colors.xcolor6}";
           label-floating-padding = 1;
           label-pseudotiled = "P";
