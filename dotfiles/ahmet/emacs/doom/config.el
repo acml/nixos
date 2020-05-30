@@ -23,13 +23,9 @@
 ;; (setq doom-font (font-spec :family "JetBrains Mono" :size 14))
 ;; (setq doom-font (font-spec :family "monospace" :size 14))
 
-;; (setq doom-font (font-spec :family "Fira Code" :size 12)
-;;       doom-big-font (font-spec :family "Fira Code" :size 26)
-;;       doom-variable-pitch-font (font-spec :family "Overpass" :size 14))
 (setq doom-font (font-spec :family "Iosevka" :size 16)
-      doom-big-font (font-spec :family "Iosevka" :size 26)
-      doom-variable-pitch-font (font-spec :family "Overpass NF" :size 14)
-      doom-serif-font (font-spec :family "BlexMono NF" :weight 'light :size 14))
+      doom-variable-pitch-font (font-spec :family "Overpass NF")
+      doom-serif-font (font-spec :family "BlexMono NF" :weight 'light))
 
 (use-package cus-face
   :config
