@@ -26,8 +26,8 @@
 ;; (setq doom-font (font-spec :family "Fira Code" :size 12)
 ;;       doom-big-font (font-spec :family "Fira Code" :size 26)
 ;;       doom-variable-pitch-font (font-spec :family "Overpass" :size 14))
-(setq doom-font (font-spec :family "Hack Nerd Font" :size 14)
-      doom-big-font (font-spec :family "Hack Nerd Font" :size 26)
+(setq doom-font (font-spec :family "Iosevka" :size 16)
+      doom-big-font (font-spec :family "Iosevka" :size 26)
       doom-variable-pitch-font (font-spec :family "Overpass NF" :size 14)
       doom-serif-font (font-spec :family "BlexMono NF" :weight 'light :size 14))
 
@@ -96,6 +96,14 @@
 (setq-default
  delete-by-moving-to-trash t)
 
+;; (setq
+;;  ;; Window manager’s focus follows mouse.
+;;  focus-follows-mouse t
+;;  ;; Focus follows mouse in Emacs too. Focus 100ms after the mouse
+;;  ;; stops in a window.
+;;  mouse-autoselect-window t
+;;  )
+
 (map! "M-c" #'capitalize-dwim
       "M-l" #'downcase-dwim
       "M-u" #'upcase-dwim)
@@ -112,6 +120,10 @@
 (add-hook! dired-mode
   (dired-hide-details-mode 1)
   (dired-show-readme-mode 1))
+
+(use-package! avy
+  :init
+  (setq avy-all-windows t))
 
 (use-package! dired-subtree
   :after dired
@@ -179,10 +191,11 @@
         modus-operandi-theme-bold-constructs t
         ;; modus-operandi-theme-visible-fringes t
         modus-operandi-theme-3d-modeline t
-        modus-operandi-theme-subtle-diffs t
         modus-operandi-theme-distinct-org-blocks t
+        modus-operandi-theme-intense-standard-completions t
         modus-operandi-theme-proportional-fonts t
         modus-operandi-theme-rainbow-headings t
+        modus-operandi-theme-subtle-diffs t
         ;; modus-operandi-theme-section-headings t
         modus-operandi-theme-scale-headings t
         modus-operandi-theme-scale-1 1.05
@@ -205,3 +218,28 @@
   (add-to-list 'evil-emacs-state-modes 'trashed-mode))
 
 ;; (use-package! shrface)
+
+;; text mode directory tree
+(use-package! ztree
+  :custom-face
+  (ztreep-header-face ((t (:inherit diff-header))))
+  (ztreep-arrow-face ((t (:inherit font-lock-comment-face))))
+  (ztreep-leaf-face ((t (:inherit diff-index))))
+  (ztreep-node-face ((t (:inherit font-lock-variable-name-face))))
+  (ztreep-expand-sign-face ((t (:inherit font-lock-function-name-face))))
+  (ztreep-diff-header-face ((t (:inherit (diff-header bold)))))
+  (ztreep-diff-header-small-face ((t (:inherit diff-file-header))))
+  (ztreep-diff-model-normal-face ((t (:inherit font-lock-doc-face))))
+  (ztreep-diff-model-ignored-face ((t (:inherit font-lock-doc-face :strike-through t))))
+  (ztreep-diff-model-diff-face ((t (:inherit diff-removed))))
+  (ztreep-diff-model-add-face ((t (:inherit diff-nonexistent))))
+  :bind (:map ztreediff-mode-map
+         ("C-<f5>" . ztree-diff))
+  :init (setq ztree-draw-unicode-lines t
+              ztree-show-number-of-children t))
+
+(use-package! daemons
+  :config
+  ;; (setq daemons-always-sudo t)
+  )
+(use-package! journalctl-mode)

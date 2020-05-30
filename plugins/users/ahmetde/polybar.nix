@@ -61,7 +61,7 @@ in {
           border-size = 0;
           # border-color= "\${colors.trans}";
 
-          font-0 = "Inconsolata Nerd Font:size=13;2";
+          font-0 = "Inconsolata Nerd Font:size=14;2";
           font-1 = "Inconsolata Nerd Font:size=16;2";
           font-2 = "Inconsolata Nerd Font:size=18;2";
 
@@ -74,6 +74,7 @@ in {
         "bar/top-tray" = {
           inherits = "bar/top";
           tray-position = "right";
+          tray-maxsize = 28;
         };
 
         "module/arrow1" = {
