@@ -182,7 +182,13 @@ in {
           use_nix() {
             eval "$(lorri direnv)"
           }
-      '';
+        '';
+
+        zsh.initExtra = ''
+                        if [[ $TERM != "dumb" && (-z $INSIDE_EMACS || $INSIDE_EMACS == "vterm") ]]; then
+                         eval "$(${pkgs.starship}/bin/starship init zsh)"
+                        fi
+                        '';
 
         starship = {
           enable = true;
@@ -218,6 +224,7 @@ in {
       };
 
       services.lorri.enable = true;
+      services.owncloud-client.enable = true;
 
       # Handwritten configs
       home.file = {
