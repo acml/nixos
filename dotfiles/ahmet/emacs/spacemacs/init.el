@@ -1068,9 +1068,7 @@ buffer's name.
   (use-package docker :defer t)
   (use-package docker-tramp :defer t)
 
-  (use-package dts-mode
-    :defer t
-    :mode "\\.dts\\'")
+  (use-package dts-mode :defer t :mode "\\.dts\\'")
 
   (with-eval-after-load 'ediff
     (add-hook 'ediff-startup-hook
@@ -1470,8 +1468,7 @@ confirmation"
             ;; invisible here anyway.
             (assq-delete-all 'which-function-mode mode-line-misc-info))
       (which-function-mode))
-    :hook (prog-mode . acml/which-func-setup)
-    )
+    :hook (prog-mode . acml/which-func-setup))
 
   (use-package wttrin
     :defer t
