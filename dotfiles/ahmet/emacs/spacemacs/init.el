@@ -162,15 +162,11 @@ This function should only modify configuration layer settings."
      disk-usage
      docker
      docker-tramp
-     dropbox
      dts-mode
-     emms
-     exec-path-from-shell
      exwm
      xelb
      guix
      hackernews
-     helm-emms
      ;; (helm-spotify :location (recipe :fetcher github :repo "jodonnell/helm-spotify"))
      helm-system-packages
      (helm-treemacs-icons :location (recipe :fetcher github :repo "yyoncho/helm-treemacs-icons"))
@@ -179,7 +175,6 @@ This function should only modify configuration layer settings."
      ;; magit-todos
      minimap
      mu4e-conversation
-     nimbus-theme
      ov
      posix-manual
      rg
@@ -331,79 +326,11 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(
-                         ;; day and night themes
-                         modus-operandi
+   dotspacemacs-themes '(modus-operandi
                          modus-vivendi
                          doom-one
                          spacemacs-dark
-                         spacemacs-light
-                         ;; dark themes
-                         darkburn ;; guix-help title
-                         darktooth
-                         doom-city-lights
-                         doom-opera
-                         doom-peacock
-                         doom-tomorrow-night
-                         dracula
-                         gruber-darker
-                         gruvbox-dark-hard
-                         immaterial
-                         kaolin-galaxy ;; guix-help title
-                         omtose-softer
-                         naquadah
-                         nimbus
-                         nord
-                         planet
-                         sanityinc-tomorrow-eighties
-                         solarized-dark
-                         zenburn ;; guix-help title
-                         zerodark
-                         ;; light themes
-                         dichromacy
-                         ;; doom-one-light
-                         ;; doom-solarized-light
-                         farmhouse-light
-                         gruvbox-light-medium
-                         light-soap
-                         material-light
-                         solarized-light
-                         ;; console themes
-                         dracula
-                         naquadah
-                         kaolin-aurora
-                         kaolin-galaxy
-                         kaolin-mono-dark
-                         kaolin-valley-dark
-                         ;; tsdh-light ;; insignificant active window modeline
-                         ;; tried and retired themes
-                         ;; afternoon ;; find-file
-                         ;; ample-zen ;; find-file
-                         ;; badwolf ;; find-file
-                         ;; bubbleberry ;; unreadable guix-help title
-                         ;; clues ;; find-file
-                         ;; doom-molokai ;; comments too dark
-                         ;; doom-nord ;; colors are washed out
-                         ;; doom-sourcerer
-                         ;; exotica ;; guix-help title
-                         ;; farmhouse-dark ;; prog mode - unreadable red variable type
-                         ;; flatland ;; guix-help title
-                         ;; hc-zenburn ;; guix-help title, insignificant selection color
-                         ;; inkpot ;; find-file
-                         ;; kaolin-light ;; insignificant selection color
-                         ;; lush ;; find-file
-                         ;; majapahit-dark ;; find-file, avy-jump
-                         ;; minimal-light ;; insignificant selection color
-                         ;; mustang ;; find-file
-                         ;; obsidian ;; find-file
-                         ;; odersky ;; find-file
-                         ;; sanityinc-tomorrow-bright ;; avy-jump
-                         ;; sanityinc-tomorrow-night ;; avy-jump
-                         ;; soft-charcoal ;; find-file, avy-jump
-                         ;; tsdh-dark ;; find-file
-                         ;; wombat  ;; find-file, hl-current-line
-                         ;; kaolin-fusion
-                         )
+                         spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -419,36 +346,13 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font '(
-                               ("DejaVu Sans Mono"
-                                :size 10.5
-                                :weight normal
-                                :width normal)
-                               ("Iosevka Regular"
-                                :size 10.0
-                                :weight normal
-                                :width normal)
-                               ("Source Code Pro"
-                                :size 10.0
-                                :weight normal
-                                :width normal)
-                               ("Monospace"
-                                :size 10.0
-                                :weight normal
-                                :width normal)
-                               ("IBM Plex Mono"
-                                :size 10.0
-                                :weight normal
-                                :width normal)
-                               ("Ubuntu Mono"
-                                :size 10.0
-                                :weight normal
-                                :width normal)
-                               ("Fira Code"
-                                :size 10.0
-                                :weight normal
-                                :width normal)
-                               )
+   dotspacemacs-default-font '(("Iosevka"          :size 12.0 :weight normal :width normal)
+                               ("DejaVu Sans Mono" :size 10.5 :weight normal :width normal)
+                               ("Source Code Pro"  :size 10.0 :weight normal :width normal)
+                               ("Monospace"        :size 10.0 :weight normal :width normal)
+                               ("IBM Plex Mono"    :size 10.0 :weight normal :width normal)
+                               ("Ubuntu Mono"      :size 10.0 :weight normal :width normal)
+                               ("Fira Code"        :size 10.0 :weight normal :width normal))
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -703,51 +607,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
   (set-face-background 'mouse "white")
 
-  ;; ;; (add-to-list 'default-frame-alist
-  ;; ;;              '(font . "-CYEL-Iosevka-normal-normal-normal-*-14-*-*-*-*-0-iso10646-1"))
-
-  ;; (set-face-attribute 'default nil :font "Ubuntu Mono-13")
-
-  ;; ;; Latin
-  ;; (set-fontset-font t 'latin "Noto Sans")
-
-  ;; ;; East Asia: 你好, 早晨, こんにちは, 안녕하세요
-  ;; ;;
-  ;; ;; Make sure you use the right font. See
-  ;; ;; https://www.google.com/get/noto/help/cjk/.
-  ;; ;;
-  ;; ;; This font requires "Regular". Other Noto fonts dont.
-  ;; ;; ¯\_(ツ)_/¯
-  ;; (set-fontset-font t 'han "Noto Sans CJK SC Regular")
-  ;; (set-fontset-font t 'kana "Noto Sans CJK JP Regular")
-  ;; (set-fontset-font t 'hangul "Noto Sans CJK KR Regular")
-  ;; (set-fontset-font t 'cjk-misc "Noto Sans CJK KR Regular")
-
-  ;; ;; South East Asia: ជំរាបសួរ, ສະບາຍດີ, မင်္ဂလာပါ, สวัสดีครับ
-  ;; (set-fontset-font t 'khmer "Noto Sans Khmer")
-  ;; (set-fontset-font t 'lao "Noto Sans Lao")
-  ;; (set-fontset-font t 'burmese "Noto Sans Myanmar")
-  ;; (set-fontset-font t 'thai "Noto Sans Thai")
-
-  ;; ;; Africa: ሠላም
-  ;; (set-fontset-font t 'ethiopic "Noto Sans Ethiopic")
-
-  ;; ;; Middle/Near East: שלום, السّلام عليكم
-  ;; (set-fontset-font t 'hebrew "Noto Sans Hebrew")
-  ;; (set-fontset-font t 'arabic "Noto Sans Arabic")
-
-  ;; ;;  South Asia: નમસ્તે, नमस्ते, ನಮಸ್ಕಾರ, നമസ്കാരം, ଶୁଣିବେ,
-  ;; ;;              ආයුබෝවන්, வணக்கம், నమస్కారం, བཀྲ་ཤིས་བདེ་ལེགས༎
-  ;; (set-fontset-font t 'gujarati "Noto Sans Gujarati")
-  ;; (set-fontset-font t 'devanagari "Noto Sans Devanagari")
-  ;; (set-fontset-font t 'kannada "Noto Sans Kannada")
-  ;; (set-fontset-font t 'malayalam "Noto Sans Malayalam")
-  ;; (set-fontset-font t 'oriya "Noto Sans Oriya")
-  ;; (set-fontset-font t 'sinhala "Noto Sans Sinhala")
-  ;; (set-fontset-font t 'tamil "Noto Sans Tamil")
-  ;; (set-fontset-font t 'telugu "Noto Sans Telugu")
-  ;; (set-fontset-font t 'tibetan "Noto Sans Tibetan")
-
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file 'noerror)
 
@@ -776,25 +635,22 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (set-terminal-coding-system 'utf-8)
   (set-keyboard-coding-system 'utf-8)
 
-  ;; (setenv "ANT_HOME" "C:\\GNU\\apache-ant-1.10.1")
-  ;; (setenv "JAVACMD" "C:\\Program Files\\Java\\jdk1.8.0_77\\bin\\java")
-  ;; (setenv "PATH" (concat (getenv "PATH") ";C:\\GNU\\apache-ant-1.10.1\\bin"))
-  ;; (setq exec-path (append exec-path '("C:/GNU\apache-ant-1.10.1/bin")))
-
-
-  (setq org-src-block-faces '(("emacs-lisp" (:background "#fef2f2" :extend t))
-                              ("python" (:background "#f4f4ff" :extend t)))
+  (setq modus-operandi-theme-slanted-constructs t
+        modus-operandi-theme-bold-constructs t
+        ;; modus-operandi-theme-visible-fringes t
+        modus-operandi-theme-3d-modeline t
         modus-operandi-theme-distinct-org-blocks t
+        modus-operandi-theme-intense-standard-completions t
+        modus-operandi-theme-proportional-fonts t
         modus-operandi-theme-rainbow-headings t
+        modus-operandi-theme-subtle-diffs t
         ;; modus-operandi-theme-section-headings t
         modus-operandi-theme-scale-headings t
-        ;; modus-operandi-theme-visible-fringes t
-        modus-operandi-theme-slanted-constructs t
-        modus-operandi-theme-bold-constructs t
-        modus-operandi-theme-3d-modeline t
-        modus-operandi-theme-subtle-diffs t
-        modus-operandi-theme-proportional-fonts t)
-
+        modus-operandi-theme-scale-1 1.05
+        modus-operandi-theme-scale-2 1.1
+        modus-operandi-theme-scale-3 1.15
+        modus-operandi-theme-scale-4 1.2
+        modus-operandi-theme-scale-5 1.3)
   )
 
 (defun dotspacemacs/user-load ()
@@ -825,11 +681,8 @@ before packages are loaded."
   (add-hook 'after-save-hook
             'executable-make-buffer-file-executable-if-script-p)
 
-  (use-package exec-path-from-shell ;; if not using the ELPA package
-    :init (exec-path-from-shell-initialize)
-    (exec-path-from-shell-copy-env "STAGING_DIR"))
-
   (use-package vlf
+    :defer t
     :config (require 'vlf-setup))
 
   (use-package calc
@@ -1024,6 +877,7 @@ buffer's name.
   ;; (set-buffer-multibyte nil)
 
   (use-package beacon
+    :defer t
     :config
     (beacon-mode 1))
 
@@ -1042,14 +896,12 @@ buffer's name.
     (setq cmake-ide-build-dir "build/"))
 
   (use-package evil
+    :defer t
     :init
-    (defun acml/man ()
-      (if (executable-find "man")
-          (man (word-at-point))
-        (woman)))
-    (setq evil-lookup-func #'acml/man))
+    (setq evil-lookup-func 'man))
 
   (use-package beginend
+    :defer t
     :init (beginend-global-mode))
 
   ;; (use-package dimmer
@@ -1090,11 +942,13 @@ buffer's name.
           wdired-allow-to-change-permissions t)
 
     (use-package dired-async
+      :defer t
       :config
       (dired-async-mode 1))
 
     ;; Colourful columns.
     (use-package diredfl
+      :defer t
       :config
       (diredfl-global-mode 1))
 
@@ -1126,6 +980,7 @@ buffer's name.
     ;; When activated after creating a new entry (e.g. a directory) cursor jumps
     ;; to beginning of the listing. Annoys me to no end. Disabled for now.
     (use-package dired-filter
+      :defer t
       :disabled
       :config
       (setq dired-filter-group-saved-groups
@@ -1133,19 +988,25 @@ buffer's name.
       :hook (dired-mode . dired-filter-group-mode))
 
     (use-package dired-git-info
+      :defer t
       :bind (:map dired-mode-map
                   (")" . dired-git-info-mode)))
 
     (use-package dired-hacks-utils
+      :defer t
       :config
       (dired-utils-format-information-line-mode t))
 
     ;; Quick sort dired buffers via hydra
     (use-package dired-quick-sort
+      :defer t
       :bind (:map dired-mode-map ("s" . hydra-dired-quick-sort/body))
       :hook (dired-initial-position . dired-quick-sort))
 
+    (use-package dired-show-readme :defer t)
+
     (use-package dired-subtree
+      :defer t
       :bind (:map dired-mode-map
                   ("<tab>" . acml/dired-subtree-toggle)
                   ("<backtab>" . dired-subtree-cycle))
@@ -1160,6 +1021,7 @@ buffer's name.
       (setq dired-subtree-use-backgrounds nil))
 
     (use-package treemacs-icons-dired
+      :defer t
       :config (use-package treemacs-icons)
       :init
       (defun acml/dired-setup ()
@@ -1171,23 +1033,6 @@ buffer's name.
     :bind (:map dired-mode-map
                 ("<left>" . dired-up-directory)
                 ("<right>" . dired-find-file)))
-
-  (use-package dired-show-readme)
-
-  (use-package dired-sidebar
-    :bind (("<f3>" . dired-sidebar-toggle-sidebar))
-    :commands (dired-sidebar-toggle-sidebar)
-    :hook (dired-sidebar-mode . (lambda ()
-                                  (unless (file-remote-p default-directory)
-                                    (auto-revert-mode))))
-    :config
-    (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
-    (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
-
-    ;; (setq dired-sidebar-subtree-line-prefix "__")
-    (setq dired-sidebar-theme 'none)
-    (setq dired-sidebar-use-term-integration t)
-    (setq dired-sidebar-use-custom-font t))
 
   ;; (use-package dired-toggle
   ;;   :bind (("<f3>" . #'dired-toggle)
@@ -1208,29 +1053,23 @@ buffer's name.
   ;;               (setq-local word-wrap nil))))
 
   (use-package direnv
-    :if (executable-find "direnv")
+    :defer t
     :config
     (add-to-list 'warning-suppress-types '(direnv))
     (direnv-mode))
 
-  (use-package trashed)
+  (use-package trashed :defer t)
 
-  (use-package disk-usage)
-  (evil-set-initial-state 'disk-usage-mode 'emacs)
-
-  (use-package docker)
-  (use-package docker-tramp)
-
-  (use-package dropbox
-    :ensure t
-    :custom
-    (dropbox-access-token "B5C6qTZzoFEAAAAAAAAkZZNmIc6x425AYR-bsS46qJDdrsd4B_EVHXh3ObOeoWZ2")
-    (dropbox-verbose t)
+  (use-package disk-usage
+    :defer t
     :config
-    (dropbox-connect)
-    :demand t)
+    (evil-set-initial-state 'disk-usage-mode 'emacs))
+
+  (use-package docker :defer t)
+  (use-package docker-tramp :defer t)
 
   (use-package dts-mode
+    :defer t
     :mode "\\.dts\\'")
 
   (with-eval-after-load 'ediff
@@ -1271,53 +1110,6 @@ confirmation"
     (defun add-c-to-ediff-mode-map () (define-key ediff-mode-map "c" 'ediff-copy-both-to-C))
     (add-hook 'ediff-keymap-setup-hook 'add-c-to-ediff-mode-map))
 
-  ;; EMMS
-  (use-package emms-setup
-    :ensure emms
-    :config
-    (emms-standard)
-    (use-package emms-streams)
-    (use-package emms-history)
-    (emms-history-load)
-
-    (when (version<= emms-version "5.3")
-      (setq emms-player-mpv-ipc-method 'file)) ; TODO: Remove once Emms 5.4 is out.
-
-    (setq emms-player-list (list emms-player-mpv)
-          emms-source-file-default-directory (file-truename "~/Music/")
-          emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find
-          ;; Cover thumbnails.
-          emms-browser-covers 'emms-browser-cache-thumbnail-async)
-    ;; (dolist (radio '(("SomaFM: Defcon" "https://somafm.com/defcon.pls" 1 streamlist)
-    ;;                  ("SomaFM: SF10-33" "https://somafm.com/sf1033.pls" 1 streamlist)
-    ;;                  ("SomaFM: Dub Step Beyond" "https://somafm.com/dubstep.pls" 1 streamlist)
-    ;;                  ("SomaFM: Illinois Street Lounge" "https://somafm.com/illstreet.pls" 1 streamlist)
-    ;;                  ("SomaFM: Space Station" "http://www.somafm.com/spacestation.pls" 1 streamlist)
-    ;;                  ("Classic rock radio" "http://internetradio.salue.de:8000/classicrock.mp3" 1 url)
-    ;;                  ("FIP" "http://direct.fipradio.fr/live/fip-midfi.mp3" 1 url)
-    ;;                  ("RadioJazz - Manouche" "http://jazz-wr02.ice.infomaniak.ch/jazz-wr02-128.mp3" 1 url)
-    ;;                  ("RadioJazz - Blues" "http://jazzblues.ice.infomaniak.ch/jazzblues-high.mp3" 1 url)
-    ;;                  ("RadioJazz - Groove" "http://jazz-wr08.ice.infomaniak.ch/jazz-wr08-128.mp3" 1 url)
-    ;;                  ("RadioJazz - Funk" "http://jazz-wr06.ice.infomaniak.ch/jazz-wr06-128.mp3" 1 url)))
-    ;;   (add-to-list 'emms-streams-built-in-list radio))
-    (global-set-key (kbd "<XF86AudioPlay>") 'emms-pause)
-    (global-set-key (kbd "<XF86AudioStop>") 'emms-stop)
-    (global-set-key (kbd "<XF86AudioPrev>") 'emms-previous)
-    (global-set-key (kbd "<XF86AudioNext>") 'emms-next)
-    (evil-leader/set-key (kbd "oE") 'emms))
-
-  ;; use Helm as the default EMMS interface for streams
-  (use-package helm-emms
-    :after emms-setup
-    :config
-    (setq helm-emms-dired-directories (list emms-source-file-default-directory
-                                            ;; "~/Downloads"
-                                            )
-          helm-emms-default-sources (list helm-source-emms-dired
-                                          helm-source-emms-files ; Disable for a huge speed-up.
-                                          helm-source-emms-streams))
-    (evil-leader/set-key (kbd "oe") 'helm-emms))
-
   (with-eval-after-load 'erc
     (setq erc-prompt-for-nickserv-password nil))
 
@@ -1337,10 +1129,10 @@ confirmation"
     (add-hook 'eww-after-render-hook 'eww-readable)
     (evil-set-initial-state 'eww-mode 'emacs)
     (evil-set-initial-state 'eww-buffers-mode 'emacs)
-    (evil-set-initial-state 'eww-bookmark-mode 'emacs)
-    )
+    (evil-set-initial-state 'eww-bookmark-mode 'emacs))
 
   (use-package geiser
+    :defer t
     :init
     (spacemacs|define-custom-layout "SICP"
       :binding "S"
@@ -1349,10 +1141,8 @@ confirmation"
       (split-window-right)
       (run-geiser 'mit)))
 
-  (with-eval-after-load 'ggtags
-    (setq-local imenu-create-index-function #'ggtags-build-imenu-index))
-
   (use-package hackernews
+    :defer t
     :init
     (evil-leader/set-key (kbd "oh") 'hackernews)
     :config
@@ -1362,12 +1152,6 @@ confirmation"
 
   (with-eval-after-load 'helm-system-packages
     (push '("*helm-system-packages-output*" . emacs) evil-buffer-regexps))
-
-  (defun acml/search-spacemacs-docs ()
-    "Search the spacemacs docs using helm-do-ag"
-    (interactive)
-    (helm-do-ag "~/.emacs.d/doc/"))
-  (evil-leader/set-key (kbd "oD") 'acml/search-spacemacs-docs)
 
   (with-eval-after-load 'conf-mode
     (use-package i3wm-config-mode))
@@ -1389,6 +1173,7 @@ confirmation"
   ;;                           'magit-insert-untracked-files t))
 
   (use-package minimap
+    :defer t
     :init
     (evil-leader/set-key (kbd "om") 'minimap-mode)
     ;; (minimap-mode 1)
@@ -1580,18 +1365,21 @@ confirmation"
     (proced-filter 'user))
 
   (use-package helm-sys
+    :defer t
     :commands (helm-top)
     :config (helm-top-poll-mode 1))
 
   (use-package org
+    :defer t
     :config
     (setq org-directory "~/Dropbox/Documents/org"
           org-agenda-files (list org-directory)
           org-default-notes-file (concat org-directory "/notes.org")))
 
-  (use-package posix-manual)
+  (use-package posix-manual :defer t)
 
   (use-package projectile
+    :defer t
     :config
     (projectile-register-project-type
      'gimsa '("build.sh")
@@ -1611,26 +1399,31 @@ confirmation"
      :compilation-dir "."))
 
   (use-package rainbow-mode
+    :defer t
     :hook
     (prog-mode . rainbow-mode))
 
   (use-package rg
-    :if (executable-find "rg")
+    :defer t
     :init
     (evil-leader/set-key (kbd "or") 'rg-dwim)
     (evil-leader/set-key (kbd "oR") 'rg))
 
-  (slack-register-team
-   :name "andasis"
-   :default t
-   :token "xoxs-663392975270-684611065526-682007404980-d820b61e4ce976caf02228e34b5d0f7efdae153b08a41b992dd524dcebe4834b"
-   :subscribed-channels '(general nms random))
+  (use-package slack
+    :defer t
+    :config
+    (slack-register-team
+     :name "andasis"
+     :default t
+     :token "xoxs-663392975270-684611065526-682007404980-d820b61e4ce976caf02228e34b5d0f7efdae153b08a41b992dd524dcebe4834b"
+     :subscribed-channels '(general nms random)))
 
-  (use-package bufler)
+  (use-package bufler :defer t)
 
-  (use-package somafm)
+  (use-package somafm :defer t)
 
   (use-package sx
+    :defer t
     :init
     (evil-leader/set-key (kbd "os") 'sx-tab-all-questions)
     :config
@@ -1638,6 +1431,7 @@ confirmation"
     (evil-set-initial-state 'sx-question-mode 'emacs))
 
   (use-package treemacs
+    :defer t
     :config
     (define-key treemacs-mode-map (kbd ".") (lambda () (interactive) (treemacs-visit-node-no-split t)))
     (defun acml/treemacs-ignore-gitignore (file _)
@@ -1655,14 +1449,17 @@ confirmation"
     (push #'acml/treemacs-ignore-gitignore treemacs-ignored-file-predicates))
 
   (use-package turkish
+    :defer t
     :commands (turkish-mode)
     :init (evil-leader/set-key (kbd "ot") 'turkish-mode))
 
   (use-package undo-tree
+    :defer t
     :config
     (setq undo-tree-enable-undo-in-region t))
 
   (use-package which-func
+    :defer t
     :commands which-function-mode
     :init
     (defun acml/which-func-setup ()
@@ -1677,6 +1474,7 @@ confirmation"
     )
 
   (use-package wttrin
+    :defer t
     :commands (wttrin wttrin-query)
     :init
     (setq wttrin-default-cities '("Istanbul"
@@ -1701,21 +1499,45 @@ confirmation"
     :config
     (push '("*wttr.in" . emacs) evil-buffer-regexps))
 
-  (use-package ztree
-    :init
-    (evil-set-initial-state 'ztree-mode 'emacs)
-    (evil-set-initial-state 'ztreediff-mode 'emacs)
-    (evil-set-initial-state 'ztreedir-mode 'emacs)
-    (evil-leader/set-key (kbd "oz") 'ztree-diff)
-    :config
-    (setq ediff-keep-variants nil))
+  ;; (use-package ztree
+  ;;   :init
+  ;;   (evil-set-initial-state 'ztree-mode 'emacs)
+  ;;   (evil-set-initial-state 'ztreediff-mode 'emacs)
+  ;;   (evil-set-initial-state 'ztreedir-mode 'emacs)
+  ;;   (evil-leader/set-key (kbd "oz") 'ztree-diff)
+  ;;   :config
+  ;;   (setq ediff-keep-variants nil))
 
   (use-package ztree-view
+    :defer t
     :bind (:map ztree-mode-map
                 ("n" . next-line)
                 ("p" . previous-line))
     :config
     (setq-default ztree-diff-filter-list (list "^\\." "^.*\\.o")))
+
+  ;; text mode directory tree
+  (use-package ztree
+    :defer t
+    :custom-face
+    (ztreep-header-face ((t (:inherit diff-header))))
+    (ztreep-arrow-face ((t (:inherit font-lock-comment-face))))
+    (ztreep-leaf-face ((t (:inherit diff-index))))
+    (ztreep-node-face ((t (:inherit font-lock-variable-name-face))))
+    (ztreep-expand-sign-face ((t (:inherit font-lock-function-name-face))))
+    (ztreep-diff-header-face ((t (:inherit (diff-header bold)))))
+    (ztreep-diff-header-small-face ((t (:inherit diff-file-header))))
+    (ztreep-diff-model-normal-face ((t (:inherit font-lock-doc-face))))
+    (ztreep-diff-model-ignored-face ((t (:inherit font-lock-doc-face :strike-through t))))
+    (ztreep-diff-model-diff-face ((t (:inherit diff-removed))))
+    (ztreep-diff-model-add-face ((t (:inherit diff-nonexistent))))
+    :init (setq ztree-draw-unicode-lines t
+                ztree-show-number-of-children t)
+    (evil-set-initial-state 'ztree-mode 'emacs)
+    (evil-set-initial-state 'ztreediff-mode 'emacs)
+    (evil-set-initial-state 'ztreedir-mode 'emacs)
+    (evil-leader/set-key (kbd "oz") 'ztree-diff))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
