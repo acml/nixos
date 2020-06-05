@@ -155,7 +155,6 @@ This function should only modify configuration layer settings."
      dired-quick-sort
      ;; dired-rainbow
      (dired-show-readme :location (recipe :fetcher gitlab :repo "kisaragi-hiu/dired-show-readme"))
-     dired-sidebar
      dired-subtree
      ;; dired-toggle
      direnv
@@ -163,9 +162,6 @@ This function should only modify configuration layer settings."
      docker
      docker-tramp
      dts-mode
-     exwm
-     xelb
-     guix
      hackernews
      ;; (helm-spotify :location (recipe :fetcher github :repo "jodonnell/helm-spotify"))
      helm-system-packages
@@ -877,7 +873,6 @@ buffer's name.
   ;; (set-buffer-multibyte nil)
 
   (use-package beacon
-    :defer t
     :config
     (beacon-mode 1))
 
@@ -1534,7 +1529,6 @@ confirmation"
     (evil-set-initial-state 'ztreediff-mode 'emacs)
     (evil-set-initial-state 'ztreedir-mode 'emacs)
     (evil-leader/set-key (kbd "oz") 'ztree-diff))
-
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
