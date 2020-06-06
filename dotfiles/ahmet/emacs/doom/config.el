@@ -3,7 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-;; (setq frame-resize-pixelwise t)
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -20,56 +19,21 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "JetBrains Mono" :size 14))
-;; (setq doom-font (font-spec :family "monospace" :size 14))
-
 (setq doom-font (font-spec :family "Iosevka" :size 16)
-      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font")
-      doom-serif-font (font-spec :family "BlexMono NF" :weight 'light))
-
-;; Hook up dired-x global bindings without loading it up-front
-(define-key ctl-x-map "\C-j" 'dired-jump)
-(define-key ctl-x-4-map "\C-j" 'dired-jump-other-window)
-
-(use-package cus-face
-  :config
-  (custom-set-faces
-   '(org-document-title ((t (:height 1.8))))
-   '(org-block-begin-line ((t (:inherit 'fixed-pitch))))
-   '(org-block-end-line ((t (:inherit 'fixed-pitch))))
-   '(org-verbatim ((t (:inherit 'fixed-pitch))))
-   '(org-code ((t (:inherit 'fixed-pitch))))
-   '(org-block ((t (:inherit 'fixed-pitch))))
-   '(org-table ((t (:inherit 'fixed-pitch))))
-   '(org-meta-line ((t (:inherit 'fixed-pitch))))
-   '(org-document-info-keyword ((t (:inherit 'fixed-pitch))))
-   '(org-indent ((t (:inherit (fixed-pitch org-hide)))))
-   '(org-level-1 ((t (:extend t))))
-   '(org-level-2 ((t (:extend t))))
-   '(org-level-3 ((t (:extend t))))
-   '(org-level-4 ((t (:extend t))))
-   '(org-level-5 ((t (:extend t))))
-   '(org-level-6 ((t (:extend t))))
-   '(org-level-7 ((t (:extend t))))
-   '(org-level-8 ((t (:extend t))))))
+      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font"))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;; (setq doom-theme 'doom-one)
-;; (setq doom-theme 'modus-operandi)
-;; (setq doom-theme 'modus-vivendi)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Documents/org/")
 
-;;; :ui doom-dashboard
-(setq fancy-splash-image (concat doom-private-dir "splash.png"))
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type nil)
+(setq display-line-numbers-type t)
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -96,13 +60,11 @@
 (setq-default
  delete-by-moving-to-trash t)
 
-;; (setq
-;;  ;; Window manager’s focus follows mouse.
-;;  focus-follows-mouse t
-;;  ;; Focus follows mouse in Emacs too. Focus 100ms after the mouse
-;;  ;; stops in a window.
-;;  mouse-autoselect-window t
-;;  )
+(setq ccls-initialization-options
+      `(:cache (:directory ,(file-truename "~/.cache/ccls"))))
+
+;;; :ui doom-dashboard
+(setq fancy-splash-image (concat doom-private-dir "splash.png"))
 
 (map! "M-c" #'capitalize-dwim
       "M-l" #'downcase-dwim
@@ -111,19 +73,26 @@
 ;; (setq spacemacs-path doom-modules-dir)
 ;; (load! (concat spacemacs-path "spacemacs/+spacemacs"))
 
-(setq ccls-initialization-options
-      `(:cache (:directory ,(file-truename "~/.cache/ccls"))))
+(use-package! avy
+  :init
+  (setq avy-all-windows t))
+
+(use-package! daemons
+  :config
+  ;; (setq daemons-always-sudo t)
+  )
 
 ;;
 ;; Dired
+;;
+;; Hook up dired-x global bindings without loading it up-front
+(define-key ctl-x-map "\C-j" 'dired-jump)
+(define-key ctl-x-4-map "\C-j" 'dired-jump-other-window)
+
 (setq dired-hide-details-hide-symlink-targets t)
 (add-hook! dired-mode
   (dired-hide-details-mode 1)
   (dired-show-readme-mode 1))
-
-(use-package! avy
-  :init
-  (setq avy-all-windows t))
 
 (use-package! dired-subtree
   :after dired
@@ -146,6 +115,11 @@
    (:map dired-mode-map
      :desc "Up" :n "<left>" #'dired-up-directory
      :desc "Down" :n "<right>" #'dired-find-file)))
+
+(use-package! docker-tramp)
+(use-package! docker)
+
+(use-package! journalctl-mode)
 
 ;;
 ;; Turkish
@@ -210,14 +184,11 @@
   :config
   (add-hook 'prog-mode-hook #'rainbow-mode))
 
-(use-package! docker-tramp)
-(use-package! docker)
+;; (use-package! shrface)
 
 (use-package! trashed
   :config
   (add-to-list 'evil-emacs-state-modes 'trashed-mode))
-
-;; (use-package! shrface)
 
 ;; text mode directory tree
 (use-package! ztree
@@ -237,9 +208,3 @@
          ("C-<f5>" . ztree-diff))
   :init (setq ztree-draw-unicode-lines t
               ztree-show-number-of-children t))
-
-(use-package! daemons
-  :config
-  ;; (setq daemons-always-sudo t)
-  )
-(use-package! journalctl-mode)

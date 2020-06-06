@@ -38,11 +38,6 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (spacemacs-layouts :variables spacemacs-layouts-restrict-spc-tab t)
-     ;; (ivy :variables ivy-enable-advanced-buffer-information t)
-     (helm :variables
-           helm-position 'bottom
-           helm-enable-auto-resize t)
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t
@@ -76,8 +71,12 @@ This function should only modify configuration layer settings."
                              :nick "acml")))
      git
      gtags
+     (helm :variables
+           helm-position 'bottom
+           helm-enable-auto-resize t)
      helpful
      html
+     ;; (ivy :variables ivy-enable-advanced-buffer-information t)
      javascript
      ;; (keyboard-layout :variables kl-layout 'colemak-hnei)
      ;; (keyboard-layout :variables kl-layout 'colemak-jkhl)
@@ -117,6 +116,7 @@ This function should only modify configuration layer settings."
      (slack :variables
             slack-spacemacs-layout-name "@Slack"
             slack-spacemacs-layout-binding "s")
+     (spacemacs-layouts :variables spacemacs-layouts-restrict-spc-tab t)
      spell-checking
      sql
      syntax-checking
@@ -216,9 +216,9 @@ It should only modify the values of Spacemacs settings."
    ;; portable dumper in the cache directory under dumps sub-directory.
    ;; To load it when starting Emacs add the parameter `--dump-file'
    ;; when invoking Emacs 27.1 executable on the command line, for instance:
-   ;;   ./emacs --dump-file=~/.emacs.d/.cache/dumps/spacemacs.pdmp
-   ;; (default spacemacs.pdmp)
-   dotspacemacs-emacs-dumper-dump-file "spacemacs.pdmp"
+   ;;   ./emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs-27.1.pdmp
+   ;; (default spacemacs-27.1.pdmp)
+   dotspacemacs-emacs-dumper-dump-file (format "spacemacs-%s.pdmp" emacs-version)
 
    ;; If non-nil ELPA repositories are contacted via HTTPS whenever it's
    ;; possible. Set it to nil if you have no way to use HTTPS in your
@@ -237,6 +237,13 @@ It should only modify the values of Spacemacs settings."
    ;; performance issues due to garbage collection operations.
    ;; (default '(100000000 0.1))
    dotspacemacs-gc-cons '(100000000 0.1)
+
+   ;; Set `read-process-output-max' when startup finishes.
+   ;; This defines how much data is read from a foreign process.
+   ;; Setting this >= 1 MB should increase performance for lsp servers
+   ;; in emacs 27.
+   ;; (default (* 1024 1024))
+   dotspacemacs-read-process-output-max (* 1024 1024)
 
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
@@ -439,7 +446,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
