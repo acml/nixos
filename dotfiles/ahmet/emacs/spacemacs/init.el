@@ -50,12 +50,9 @@ This function should only modify configuration layer settings."
      better-defaults
      bm
      (c-c++ :variables
-
             c-c++-adopt-subprojects t
-
             c-c++-backend 'lsp-ccls
             ;; c-c++-lsp-enable-semantic-highlight 'rainbow
-
             c-c++-default-mode-for-headers 'c-mode)
      (cmake :variables cmake-enable-cmake-ide-support t)
      ;; (colors :variables colors-colorize-identifiers 'all)
@@ -120,8 +117,7 @@ This function should only modify configuration layer settings."
      (slack :variables
             slack-spacemacs-layout-name "@Slack"
             slack-spacemacs-layout-binding "s")
-     ;; spell-checking
-     spotify
+     spell-checking
      sql
      syntax-checking
      systemd
@@ -156,29 +152,24 @@ This function should only modify configuration layer settings."
      ;; dired-rainbow
      (dired-show-readme :location (recipe :fetcher gitlab :repo "kisaragi-hiu/dired-show-readme"))
      dired-subtree
-     ;; dired-toggle
      direnv
      disk-usage
      docker
      docker-tramp
      dts-mode
      hackernews
-     ;; (helm-spotify :location (recipe :fetcher github :repo "jodonnell/helm-spotify"))
-     helm-system-packages
      (helm-treemacs-icons :location (recipe :fetcher github :repo "yyoncho/helm-treemacs-icons"))
      ;; highlight-indent-guides
      (i3wm-config-mode :location (recipe :fetcher github :repo "Alexander-Miller/i3wm-Config-Mode"))
      ;; magit-todos
      minimap
-     mu4e-conversation
-     ov
+     ;; mu4e-conversation
      posix-manual
      rg
      rmsbolt
-     (bufler :location (recipe :fetcher github :repo "alphapapa/bufler.el"))
-     (somafm :location (recipe :fetcher github :repo "artenator/somafm.el"))
+     bufler
+     somafm
      sx
-     system-packages
      treemacs-icons-dired
      trashed
      turkish
@@ -1029,24 +1020,6 @@ buffer's name.
                 ("<left>" . dired-up-directory)
                 ("<right>" . dired-find-file)))
 
-  ;; (use-package dired-toggle
-  ;;   :bind (("<f3>" . #'dired-toggle)
-  ;;          :map dired-mode-map
-  ;;          ("q" . #'dired-toggle-quit)
-  ;;          ([remap dired-find-file] . #'dired-toggle-find-file)
-  ;;          ([remap dired-up-directory] . #'dired-toggle-up-directory)
-  ;;          ("C-c C-u" . #'dired-toggle-up-directory))
-  ;;   :config
-  ;;   (setq dired-toggle-window-size 32)
-  ;;   (setq dired-toggle-window-side 'left)
-
-  ;;   ;; Optional, enable =visual-line-mode= for our narrow dired buffer:
-  ;;   (add-hook 'dired-toggle-mode-hook
-  ;;             (lambda () (interactive)
-  ;;               (visual-line-mode 1)
-  ;;               (setq-local visual-line-fringe-indicators '(nil right-curly-arrow))
-  ;;               (setq-local word-wrap nil))))
-
   (use-package direnv
     :defer t
     :config
@@ -1143,27 +1116,28 @@ confirmation"
     ;; (set 'face-remapping-alist '((hackernews-link font-lock-function-name-face)))
     (push '("*hackernews*" . emacs) evil-buffer-regexps))
 
-  (with-eval-after-load 'helm-system-packages
-    (push '("*helm-system-packages-output*" . emacs) evil-buffer-regexps))
-
   (with-eval-after-load 'conf-mode
     (use-package i3wm-config-mode))
 
   (setq magit-repository-directories '(( "~/Projects/" . 2)))
-
-  ;; (use-package magit-todos
-  ;;   :after magit
-  ;;   :config
-  ;;   (setq magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:?")
-  ;;   (setq magit-todos-rg-extra-args '("-M 120"))
-  ;;   (define-key magit-todos-section-map "j" nil)
-  ;;   (magit-todos-mode +1))
 
   ;; (use-package magit
   ;;   :config
   ;;   (magit-add-section-hook 'magit-status-sections-hook
   ;;                           'magit-insert-ignored-files
   ;;                           'magit-insert-untracked-files t))
+
+  ;; (use-package magit-todos
+  ;;   :after magit
+  ;;   ;; :hook (magit-mode . magit-todos-mode)
+  ;;   :init
+  ;;   (setq magit-todos-nice t)
+  ;;   :config
+  ;;   (setq magit-todos-keyword-suffix "\\(?:([^)]+)\\)?:?") ; make colon optional
+  ;;   ;;   (setq magit-todos-rg-extra-args '("-M 120"))
+  ;;   (define-key magit-todos-section-map "j" nil)
+  ;;   (setq magit-todos-group-by
+  ;;         '(magit-todos-item-first-path-component magit-todos-item-keyword magit-todos-item-filename)))
 
   (use-package minimap
     :defer t
@@ -1374,6 +1348,7 @@ confirmation"
   (use-package projectile
     :defer t
     :config
+    (setq projectile-switch-project-action 'projectile-dired)
     (projectile-register-project-type
      'gimsa '("build.sh")
      :compile "./build.sh"
@@ -1413,7 +1388,7 @@ confirmation"
 
   (use-package bufler :defer t)
 
-  (use-package somafm :defer t)
+  (use-package somafm :defer t :commands somafm)
 
   (use-package sx
     :defer t
