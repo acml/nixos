@@ -24,8 +24,12 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 14))
 
 (setq doom-font (font-spec :family "Iosevka" :size 16)
-      doom-variable-pitch-font (font-spec :family "Overpass NF")
+      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font")
       doom-serif-font (font-spec :family "BlexMono NF" :weight 'light))
+
+;; Hook up dired-x global bindings without loading it up-front
+(define-key ctl-x-map "\C-j" 'dired-jump)
+(define-key ctl-x-4-map "\C-j" 'dired-jump-other-window)
 
 (use-package cus-face
   :config
