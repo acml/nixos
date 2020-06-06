@@ -143,7 +143,6 @@ This function should only modify configuration layer settings."
      beginend
      charmap
      (declutter :location (recipe :fetcher github :repo "sanel/declutter"))
-     ;; dimmer
      diredfl
      dired-filter
      dired-git-info
@@ -890,16 +889,6 @@ buffer's name.
     :defer t
     :init (beginend-global-mode))
 
-  ;; (use-package dimmer
-  ;;   :config
-  ;;   (setq dimmer-fraction 0.4)
-  ;;   (dimmer-configure-helm)
-  ;;   (dimmer-configure-hydra)
-  ;;   (dimmer-configure-magit)
-  ;;   (dimmer-configure-org)
-  ;;   (dimmer-configure-which-key)
-  ;;   (dimmer-mode t))
-
   (use-package dired-aux
     :commands dired-dwim-target-directory)
 
@@ -1119,13 +1108,15 @@ confirmation"
   (with-eval-after-load 'conf-mode
     (use-package i3wm-config-mode))
 
-  (setq magit-repository-directories '(( "~/Projects/" . 2)))
-
-  ;; (use-package magit
-  ;;   :config
-  ;;   (magit-add-section-hook 'magit-status-sections-hook
-  ;;                           'magit-insert-ignored-files
-  ;;                           'magit-insert-untracked-files t))
+  (use-package magit
+    :defer t
+    :init
+    (setq magit-repository-directories '(( "~/Projects/" . 2)))
+    ;; :config
+    ;; (magit-add-section-hook 'magit-status-sections-hook
+    ;;                         'magit-insert-ignored-files
+    ;;                         'magit-insert-untracked-files t)
+    )
 
   ;; (use-package magit-todos
   ;;   :after magit
