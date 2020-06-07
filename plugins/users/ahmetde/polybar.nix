@@ -247,8 +247,7 @@ in {
           # space-padded hour
           time = " %l:%M";
           time-alt = "  %l:%M";
-          label = "%date%%time%";
-          label-padding = 1;
+          label = "%date%%time% ";
         };
 
         "module/title" = {
@@ -258,13 +257,13 @@ in {
           #   <label> (default)
           format = "<label>";
           format-background = "\${colors.trans}";
-          format-padding = 2;
+          format-padding = 1;
 
           # Available tokens:
           #   %title%
           # Default: %title%
           label = "%title%";
-          label-maxlen = 70;
+          label-maxlen = 64;
 
           # Used instead of label when there is no window title
           # Available tokens:
@@ -277,9 +276,7 @@ in {
           interval = 5;
           format-volume = "<ramp-volume> <label-volume>";
           label-volume = "%percentage%";
-          label-volume-padding = 1;
           label-muted = "婢";
-          label-muted-padding = 1;
           ramp-volume-0 = "";
           ramp-volume-1 = "";
           ramp-volume-2 = "";
@@ -320,7 +317,6 @@ in {
           enable-scroll = true;
 
           format = "<ramp> <label>";
-          format-padding = 1;
           label = "%percentage%";
 
           ramp-0 = "";
