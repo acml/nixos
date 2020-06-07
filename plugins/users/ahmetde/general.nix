@@ -251,7 +251,7 @@ in {
           # "*.font" = "Hack Nerd Font:pixelsize=13:antialias=true:autohint=true";
           # XTerm stuff
           "XTerm.termName"          = "xterm-256color";
-          "XTerm.vt100.faceName"    = "Iosevka Term:size=11.5";
+          "XTerm.vt100.faceName"    = "Iosevka Term:size=12";
           "XTerm*decTerminalID"     = "vt340";
           "XTerm*numColorRegisters" = 256;
         };
