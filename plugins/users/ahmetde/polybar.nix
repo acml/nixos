@@ -267,7 +267,7 @@ in {
           #   %title%
           # Default: %title%
           label = "%title%";
-          label-maxlen = 108;
+          label-maxlen = 96;
 
           # Used instead of label when there is no window title
           # Available tokens:
