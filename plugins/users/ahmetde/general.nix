@@ -251,7 +251,7 @@ in {
           # "*.font" = "Hack Nerd Font:pixelsize=13:antialias=true:autohint=true";
           # XTerm stuff
           "XTerm.termName"          = "xterm-256color";
-          "XTerm.vt100.faceName"    = "Hack Nerd Font Mono:size=10";
+          "XTerm.vt100.faceName"    = "Iosevka Term:size=11.5";
           "XTerm*decTerminalID"     = "vt340";
           "XTerm*numColorRegisters" = 256;
         };
@@ -260,10 +260,12 @@ in {
       # GTK theme configs
       gtk = {
         enable = true;
-        # font = {
+        font = {
         #   name    = "Cantarell 11";
         #   package = pkgs.cantarell-fonts;
-        # };
+          package = pkgs.roboto;
+          name = "Roboto 11";
+        };
         iconTheme = {
           # name    = "Paper";
           # package = pkgs.paper-icon-theme;

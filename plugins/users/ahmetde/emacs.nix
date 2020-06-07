@@ -50,10 +50,13 @@ in {
         sqlite
         # :lang cc
         ccls
+        glslang
         # :lang javascript
         nodePackages.javascript-typescript-langserver
         # :lang latex & :lang org (latex previews)
         texlive.combined.scheme-tetex
+        # :lang markdown
+        pandoc
         # :lang rust
         # (pkgs.latest.rustChannels.stable.rust.override {
         #   extensions = [
