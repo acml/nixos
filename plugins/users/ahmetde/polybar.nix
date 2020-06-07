@@ -51,6 +51,7 @@ in {
           background = "\${colors.trans}";
           override-redirect = true;
           wm-restack = "bspwm";
+          line-size = 3;
 
           # border-top-size = 3;
           # border-top-color= "\${colors.border}";
@@ -127,6 +128,7 @@ in {
 
           label-focused = "%icon%";
           label-focused-foreground = "\${colors.xcolor6}";
+          label-focused-underline = "\${colors.xcolor6}";
           label-focused-padding = 1;
 
           label-occupied = "%icon%";
