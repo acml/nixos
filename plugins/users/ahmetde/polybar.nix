@@ -61,9 +61,11 @@ in {
           border-size = 0;
           # border-color= "\${colors.trans}";
 
-          font-0 = "Inconsolata Nerd Font:size=14;2";
-          font-1 = "Inconsolata Nerd Font:size=16;2";
-          font-2 = "Inconsolata Nerd Font:size=18;2";
+          font-0 = "NotoSansDisplay Nerd Font:size=13;3";
+          font-1 = "NotoSansDisplay Nerd Font:size=16;2";
+          font-2 = "NotoSansDisplay Nerd Font:size=18;6";
+          # fallback font for ramp icons
+          font-3 = "Inconsolata Nerd Font:size=14;2";
 
           modules-left = "menu arrow powermenu arrow random-background arrow bspwm arrow1 title";
           # modules-right = "arrow2 music mpd arrow pulseaudio backlight battery arrow wlan pkg arrow date openweathermap-simple arrow1";
@@ -263,7 +265,7 @@ in {
           #   %title%
           # Default: %title%
           label = "%title%";
-          label-maxlen = 64;
+          label-maxlen = 108;
 
           # Used instead of label when there is no window title
           # Available tokens:
@@ -329,8 +331,9 @@ in {
         "module/temperature" = {
           type = "internal/temperature";
           # thermal-zone = 5;
-          hwmon-path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input";
-          warn-temperature = 60;
+          hwmon-path = "/sys/devices/virtual/thermal/thermal_zone3/hwmon2/temp1_input";
+          base-temperature = 40;
+          warn-temperature = 70;
 
           format = "<ramp> <label>";
           format-warn = "<ramp> <label-warn>";
