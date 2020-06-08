@@ -60,23 +60,22 @@
 ;; (package! move-text) ;; for spacemacs-editing
 ;; (package! string-inflection) ;; for spacemacs-editing
 
-(package! turkish)
+(package! daemons)
 
-;; system
+(package! dired-show-readme :recipe (:host gitlab :repo "kisaragi-hiu/dired-show-readme"))
 (package! dired-subtree)
+
+(package! docker)
+(package! docker-tramp)
+
+(package! journalctl-mode)
 
 (package! modus-operandi-theme)
 (package! modus-vivendi-theme)
 
-(package! docker-tramp)
-(package! docker)
+;; (package! shrface :recipe (:host github :repo "chenyanming/shrface"))
+
+(package! turkish)
 
 (package! trashed)
 (package! ztree)
-
-(package! dired-show-readme
- :recipe (:host gitlab :repo "kisaragi-hiu/dired-show-readme"))
-
-;; (package! shrface :recipe (:host github :repo "chenyanming/shrface"))
-(package! daemons)
-(package! journalctl-mode :recipe (:host github :repo "SebastianMeisel/journalctl-mode"))
