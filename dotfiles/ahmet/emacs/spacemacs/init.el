@@ -600,8 +600,9 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
   (set-face-background 'mouse "white")
 
-  (setq custom-file "~/.emacs.d/custom.el")
-  (load custom-file 'noerror)
+  (setq-default custom-file (expand-file-name "custom.el" dotspacemacs-directory))
+  (when (file-exists-p custom-file)
+    (load custom-file))
 
   (add-to-list 'load-path "~/.nix-profile/share/emacs/site-lisp/mu4e")
 
