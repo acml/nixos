@@ -79,6 +79,10 @@ in {
     };
     programs.light.enable = true;
     programs.dconf.enable = true;
+    programs.wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
+    };
 
     home-manager.users = iceLib.functions.mkUserConfigs' (n: c: {
 

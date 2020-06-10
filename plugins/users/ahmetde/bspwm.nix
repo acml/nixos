@@ -494,10 +494,7 @@ in {
           HDMI-0 = [ "6" "7" "8" "9" "0"];
         };
         rules = {
-          Pinentry = {
-            state = "floating";
-            center = true;
-          };
+          Pinentry = { state = "floating"; center = true; };
           Emacs = { state = "tiled"; };
           "Emacs:org*" = { state = "floating"; };
           "Emacs:scratch" = { state = "floating"; };
