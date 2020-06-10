@@ -332,8 +332,7 @@ in {
 
         "module/temperature" = {
           type = "internal/temperature";
-          # thermal-zone = 5;
-          hwmon-path = "/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input";
+          hwmon-path = "\${env:HWMON_PATH:/sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input}";
           base-temperature = 40;
           warn-temperature = 70;
 
