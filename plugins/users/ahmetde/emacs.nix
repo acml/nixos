@@ -84,7 +84,29 @@ in {
        rev = "233bb7fb4d176f81fe4e7dccbb7f1cba793010e6";
        sha256 = "0rljwgnns38g95zdlvch63zsicdvbyaq6xfq2f2mqag051yn9pwb";
       } + "/.emacs";
-      ".emacs-profiles.el".source = (system.dirs.dotfiles + "/${name}/emacs/emacs-profiles.el");
+      ".emacs-profiles.el".text = ''
+        (("default" . ((user-emacs-directory . "~/.emacs.d/doom")
+                      (env . (("DOOMDIR" . "~/.config/doom")))))
+         ("spacemacs" . ((user-emacs-directory . "~/.emacs.d/spacemacs")
+                         (env . (("SPACEMACSDIR" . "~/.config/spacemacs"))))))
+      '';
+      # ".emacs.d/doom" = {
+      #   source = builtins.fetchGit {
+      #     url = "https://github.com/hlissner/doom-emacs";
+      #     ref = "develop";
+      #   };
+      #   recursive = true;
+      #   # onChange = ''
+      #   #   ~/.emacs.d/doom/bin/doom sync
+      #   # '';
+      # };
+      ".emacs.d/spacemacs" = {
+        source = builtins.fetchGit {
+          url = "https://github.com/syl20bnr/spacemacs";
+          ref = "develop";
+        };
+        recursive = true;
+      };
     };
 
     xdg.configFile = {
