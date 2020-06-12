@@ -679,8 +679,7 @@ before packages are loaded."
   (add-hook 'after-save-hook
             'executable-make-buffer-file-executable-if-script-p)
 
-  (use-package vlf
-    :defer t
+  (use-package vlf :defer t
     :config (require 'vlf-setup))
 
   (use-package calc
@@ -791,7 +790,7 @@ buffer's name.
         (narrow-to-region start end)
         (rename-buffer indirect-buffer-name t))
       (switch-to-buffer buf)))
-  (evil-leader/set-key (kbd "on") 'narrow-to-region-indirect)
+  (evil-leader/set-key (kbd "oi") 'narrow-to-region-indirect)
 
   ;; ;; C/C++ styles
   ;; (defun c-lineup-arglist-tabs-only (ignored)
@@ -892,13 +891,11 @@ buffer's name.
   (with-eval-after-load 'cmake-ide
     (setq cmake-ide-build-dir "build/"))
 
-  (use-package evil
-    :defer t
+  (use-package evil :defer t
     :init
     (setq evil-lookup-func 'man))
 
-  (use-package beginend
-    :defer t
+  (use-package beginend :defer t
     :init (beginend-global-mode))
 
   (use-package dired-aux
@@ -928,14 +925,12 @@ buffer's name.
 
           wdired-allow-to-change-permissions t)
 
-    (use-package dired-async
-      :defer t
+    (use-package dired-async :defer t
       :config
       (dired-async-mode 1))
 
     ;; Colourful columns.
-    (use-package diredfl
-      :defer t
+    (use-package diredfl :defer t
       :config
       (diredfl-global-mode 1))
 
@@ -966,34 +961,29 @@ buffer's name.
 
     ;; When activated after creating a new entry (e.g. a directory) cursor jumps
     ;; to beginning of the listing. Annoys me to no end. Disabled for now.
-    (use-package dired-filter
-      :defer t
+    (use-package dired-filter :defer t
       :disabled
       :config
       (setq dired-filter-group-saved-groups
             '(("default" ("Directories" (directory)))))
       :hook (dired-mode . dired-filter-group-mode))
 
-    (use-package dired-git-info
-      :defer t
+    (use-package dired-git-info :defer t
       :bind (:map dired-mode-map
                   (")" . dired-git-info-mode)))
 
-    (use-package dired-hacks-utils
-      :defer t
+    (use-package dired-hacks-utils :defer t
       :config
       (dired-utils-format-information-line-mode t))
 
     ;; Quick sort dired buffers via hydra
-    (use-package dired-quick-sort
-      :defer t
+    (use-package dired-quick-sort :defer t
       :bind (:map dired-mode-map ("s" . hydra-dired-quick-sort/body))
       :hook (dired-initial-position . dired-quick-sort))
 
     (use-package dired-show-readme :defer t)
 
-    (use-package dired-subtree
-      :defer t
+    (use-package dired-subtree :defer t
       :bind (:map dired-mode-map
                   ("<tab>" . acml/dired-subtree-toggle)
                   ("<backtab>" . dired-subtree-cycle))
@@ -1007,8 +997,7 @@ buffer's name.
       :config
       (setq dired-subtree-use-backgrounds nil))
 
-    (use-package treemacs-icons-dired
-      :defer t
+    (use-package treemacs-icons-dired :defer t
       :config (use-package treemacs-icons)
       :init
       (defun acml/dired-setup ()
@@ -1021,16 +1010,14 @@ buffer's name.
                 ("<left>" . dired-up-directory)
                 ("<right>" . dired-find-file)))
 
-  (use-package direnv
-    :defer t
+  (use-package direnv :defer t
     :config
     (add-to-list 'warning-suppress-types '(direnv))
     (direnv-mode))
 
   (use-package trashed :defer t)
 
-  (use-package disk-usage
-    :defer t
+  (use-package disk-usage :defer t
     :config
     (evil-set-initial-state 'disk-usage-mode 'emacs))
 
@@ -1098,8 +1085,7 @@ confirmation"
     (evil-set-initial-state 'eww-buffers-mode 'emacs)
     (evil-set-initial-state 'eww-bookmark-mode 'emacs))
 
-  (use-package geiser
-    :defer t
+  (use-package geiser :defer t
     :init
     (spacemacs|define-custom-layout "SICP"
       :binding "S"
@@ -1108,8 +1094,7 @@ confirmation"
       (split-window-right)
       (run-geiser 'mit)))
 
-  (use-package hackernews
-    :defer t
+  (use-package hackernews :defer t
     :init
     (evil-leader/set-key (kbd "oh") 'hackernews)
     :config
@@ -1120,8 +1105,7 @@ confirmation"
   (with-eval-after-load 'conf-mode
     (use-package i3wm-config-mode))
 
-  (use-package magit
-    :defer t
+  (use-package magit :defer t
     :init
     (setq magit-repository-directories '(( "~/Projects/" . 2)))
     ;; :config
@@ -1142,8 +1126,7 @@ confirmation"
   ;;   (setq magit-todos-group-by
   ;;         '(magit-todos-item-first-path-component magit-todos-item-keyword magit-todos-item-filename)))
 
-  (use-package minimap
-    :defer t
+  (use-package minimap :defer t
     :init
     (evil-leader/set-key (kbd "om") 'minimap-mode)
     ;; (minimap-mode 1)
@@ -1334,13 +1317,11 @@ confirmation"
     (proced-descend t)
     (proced-filter 'user))
 
-  (use-package helm-sys
-    :defer t
+  (use-package helm-sys :defer t
     :commands (helm-top)
     :config (helm-top-poll-mode 1))
 
-  (use-package org
-    :defer t
+  (use-package org :defer t
     :config
     (setq org-directory "~/Dropbox/Documents/org"
           org-agenda-files (list org-directory)
@@ -1348,8 +1329,7 @@ confirmation"
 
   (use-package posix-manual :defer t)
 
-  (use-package projectile
-    :defer t
+  (use-package projectile :defer t
     :config
     (setq projectile-switch-project-action 'projectile-dired)
     (projectile-register-project-type
@@ -1369,19 +1349,16 @@ confirmation"
      :compile "make O=am43xx_evm ARCH=arm CROSS_COMPILE=arm-openwrt-linux-gnueabi- all"
      :compilation-dir "."))
 
-  (use-package rainbow-mode
-    :defer t
+  (use-package rainbow-mode :defer t
     :hook
     (prog-mode . rainbow-mode))
 
-  (use-package rg
-    :defer t
+  (use-package rg :defer t
     :init
     (evil-leader/set-key (kbd "or") 'rg-dwim)
     (evil-leader/set-key (kbd "oR") 'rg))
 
-  (use-package slack
-    :defer t
+  (use-package slack :defer t
     :config
     (slack-register-team
      :name "andasis"
@@ -1393,16 +1370,14 @@ confirmation"
 
   (use-package somafm :defer t :commands somafm)
 
-  (use-package sx
-    :defer t
+  (use-package sx :defer t
     :init
     (evil-leader/set-key (kbd "os") 'sx-tab-all-questions)
     :config
     (evil-set-initial-state 'sx-question-list-mode 'emacs)
     (evil-set-initial-state 'sx-question-mode 'emacs))
 
-  (use-package treemacs
-    :defer t
+  (use-package treemacs :defer t
     :config
     (define-key treemacs-mode-map (kbd ".") (lambda () (interactive) (treemacs-visit-node-no-split t)))
     (defun acml/treemacs-ignore-gitignore (file _)
@@ -1419,18 +1394,15 @@ confirmation"
                   file))
     (push #'acml/treemacs-ignore-gitignore treemacs-ignored-file-predicates))
 
-  (use-package turkish
-    :defer t
+  (use-package turkish :defer t
     :commands (turkish-mode)
     :init (evil-leader/set-key (kbd "ot") 'turkish-mode))
 
-  (use-package undo-tree
-    :defer t
+  (use-package undo-tree :defer t
     :config
     (setq undo-tree-enable-undo-in-region t))
 
-  (use-package which-func
-    :defer t
+  (use-package which-func :defer t
     :commands which-function-mode
     :init
     (defun acml/which-func-setup ()
@@ -1443,8 +1415,7 @@ confirmation"
       (which-function-mode))
     :hook (prog-mode . acml/which-func-setup))
 
-  (use-package wttrin
-    :defer t
+  (use-package wttrin :defer t
     :commands (wttrin wttrin-query)
     :init
     (setq wttrin-default-cities '("Istanbul"
@@ -1478,8 +1449,7 @@ confirmation"
   ;;   :config
   ;;   (setq ediff-keep-variants nil))
 
-  (use-package ztree-view
-    :defer t
+  (use-package ztree-view :defer t
     :bind (:map ztree-mode-map
                 ("n" . next-line)
                 ("p" . previous-line))
@@ -1487,8 +1457,7 @@ confirmation"
     (setq-default ztree-diff-filter-list (list "^\\." "^.*\\.o")))
 
   ;; text mode directory tree
-  (use-package ztree
-    :defer t
+  (use-package ztree :defer t
     :custom-face
     (ztreep-header-face ((t (:inherit diff-header))))
     (ztreep-arrow-face ((t (:inherit font-lock-comment-face))))
