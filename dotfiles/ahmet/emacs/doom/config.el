@@ -67,6 +67,10 @@
 (setq ccls-initialization-options
       `(:cache (:directory ,(file-truename "~/.cache/ccls"))))
 
+(setq calendar-location-name "Istanbul, Turkey"
+      calendar-latitude 41.168602
+      calendar-longitude 29.047024)
+
 ;;; :ui doom-dashboard
 (setq fancy-splash-image (concat doom-private-dir "splash.png"))
 
