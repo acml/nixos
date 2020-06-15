@@ -9,7 +9,10 @@ in {
     programs.emacs = {
       enable = true;
       # Compile with imagemagick support so I can resize images.
-      package = pkgs.emacsUnstable.override { inherit (pkgs) imagemagick; };
+      package = pkgs.emacsGcc.override {
+        inherit (pkgs) imagemagick;
+        withXwidgets = true;
+      };
       extraPackages = (epkgs:
         (with epkgs; [
           # exwm
@@ -21,9 +24,11 @@ in {
     # Home-manager settings.
     # User-layer packages
     home.packages = with pkgs; [
+      gnumake
       ## Doom dependencies
       global
       (ripgrep.override { withPCRE2 = true; })
+      (pkgs.callPackage ./emacs-sandbox.nix {})
       gnutls # for TLS connectivity
 
       ## Optional dependencies
@@ -72,6 +77,42 @@ in {
       # })
       # :ui treemacs
       python3 # advanced git-mode and directory flattening features require python3
+      (makeDesktopItem {
+        name = "centaur";
+        desktopName = "Centaur Emacs";
+        icon = "emacs";
+        exec = "emacs --with-profile centaur";
+      })
+      (makeDesktopItem {
+        name = "doom";
+        desktopName = "Doom Emacs";
+        icon = "emacs";
+        exec = "emacs --with-profile doom";
+      })
+      (makeDesktopItem {
+        name = "prelude";
+        desktopName = "Prelude Emacs";
+        icon = "emacs";
+        exec = "emacs --with-profile prelude";
+      })
+      (makeDesktopItem {
+        name = "scimax";
+        desktopName = "Scimax Emacs";
+        icon = "emacs";
+        exec = "emacs --with-profile scimax";
+      })
+      (makeDesktopItem {
+        name = "spacemacs";
+        desktopName = "Spacemacs Emacs";
+        icon = "emacs";
+        exec = "emacs --with-profile spacemacs";
+      })
+      (makeDesktopItem {
+        name = "radian";
+        desktopName = "Radian Emacs";
+        icon = "emacs";
+        exec = ''emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.emacs.d/radian-user\"))" --load /home/ahmet/.emacs.d/radian-user/early-init.el'';
+      })
     ];
 
     # Handwritten configs
@@ -83,8 +124,10 @@ in {
       } + "/.emacs";
       ".emacs-profiles.el".text = ''
         (("default" . ((user-emacs-directory . "~/.emacs.d/doom")
-                      (env . (("DOOMDIR" . "~/.config/doom")))))
+                       (env . (("DOOMDIR" . "~/.config/doom")))))
          ("centaur" . ((user-emacs-directory . "~/.emacs.d/centaur")))
+         ("doom" . ((user-emacs-directory . "~/.emacs.d/doom")
+                    (env . (("DOOMDIR" . "~/.config/doom")))))
          ("prelude" . ((user-emacs-directory . "~/.emacs.d/prelude")))
          ("scimax" . ((user-emacs-directory . "~/.emacs.d/scimax")))
          ("spacemacs" . ((user-emacs-directory . "~/.emacs.d/spacemacs")
@@ -127,6 +170,8 @@ in {
         };
         recursive = true;
       };
+      ".emacs.d/scimax/user/user.el".source = system.dirs.dotfiles + "/${name}/emacs/scimax/user.el";
+      ".emacs.d/scimax/user/preload.el".source = system.dirs.dotfiles + "/${name}/emacs/scimax/user.el";
       ".emacs.d/spacemacs" = {
         source = builtins.fetchGit {
           url = "https://github.com/syl20bnr/spacemacs";
