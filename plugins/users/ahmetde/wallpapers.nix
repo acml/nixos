@@ -4,10 +4,9 @@ with import <nixpkgs> {};
 stdenv.mkDerivation {
   name    = "schmich-wallpapers";
 
-  src = fetchgit {
-    url    = "https://github.com/schmich/wallpapers.git";
-    rev    = "e09f3b279e59f261a78305d9bbfd1881820e4812";
-    sha256 = "1yzz6v4iyah3crwxh3mfjwf833ssakfvnl1sc07accjyh3bdjgyr";
+  src = fetchGit {
+    url = "https://github.com/schmich/wallpapers.git";
+    ref = "wallpapers";
   };
 
   installPhase = ''
