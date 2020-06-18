@@ -5,6 +5,8 @@ stdenv.mkDerivation {
   name    = "schmich-wallpapers";
 
   src = fetchGit {
+    # url = "https://github.com/kijart/bing-daily-images-dl.git"
+    # url = "https://github.com/facefruit/daily-bing-wallpaper.git"
     url = "https://github.com/schmich/wallpapers.git";
     ref = "wallpapers";
   };

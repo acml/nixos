@@ -129,7 +129,7 @@ in {
       configs = {
         g3 = {
           # Choose "howdy", "fprintd", or null.
-          bio-auth = "fprintd";
+          bio-auth = null;
         };
         # g3 would automatically enable howdy and set necessary configuratons.
         howdy.pamServices = [ "sudo" "login" "polkit-1" "i3lock" ];
