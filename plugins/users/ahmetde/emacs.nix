@@ -9,10 +9,12 @@ in {
     programs.emacs = {
       enable = true;
       # Compile with imagemagick support so I can resize images.
-      package = pkgs.emacsGcc.override {
+      package = (pkgs.emacsGcc.override {
         inherit (pkgs) imagemagick;
         withXwidgets = true;
-      };
+      }).overrideAttrs(old: rec {
+        configureFlags = (old.configureFlags or []) ++ ["--with-imagemagick"];
+      });
       extraPackages = (epkgs:
         (with epkgs; [
           # exwm
@@ -83,12 +85,12 @@ in {
         icon = "emacs";
         exec = "emacs --with-profile centaur";
       })
-      (makeDesktopItem {
-        name = "doom";
-        desktopName = "Doom Emacs";
-        icon = "emacs";
-        exec = "emacs --with-profile doom";
-      })
+      # (makeDesktopItem {
+      #   name = "doom";
+      #   desktopName = "Doom Emacs";
+      #   icon = "emacs";
+      #   exec = "emacs --with-profile doom";
+      # })
       (makeDesktopItem {
         name = "prelude";
         desktopName = "Prelude Emacs";
