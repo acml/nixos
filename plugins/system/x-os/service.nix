@@ -55,7 +55,6 @@ in mkIf cfg.enable (mkMerge [
 
     services.atftpd = {
       enable = true;
-      extraOptions = [ "--bind-address 192.168.5.35" "--verbose=7" ];
     };
 
   })
