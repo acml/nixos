@@ -6,6 +6,8 @@ let
 in with lib;
 mkIf cfg.enable (mkMerge [
   ({
+    boot.cleanTmpDir = true;
+
     # Enable plymouth for better experience of booting
     boot.plymouth.enable = true;
 

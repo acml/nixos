@@ -3,24 +3,28 @@
 let
   inherit (config.icebox.static.lib.configs) devices system;
   iceLib = config.icebox.static.lib;
+  myEmacs = (pkgs.emacsGcc.override {
+    inherit (pkgs) imagemagick;
+    withXwidgets = true;
+  }).overrideAttrs (old: rec {
+    # Compile with imagemagick support so I can resize images.
+    configureFlags = (old.configureFlags or [ ]) ++ [ "--with-imagemagick" ];
+  });
 in {
   config.home-manager.users = iceLib.functions.mkUserConfigs' (name: cfg: {
 
     programs.emacs = {
       enable = true;
-      # Compile with imagemagick support so I can resize images.
-      package = (pkgs.emacsGcc.override {
-        inherit (pkgs) imagemagick;
-        withXwidgets = true;
-      }).overrideAttrs(old: rec {
-        configureFlags = (old.configureFlags or []) ++ ["--with-imagemagick"];
-      });
+      package = myEmacs;
       extraPackages = (epkgs:
         (with epkgs; [
           # exwm
           vterm
           pdf-tools
-        ]));
+        ]) ++
+
+        # MELPA packages:
+        (with epkgs.melpaPackages; [ ]));
     };
 
     # Home-manager settings.
@@ -30,7 +34,7 @@ in {
       ## Doom dependencies
       global
       (ripgrep.override { withPCRE2 = true; })
-      (pkgs.callPackage ./emacs-sandbox.nix {})
+      (pkgs.callPackage ./emacs-sandbox.nix { })
       gnutls # for TLS connectivity
 
       ## Optional dependencies
@@ -92,6 +96,12 @@ in {
       #   exec = "emacs --with-profile doom";
       # })
       (makeDesktopItem {
+        name = "purcell";
+        desktopName = "Purcell Emacs";
+        icon = "emacs";
+        exec = "emacs --with-profile purcell";
+      })
+      (makeDesktopItem {
         name = "prelude";
         desktopName = "Prelude Emacs";
         icon = "emacs";
@@ -113,13 +123,15 @@ in {
         name = "radian";
         desktopName = "Radian Emacs";
         icon = "emacs";
-        exec = ''emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.emacs.d/radian-user\"))" --load /home/ahmet/.emacs.d/radian-user/early-init.el'';
+        exec = ''
+          emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.emacs.d/radian-user\"))" --load /home/ahmet/.emacs.d/radian-user/early-init.el'';
       })
     ];
 
     # Handwritten configs
     home.file = {
       # Handle multiple emacs installs
+      # Chemacs
       ".emacs".source = builtins.fetchGit {
         url = "https://github.com/plexus/chemacs";
         ref = "master";
@@ -130,11 +142,13 @@ in {
          ("centaur" . ((user-emacs-directory . "~/.emacs.d/centaur")))
          ("doom" . ((user-emacs-directory . "~/.emacs.d/doom")
                     (env . (("DOOMDIR" . "~/.config/doom")))))
+         ("purcell" . ((user-emacs-directory . "~/.emacs.d/purcell")))
          ("prelude" . ((user-emacs-directory . "~/.emacs.d/prelude")))
          ("scimax" . ((user-emacs-directory . "~/.emacs.d/scimax")))
          ("spacemacs" . ((user-emacs-directory . "~/.emacs.d/spacemacs")
                          (env . (("SPACEMACSDIR" . "~/.config/spacemacs"))))))
       '';
+      # Doom Emacs
       # ".emacs.d/doom" = {
       #   source = builtins.fetchGit {
       #     url = "https://github.com/hlissner/doom-emacs";
@@ -145,6 +159,10 @@ in {
       #   #   ~/.emacs.d/doom/bin/doom sync
       #   # '';
       # };
+      # ".emacs.d/doom/init.el".text = ''
+      #   (load "default.el")
+      # '';
+      # Centaur Emacs
       ".emacs.d/centaur" = {
         source = builtins.fetchGit {
           url = "https://github.com/seagle0128/.emacs.d";
@@ -152,7 +170,19 @@ in {
         };
         recursive = true;
       };
-      ".emacs.d/centaur/custom.el".source = system.dirs.dotfiles + "/${name}/emacs/centaur/custom.el";
+      ".emacs.d/centaur/custom.el".source = system.dirs.dotfiles
+        + "/${name}/emacs/centaur/custom.el";
+      # Purcell Emacs
+      ".emacs.d/purcell" = {
+        source = builtins.fetchGit {
+          url = "https://github.com/purcell/emacs.d";
+          ref = "master";
+        };
+        recursive = true;
+      };
+      ".emacs.d/purcell/init-local.el".source = system.dirs.dotfiles
+        + "/${name}/emacs/purcell/init-local.el";
+      # Prelude Emacs
       ".emacs.d/prelude" = {
         source = builtins.fetchGit {
           url = "https://github.com/bbatsov/prelude";
@@ -160,8 +190,11 @@ in {
         };
         recursive = true;
       };
-      ".emacs.d/prelude/personal/preload/font.el".source = system.dirs.dotfiles + "/${name}/emacs/prelude/preload/font.el";
-      ".emacs.d/prelude/personal/prelude-modules.el".source = system.dirs.dotfiles + "/${name}/emacs/prelude/prelude-modules.el";
+      ".emacs.d/prelude/personal/preload/font.el".source = system.dirs.dotfiles
+        + "/${name}/emacs/prelude/preload/font.el";
+      ".emacs.d/prelude/personal/prelude-modules.el".source =
+        system.dirs.dotfiles + "/${name}/emacs/prelude/prelude-modules.el";
+      # Scimax
       ".emacs.d/scimax" = {
         source = pkgs.fetchFromGitHub {
           owner = "jkitchin";
@@ -172,8 +205,11 @@ in {
         };
         recursive = true;
       };
-      ".emacs.d/scimax/user/user.el".source = system.dirs.dotfiles + "/${name}/emacs/scimax/user.el";
-      ".emacs.d/scimax/user/preload.el".source = system.dirs.dotfiles + "/${name}/emacs/scimax/user.el";
+      ".emacs.d/scimax/user/user.el".source = system.dirs.dotfiles
+        + "/${name}/emacs/scimax/user.el";
+      ".emacs.d/scimax/user/preload.el".source = system.dirs.dotfiles
+        + "/${name}/emacs/scimax/user.el";
+      # Spacemacs
       ".emacs.d/spacemacs" = {
         source = builtins.fetchGit {
           url = "https://github.com/syl20bnr/spacemacs";

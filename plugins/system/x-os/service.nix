@@ -52,6 +52,12 @@ in mkIf cfg.enable (mkMerge [
       enable = true;
       forwardX11 = true;
     };
+
+    services.atftpd = {
+      enable = true;
+      extraOptions = [ "--bind-address 192.168.5.35" "--verbose=7" ];
+    };
+
   })
 
   (mkIf (system.bluetooth.enable) {

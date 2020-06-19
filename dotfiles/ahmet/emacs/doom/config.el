@@ -53,10 +53,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(setq-default custom-file (expand-file-name "custom.el" doom-private-dir))
-(when (file-exists-p custom-file)
-  (load custom-file))
-
 (when (window-system)
   (add-to-list 'default-frame-alist '(alpha . (100)))
   (set-frame-parameter (selected-frame) 'alpha '(100)))
