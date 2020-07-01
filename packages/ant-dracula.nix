@@ -9,9 +9,7 @@ stdenv.mkDerivation rec {
     sha256 = "00b8w69xapqy8kc7zqwlfz1xpld6hibbh35djvhcnd905gzzymkd";
   };
 
-  propagatedUserEnvPkgs = [
-    gtk-engine-murrine
-  ];
+  propagatedUserEnvPkgs = [ gtk-engine-murrine ];
 
   dontBuild = true;
 
@@ -25,15 +23,13 @@ stdenv.mkDerivation rec {
 
   outputHashAlgo = "sha256";
   outputHashMode = "recursive";
-  outputHash = "1ns00y1haxm20jak26gjv53yisaw9vsr2dbsgj10zz65rglr1h18";
+  outputHash = "19sm8wy1qd2vc6ifw3j6dki3ws4lmh8ysvgqlry36g3ny23zjq9d";
 
   meta = with stdenv.lib; {
     description = "A flat and light theme with a modern look";
-    homepage = https://github.com/EliverLara/Ant-Dracula;
+    homepage = "https://github.com/EliverLara/Ant-Dracula";
     license = licenses.gpl3;
     platforms = platforms.all;
-    maintainers = [
-      maintainers.pbogdan
-    ];
+    maintainers = [ maintainers.pbogdan ];
   };
 }
