@@ -1130,78 +1130,121 @@ confirmation"
     ;; (minimap-mode 1)
     :config (setq minimap-window-location 'right))
 
-  (use-package mu4e
+  (use-package mu4e :defer t
+    :init
+    (provide 'html2text) ; disable obsolete package
+    (when (or (not (require 'mu4e-meta nil t))
+              (version< mu4e-mu-version "1.4"))
+      (setq mu4e-maildir "~/.mail"
+            mu4e-user-mail-address-list nil))
+    (setq mu4e-attachment-dir
+          (lambda (&rest _)
+            (expand-file-name ".attachments" (mu4e-root-maildir))))
     :config
-    (setq
-     mu4e-attachment-dir "~/Documents/Attachments"
+    ;; Use fancy icons
+    (setq mu4e-use-fancy-chars t
+          mu4e-headers-draft-mark '("D" . "")
+          mu4e-headers-flagged-mark '("F" . "")
+          mu4e-headers-new-mark '("N" . "")
+          mu4e-headers-passed-mark '("P" . "")
+          mu4e-headers-replied-mark '("R" . "")
+          mu4e-headers-seen-mark '("S" . "")
+          mu4e-headers-trashed-mark '("T" . "")
+          mu4e-headers-attach-mark '("a" . "")
+          mu4e-headers-encrypted-mark '("x" . "")
+          mu4e-headers-signed-mark '("s" . "")
+          mu4e-headers-unread-mark '("u" . ""))
 
-     ;; set `mu4e-context-policy` and `mu4e-compose-policy` to tweak when mu4e should
-     ;; guess or ask the correct context, e.g.
+    ;; Add a column to display what email account the email belongs to.
+    (add-to-list 'mu4e-header-info-custom
+                 '(:account
+                   :name "Account"
+                   :shortname "Account"
+                   :help "Which account this email belongs to"
+                   :function
+                   (lambda (msg)
+                     (let ((maildir (mu4e-message-field msg :maildir)))
+                       (format "%s" (substring maildir 1 (string-match-p "/" maildir 1)))))))
 
-     ;; start with the first (default) context;
-     ;; default is to ask-if-none (ask when there's no context yet, and none match)
-     mu4e-context-policy 'pick-first
-
-     ;; compose with the current context is no context matches;
-     ;; default is to ask
-     mu4e-compose-context-policy nil
-
-     mu4e-view-show-images t
-     mu4e-view-show-addresses t
-     mu4e-contexts
-     `(,(make-mu4e-context
-         :name "andasis"
-         :match-func (lambda (msg)
-                       (when msg
-                         (mu4e-message-contact-field-matches msg :to "ahmet.ozgezer@andasis.com")))
-         :vars '((user-mail-address      . "ahmet.ozgezer@andasis.com")
-                 (user-full-name         . "Ahmet Cemal Özgezer")
-                 (mu4e-drafts-folder     . "/Andasis/Drafts")
-                 (mu4e-sent-folder       . "/Andasis/Sent Items")
-                 (mu4e-trash-folder      . "/Andasis/Trash")
-                 (smtpmail-mail-address . "ahmet.ozgezer@andasis.com")
-                 (mu4e-compose-signature . (concat
-                                            "Ahmet Cemal Özgezer\n"
-                                            "Andasis Elektronik San. ve Tic. A.Ş.\n"
-                                            "Teknopark İstanbul, No: 1/1C 1206 Kat:2\n"
-                                            "Pendik İstanbul / Türkiye\n"
-                                            "Tel: +90 216 510 20 01\n"))))
-       ,(make-mu4e-context
-         :name "gmail"
-         :match-func (lambda (msg)
-                       (when msg
-                         (mu4e-message-contact-field-matches msg :to "ozgezer@gmail.com")))
-         :vars '((user-mail-address      . "ozgezer@gmail.com")
-                 (user-full-name         . "Ahmet Cemal Özgezer")
-                 (mu4e-drafts-folder     . "/GMail/Drafts")
-                 (mu4e-sent-folder       . "/GMail/Sent")
-                 (mu4e-trash-folder      . "/GMail/Trash")
-                 (smtpmail-mail-address . "ozgezer@gmail.com")
-                 (mu4e-compose-signature . (concat "Ahmet Cemal Özgezer\n"))))
-       ,(make-mu4e-context
-         :name "yahoo"
-         :match-func (lambda (msg)
-                       (when msg
-                         (mu4e-message-contact-field-matches msg :to "ozgezer@yahoo.com")))
-         :vars '((user-mail-address      . "ozgezer@yahoo.com")
-                 (user-full-name         . "Ahmet Cemal Özgezer")
-                 (mu4e-drafts-folder     . "/Yahoo/Draft")
-                 (mu4e-sent-folder       . "/Yahoo/Sent")
-                 (mu4e-trash-folder      . "/Yahoo/Trash")
-                 (smtpmail-mail-address . "ozgezer@yahoo.com")
-                 (mu4e-compose-signature . (concat "Ahmet Cemal Özgezer\n"))))
-       ,(make-mu4e-context
-         :name "msn"
-         :match-func (lambda (msg)
-                       (when msg
-                         (mu4e-message-contact-field-matches msg :to "ozgezer@msn.com")))
-         :vars '((user-mail-address      . "ozgezer@msn.com")
-                 (user-full-name         . "Ahmet Cemal Özgezer")
-                 (mu4e-drafts-folder     . "/MSN/Drafts")
-                 (mu4e-sent-folder       . "/MSN/Sent")
-                 (mu4e-trash-folder      . "/MSN/Deleted")
-                 (smtpmail-mail-address . "ozgezer@msn.com")
-                 (mu4e-compose-signature . (concat "Ahmet Cemal Özgezer\n")))))))
+    (setq mu4e-update-interval nil
+          mu4e-compose-format-flowed t ; visual-line-mode + auto-fill upon sending
+          mu4e-view-show-addresses t
+          mu4e-sent-messages-behavior 'sent
+          mu4e-hide-index-messages t
+          ;; try to show images
+          mu4e-view-show-images t
+          mu4e-view-image-max-width 800
+          ;; configuration for sending mail
+          message-send-mail-function #'smtpmail-send-it
+          smtpmail-stream-type 'starttls
+          message-kill-buffer-on-exit t ; close after sending
+          ;; start with the first (default) context;
+          mu4e-context-policy 'pick-first
+          ;; compose with the current context, or ask
+          mu4e-compose-context-policy 'ask-if-none
+          ;; no need to ask
+          mu4e-confirm-quit nil
+          ;; remove 'lists' column
+          mu4e-headers-fields
+          '((:account . 12)
+            (:human-date . 12)
+            (:flags . 4)
+            (:from . 25)
+            (:subject))
+          mu4e-contexts
+          `(,(make-mu4e-context
+              :name "andasis"
+              :match-func (lambda (msg)
+                            (when msg
+                              (mu4e-message-contact-field-matches msg :to "ahmet.ozgezer@andasis.com")))
+              :vars '((user-mail-address      . "ahmet.ozgezer@andasis.com")
+                      (user-full-name         . "Ahmet Cemal Özgezer")
+                      (mu4e-drafts-folder     . "/Andasis/Drafts")
+                      (mu4e-sent-folder       . "/Andasis/Sent Items")
+                      (mu4e-trash-folder      . "/Andasis/Trash")
+                      (smtpmail-mail-address . "ahmet.ozgezer@andasis.com")
+                      (mu4e-compose-signature . (concat
+                                                 "Ahmet Cemal Özgezer\n"
+                                                 "Andasis Elektronik San. ve Tic. A.Ş.\n"
+                                                 "Teknopark İstanbul, No: 1/1C 1206 Kat:2\n"
+                                                 "Pendik İstanbul / Türkiye\n"
+                                                 "Tel: +90 216 510 20 01\n"))))
+            ,(make-mu4e-context
+              :name "gmail"
+              :match-func (lambda (msg)
+                            (when msg
+                              (mu4e-message-contact-field-matches msg :to "ozgezer@gmail.com")))
+              :vars '((user-mail-address      . "ozgezer@gmail.com")
+                      (user-full-name         . "Ahmet Cemal Özgezer")
+                      (mu4e-drafts-folder     . "/GMail/Drafts")
+                      (mu4e-sent-folder       . "/GMail/Sent")
+                      (mu4e-trash-folder      . "/GMail/Trash")
+                      (smtpmail-mail-address . "ozgezer@gmail.com")
+                      (mu4e-compose-signature . (concat "Ahmet Cemal Özgezer\n"))))
+            ,(make-mu4e-context
+              :name "yahoo"
+              :match-func (lambda (msg)
+                            (when msg
+                              (mu4e-message-contact-field-matches msg :to "ozgezer@yahoo.com")))
+              :vars '((user-mail-address      . "ozgezer@yahoo.com")
+                      (user-full-name         . "Ahmet Cemal Özgezer")
+                      (mu4e-drafts-folder     . "/Yahoo/Draft")
+                      (mu4e-sent-folder       . "/Yahoo/Sent")
+                      (mu4e-trash-folder      . "/Yahoo/Trash")
+                      (smtpmail-mail-address . "ozgezer@yahoo.com")
+                      (mu4e-compose-signature . (concat "Ahmet Cemal Özgezer\n"))))
+            ,(make-mu4e-context
+              :name "msn"
+              :match-func (lambda (msg)
+                            (when msg
+                              (mu4e-message-contact-field-matches msg :to "ozgezer@msn.com")))
+              :vars '((user-mail-address      . "ozgezer@msn.com")
+                      (user-full-name         . "Ahmet Cemal Özgezer")
+                      (mu4e-drafts-folder     . "/MSN/Drafts")
+                      (mu4e-sent-folder       . "/MSN/Sent")
+                      (mu4e-trash-folder      . "/MSN/Deleted")
+                      (smtpmail-mail-address . "ozgezer@msn.com")
+                      (mu4e-compose-signature . (concat "Ahmet Cemal Özgezer\n")))))))
 
   ;; mpc
   (evil-set-initial-state 'mpc-mode 'emacs)
