@@ -1137,7 +1137,9 @@ confirmation"
               (version< mu4e-mu-version "1.4"))
       (setq mu4e-maildir "~/.mail"
             mu4e-user-mail-address-list nil))
-    (setq mu4e-attachment-dir
+    (setq mu4e-get-mail-command "mbsync -a"
+          mu4e-update-interval nil
+          mu4e-attachment-dir
           (lambda (&rest _)
             (expand-file-name ".attachments" (mu4e-root-maildir))))
     :config
