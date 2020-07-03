@@ -32,7 +32,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   `(
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -85,16 +85,17 @@ This function should only modify configuration layer settings."
           lsp-ui-doc-enable nil)
      lua
      markdown
-     ;; (mu4e :variables
-     ;;       mu4e-enable-async-operations t
-     ;;       mu4e-enable-mode-line t
-     ;;       mu4e-enable-notifications t
-     ;;       mu4e-use-maildirs-extension t)
+     (mu4e :variables
+           mu4e-enable-async-operations t
+           mu4e-enable-mode-line t
+           mu4e-enable-notifications t
+           ;; mu4e-use-maildirs-extension t
+           )
      multiple-cursors
      nginx
      nixos
      org
-     osx
+     ,(when (eq system-type 'darwin) 'osx)
      pass
      pdf
      perl5
@@ -118,7 +119,7 @@ This function should only modify configuration layer settings."
             slack-spacemacs-layout-binding "s")
      (spacemacs-layouts :variables spacemacs-layouts-restrict-spc-tab t)
      spell-checking
-     sql
+     ;; sql
      syntax-checking
      systemd
      (treemacs :variables
@@ -162,7 +163,6 @@ This function should only modify configuration layer settings."
      (i3wm-config-mode :location (recipe :fetcher github :repo "Alexander-Miller/i3wm-Config-Mode"))
      ;; magit-todos
      minimap
-     ;; mu4e-conversation
      posix-manual
      rg
      rmsbolt
@@ -604,10 +604,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (when (file-exists-p custom-file)
     (load custom-file))
 
-  (add-to-list 'load-path "~/.nix-profile/share/emacs/site-lisp/mu4e")
-
-  (when (spacemacs/system-is-mac)
-    (setq mu4e-mu-binary "/usr/local/bin/mu"))
+  ;; (setq comp-deferred-compilation t)
   (setq
    auto-window-vscroll nil
    browse-url-browser-function 'eww-browse-url
@@ -981,7 +978,8 @@ buffer's name.
       :bind (:map dired-mode-map ("s" . hydra-dired-quick-sort/body))
       :hook (dired-initial-position . dired-quick-sort))
 
-    (use-package dired-show-readme :defer t)
+    (use-package dired-show-readme :defer t
+      :hook (dired-mode . dired-show-readme-mode))
 
     (use-package dired-subtree :defer t
       :bind (:map dired-mode-map
@@ -1132,176 +1130,78 @@ confirmation"
     ;; (minimap-mode 1)
     :config (setq minimap-window-location 'right))
 
-  ;; (use-package mu4e-conversation
-  ;;   :after mu4e)
+  (use-package mu4e
+    :config
+    (setq
+     mu4e-attachment-dir "~/Documents/Attachments"
 
-  ;; (with-eval-after-load 'mu4e
-  ;;   (setq mu4e-attachment-dir "~/Documents/Attachments"
-  ;;       mu4e-maildir "~/.mail"
-  ;;       mu4e-get-mail-command "mbsync -q -a"
-  ;;       mu4e-update-interval nil
-  ;;       mu4e-user-mail-address-list '("ahmet.ozgezer@andasis.com"
-  ;;                                     "a_c_o@aof.anadolu.edu.tr"
-  ;;                                     "ozgezer@gmail.com"
-  ;;                                     "ozgezer@mail333.com"
-  ;;                                     "ozgezer@msn.com"
-  ;;                                     "ozgezer@yaho.com")
-  ;;       mu4e-compose-signature-auto-include nil
+     ;; set `mu4e-context-policy` and `mu4e-compose-policy` to tweak when mu4e should
+     ;; guess or ask the correct context, e.g.
 
-  ;;       ;; set `mu4e-context-policy` and `mu4e-compose-policy` to tweak when mu4e should
-  ;;       ;; guess or ask the correct context, e.g.
+     ;; start with the first (default) context;
+     ;; default is to ask-if-none (ask when there's no context yet, and none match)
+     mu4e-context-policy 'pick-first
 
-  ;;       ;; start with the first (default) context;
-  ;;       ;; default is to ask-if-none (ask when there's no context yet, and none match)
-  ;;       mu4e-context-policy 'pick-first
+     ;; compose with the current context is no context matches;
+     ;; default is to ask
+     mu4e-compose-context-policy nil
 
-  ;;       ;; compose with the current context is no context matches;
-  ;;       ;; default is to ask
-  ;;       mu4e-compose-context-policy nil
-
-  ;;       mu4e-view-show-images t
-  ;;       mu4e-view-show-addresses t
-  ;;       mu4e-bookmarks
-  ;;       `(("flag:unread AND NOT flag:trashed" "Unread messages" ?u)
-  ;;         ("date:today..now" "Today's messages" ?t)
-  ;;         ("date:7d..now" "Last 7 days" ?w)
-  ;;         ("mime:image/*" "Messages with images" ?p)
-  ;;         (,(mapconcat 'identity
-  ;;                      (mapcar
-  ;;                       (lambda (maildir)
-  ;;                         (concat "maildir:" (car maildir)))
-  ;;                       mu4e-maildir-shortcuts) " OR ")
-  ;;          "All inboxes" ?i))
-  ;;       mu4e-contexts
-  ;;       `(,(make-mu4e-context
-  ;;           :name "andasis"
-  ;;           :enter-func (lambda () (mu4e-message "Switch to the andasis context"))
-  ;;           ;; leave-func not defined
-  ;;           :match-func (lambda (msg)
-  ;;                         (when msg
-  ;;                           (mu4e-message-contact-field-matches msg :to "ahmet.ozgezer@andasis.com")))
-  ;;           :vars '((user-mail-address      . "ahmet.ozgezer@andasis.com")
-  ;;                   (user-full-name         . "Ahmet Cemal Ozgezer")
-  ;;                   (mu4e-drafts-folder     . "/andasis/drafts")
-  ;;                   (mu4e-sent-folder       . "/andasis/sent")
-  ;;                   (mu4e-trash-folder      . "/andasis/trash")
-  ;;                   (mu4e-maildir-shortcuts . (("/andasis/inbox" . ?i)
-  ;;                                              ("/andasis/sent"  . ?s)
-  ;;                                              ("/andasis/trash" . ?t)))
-  ;;                   (smtpmail-mail-address . "ahmet.ozgezer@andasis.com")
-  ;;                   (mu4e-compose-signature . (concat
-  ;;                                              "Ahmet Cemal Ozgezer\n"
-  ;;                                              "Andasis Elektronik San. ve Tic. A.Ş.\n"
-  ;;                                              "Teknopark İstanbul, No: 1/1C 1206 Kat:2\n"
-  ;;                                              "Pendik İstanbul / Türkiye\n"
-  ;;                                              "Tel: +90 216 510 20 01\n"))))
-  ;;         ,(make-mu4e-context
-  ;;           :name "gmail"
-  ;;           :enter-func (lambda () (mu4e-message "Switch to the gmail context"))
-  ;;           ;; leave-fun not defined
-  ;;           :match-func (lambda (msg)
-  ;;                         (when msg
-  ;;                           (mu4e-message-contact-field-matches msg :to "ozgezer@gmail.com")))
-  ;;           :vars '((user-mail-address      . "ozgezer@gmail.com")
-  ;;                   (user-full-name         . "Ahmet Cemal Ozgezer")
-  ;;                   (mu4e-drafts-folder     . "/gmail/drafts")
-  ;;                   (mu4e-sent-folder       . "/gmail/sent")
-  ;;                   (mu4e-trash-folder      . "/gmail/trash")
-  ;;                   (mu4e-maildir-shortcuts . (("/gmail/inbox" . ?i)
-  ;;                                              ("/gmail/sent"  . ?s)
-  ;;                                              ("/gmail/trash" . ?t)))
-  ;;                   (smtpmail-mail-address . "ozgezer@gmail.com")
-  ;;                   (mu4e-compose-signature . (concat "Ahmet Cemal Ozgezer\n"))))
-  ;;         ,(make-mu4e-context
-  ;;           :name "yahoo"
-  ;;           :enter-func (lambda () (mu4e-message "Switch to the yahoo context"))
-  ;;           ;; leave-fun not defined
-  ;;           :match-func (lambda (msg)
-  ;;                         (when msg
-  ;;                           (mu4e-message-contact-field-matches msg :to "ozgezer@yahoo.com")))
-  ;;           :vars '((user-mail-address      . "ozgezer@yahoo.com")
-  ;;                   (user-full-name         . "Ahmet Cemal Ozgezer")
-  ;;                   (mu4e-drafts-folder     . "/yahoo/drafts")
-  ;;                   (mu4e-sent-folder       . "/yahoo/sent")
-  ;;                   (mu4e-trash-folder      . "/yahoo/trash")
-  ;;                   (mu4e-maildir-shortcuts . (("/yahoo/inbox" . ?i)
-  ;;                                              ("/yahoo/sent"  . ?s)
-  ;;                                              ("/yahoo/trash" . ?t)))
-  ;;                   (smtpmail-mail-address . "ozgezer@yahoo.com")
-  ;;                   (mu4e-compose-signature . (concat "Ahmet Cemal Ozgezer\n"))))
-  ;;         ,(make-mu4e-context
-  ;;           :name "msn"
-  ;;           :enter-func (lambda () (mu4e-message "Switch to the msn context"))
-  ;;           ;; leave-fun not defined
-  ;;           :match-func (lambda (msg)
-  ;;                         (when msg
-  ;;                           (mu4e-message-contact-field-matches msg :to "ozgezer@msn.com")))
-  ;;           :vars '((user-mail-address      . "ozgezer@msn.com")
-  ;;                   (user-full-name         . "Ahmet Cemal Ozgezer")
-  ;;                   (mu4e-drafts-folder     . "/msn/drafts")
-  ;;                   (mu4e-sent-folder       . "/msn/sent")
-  ;;                   (mu4e-trash-folder      . "/msn/trash")
-  ;;                   (mu4e-maildir-shortcuts . (("/msn/inbox" . ?i)
-  ;;                                              ("/msn/sent"  . ?s)
-  ;;                                              ("/msn/trash" . ?t)))
-  ;;                   (smtpmail-mail-address . "ozgezer@msn.com")
-  ;;                   (mu4e-compose-signature . (concat "Ahmet Cemal Ozgezer\n"))))
-  ;;         ,(make-mu4e-context
-  ;;           :name "aof"
-  ;;           :enter-func (lambda () (mu4e-message "Switch to the aof context"))
-  ;;           ;; leave-fun not defined
-  ;;           :match-func (lambda (msg)
-  ;;                         (when msg
-  ;;                           (mu4e-message-contact-field-matches msg :to "a_c_o@aof.anadolu.edu.tr")))
-  ;;           :vars '((user-mail-address      . "a_c_o@aof.anadolu.edu.tr")
-  ;;                   (user-full-name         . "Ahmet Cemal Ozgezer")
-  ;;                   (mu4e-drafts-folder     . "/aof/drafts")
-  ;;                   (mu4e-sent-folder       . "/aof/sent")
-  ;;                   (mu4e-trash-folder      . "/aof/trash")
-  ;;                   (mu4e-maildir-shortcuts . (("/aof/inbox" . ?i)
-  ;;                                              ("/aof/sent"  . ?s)
-  ;;                                              ("/aof/trash" . ?t)))
-  ;;                   (smtpmail-mail-address . "a_c_o@aof.anadolu.edu.tr")
-  ;;                   (mu4e-compose-signature . (concat "Ahmet Cemal Ozgezer\n"))))
-  ;;         ,(make-mu4e-context
-  ;;           :name "qip"
-  ;;           :enter-func (lambda () (mu4e-message "Switch to the qip context"))
-  ;;           ;; leave-fun not defined
-  ;;           :match-func (lambda (msg)
-  ;;                         (when msg
-  ;;                           (mu4e-message-contact-field-matches msg :to "ozgezer@mail333.com")))
-  ;;           :vars '((user-mail-address      . "ozgezer@mail333.com")
-  ;;                   (user-full-name         . "Ahmet Cemal Ozgezer")
-  ;;                   (mu4e-drafts-folder     . "/qip/drafts")
-  ;;                   (mu4e-sent-folder       . "/qip/sent")
-  ;;                   (mu4e-trash-folder      . "/qip/trash")
-  ;;                   (mu4e-maildir-shortcuts . (("/qip/inbox" . ?i)
-  ;;                                              ("/qip/sent"  . ?s)
-  ;;                                              ("/qip/trash" . ?t)))
-  ;;                   (smtpmail-mail-address . "ozgezer@mail333.com")
-  ;;                   (mu4e-compose-signature . (concat "Ahmet Cemal Ozgezer\n"))))))
-  ;;   ;; (require 'mu4e-conversation)
-  ;;   ;; (global-mu4e-conversation-mode)
-  ;;   )
-
-  ;; (with-eval-after-load 'mu4e-alert
-  ;;   ;; Enable Desktop notifications
-  ;;   (mu4e-alert-set-default-style (cond
-  ;;                                  ((spacemacs/system-is-mac) 'notifier) ; For Mac OSX (through the terminal notifier app)
-  ;;                                  ;; ((spacemacs/system-is-mac) 'growl) ; Alternative for Mac OSX
-  ;;                                  ;; ((spacemacs/system-is-linux) 'notifications) ; For linux
-  ;;                                  ((spacemacs/system-is-linux) 'libnotify)   ; Alternative for linux
-  ;;                                  (t 'ignore))))
-
-  ;; ;; reading mailing lists
-  ;; (setq gnus-select-method '(nnml "")   ; this depends on how you want
-  ;;                                       ; to get your mail
-  ;;       gnus-secondary-select-methods '((nntp "news.gmane.org")
-  ;;                                       ; (nntp "news.eternal-september.org")
-  ;;                                       )
-  ;;       message-directory  "~/.emacs.d/mail/"
-  ;;       gnus-directory     "~/.emacs.d/news/"
-  ;;       nnfolder-directory "~/.emacs.d/mail/archive")
+     mu4e-view-show-images t
+     mu4e-view-show-addresses t
+     mu4e-contexts
+     `(,(make-mu4e-context
+         :name "andasis"
+         :match-func (lambda (msg)
+                       (when msg
+                         (mu4e-message-contact-field-matches msg :to "ahmet.ozgezer@andasis.com")))
+         :vars '((user-mail-address      . "ahmet.ozgezer@andasis.com")
+                 (user-full-name         . "Ahmet Cemal Özgezer")
+                 (mu4e-drafts-folder     . "/Andasis/Drafts")
+                 (mu4e-sent-folder       . "/Andasis/Sent Items")
+                 (mu4e-trash-folder      . "/Andasis/Trash")
+                 (smtpmail-mail-address . "ahmet.ozgezer@andasis.com")
+                 (mu4e-compose-signature . (concat
+                                            "Ahmet Cemal Özgezer\n"
+                                            "Andasis Elektronik San. ve Tic. A.Ş.\n"
+                                            "Teknopark İstanbul, No: 1/1C 1206 Kat:2\n"
+                                            "Pendik İstanbul / Türkiye\n"
+                                            "Tel: +90 216 510 20 01\n"))))
+       ,(make-mu4e-context
+         :name "gmail"
+         :match-func (lambda (msg)
+                       (when msg
+                         (mu4e-message-contact-field-matches msg :to "ozgezer@gmail.com")))
+         :vars '((user-mail-address      . "ozgezer@gmail.com")
+                 (user-full-name         . "Ahmet Cemal Özgezer")
+                 (mu4e-drafts-folder     . "/GMail/Drafts")
+                 (mu4e-sent-folder       . "/GMail/Sent")
+                 (mu4e-trash-folder      . "/GMail/Trash")
+                 (smtpmail-mail-address . "ozgezer@gmail.com")
+                 (mu4e-compose-signature . (concat "Ahmet Cemal Özgezer\n"))))
+       ,(make-mu4e-context
+         :name "yahoo"
+         :match-func (lambda (msg)
+                       (when msg
+                         (mu4e-message-contact-field-matches msg :to "ozgezer@yahoo.com")))
+         :vars '((user-mail-address      . "ozgezer@yahoo.com")
+                 (user-full-name         . "Ahmet Cemal Özgezer")
+                 (mu4e-drafts-folder     . "/Yahoo/Draft")
+                 (mu4e-sent-folder       . "/Yahoo/Sent")
+                 (mu4e-trash-folder      . "/Yahoo/Trash")
+                 (smtpmail-mail-address . "ozgezer@yahoo.com")
+                 (mu4e-compose-signature . (concat "Ahmet Cemal Özgezer\n"))))
+       ,(make-mu4e-context
+         :name "msn"
+         :match-func (lambda (msg)
+                       (when msg
+                         (mu4e-message-contact-field-matches msg :to "ozgezer@msn.com")))
+         :vars '((user-mail-address      . "ozgezer@msn.com")
+                 (user-full-name         . "Ahmet Cemal Özgezer")
+                 (mu4e-drafts-folder     . "/MSN/Drafts")
+                 (mu4e-sent-folder       . "/MSN/Sent")
+                 (mu4e-trash-folder      . "/MSN/Deleted")
+                 (smtpmail-mail-address . "ozgezer@msn.com")
+                 (mu4e-compose-signature . (concat "Ahmet Cemal Özgezer\n")))))))
 
   ;; mpc
   (evil-set-initial-state 'mpc-mode 'emacs)

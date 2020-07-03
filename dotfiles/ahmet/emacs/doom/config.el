@@ -60,6 +60,38 @@
 (setq-default
  delete-by-moving-to-trash t)
 
+; Each path is relative to `+mu4e-mu4e-mail-path', which is ~/.mail by default
+(after! mu4e
+  (set-email-account! "yahoo"
+                      '((mu4e-sent-folder       . "/Yahoo/Sent")
+                        (mu4e-drafts-folder     . "/Yahoo/Draft")
+                        (mu4e-trash-folder      . "/Yahoo/Trash")
+                        (mu4e-refile-folder     . "/Yahoo/Archive")
+                        (smtpmail-smtp-user     . "ozgezer@yahoo.com")
+                        (mu4e-compose-signature . "---\nAhmet Cemal Özgezer")))
+  (set-email-account! "gmail"
+                      '((mu4e-sent-folder       . "/Gmail/[Gmail]/Sent Mail")
+                        (mu4e-drafts-folder     . "/Gmail/[Gmail]/Drafts")
+                        (mu4e-trash-folder      . "/Gmail/[Gmail]/Trash")
+                        (mu4e-refile-folder     . "/Gmail/[Gmail]/Archive")
+                        (smtpmail-smtp-user     . "ozgezer@gmail.com")
+                        (mu4e-compose-signature . "---\nAhmet Cemal Özgezer")))
+  (set-email-account! "msn"
+                      '((mu4e-sent-folder       . "/MSN/Sent")
+                        (mu4e-drafts-folder     . "/MSN/Drafts")
+                        (mu4e-trash-folder      . "/MSN/Deleted")
+                        (mu4e-refile-folder     . "/MSN/Archive")
+                        (smtpmail-smtp-user     . "ozgezer@msn.com")
+                        (mu4e-compose-signature . "---\nAhmet Cemal Özgezer")))
+  (set-email-account! "andasis"
+                      '((mu4e-sent-folder       . "/Andasis/Sent Items")
+                        (mu4e-drafts-folder     . "/Andasis/Drafts")
+                        (mu4e-trash-folder      . "/Andasis/Trash")
+                        (mu4e-refile-folder     . "/Andasis/Archives")
+                        (smtpmail-smtp-user     . "ahmet.ozgezer@andasis.com")
+                        (mu4e-compose-signature . "---\nAhmet Cemal Özgezer"))
+                      t))
+
 (setq ccls-initialization-options
       `(:cache (:directory ,(file-truename "~/.cache/ccls"))))
 
@@ -76,6 +108,13 @@
 
 ;; (setq spacemacs-path doom-modules-dir)
 ;; (load! (concat spacemacs-path "spacemacs/+spacemacs"))
+
+;; (setq comp-deferred-compilation t)
+
+(custom-set-faces!
+  '(aw-leading-char-face
+    :foreground "white" :background "red"
+    :weight bold :height 2.5 :box (:line-width 10 :color "red")))
 
 (use-package! avy
   :init
@@ -193,6 +232,10 @@
 (use-package! trashed
   :config
   (add-to-list 'evil-emacs-state-modes 'trashed-mode))
+
+(use-package! vterm
+  :config
+  (setq vterm-max-scrollback 100000))
 
 ;; text mode directory tree
 (use-package! ztree
