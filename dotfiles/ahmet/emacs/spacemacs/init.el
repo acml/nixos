@@ -1296,7 +1296,8 @@ confirmation"
 
   (use-package rainbow-mode :defer t
     :hook
-    (prog-mode . rainbow-mode))
+    ((prog-mode . rainbow-mode)
+     (org-mode . rainbow-mode)))
 
   (use-package rg :defer t
     :init
@@ -1346,6 +1347,10 @@ confirmation"
   (use-package undo-tree :defer t
     :config
     (setq undo-tree-enable-undo-in-region t))
+
+  (use-package vterm :defer t
+    :config
+    (setq vterm-max-scrollback 100000))
 
   (use-package which-func :defer t
     :commands which-function-mode

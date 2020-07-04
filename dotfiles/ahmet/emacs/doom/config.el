@@ -224,8 +224,9 @@
   (load-theme 'modus-operandi t))
 
 (use-package! rainbow-mode
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-mode))
+  :hook
+  ((prog-mode . rainbow-mode)
+   (org-mode . rainbow-mode)))
 
 ;; (use-package! shrface)
 
