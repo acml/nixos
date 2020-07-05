@@ -163,6 +163,7 @@ This function should only modify configuration layer settings."
      (i3wm-config-mode :location (recipe :fetcher github :repo "Alexander-Miller/i3wm-Config-Mode"))
      ;; magit-todos
      minimap
+     (mixed-pitch :location (recipe :fetcher gitlab :repo "jabranham/mixed-pitch"))
      posix-manual
      rg
      rmsbolt
@@ -320,10 +321,7 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(modus-operandi
-                         modus-vivendi
-                         doom-one
-                         spacemacs-dark
-                         spacemacs-light)
+                         modus-vivendi)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -497,7 +495,12 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers '(:relative nil
+                               :visual nil
+                               :disabled-for-modes dired-mode
+                                                   doc-view-mode
+                                                   pdf-view-mode
+                               :size-limit-kb 10000)
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -629,6 +632,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq modus-operandi-theme-slanted-constructs t
         modus-operandi-theme-bold-constructs t
         ;; modus-operandi-theme-visible-fringes t
+        ;; modus-operandi-theme-faint-syntax t
         modus-operandi-theme-3d-modeline t
         modus-operandi-theme-distinct-org-blocks t
         modus-operandi-theme-intense-standard-completions t
@@ -1129,6 +1133,14 @@ confirmation"
     (evil-leader/set-key (kbd "om") 'minimap-mode)
     ;; (minimap-mode 1)
     :config (setq minimap-window-location 'right))
+
+  (use-package mixed-pitch :defer t
+    :config
+    (set-face-attribute 'variable-pitch nil :family "Ubuntu Nerd Font")
+    (set-face-attribute 'fixed-pitch nil :family "Iosevka")
+    (set-face-attribute 'default nil :family "Ubuntu Mono")
+    :hook
+    (text-mode . mixed-pitch-mode))
 
   (use-package mu4e :defer t
     :init

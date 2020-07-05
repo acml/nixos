@@ -207,6 +207,7 @@
   (setq modus-operandi-theme-slanted-constructs t
         modus-operandi-theme-bold-constructs t
         ;; modus-operandi-theme-visible-fringes t
+        ;; modus-operandi-theme-faint-syntax t
         modus-operandi-theme-3d-modeline t
         modus-operandi-theme-distinct-org-blocks t
         modus-operandi-theme-intense-standard-completions t
