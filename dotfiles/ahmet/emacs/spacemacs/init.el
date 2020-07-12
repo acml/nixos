@@ -158,7 +158,7 @@ This function should only modify configuration layer settings."
      docker-tramp
      dts-mode
      hackernews
-     (helm-treemacs-icons :location (recipe :fetcher github :repo "yyoncho/helm-treemacs-icons"))
+     (helm-icons :location (recipe :fetcher github :repo "yyoncho/helm-icons"))
      ;; highlight-indent-guides
      (i3wm-config-mode :location (recipe :fetcher github :repo "Alexander-Miller/i3wm-Config-Mode"))
      ;; magit-todos
@@ -668,7 +668,7 @@ before packages are loaded."
 
   (use-package treemacs-icons)
   (treemacs--setup-icon-background-colors)
-  (helm-treemacs-icons-enable)
+  (helm-icons-enable)
 
   (setq focus-follows-mouse t
         gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"
