@@ -926,6 +926,19 @@ buffer's name.
 
           wdired-allow-to-change-permissions t)
 
+    (use-package dired-x :defer t
+      :hook (dired-mode . dired-omit-mode)
+      :config
+      (setq dired-omit-verbose nil
+            dired-omit-files
+            (concat dired-omit-files
+                    "\\|^.DS_Store\\'"
+                    "\\|^.project\\(?:ile\\)?\\'"
+                    "\\|^.\\(svn\\|git\\)\\'"
+                    "\\|^.ccls-cache\\'"
+                    "\\|\\(?:\\.js\\)?\\.meta\\'"
+                    "\\|\\.\\(?:elc\\|o\\|pyo\\|swp\\|class\\)\\'")))
+
     (use-package dired-async :defer t
       :config
       (dired-async-mode 1))
