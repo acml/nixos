@@ -662,10 +662,6 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  ;; Hook up dired-x global bindings without loading it up-front
-  (define-key ctl-x-map "\C-j" 'dired-jump)
-  (define-key ctl-x-4-map "\C-j" 'dired-jump-other-window)
-
   (use-package treemacs-icons)
   (treemacs--setup-icon-background-colors)
   (helm-icons-enable)
@@ -927,6 +923,10 @@ buffer's name.
           wdired-allow-to-change-permissions t)
 
     (use-package dired-x :defer t
+      :bind (:map ctl-x-map
+             ("C-j" . dired-jump)
+             :map ctl-x-4-map
+             ("C-j" . dired-jump-other-window))
       :hook (dired-mode . dired-omit-mode)
       :config
       (setq dired-omit-verbose nil

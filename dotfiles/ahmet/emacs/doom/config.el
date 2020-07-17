@@ -120,6 +120,9 @@
   :init
   (setq avy-all-windows t))
 
+(use-package! beginend :defer t
+  :init (beginend-global-mode))
+
 (use-package! daemons
   :config
   ;; (setq daemons-always-sudo t)

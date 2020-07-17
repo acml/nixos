@@ -60,6 +60,7 @@
 ;; (package! move-text) ;; for spacemacs-editing
 ;; (package! string-inflection) ;; for spacemacs-editing
 
+(package! beginend)
 (package! daemons)
 
 (package! dired-show-readme :recipe (:host gitlab :repo "kisaragi-hiu/dired-show-readme"))
