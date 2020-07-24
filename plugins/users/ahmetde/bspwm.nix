@@ -425,10 +425,10 @@ in {
         };
 
         shortcuts = {
-          close = "mod1+grave"; # mod1 is alt
-          close_all = "mod4+grave"; # mod4 is super
-          history = "ctrl+grave"; # ` is grave
-          context = "ctrl+mod4+period"; # . is period
+          close = "mod4+grave"; # mod1 is alt
+          close_all = "mod4+shift+grave"; # mod4 is super
+          history = "mod1+mod4+grave"; # ` is grave
+          context = "ctrl+mod4+grave"; # . is period
         };
 
         urgency_low = { # Dark
