@@ -79,4 +79,5 @@
 (package! turkish)
 
 (package! trashed)
+(package! windswap)
 (package! ztree)

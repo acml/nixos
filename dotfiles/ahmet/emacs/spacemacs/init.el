@@ -109,8 +109,6 @@ This function should only modify configuration layer settings."
      search-engine
      ;; semantic
      (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom
             shell-default-shell 'vterm
             shell-enable-smart-eshell t)
      shell-scripts
@@ -632,13 +630,12 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (setq modus-operandi-theme-slanted-constructs t
         modus-operandi-theme-bold-constructs t
         ;; modus-operandi-theme-visible-fringes t
-        ;; modus-operandi-theme-faint-syntax t
         modus-operandi-theme-3d-modeline t
-        modus-operandi-theme-distinct-org-blocks t
-        modus-operandi-theme-intense-standard-completions t
-        modus-operandi-theme-proportional-fonts t
-        modus-operandi-theme-rainbow-headings t
         modus-operandi-theme-subtle-diffs t
+        modus-operandi-theme-intense-standard-completions t
+        modus-operandi-theme-org-blocks 'rainbow
+        modus-operandi-theme-variable-pitch-headings t
+        modus-operandi-theme-rainbow-headings t
         ;; modus-operandi-theme-section-headings t
         modus-operandi-theme-scale-headings t
         modus-operandi-theme-scale-1 1.05
@@ -1347,6 +1344,10 @@ confirmation"
     :config
     (evil-set-initial-state 'sx-question-list-mode 'emacs)
     (evil-set-initial-state 'sx-question-mode 'emacs))
+
+  (use-package terminal-here :defer t
+    :config
+    (setq terminal-here-terminal-command '("alacritty")))
 
   (use-package treemacs :defer t
     :config

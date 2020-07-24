@@ -60,6 +60,9 @@
 (setq-default
  delete-by-moving-to-trash t)
 
+(windmove-default-keybindings 'control)
+(windswap-default-keybindings 'control 'shift)
+
 ; Each path is relative to `+mu4e-mu4e-mail-path', which is ~/.mail by default
 (after! mu4e
   (set-email-account! "yahoo"
@@ -210,13 +213,12 @@
   (setq modus-operandi-theme-slanted-constructs t
         modus-operandi-theme-bold-constructs t
         ;; modus-operandi-theme-visible-fringes t
-        ;; modus-operandi-theme-faint-syntax t
         modus-operandi-theme-3d-modeline t
-        modus-operandi-theme-distinct-org-blocks t
-        modus-operandi-theme-intense-standard-completions t
-        modus-operandi-theme-proportional-fonts t
-        modus-operandi-theme-rainbow-headings t
         modus-operandi-theme-subtle-diffs t
+        modus-operandi-theme-intense-standard-completions t
+        modus-operandi-theme-org-blocks 'rainbow
+        modus-operandi-theme-variable-pitch-headings t
+        modus-operandi-theme-rainbow-headings t
         ;; modus-operandi-theme-section-headings t
         modus-operandi-theme-scale-headings t
         modus-operandi-theme-scale-1 1.05
