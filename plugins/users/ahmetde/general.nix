@@ -174,11 +174,16 @@ in {
         };
 
         # enhances zsh (C-r: history search C-t: file search M-c: change directory)
-        fzf = {
+        skim = {
           enable = true;
-          changeDirWidgetCommand = "${pkgs.fd}/bin/fd --type d";
-          # defaultCommand = "rg --files --no-ignore --hidden --follow --glob \"!.git\"";
           defaultCommand = "${pkgs.fd}/bin/fd --type f";
+          # defaultOptions = [ "--height 40%" "--prompt ⟫" ];
+          defaultOptions = [ "--height 100%" "--prompt ⟫" ];
+          fileWidgetCommand = "${pkgs.fd}/bin/fd --type f";
+          fileWidgetOptions = [ "--preview '${pkgs.bat}/bin/bat --style=numbers --color=always --line-range :500 {}'" ];
+          changeDirWidgetCommand = "${pkgs.fd}/bin/fd --type d";
+          changeDirWidgetOptions = [ "--preview '${pkgs.tree}/bin/tree -C {} | head -200'" ];
+          # historyWidgetOptions = [ "--tac" "--exact" ];
         };
 
         direnv.enable = true;
