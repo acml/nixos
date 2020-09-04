@@ -27,6 +27,8 @@ in mkIf cfg.enable (mkMerge [
 
     # Docker
     virtualisation.docker.enable = true;
+    virtualisation.docker.enableNvidia = true;
+
     # Libvirtd
     virtualisation.libvirtd.enable = true;
     # FIXME: Should we let users add them to group or other way around.

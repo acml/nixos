@@ -68,6 +68,7 @@ in {
         ENV{ID_VENDOR}=="Ultimate_Gadget_Laboratories",\
         TAG+="systemd",\
         ENV{SYSTEMD_USER_WANTS}+="setup-keyboard.service"
+        KERNEL=="ttyUSB[0-9]*",MODE="0666"
   '';
 
   icebox = {
