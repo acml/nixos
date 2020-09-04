@@ -119,17 +119,18 @@ in {
       # ];
 
       extraOptions = ''
-      shadow-radius = 7;
-      # frame-opacity = 0.7;
-      blur-method = "gaussian";
-      blur-strength = 5;
+        xrender-sync-fence = true;
+        shadow-radius = 7;
+        # frame-opacity = 0.7;
+        blur-method = "gaussian";
+        blur-strength = 5;
 
-      detect-client-opacity = true;
-      detect-rounded-corners = true;
-      detect-transient = true;
-      mark-wmwin-focused = true;
-      mark-ovredir-focused = true;
-    '';
+        detect-client-opacity = true;
+        detect-rounded-corners = true;
+        detect-transient = true;
+        mark-wmwin-focused = true;
+        mark-ovredir-focused = true;
+      '';
     };
 
     # services.sxhkd = {

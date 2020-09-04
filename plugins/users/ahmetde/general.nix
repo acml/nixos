@@ -167,9 +167,9 @@ in {
                 family = "Iosevka Term";
                 style = "Bold Italic";
               };
-              size = 8.0;
+              size = 12.0;
             };
-            env = { WINIT_HIDPI_FACTOR = toString system.scale; };
+            env = { WINIT_X11_SCALE_FACTOR = toString system.scale; };
           };
         };
 
@@ -225,6 +225,50 @@ in {
           };
         };
 
+      };
+
+      services.grobi = {
+        enable = true;
+        executeAfter = [
+          "${pkgs.systemd}/bin/systemctl --user restart random-background"
+          # "${pkgs.systemd}/bin/systemctl --user restart setup-keyboard"
+          "${pkgs.bspwm}/bin/bspc wm -r"
+        ];
+        rules = [
+          {
+            name = "Home";
+            outputs_connected = [
+              "eDP-1-1"
+              "HDMI-0-SAM-1316-1279341106-SyncMaster-H1AK500000" ];
+            configure_row = [ "eDP-1-1" "HDMI-0" ];
+            primary = "eDP-1-1";
+            atomic = true;
+          }
+          {
+            name = "Office";
+            outputs_connected = [
+              "eDP-1-1"
+              "HDMI-0-ACR-1406-2233467840-SA230-T91EE0012410" ];
+            configure_row = [ "eDP-1-1" "HDMI-0" ];
+            primary = "eDP-1-1";
+            atomic = true;
+          }
+          {
+            name = "Office-2";
+            outputs_connected = [
+              "eDP-1-1"
+              "HDMI-0-ACR-1406-2435846283-SA230-T91EE0012410" ];
+            configure_row = [ "eDP-1-1" "HDMI-0" ];
+            primary = "eDP-1-1";
+            atomic = true;
+          }
+          {
+            name = "Fallback";
+            configure_single = "eDP-1-1";
+            primary = "eDP-1-1";
+            atomic = true;
+          }
+        ];
       };
 
       services.lorri.enable = true;

@@ -24,8 +24,29 @@ in {
     mkIf cfg.enable (mkMerge [
       ({
         # Activate acpi_call module for TLP ThinkPad features
-        boot.extraModulePackages = with config.boot.kernelPackages;
-          [ acpi_call ];
+        boot.extraModulePackages = with config.boot.kernelPackages; [
+          acpi_call
+          nvidia_x11
+        ];
+
+        boot.blacklistedKernelModules = ["nouveau" "bbswitch"];
+
+        ##### disable intel, run nvidia only and as default
+        hardware.opengl.enable = true;
+        hardware.opengl.driSupport32Bit = true;
+
+        services.xserver.videoDrivers = [ "nvidia" ];
+        # hardware.nvidia.modesetting.enable = true;
+        hardware.nvidia.prime = {
+          sync.enable = true;
+          sync.allowExternalGpu = true;
+
+          # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
+          nvidiaBusId = "PCI:1:0:0";
+
+          # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
+          intelBusId = "PCI:0:2:0";
+        };
 
         # Set hardware related attributes
         icebox.static.lib.configs = {
