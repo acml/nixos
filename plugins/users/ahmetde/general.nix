@@ -234,11 +234,7 @@ in {
 
       services.grobi = {
         enable = true;
-        executeAfter = [
-          "${pkgs.systemd}/bin/systemctl --user restart random-background"
-          # "${pkgs.systemd}/bin/systemctl --user restart setup-keyboard"
-          "${pkgs.bspwm}/bin/bspc wm -r"
-        ];
+        executeAfter = [ "${pkgs.bspwm}/bin/bspc wm -r" ];
         rules = [
           {
             name = "Home";
