@@ -25,7 +25,11 @@ in {
   systemd.user.services."setup-keyboard" = {
     enable = true;
     description = "Load my keyboard modifications";
-    wantedBy = [ "hm-graphical-session.target" ];
+    # wantedBy = [ "hm-graphical-session.target" ];
+    wantedBy = [ "graphical-session.target" ];
+    after = [ "graphical-session-pre.target" ];
+    partOf = [ "graphical-session.target" ];
+
     serviceConfig = {
       Type = "forking";
       ExecStart = "${pkgs.bash}/bin/bash ${pkgs.writeScript "setup-keyboard.sh" ''
@@ -44,14 +48,13 @@ in {
         # Capslock to control
         ${pkgs.xcape}/bin/xcape -e 'Control_L=Escape'
 
-        # Make space Control L whenn pressed.
+        # Make space Control L when pressed.
         spare_modifier="Hyper_L"
         ${pkgs.xorg.xmodmap}/bin/xmodmap -e "keycode 65 = $spare_modifier"
         ${pkgs.xorg.xmodmap}/bin/xmodmap -e "remove mod4 = $spare_modifier"
         ${pkgs.xorg.xmodmap}/bin/xmodmap -e "add Control = $spare_modifier"
 
-        # Map space to an unused keycode (to keep it around for xcape to
-        # use).
+        # Map space to an unused keycode (to keep it around for xcape to use).
         ${pkgs.xorg.xmodmap}/bin/xmodmap -e "keycode any = space"
 
         # Finally use xcape to cause the space bar to generate a space when tapped.
