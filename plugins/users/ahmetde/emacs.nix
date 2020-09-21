@@ -3,7 +3,7 @@
 let
   inherit (config.icebox.static.lib.configs) devices system;
   iceLib = config.icebox.static.lib;
-  myEmacs = (pkgs.emacsGcc.override {
+  myEmacs = (pkgs.emacsUnstable.override {
     inherit (pkgs) imagemagick;
     withXwidgets = true;
   }).overrideAttrs (old: rec {
@@ -16,6 +16,7 @@ in {
     programs.emacs = {
       enable = true;
       package = myEmacs;
+      # package = pkgs.emacsGccPgtk;
       extraPackages = (epkgs:
         (with epkgs; [
           # exwm
