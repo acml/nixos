@@ -14,10 +14,10 @@ in {
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Add swap file
-    swapDevices = [{
-      device = "/var/swapFile";
-      size = devices.ramSize;
-    }];
+    #swapDevices = [{
+    #  device = "/var/swapFile";
+    #  size = devices.ramSize;
+    #}];
 
     # Support NTFS
     boot.supportedFilesystems = [ "ntfs" ];
