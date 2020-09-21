@@ -118,7 +118,9 @@ in {
       #   "75:class_g ?= 'alacritty' && !focused"
       # ];
 
+      # adding 'vsync = true;' was the only working option for NixOS 20.03. 20.09 does not need this.
       extraOptions = ''
+        vsync = true;
         xrender-sync-fence = true;
         shadow-radius = 7;
         # frame-opacity = 0.7;
