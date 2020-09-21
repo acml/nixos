@@ -26,21 +26,29 @@ in mkIf cfg.enable {
   ];
 
   # Fonts
+  nixpkgs.overlays = [ (import (builtins.fetchTarball https://github.com/lightdiscord/nix-nerd-fonts-overlay/archive/master.tar.gz)) ];
   fonts = {
     enableFontDir = true;
     enableGhostscriptFonts = true;
     fonts = with pkgs; [
-      dejavu_fonts
-      fira
-      fira-code
-      fira-code-symbols
+      # dejavu_fonts
+      # fira
+      # fira-code
+      # fira-code-symbols
+      # nerdfonts
+      # noto-fonts
+      # noto-fonts-emoji
+      # ubuntu_font_family
       font-awesome-ttf
-      nerdfonts
-      noto-fonts
-      noto-fonts-emoji
+      nerd-fonts.dejavusansmono
+      nerd-fonts.firacode
+      nerd-fonts.firamono
+      nerd-fonts.inconsolata
+      nerd-fonts.iosevka
+      nerd-fonts.noto
+      nerd-fonts.ubuntu
       siji
       symbola
-      ubuntu_font_family
     ];
     fontconfig = {
       enable = true;
