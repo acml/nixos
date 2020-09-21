@@ -216,7 +216,7 @@ in {
 
         "module/fs_root" = {
           type = "internal/fs";
-          format-mounted = " <ramp-capacity>";
+          format-mounted = " <ramp-capacity>";
           interval = 30;
           mount-0 = "/";
           ramp-capacity-7 = "▁";
@@ -231,8 +231,8 @@ in {
 
         "module/fs_home" = {
           inherits = "module/fs_root";
-          format-mounted = " <ramp-capacity>";
-          mount-0 = "/home";
+          format-mounted = " <ramp-capacity>";
+          mount-0 = "/mnt/projects";
         };
 
         "module/music" = {
