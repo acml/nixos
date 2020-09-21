@@ -520,6 +520,7 @@ in {
           split_ratio = 0.5;
           borderless_monocle = true;
           gapless_monocle = true;
+          single_monocle = true;
 
           focus_follows_pointer = true;
           pointer_follows_monitor = true;
