@@ -4,50 +4,32 @@ let
   inherit (config.icebox.static.lib.configs) devices system;
   cfg = config.icebox.static.system.x-os;
 in with lib;
-mkIf cfg.enable (mkMerge [
-  ({
-    boot.cleanTmpDir = true;
+mkIf cfg.enable (mkMerge [({
+  boot.cleanTmpDir = true;
 
-    # Enable plymouth for better experience of booting
-    boot.plymouth.enable = true;
+  # Enable plymouth for better experience of booting
+  boot.plymouth.enable = true;
 
-    # Use Keyfile to unlock the root partition to avoid keying in twice.
-    # Allow fstrim to work on it.
-    boot.initrd = {
-      secrets = { "/keyfile.bin" = (system.dirs.secrets + /keyfile.bin); };
-      luks.devices."cryptroot" = {
-        keyFile = "/keyfile.bin";
-        allowDiscards = true;
-        fallbackToPassword = true;
-      };
-      luks.devices."crypthome" = {
-        keyFile = "/keyfile.bin";
-        allowDiscards = true;
-        fallbackToPassword = true;
-      };
+  # Use simple bootloader; I prefer the on-demand BIOs boot menu
+  boot.loader = {
+    timeout = 1;
+    efi.canTouchEfiVariables = true;
+    systemd-boot = {
+      enable = true;
+      # Fix a security hole in place for backwards compatibility. See desc in
+      # nixpkgs/nixos/modules/system/boot/loader/systemd-boot/systemd-boot.nix
+      editor = false;
+      # Limit number of generations to display in boot menu
+      configurationLimit = 10;
     };
+  };
+})
 
-    # Use GRUB with encrypted /boot under EFI env.
-    boot.loader = {
-      efi = {
-        efiSysMountPoint = "/boot/efi";
-        canTouchEfiVariables = true;
-      };
-      grub = {
-        enable = true;
-        version = 2;
-        device = "nodev";
-        efiSupport = true;
-        enableCryptodisk = true;
-      };
-    };
-  })
-
-  # Resume kernel parameter
-  # If there is no swapResumeOffset defined, then we simply skip it.
-  (mkIf (devices.swapResumeOffset != null) {
-    boot.resumeDevice = "/dev/mapper/cryptroot";
-    boot.kernelParams =
-      [ "resume_offset=${toString devices.swapResumeOffset}" ];
-  })
-])
+# Resume kernel parameter
+# If there is no swapResumeOffset defined, then we simply skip it.
+# (mkIf (devices.swapResumeOffset != null) {
+#   boot.resumeDevice = "/dev/mapper/cryptroot";
+#   boot.kernelParams =
+#     [ "resume_offset=${toString devices.swapResumeOffset}" ];
+# })
+  ])
