@@ -277,7 +277,7 @@ in {
       };
 
       services.lorri.enable = true;
-      services.owncloud-client.enable = true;
+      # services.owncloud-client.enable = true;
 
       # Handwritten configs
       home.file = {
