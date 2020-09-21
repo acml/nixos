@@ -4,7 +4,7 @@ let
   moz_overlay = import (builtins.fetchTarball
     "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz");
   home-manager = builtins.fetchTarball
-    "https://github.com/rycee/home-manager/archive/master.tar.gz";
+    "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz";
   icebox = builtins.fetchTarball
     "https://github.com/LEXUGE/icebox/archive/master.tar.gz";
 in {
