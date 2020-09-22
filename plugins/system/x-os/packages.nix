@@ -43,6 +43,7 @@ in mkIf cfg.enable {
       nerd-fonts.dejavusansmono
       nerd-fonts.firacode
       nerd-fonts.firamono
+      nerd-fonts.hermit
       nerd-fonts.inconsolata
       nerd-fonts.iosevka
       nerd-fonts.noto
