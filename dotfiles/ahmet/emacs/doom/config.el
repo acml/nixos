@@ -264,6 +264,25 @@
   :config
   (add-to-list 'evil-emacs-state-modes 'trashed-mode))
 
+;; A tree layout file explorer
+(use-package! treemacs
+    :config
+    (setq treemacs-collapse-dirs           (if treemacs-python-executable 3 0)
+          treemacs-sorting                 'alphabetic-asc
+          treemacs-follow-after-init       t
+          treemacs-is-never-other-window   t
+          treemacs-silent-filewatch        t
+          treemacs-silent-refresh          t
+          treemacs-width                   30)
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null (executable-find "python3"))))
+      (`(t . t)
+       (treemacs-git-mode 'deferred))
+      (`(t . _)
+       (treemacs-git-mode 'simple))))
+
 (use-package! vterm
   :config
   (setq vterm-max-scrollback 100000))
