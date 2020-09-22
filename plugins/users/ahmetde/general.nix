@@ -282,7 +282,7 @@ in {
 
       home.keyboard = {
         layout = "us,tr";
-        options = [ "ctrl:nocaps" "grp:rctrl_toggle" ];
+        options = [ "ctrl:nocaps" "grp:shifts_toggle" ];
         variant = "colemak,";
       };
 
