@@ -19,8 +19,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Iosevka" :size 15)
-      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 15))
+(setq doom-font (font-spec :family "Iosevka" :size 13)
+      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 13))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -56,6 +56,32 @@
 (when (window-system)
   (add-to-list 'default-frame-alist '(alpha . (100)))
   (set-frame-parameter (selected-frame) 'alpha '(100)))
+
+(set-popup-rules! '(("^\\*Customize.*" :slot 2 :side right :modeline nil :select t :quit t)
+                    (" \\*undo-tree\\*" :slot 2 :side left :size 20 :modeline nil :select t :quit t)
+                    ("^\\*Password-Store" :side left :size 0.25)
+
+                    ;; * help
+                    ("^\\*info.*" :size 82 :side right :ttl t :select t :quit t)
+                    ("^\\*Man.*" :size 82 :side right :ttl t :select t :quit t)
+                    ("^\\*tldr\\*" :size 82 :side right :select t :quit t)
+                    ("^\\*helpful.*" :size 82 :side right :select t :quit t)
+                    ("^\\*Help.*" :size 82 :height 0.6 :side right :select t :quit t)
+                    ("^ \\*Metahelp.*" :size 82 :side right :select t :quit t)
+                    ("^\\*Apropos.*" :size 82 :height 0.6 :side right :select t :quit t)
+                    ("^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom :select t :quit t :ttl nil)
+
+                    ;; ("^ ?\\*NeoTree" :side ,neo-window-position :width ,neo-window-width :quit 'current :select t)
+                    ("\\*VC-history\\*" :slot 2 :side right :size 82 :modeline nil :select t :quit t)
+
+                    ;; * web
+                    ("^\\*eww.*" :size 82 :side right :select t :quit t)
+                    ("\\*xwidget" :side right :size 100 :select t)
+
+                    ;; * lang
+                    ;; ** python
+                    ("^\\*Anaconda\\*" :side right :size 82 :quit t :ttl t)
+                    ))
 
 (setq-default
  delete-by-moving-to-trash t)
