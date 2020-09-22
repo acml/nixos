@@ -216,7 +216,7 @@
    (defun modus-%1$s-theme-load ()
      (setq modus-%1$s-theme-slanted-constructs t
            modus-%1$s-theme-bold-constructs t
-           modus-%1$s-theme-fringes 'subtle ; {nil,'subtle,'intense}
+           modus-%1$s-theme-fringes nil ; {nil,'subtle,'intense}
            modus-%1$s-theme-mode-line '3d ; {nil,'3d,'moody}
            modus-%1$s-theme-faint-syntax t
            modus-%1$s-theme-intense-hl-line nil
