@@ -277,6 +277,8 @@ in {
       # services.owncloud-client.enable = true;
       services.syncthing.enable = true;
       services.syncthing.tray = true;
+      # services.kdeconnect.enable = true;
+      # services.kdeconnect.indicator = true;
 
       # Handwritten configs
       home.file = {
