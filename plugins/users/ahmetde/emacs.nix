@@ -84,6 +84,9 @@ in {
       # })
       # :ui treemacs
       python3 # advanced git-mode and directory flattening features require python3
+      man-pages
+      posix_man_pages
+      tldr
       (makeDesktopItem {
         name = "centaur";
         desktopName = "Centaur Emacs";
