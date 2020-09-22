@@ -98,7 +98,7 @@ in {
                 htop
                 # deluge
                 zoom-us
-                thunderbird
+                thunderbird-78
                 spotify
                 # tdesktop
                 # minecraft
