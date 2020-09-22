@@ -19,8 +19,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Iosevka" :size 16)
-      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 16))
+(setq doom-font (font-spec :family "Iosevka" :size 15)
+      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 15))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -208,26 +208,50 @@
    :compile "make O=am43xx_evm ARCH=arm CROSS_COMPILE=arm-openwrt-linux-gnueabi- all"
    :compilation-dir "."))
 
+(defmacro modus-themes-format-sexp (sexp &rest objects)
+  `(eval (read (format ,(format "%S" sexp) ,@objects))))
+
+(dolist (theme '("operandi" "vivendi"))
+  (modus-themes-format-sexp
+   (defun modus-%1$s-theme-load ()
+     (setq modus-%1$s-theme-slanted-constructs t
+           modus-%1$s-theme-bold-constructs t
+           modus-%1$s-theme-fringes 'subtle ; {nil,'subtle,'intense}
+           modus-%1$s-theme-mode-line '3d ; {nil,'3d,'moody}
+           modus-%1$s-theme-faint-syntax t
+           modus-%1$s-theme-intense-hl-line nil
+           modus-%1$s-theme-intense-paren-match nil
+           modus-%1$s-theme-no-link-underline t
+           modus-%1$s-theme-prompts 'subtle ; {nil,'subtle,'intense}
+           modus-%1$s-theme-completions 'moderate ; {nil,'moderate,'opinionated}
+           modus-%1$s-theme-diffs 'desaturated ; {nil,'desaturated,'fg-only}
+           modus-%1$s-theme-org-blocks 'greyscale ; {nil,'greyscale,'rainbow}
+           modus-%1$s-theme-headings  ; Read further below in the manual for this one
+           '((1 . line)
+             (t . rainbow-line-no-bold))
+           modus-%1$s-theme-variable-pitch-headings t
+           modus-%1$s-theme-scale-headings t
+           modus-%1$s-theme-scale-1 1.1
+           modus-%1$s-theme-scale-2 1.15
+           modus-%1$s-theme-scale-3 1.21
+           modus-%1$s-theme-scale-4 1.27
+           modus-%1$s-theme-scale-5 1.33)
+     (load-theme 'modus-%1$s t))
+   theme))
+
+(defun modus-themes-toggle ()
+  "Toggle between `modus-operandi' and `modus-vivendi' themes."
+  (interactive)
+  (if (eq (car custom-enabled-themes) 'modus-operandi)
+      (progn
+        (disable-theme 'modus-operandi)
+        (modus-vivendi-theme-load))
+    (disable-theme 'modus-vivendi)
+    (modus-operandi-theme-load)))
+
 (use-package! modus-operandi-theme
-  :init
-  (setq modus-operandi-theme-slanted-constructs t
-        modus-operandi-theme-bold-constructs t
-        ;; modus-operandi-theme-visible-fringes t
-        modus-operandi-theme-3d-modeline t
-        modus-operandi-theme-subtle-diffs t
-        modus-operandi-theme-intense-standard-completions t
-        modus-operandi-theme-org-blocks 'rainbow
-        modus-operandi-theme-variable-pitch-headings t
-        modus-operandi-theme-rainbow-headings t
-        ;; modus-operandi-theme-section-headings t
-        modus-operandi-theme-scale-headings t
-        modus-operandi-theme-scale-1 1.05
-        modus-operandi-theme-scale-2 1.1
-        modus-operandi-theme-scale-3 1.15
-        modus-operandi-theme-scale-4 1.2
-        modus-operandi-theme-scale-5 1.3)
   :config
-  (load-theme 'modus-operandi t))
+  (modus-operandi-theme-load))
 
 (use-package! rainbow-mode
   :hook
