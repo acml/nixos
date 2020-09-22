@@ -123,6 +123,7 @@ in {
         # (pkgs.pass.withExtensions (exts: [ exts.pass-otp ]))
         gnome3.seahorse
         lazydocker
+        keepassxc
       ];
 
       # HACK Without this config file you get "No pinentry program" on 20.03.
@@ -274,6 +275,8 @@ in {
 
       services.lorri.enable = true;
       # services.owncloud-client.enable = true;
+      services.syncthing.enable = true;
+      services.syncthing.tray = true;
 
       # Handwritten configs
       home.file = {
