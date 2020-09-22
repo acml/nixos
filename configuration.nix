@@ -97,6 +97,7 @@ in {
               extraPackages = with pkgs; [
                 htop
                 # deluge
+                slack
                 zoom-us
                 thunderbird-78
                 spotify
