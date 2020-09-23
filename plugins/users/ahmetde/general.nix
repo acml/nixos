@@ -177,12 +177,12 @@ in {
         # enhances zsh (C-r: history search C-t: file search M-c: change directory)
         skim = {
           enable = true;
-          defaultCommand = "${pkgs.fd}/bin/fd --type f";
+          defaultCommand = "${pkgs.fd}/bin/fd -L -tf";
           # defaultOptions = [ "--height 40%" "--prompt ⟫" ];
           defaultOptions = [ "--height 100%" "--prompt ⟫" ];
-          fileWidgetCommand = "${pkgs.fd}/bin/fd --type f";
+          fileWidgetCommand = "${pkgs.fd}/bin/fd -L -tf";
           fileWidgetOptions = [ "--preview '${pkgs.bat}/bin/bat --style=numbers --color=always --line-range :500 {}'" ];
-          changeDirWidgetCommand = "${pkgs.fd}/bin/fd --type d";
+          changeDirWidgetCommand = "${pkgs.fd}/bin/fd -L -td";
           changeDirWidgetOptions = [ "--preview '${pkgs.tree}/bin/tree -C {} | head -200'" ];
           # historyWidgetOptions = [ "--tac" "--exact" ];
         };
