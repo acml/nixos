@@ -82,7 +82,7 @@ in {
           bindkey "^P" up-line-or-search
           bindkey "^N" down-line-or-search
         '';
-        profileExtra =
+        envExtra =
           ''
           if [ -d "$HOME/.local/bin" ]; then
              export PATH="$PATH:$HOME/.local/bin"
