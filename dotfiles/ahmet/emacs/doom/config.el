@@ -19,8 +19,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Iosevka" :size 13)
-      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 13))
+(setq doom-font (font-spec :family "Iosevka" :size 14)
+      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 14))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -299,7 +299,7 @@
           treemacs-is-never-other-window   t
           treemacs-silent-filewatch        t
           treemacs-silent-refresh          t
-          treemacs-width                   30)
+          treemacs-width                   42)
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (pcase (cons (not (null (executable-find "git")))
