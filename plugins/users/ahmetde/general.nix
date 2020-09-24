@@ -143,6 +143,10 @@ in {
         defaultApplications = {
           "image/jpeg" = "eog.desktop"; # `.jpg`
           "application/pdf" = "org.gnome.Evince.desktop"; # `.pdf`
+          "x-scheme-handler/mailto" = "thunderbird.desktop";
+          "message/rfc822" = "thunderbird.desktop";
+          "text/plain" = "emacs.desktop";
+          "inode/directory" = "org.gnome.Nautilus.desktop";
         };
       };
 
