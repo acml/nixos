@@ -335,7 +335,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font '(("Iosevka"          :size 12.0 :weight normal :width normal)
+   dotspacemacs-default-font '(("Iosevka"          :size 11.0 :weight normal :width normal)
                                ("DejaVu Sans Mono" :size 10.5 :weight normal :width normal)
                                ("Source Code Pro"  :size 10.0 :weight normal :width normal)
                                ("Monospace"        :size 10.0 :weight normal :width normal)
