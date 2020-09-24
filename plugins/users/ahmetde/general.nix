@@ -178,13 +178,11 @@ in {
         skim = {
           enable = true;
           defaultCommand = "${pkgs.fd}/bin/fd -L -tf";
-          # defaultOptions = [ "--height 40%" "--prompt ⟫" ];
-          defaultOptions = [ "--height 100%" "--prompt ⟫" ];
+          defaultOptions = [ "--height 100%" "--prompt ⟫" "--bind '?:toggle-preview,ctrl-o:execute-silent(xdg-open {})'"];
           fileWidgetCommand = "${pkgs.fd}/bin/fd -L -tf";
-          fileWidgetOptions = [ "--preview '${pkgs.bat}/bin/bat --style=numbers --color=always --line-range :500 {}'" ];
+          fileWidgetOptions = [ "--preview '${pkgs.bat}/bin/bat --color=always --style=header,grid,numbers --line-range :300 {}'" ];
           changeDirWidgetCommand = "${pkgs.fd}/bin/fd -L -td";
           changeDirWidgetOptions = [ "--preview '${pkgs.tree}/bin/tree -C {} | head -200'" ];
-          # historyWidgetOptions = [ "--tac" "--exact" ];
         };
 
         direnv.enable = true;
