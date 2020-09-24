@@ -192,7 +192,7 @@ in {
         direnv.enable = true;
         direnv.stdlib = ''
           use_nix() {
-            eval "$(lorri direnv)"
+          eval "$(lorri direnv)"
           }
         '';
 
