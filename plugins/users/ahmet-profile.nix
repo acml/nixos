@@ -90,6 +90,8 @@ in {
           if [ -d "$HOME/.emacs.d/doom/bin" ]; then
              export PATH="$PATH:$HOME/.emacs.d/doom/bin"
           fi
+          MINICOM='-con'
+          export MINICOM
         '';
         defaultKeymap = "emacs";
         oh-my-zsh = {
