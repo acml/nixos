@@ -178,6 +178,18 @@ in {
           };
         };
 
+        ssh = {
+          enable = true;
+          controlMaster = "yes";
+          controlPersist = "10m";
+          matchBlocks = {
+            "sw" = {
+              hostname = "10.0.0.1";
+              user = "root";
+            };
+          };
+        };
+
         # enhances zsh (C-r: history search C-t: file search M-c: change directory)
         skim = {
           enable = true;
