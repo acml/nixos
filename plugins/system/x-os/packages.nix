@@ -61,7 +61,13 @@ in mkIf cfg.enable {
   };
 
   # Setup zsh
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+
+    # Prevent NixOS from clobbering prompts
+    # See: https://github.com/NixOS/nixpkgs/pull/38535
+    promptInit = lib.mkDefault "";
+  };
 
   # lets users use sudo without password
   security.sudo.wheelNeedsPassword = false;
