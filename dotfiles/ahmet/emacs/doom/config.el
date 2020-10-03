@@ -53,6 +53,9 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; fixes vterm garbled terminal output
+(setq locale-coding-system 'utf-8-unix)
+
 (when (window-system)
   (add-to-list 'default-frame-alist '(alpha . (100)))
   (set-frame-parameter (selected-frame) 'alpha '(100)))
