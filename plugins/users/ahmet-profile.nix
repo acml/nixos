@@ -180,6 +180,7 @@ in {
             lt="${pkgs.exa}/bin/exa --tree --level=2";                                        # tree
             ns = "nix-shell --run zsh -p";
             cat = "${pkgs.bat}/bin/bat";
+            du = "${pkgs.du-dust}/bin/dust";
         };
       };
     };
