@@ -34,6 +34,8 @@ in {
       };
     };
 
+  config.environment.pathsToLink = [ "/share/zsh" ];
+
   config.home-manager.users = iceLib.functions.mkUserConfigs' (n: c: {
     # Home-manager settings.
     # User-layer packages
@@ -72,16 +74,12 @@ in {
 
       # zsh
       zsh = {
-        enable = true;
-        enableCompletion = true;
-        enableAutosuggestions = true;
         autocd = true;
+        defaultKeymap = "emacs";
         dotDir = ".config/zsh";
-        initExtra = ''
-          prompt off
-          bindkey "^P" up-line-or-search
-          bindkey "^N" down-line-or-search
-        '';
+        enable = true;
+        enableAutosuggestions = true;
+        enableCompletion = true;
         envExtra =
           ''
           if [ -d "$HOME/.local/bin" ]; then
@@ -93,35 +91,96 @@ in {
           MINICOM='-con'
           export MINICOM
         '';
-        defaultKeymap = "emacs";
+        history = {
+          ignoreDups = true;
+          expireDuplicatesFirst = true;
+        };
+        initExtra = ''
+          bindkey "^P" up-line-or-search
+          bindkey "^N" down-line-or-search
+        '';
         oh-my-zsh = {
           enable = true;
           plugins = [
-            ## appearence
-            "common-aliases"
-
+            # "common-aliases"
+            "dirhistory"
             "extract"
-
-            ## programs
             "git"
-            "pass"
-
             "gitignore"
+            "pass"
+            "ripgrep"
+            "rsync"
+            "safe-paste"
             "sudo"
+            "systemadmin"
+            "systemd"
           ];
           # theme = "agnoster";
         };
         plugins = [
           {
+            name = "zsh-autosuggestions";
+            src = pkgs.fetchFromGitHub {
+              owner = "zsh-users";
+              repo = "zsh-autosuggestions";
+              rev = "ae315ded4dba10685dbbafbfa2ff3c1aefeb490d";
+              sha256 = "0h52p2waggzfshvy1wvhj4hf06fmzd44bv6j18k3l9rcx6aixzn6";
+            };
+          }
+          {
+            name = "zsh-nix-shell";
+            file = "nix-shell.plugin.zsh";
+            src = pkgs.fetchFromGitHub {
+              owner = "chisui";
+              repo = "zsh-nix-shell";
+              rev = "5dc081265cdd0d03631e9dc20b5e656530ae3af2";
+              sha256 = "10y3jylx271j01i10vpqqz2ph4njbcyy34fnkn8ps39i9lfb7vhb";
+            };
+          }
+          {
             name = "zsh-syntax-highlighting";
             src = pkgs.fetchFromGitHub {
               owner = "zsh-users";
               repo = "zsh-syntax-highlighting";
-              rev = "0.7.0-beta1";
-              sha256 = "0xk9fwii31zrwvhd441p3c0cr7lqhf97fqif3nys4wkgnvhd5s4x";
+              rev = "62c5575848f1f0a96161243d18497c247c9f52df";
+              sha256 = "0s1cjm8psjwmrg8qdhdg48qyvp8nqk7bdgvqivgc5v9m27m7h5cg";
+            };
+          }
+          {
+            name = "you-should-use";
+            src = pkgs.fetchFromGitHub {
+              owner = "MichaelAquilina";
+              repo = "zsh-you-should-use";
+              rev = "b4aec740f23d195116d1fddec91d67b5e9c2c5c7";
+              sha256 = "0bq15d6jk750cdbbjfdmdijp644d1pn2z80pk1r1cld6qqjnsaaq";
+            };
+          }
+          {
+            name = "solarized-man";
+            src = pkgs.fetchFromGitHub {
+              owner = "zlsun";
+              repo = "solarized-man";
+              rev = "e69d2cedc3a51031e660f2c3459b08ab62ef9afa";
+              sha256 = "1ljnqxfzhi26jfzm0nm2s9w43y545sj1gmlk6pyd9a8zc0hafdx8";
             };
           }
         ];
+        shellAliases = {
+            calc = "emacs -nw -Q -f full-calc";
+            # general use
+            ls="${pkgs.exa}/bin/exa";                                                         # ls
+            l="${pkgs.exa}/bin/exa -lbF --git";                                               # list, size, type, git
+            ll="${pkgs.exa}/bin/exa -lbGF --git";                                             # long list
+            llm="${pkgs.exa}/bin/exa -lbGd --git --sort=modified";                            # long list, modified date sort
+            la="${pkgs.exa}/bin/exa -lbhHigUmuSa --time-style=long-iso --git --color-scale";  # all list
+            lx="${pkgs.exa}/bin/exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale"; # all + extended list
+
+            # specialty views
+            lS="${pkgs.exa}/bin/exa -1";                                                      # one column, just names
+            lt="${pkgs.exa}/bin/exa --tree --level=2";                                        # tree
+            ns = "nix-shell --run zsh -p";
+            cat = "${pkgs.bat}/bin/bat";
+        };
       };
     };
 
