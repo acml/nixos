@@ -178,9 +178,12 @@ in {
             # specialty views
             lS="${pkgs.exa}/bin/exa -1";                                                      # one column, just names
             lt="${pkgs.exa}/bin/exa --tree --level=2";                                        # tree
+
             ns = "nix-shell --run zsh -p";
             cat = "${pkgs.bat}/bin/bat";
-            du = "${pkgs.du-dust}/bin/dust";
+            # du = "${pkgs.du-dust}/bin/dust";
+            du = "${pkgs.ncdu}/bin/ncdu --color dark";
+            h = "${pkgs.tldr}/bin/tldr";
         };
       };
     };
