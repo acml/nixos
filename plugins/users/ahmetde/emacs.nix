@@ -193,10 +193,8 @@ in {
         };
         recursive = true;
       };
-      ".emacs.d/prelude/personal/preload/font.el".source = system.dirs.dotfiles
-        + "/${name}/emacs/prelude/preload/font.el";
-      ".emacs.d/prelude/personal/prelude-modules.el".source =
-        system.dirs.dotfiles + "/${name}/emacs/prelude/prelude-modules.el";
+      ".emacs.d/prelude/personal/preload/font.el".source = system.dirs.dotfiles + "/${name}/emacs/prelude/preload/font.el";
+      # ".emacs.d/prelude/personal/prelude-modules.el".source = system.dirs.dotfiles + "/${name}/emacs/prelude/prelude-modules.el";
       # Scimax
       ".emacs.d/scimax" = {
         source = pkgs.fetchFromGitHub {
