@@ -512,11 +512,19 @@ in {
           remove_unplugged_monitors = true;
           remove_disabled_monitors = true;
           border_width = 3;
-          window_gap = 10;
-          top_padding = 32;
+
+          window_gap      = 10;
+          top_padding     = 22;
+          left_padding    = -10;
+          right_padding   = -10;
+          bottom_padding  = -10;
+          top_monocle_padding     = 10;
+          left_monocle_padding    = 10;
+          right_monocle_padding   = 10;
+          bottom_monocle_padding  = 10;
 
           split_ratio = 0.5;
-          borderless_monocle = true;
+          borderless_monocle = false;
           gapless_monocle = true;
           single_monocle = true;
 
