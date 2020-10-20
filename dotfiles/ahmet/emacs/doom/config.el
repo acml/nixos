@@ -124,8 +124,10 @@
                         (mu4e-compose-signature . "---\nAhmet Cemal Özgezer"))
                       t))
 
-(setq ccls-initialization-options
-      `(:cache (:directory ,(file-truename "~/.cache/ccls"))))
+(after! ccls
+  (setq ccls-initialization-options
+        (append ccls-initialization-options
+                `(:cache (:directory ,(file-truename "~/.cache/ccls"))))))
 
 (setq calendar-location-name "Istanbul, Turkey"
       calendar-latitude 41.168602
