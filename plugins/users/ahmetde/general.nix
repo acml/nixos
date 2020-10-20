@@ -175,6 +175,9 @@ in {
               size = 12.0;
             };
             env = { WINIT_X11_SCALE_FACTOR = toString system.scale; };
+            scrolling = {
+              history = 10000;
+            };
           };
         };
 

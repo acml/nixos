@@ -64,6 +64,8 @@ in {
       glslang
       # :lang javascript
       nodePackages.javascript-typescript-langserver
+      # :lang sh
+      nodePackages.bash-language-server
       # :lang latex & :lang org (latex previews)
       texlive.combined.scheme-tetex
       # :lang markdown

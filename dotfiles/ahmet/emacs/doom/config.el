@@ -176,17 +176,29 @@
 
 (use-package! dired-subtree
   :after dired
-  :init
-  (defun acml/dired-subtree-toggle ()
+  :config
+  ;; fixes the case of the first line in dired when the cursor jumps
+  ;; to the header in dired rather then to the first file in buffer
+  (defun dired-subtree-toggle ()
     "Insert subtree at point or remove it if it was not present."
     (interactive)
-    (dired-subtree-toggle)
-    (dired-revert))
-  :config
+    (if (dired-subtree--is-expanded-p)
+        (progn
+          (dired-next-line 1)
+          (dired-subtree-remove)
+          (if (bobp)
+              (dired-next-line 1)))
+      (save-excursion (dired-subtree-insert))))
+
+  (defadvice dired-subtree-toggle (after dired-icons-refresh ())
+    "Insert an empty line when moving up from the top line."
+      (revert-buffer))
+  (ad-activate 'dired-subtree-toggle)
+
   (map!
    (:map dired-mode-map
-     :desc "Toggle subtree" :n [tab] #'acml/dired-subtree-toggle
-     :desc "Cycle subtree" :n "<backtab>" #'dired-subtree-cycle)))
+    :desc "Toggle subtree" :n [tab] #'dired-subtree-toggle))
+  )
 
 (after! dired
   ;; Define localleader bindings
