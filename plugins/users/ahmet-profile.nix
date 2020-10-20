@@ -166,24 +166,31 @@ in {
           }
         ];
         shellAliases = {
-            calc = "emacs -nw -Q -f full-calc";
-            # general use
-            ls="${pkgs.exa}/bin/exa";                                                         # ls
-            l="${pkgs.exa}/bin/exa -lbF --git";                                               # list, size, type, git
-            ll="${pkgs.exa}/bin/exa -lbGF --git";                                             # long list
-            llm="${pkgs.exa}/bin/exa -lbGd --git --sort=modified";                            # long list, modified date sort
-            la="${pkgs.exa}/bin/exa -lbhHigUmuSa --time-style=long-iso --git --color-scale";  # all list
-            lx="${pkgs.exa}/bin/exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale"; # all + extended list
+          rm="rm -i";
+          cp="cp -i";
+          mv="mv -i";
 
-            # specialty views
-            lS="${pkgs.exa}/bin/exa -1";                                                      # one column, just names
-            lt="${pkgs.exa}/bin/exa --tree --level=2";                                        # tree
+          calc = "emacs -nw -Q -f full-calc";
+          cat = "${pkgs.bat}/bin/bat";
+          # du = "${pkgs.du-dust}/bin/dust";
+          du = "${pkgs.ncdu}/bin/ncdu --color dark";
+          h = "${pkgs.tldr}/bin/tldr";
 
-            ns = "nix-shell --run zsh -p";
-            cat = "${pkgs.bat}/bin/bat";
-            # du = "${pkgs.du-dust}/bin/dust";
-            du = "${pkgs.ncdu}/bin/ncdu --color dark";
-            h = "${pkgs.tldr}/bin/tldr";
+          # general use
+          ls ="${pkgs.exa}/bin/exa";                                                         # ls
+          l  ="${pkgs.exa}/bin/exa -lbF --git";                                              # list, size, type, git
+          ll ="${pkgs.exa}/bin/exa -lbGF --git";                                             # long list
+          llm="${pkgs.exa}/bin/exa -lbGd --git --sort=modified";                             # long list, modified date sort
+          la ="${pkgs.exa}/bin/exa -lbhHigUmuSa --time-style=long-iso --git --color-scale";  # all list
+          lx ="${pkgs.exa}/bin/exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale"; # all + extended list
+
+          # specialty views
+          lS="${pkgs.exa}/bin/exa -1";                                                      # one column, just names
+          lt="${pkgs.exa}/bin/exa --tree --level=2";                                        # tree
+
+          ns = "nix-shell --run zsh -p";
+          ssh = "TERM=xterm-256color ssh";
+          wipe = "${pkgs.srm}/bin/srm -vfr";
         };
       };
     };
