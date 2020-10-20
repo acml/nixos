@@ -252,7 +252,9 @@
            modus-%1$s-theme-faint-syntax t
            modus-%1$s-theme-intense-hl-line nil
            modus-%1$s-theme-intense-paren-match nil
-           modus-%1$s-theme-no-link-underline t
+           modus-%1$s-theme-links 'no-underline ; {nil,'faint,'neutral-underline,'faint-neutral-underline,'no-underline}
+           modus-%1$s-theme-comments 'yellow ; {nil,'green,'yellow}
+           modus-%1$s-theme-no-mixed-fonts nil
            modus-%1$s-theme-prompts 'subtle ; {nil,'subtle,'intense}
            modus-%1$s-theme-completions 'moderate ; {nil,'moderate,'opinionated}
            modus-%1$s-theme-diffs 'desaturated ; {nil,'desaturated,'fg-only}
