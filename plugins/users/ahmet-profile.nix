@@ -172,6 +172,7 @@ in {
 
           calc = "emacs -nw -Q -f full-calc";
           cat = "${pkgs.bat}/bin/bat";
+          df = "df -h";
           # du = "${pkgs.du-dust}/bin/dust";
           du = "${pkgs.ncdu}/bin/ncdu --color dark";
           h = "${pkgs.tldr}/bin/tldr";
@@ -190,7 +191,9 @@ in {
 
           ns = "nix-shell --run zsh -p";
           ssh = "TERM=xterm-256color ssh";
+          sw = "ssh sw";
           wipe = "${pkgs.srm}/bin/srm -vfr";
+          upgrade = "sudo nixos-rebuild switch --upgrade && doom upgrade";
         };
       };
     };

@@ -4,7 +4,7 @@ let
   moz_overlay = import (builtins.fetchTarball
     "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz");
   home-manager = builtins.fetchTarball
-    "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz";
+    "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz";
   icebox = builtins.fetchTarball
     "https://github.com/LEXUGE/icebox/archive/master.tar.gz";
 in {
@@ -169,7 +169,7 @@ in {
     system = {
       #plugins = [ "x-os" "gnome" "clash" "onlyoffice-desktop" ];
       plugins = [ "x-os" ];
-      stateVersion = "20.03";
+      stateVersion = "20.09";
       configs = {
         x-os = {
           enable = true;

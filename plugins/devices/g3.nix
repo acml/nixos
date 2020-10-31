@@ -37,9 +37,9 @@ in {
 
         services.xserver.videoDrivers = [ "nvidia" ];
         hardware.nvidia.modesetting.enable = true;
-        hardware.nvidia.optimus_prime = {
-          enable = true;
-          allowExternalGpu = true;
+        hardware.nvidia.prime = {
+          sync.enable = true;
+          sync.allowExternalGpu = true;
 
           # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
           nvidiaBusId = "PCI:1:0:0";
