@@ -70,10 +70,10 @@ in {
         # Enable TLP Power Management
         services.tlp = {
           enable = true;
-          extraConfig = ''
-            START_CHARGE_THRESH_BAT0=85
-            STOP_CHARGE_THRESH_BAT0=90
-          '';
+          settings = {
+            START_CHARGE_THRESH_BAT0 = 85;
+            STOP_CHARGE_THRESH_BAT0 = 90;
+          };
         };
       })
 
