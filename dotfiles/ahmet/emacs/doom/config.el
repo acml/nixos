@@ -53,9 +53,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; fixes vterm garbled terminal output
-(setq locale-coding-system 'utf-8-unix)
-
 (when (window-system)
   (add-to-list 'default-frame-alist '(alpha . (100)))
   (set-frame-parameter (selected-frame) 'alpha '(100)))
@@ -261,19 +258,19 @@
            modus-%1$s-theme-bold-constructs t
            modus-%1$s-theme-fringes nil ; {nil,'subtle,'intense}
            modus-%1$s-theme-mode-line '3d ; {nil,'3d,'moody}
-           modus-%1$s-theme-faint-syntax t
+           modus-%1$s-theme-syntax 'alt-syntax-yellow-comments ; {nil,faint,'yellow-comments,'green-strings,'yellow-comments-green-strings,'alt-syntax,'alt-syntax-yellow-comments}
            modus-%1$s-theme-intense-hl-line nil
            modus-%1$s-theme-intense-paren-match nil
            modus-%1$s-theme-links 'no-underline ; {nil,'faint,'neutral-underline,'faint-neutral-underline,'no-underline}
-           modus-%1$s-theme-comments 'yellow ; {nil,'green,'yellow}
            modus-%1$s-theme-no-mixed-fonts nil
            modus-%1$s-theme-prompts 'subtle ; {nil,'subtle,'intense}
            modus-%1$s-theme-completions 'moderate ; {nil,'moderate,'opinionated}
            modus-%1$s-theme-diffs 'desaturated ; {nil,'desaturated,'fg-only}
            modus-%1$s-theme-org-blocks 'greyscale ; {nil,'greyscale,'rainbow}
            modus-%1$s-theme-headings  ; Read further below in the manual for this one
-           '((1 . line)
-             (t . rainbow-line-no-bold))
+           '((1 . highlight)
+             (2 . rainbow-highlight)
+             (t . rainbow))
            modus-%1$s-theme-variable-pitch-headings t
            modus-%1$s-theme-scale-headings t
            modus-%1$s-theme-scale-1 1.1
@@ -334,18 +331,6 @@
 
 ;; text mode directory tree
 (use-package! ztree
-  :custom-face
-  (ztreep-header-face ((t (:inherit diff-header))))
-  (ztreep-arrow-face ((t (:inherit font-lock-comment-face))))
-  (ztreep-leaf-face ((t (:inherit diff-index))))
-  (ztreep-node-face ((t (:inherit font-lock-variable-name-face))))
-  (ztreep-expand-sign-face ((t (:inherit font-lock-function-name-face))))
-  (ztreep-diff-header-face ((t (:inherit (diff-header bold)))))
-  (ztreep-diff-header-small-face ((t (:inherit diff-file-header))))
-  (ztreep-diff-model-normal-face ((t (:inherit font-lock-doc-face))))
-  (ztreep-diff-model-ignored-face ((t (:inherit font-lock-doc-face :strike-through t))))
-  (ztreep-diff-model-diff-face ((t (:inherit diff-removed))))
-  (ztreep-diff-model-add-face ((t (:inherit diff-nonexistent))))
   :bind (:map ztreediff-mode-map
          ("C-<f5>" . ztree-diff))
   :init (setq ztree-draw-unicode-lines t
