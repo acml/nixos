@@ -83,6 +83,9 @@
                     ("^\\*Anaconda\\*" :side right :size 82 :quit t :ttl t)
                     ))
 
+(after! ivy-posframe
+  (setq ivy-posframe-border-width 3))
+
 (setq-default
  delete-by-moving-to-trash t)
 
@@ -268,9 +271,9 @@
            modus-%1$s-theme-diffs 'desaturated ; {nil,'desaturated,'fg-only}
            modus-%1$s-theme-org-blocks 'greyscale ; {nil,'greyscale,'rainbow}
            modus-%1$s-theme-headings  ; Read further below in the manual for this one
-           '((1 . highlight)
-             (2 . rainbow-highlight)
-             (t . rainbow))
+           '(;; (1 . rainbow)
+             ;; (2 . rainbow-highlight)
+             (t . highlight))
            modus-%1$s-theme-variable-pitch-headings t
            modus-%1$s-theme-scale-headings t
            modus-%1$s-theme-scale-1 1.1
@@ -305,25 +308,6 @@
 (use-package! trashed
   :config
   (add-to-list 'evil-emacs-state-modes 'trashed-mode))
-
-;; A tree layout file explorer
-(use-package! treemacs
-    :config
-    (setq treemacs-collapse-dirs           (if treemacs-python-executable 3 0)
-          treemacs-sorting                 'alphabetic-asc
-          treemacs-follow-after-init       t
-          treemacs-is-never-other-window   t
-          treemacs-silent-filewatch        t
-          treemacs-silent-refresh          t
-          treemacs-width                   42)
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    (pcase (cons (not (null (executable-find "git")))
-                 (not (null (executable-find "python3"))))
-      (`(t . t)
-       (treemacs-git-mode 'deferred))
-      (`(t . _)
-       (treemacs-git-mode 'simple))))
 
 (use-package! vterm
   :config
