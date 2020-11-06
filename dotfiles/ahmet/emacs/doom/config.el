@@ -213,6 +213,15 @@
 
 (use-package! journalctl-mode)
 
+(use-package! lsp-mode
+  :config
+  (setq lsp-headerline-breadcrumb-enable t
+        ;; lsp-lens-enable t
+        ;; lsp-enable-file-watchers t
+        ;; lsp-signature-auto-activate nil
+        ;; lsp-completion-use-last-result nil
+        ))
+
 ;;
 ;; Turkish
 (use-package! turkish
