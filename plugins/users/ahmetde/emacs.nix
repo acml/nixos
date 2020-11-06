@@ -15,8 +15,8 @@ in {
 
     programs.emacs = {
       enable = true;
-      package = myEmacs;
-      # package = pkgs.emacsGccPgtk;
+      # package = myEmacs;
+      package = pkgs.emacsGccPgtk;
       extraPackages = (epkgs:
         (with epkgs; [
           # exwm

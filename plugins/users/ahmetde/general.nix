@@ -115,8 +115,10 @@ in {
         feh       # image viewer
         mpv       # video player
         font-manager
+        libreoffice
         minicom
-        my.ripcord
+        nixos-unstable.ripcord
+        nixos-unstable.bottom
         ytop
         qtpass
         (pass.withExtensions (p: [ p.pass-import ]))
@@ -124,6 +126,7 @@ in {
         gnome3.seahorse
         lazydocker
         keepassxc
+        glava
       ];
 
       # HACK Without this config file you get "No pinentry program" on 20.03.
