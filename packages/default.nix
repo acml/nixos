@@ -7,7 +7,6 @@
           (builtins.fetchTarball
             https://github.com/xzfc/cached-nix-shell/archive/master.tar.gz) {});
       linode-cli = (callPackage ./linode-cli.nix {});
-      ripcord = (callPackage ./ripcord.nix {});
       zunit = (callPackage ./zunit.nix {});
     };
 

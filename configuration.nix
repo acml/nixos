@@ -15,6 +15,8 @@ in {
     "${home-manager}/nixos"
   ];
 
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreeRedistributable = true;
   nixpkgs.overlays = import ./packages;
 
   home-manager.useUserPackages = true;
