@@ -127,6 +127,14 @@ in {
         lazydocker
         keepassxc
         glava
+        meld
+        (nixos-unstable.vscode-with-extensions.override {
+           vscodeExtensions = with vscode-extensions; [
+             bbenoist.Nix
+             ms-vscode.cpptools
+             vscodevim.vim
+           ];
+        })
       ];
 
       # HACK Without this config file you get "No pinentry program" on 20.03.
