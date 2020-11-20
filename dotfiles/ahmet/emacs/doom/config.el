@@ -222,6 +222,10 @@
         ;; lsp-completion-use-last-result nil
         ))
 
+(add-hook! 'magit-mode-hook
+  (defun acml/magit-left-fringe ()
+    (setq-local left-fringe-width 8)))
+
 ;;
 ;; Turkish
 (use-package! turkish
