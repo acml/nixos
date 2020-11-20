@@ -80,8 +80,7 @@ in {
         enable = true;
         enableAutosuggestions = true;
         enableCompletion = true;
-        envExtra =
-          ''
+        envExtra = ''
           if [ -d "$HOME/.local/bin" ]; then
              export PATH="$PATH:$HOME/.local/bin"
           fi
@@ -184,7 +183,7 @@ in {
           ssh = "TERM=xterm-256color ssh";
           sw = "ssh sw";
           wipe = "${pkgs.srm}/bin/srm -vfr";
-          upgrade = "sudo nixos-rebuild switch --upgrade && doom upgrade";
+          upgrade = "sudo nixos-rebuild switch --upgrade";
         };
       };
     };

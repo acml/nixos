@@ -226,8 +226,6 @@
   (defun acml/magit-left-fringe ()
     (setq-local left-fringe-width 8)))
 
-;;
-;; Turkish
 (use-package! turkish
   :commands (turkish-mode)
   ;; :init (evil-leader/set-key (kbd "ot") 'turkish-mode)

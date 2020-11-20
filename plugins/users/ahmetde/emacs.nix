@@ -226,6 +226,7 @@ in {
       "doom" = {
         source = (system.dirs.dotfiles + "/${name}/emacs/doom");
         recursive = true;
+        onChange = "$HOME/.emacs.d/doom/bin/doom sync";
       };
       "spacemacs" = {
         source = (system.dirs.dotfiles + "/${name}/emacs/spacemacs");
