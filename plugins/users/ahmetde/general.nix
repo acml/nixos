@@ -311,6 +311,11 @@ in {
       # Handwritten configs
       home.file = {
         # ".config/gtk-3.0/settings.ini".source = (system.dirs.dotfiles + "/${name}/gtk-settings.ini");
+        ".docker/config.json".text = ''
+            {
+              "detachKeys": "ctrl-],]"
+            }
+        '';
       };
 
       home.keyboard = {
