@@ -20,11 +20,14 @@
        ;;layout            ; auie,ctsrnm is the superior home row
 
        :completion
-       (company           ; the ultimate code completion backend
-        +childframe)
+       (:if (version<= "28.0" emacs-version)
+        (company +childframe) ; the ultimate code completion backend
+        company)
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       (ivy +prescient +childframe +icons)        ; a search engine for love and life
+       (:if (version<= "28.0" emacs-version)
+        (ivy +prescient +childframe +icons) ; a search engine for love and life
+        (ivy +prescient +icons))
 
        :ui
        ;;deft              ; notational velocity for Emacs

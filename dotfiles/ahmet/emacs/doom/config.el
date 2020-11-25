@@ -222,9 +222,10 @@
         ;; lsp-completion-use-last-result nil
         ))
 
-(add-hook! 'magit-mode-hook
-  (defun acml/magit-left-fringe ()
-    (setq-local left-fringe-width 8)))
+(add-hook! ('magit-mode-hook 'text-mode-hook 'prog-mode-hook)
+           (defun acml/set-fringe-widths ()
+             (setq-local left-fringe-width 8
+                         right-fringe-width 8)))
 
 (use-package! turkish
   :commands (turkish-mode)
