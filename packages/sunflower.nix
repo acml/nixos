@@ -20,8 +20,8 @@ python3.pkgs.buildPythonApplication rec {
   src = fetchFromGitHub {
     owner = "MeanEYE";
     repo = "Sunflower";
-    rev = "8d75084e78f82276a13b51bd10fa9ae4fbae18f4";
-    sha256 = "jAh26yjNRZOIt++geWb7geVOdHpNhxlYhOiEiFTCtSg=";
+    rev = "3c45a4cbd28b785d3d49f3fc0dca5e8227ee5d29";
+    sha256 = "1608r51abxs23m6jg4mjr25jflg9w11xrj102r5ngzgszac84mq0";
   };
 
   nativeBuildInputs = [
