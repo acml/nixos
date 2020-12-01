@@ -221,7 +221,7 @@ in {
                         size=''${2:-'10'}
                         direction=$1
 
-                        ${pkgs.bspwm}/bin/bspc query -N -n focused.floating
+                        bspc query -N -n focused.floating
                         floating=$?
 
                         case "$direction" in
