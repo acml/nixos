@@ -117,6 +117,7 @@ in {
         font-manager
         libreoffice
         minicom
+        my.sunflower
         nixos-unstable.ripcord
         nixos-unstable.bottom
         ytop
