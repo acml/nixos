@@ -1,12 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  moz_overlay = import (builtins.fetchTarball
-    "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz");
-  home-manager = builtins.fetchTarball
-    "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz";
-  icebox = builtins.fetchTarball
-    "https://github.com/LEXUGE/icebox/archive/master.tar.gz";
+  home-manager = fetchTarball "https://github.com/rycee/home-manager/archive/release-20.09.tar.gz";
+  icebox = fetchTarball "https://github.com/LEXUGE/icebox/archive/master.tar.gz";
 in {
   imports = [
     ./hardware-configuration.nix
@@ -15,8 +11,42 @@ in {
     "${home-manager}/nixos"
   ];
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreeRedistributable = true;
+  nixpkgs.config = {
+    # Allow proprietary packages
+    allowUnfree = true;
+    allowUnfreeRedistributable = true;
+
+    # Create an alias for the unstable channel
+    packageOverrides = pkgs: rec {
+
+      stable = import (fetchTarball
+        "https://nixos.org/channels/nixos-20.09/nixexprs.tar.xz") {
+          config = config.nixpkgs.config;
+        };
+      nixos-unstable = import (fetchTarball
+        "https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz") {
+          # pass the nixpkgs config to the unstable alias
+          # to ensure `allowUnfree = true;` is propagated:
+          config = config.nixpkgs.config;
+        };
+
+      nixpkgs-unstable = import (fetchTarball
+        "https://github.com/nixos/nixpkgs-channels/archive/nixpkgs-unstable.tar.gz") {
+          # pass the nixpkgs config to the unstable alias
+          # to ensure `allowUnfree = true;` is propagated:
+          config = config.nixpkgs.config;
+        };
+      nixos-unstable-small = import (fetchTarball
+        "https://nixos.org/channels/nixos-unstable-small/nixexprs.tar.xz") {
+          # pass the nixpkgs config to the unstable alias
+          # to ensure `allowUnfree = true;` is propagated:
+          config = config.nixpkgs.config;
+        };
+
+      nur = import (fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") { inherit pkgs; };
+      moz_overlay = import (fetchTarball "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz") {};
+    };
+  };
   nixpkgs.overlays = import ./packages;
 
   home-manager.useUserPackages = true;
@@ -91,7 +121,7 @@ in {
             # video - light control
             # libvirtd - virtual manager controls.
             # dialout - tty
-            extraGroups = [ "wheel" "networkmanager" "video" "libvirtd" "docker" "dialout" "wireshark" ];
+            extraGroups = [ "wheel" "networkmanager" "video" "libvirtd" "kvm" "docker" "vboxusers" "dialout" "wireshark" ];
           };
           configs = {
             ahmet-profile = {
@@ -189,7 +219,5 @@ in {
         # };
       };
     };
-
-    overlays = [ moz_overlay ];
   };
 }
