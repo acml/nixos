@@ -43,6 +43,7 @@ in mkIf cfg.enable {
       # ubuntu_font_family
       font-awesome-ttf
       nerd-fonts.dejavusansmono
+      nerd-fonts.droidsansmono
       nerd-fonts.firacode
       nerd-fonts.firamono
       nerd-fonts.hermit
