@@ -13,6 +13,6 @@
   })
 
   # emacsGit
-  # (import (fetchTarball "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz"))
-  # (import (fetchTarball "https://github.com/mjlbach/emacs-pgtk-nativecomp-overlay/archive/master.tar.gz"))
+  (import (fetchTarball "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz"))
+  (import (fetchTarball "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz"))
 ]

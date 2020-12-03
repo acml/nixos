@@ -44,7 +44,6 @@ in {
         };
 
       nur = import (fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") { inherit pkgs; };
-      moz_overlay = import (fetchTarball "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz") {};
     };
   };
   nixpkgs.overlays = import ./packages;
