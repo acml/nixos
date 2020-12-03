@@ -16,7 +16,9 @@ in {
     programs.emacs = {
       enable = true;
       # package = myEmacs;
-      package = pkgs.emacsGccPgtk;
+      # package = pkgs.emacsPgtkGcc;
+      # package = pkgs.emacsGcc;
+      package = pkgs.emacs;
       extraPackages = (epkgs:
         (with epkgs; [
           # exwm
@@ -31,6 +33,7 @@ in {
     # Home-manager settings.
     # User-layer packages
     home.packages = with pkgs; [
+      binutils
       gnumake
       ## Doom dependencies
       global
