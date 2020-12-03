@@ -10,7 +10,9 @@ in mkIf cfg.enable {
   environment.systemPackages = with pkgs; [
     wget
     nixfmt
-    git
+    gitAndTools.gitFull
+    gitAndTools.qgit
+    git-cola
     gnupg
     neofetch
     bind
