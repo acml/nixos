@@ -120,7 +120,6 @@ in {
         my.sunflower
         nixos-unstable.ripcord
         nixos-unstable.bottom
-        ytop
         qtpass
         (pass.withExtensions (p: [ p.pass-import ]))
         # (pkgs.pass.withExtensions (exts: [ exts.pass-otp ]))
