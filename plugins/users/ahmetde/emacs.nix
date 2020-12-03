@@ -48,11 +48,7 @@ in {
 
       ## Module dependencies
       # :checkers spell
-      aspell
-      aspellDicts.en
-      aspellDicts.en-computers
-      aspellDicts.en-science
-      aspellDicts.tr
+      (aspellWithDicts (dicts: with dicts; [ en en-computers en-science tr ]))
       # :checkers grammar
       languagetool
       # :tools editorconfig
