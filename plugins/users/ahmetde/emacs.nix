@@ -18,7 +18,7 @@ in {
       # package = myEmacs;
       # package = pkgs.emacsPgtkGcc;
       # package = pkgs.emacsGcc;
-      package = pkgs.emacs;
+      package = pkgs.emacsGit;
       extraPackages = (epkgs:
         (with epkgs; [
           # exwm
@@ -42,6 +42,7 @@ in {
       gnutls # for TLS connectivity
 
       ## Optional dependencies
+      jq
       fd # faster projectile indexing
       imagemagick # for image-dired
       (lib.mkIf (config.programs.gnupg.agent.enable)
@@ -61,6 +62,11 @@ in {
       # :lang cc
       ccls
       glslang
+      # :lang go
+      gocode
+      gomodifytags
+      gotests
+      gore
       # :lang javascript
       nodePackages.javascript-typescript-langserver
       # :lang sh
@@ -70,19 +76,19 @@ in {
       # :lang markdown
       pandoc
       # :lang rust
-      # (pkgs.latest.rustChannels.stable.rust.override {
-      #   extensions = [
-      #     "clippy-preview"
-      #     # "miri-preview"
-      #     "rls-preview"
-      #     "rustfmt-preview"
-      #     "llvm-tools-preview"
-      #     "rust-analysis"
-      #     "rust-std"
-      #     "rustc-dev"
-      #     "rust-src"
-      #   ];
-      # })
+      (pkgs.latest.rustChannels.stable.rust.override {
+        extensions = [
+          "clippy-preview"
+          # "miri-preview"
+          "rls-preview"
+          "rustfmt-preview"
+          "llvm-tools-preview"
+          "rust-analysis"
+          "rust-std"
+          "rustc-dev"
+          "rust-src"
+        ];
+      })
       # :ui treemacs
       python3 # advanced git-mode and directory flattening features require python3
       man-pages

@@ -227,7 +227,7 @@ in {
                         if [[ $TERM != "dumb" && (-z $INSIDE_EMACS || $INSIDE_EMACS == "vterm") ]]; then
                          eval "$(${pkgs.starship}/bin/starship init zsh)"
                         fi
-                        '';
+                        '' + "\n" + readFile (system.dirs.dotfiles + "/${n}/emacs-vterm-zsh.sh");
 
         starship = {
           enable = true;
