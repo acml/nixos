@@ -211,6 +211,20 @@
 (use-package! docker-tramp)
 (use-package! docker)
 
+
+(use-package! highlight-parentheses
+    :defer t
+    :init
+    (progn
+      (add-hook 'prog-mode-hook #'highlight-parentheses-mode)
+      (setq hl-paren-delay 0.2)
+      (setq hl-paren-colors '("Springgreen3"
+                              "IndianRed1"
+                              "IndianRed3"
+                              "IndianRed4")))
+    :config
+    (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold))
+
 (use-package! journalctl-mode)
 
 (use-package! lsp-mode

@@ -69,6 +69,7 @@
 (package! docker)
 (package! docker-tramp)
 
+(package! highlight-parentheses)
 (package! journalctl-mode)
 
 (package! modus-operandi-theme)
