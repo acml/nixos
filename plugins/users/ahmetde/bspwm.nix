@@ -237,8 +237,25 @@ in {
 
                         # Check if argument is a valid direction.
                         case "$1" in
-                             north|east|south|west)
+                             north)
                               dir="$1"
+                              dx=0
+                              dy=-90
+                              ;;
+                             east)
+                              dir="$1"
+                              dx=90
+                              dy=0
+                              ;;
+                             south)
+                              dir="$1"
+                              dx=0
+                              dy=90
+                              ;;
+                             west)
+                              dir="$1"
+                              dx=-90
+                              dy=0
                               ;;
                              *)
                               echo "Not a valid argument."
@@ -251,8 +268,7 @@ in {
                           bspc query -N -n "$@"
                         }
 
-                        # Do not operate on floating windows!
-                        [ -z "$(_query_nodes focused.floating)" ] || { echo "Only move tiled windows."; exit 1; }
+                        [ -z "$(_query_nodes focused.floating)" ] || { bspc node --move "$dx" "$dy"; exit 0; }
 
                         receptacle="$(_query_nodes 'any.leaf.!window')"
 
