@@ -40,7 +40,10 @@ in {
     # Home-manager settings.
     # User-layer packages
     home.packages = with pkgs;
-      [ hunspell hunspellDicts.en-us-large ] ++ c.extraPackages;
+      [
+        # hunspell
+        # hunspellDicts.en-us-large
+      ] ++ c.extraPackages;
 
     # Package settings
     programs = {
