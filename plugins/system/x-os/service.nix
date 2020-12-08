@@ -33,6 +33,13 @@ in mkIf cfg.enable (mkMerge [
     virtualisation.libvirtd.enable = true;
     # FIXME: Should we let users add them to group or other way around.
 
+    virtualisation.kvmgt.enable = true;
+
+    # virtualisation.virtualbox.host = {
+    #   enable = true;
+    #   enableExtensionPack = true;
+    # };
+
     # OpenGL 32 bit support for steam
     hardware.opengl.driSupport32Bit = true;
 
