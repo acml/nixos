@@ -136,6 +136,13 @@ in {
         exec = ''
           emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.emacs.d/radian-user\"))" --load /home/ahmet/.emacs.d/radian-user/early-init.el'';
       })
+      (makeDesktopItem {
+        name = "nano";
+        desktopName = "Nano Emacs";
+        icon = "emacs";
+        exec = ''
+          emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.emacs.d/nano-user\"))" --load /home/ahmet/.emacs.d/nano/init.el'';
+      })
     ];
 
     # Handwritten configs
@@ -172,6 +179,19 @@ in {
       # ".emacs.d/doom/init.el".text = ''
       #   (load "default.el")
       # '';
+      # Nano Emacs
+      ".emacs.d/nano" = {
+        source = builtins.fetchGit {
+          url = "https://github.com/rougier/nano-emacs";
+          ref = "master";
+        };
+        recursive = true;
+      };
+      ".emacs.d/nano/init.el".text = ''
+      ;;; Nano Emacs
+      (add-to-list 'load-path "~/.emacs.d/nano")
+      (load-file "~/.emacs.d/nano/nano.el")
+      '';
       # Centaur Emacs
       ".emacs.d/centaur" = {
         source = builtins.fetchGit {

@@ -52,6 +52,7 @@ in mkIf cfg.enable {
       nerd-fonts.iosevka
       nerd-fonts.noto
       nerd-fonts.ubuntu
+      roboto-mono
       siji
       symbola
     ];
