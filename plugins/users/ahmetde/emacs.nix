@@ -141,7 +141,7 @@ in {
         desktopName = "Nano Emacs";
         icon = "emacs";
         exec = ''
-          emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.emacs.d/nano-user\"))" --load /home/ahmet/.emacs.d/nano/init.el'';
+          emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.emacs.d/nano-user\"))" --load /home/ahmet/.emacs.d/nano/init.el -dark'';
       })
     ];
 
