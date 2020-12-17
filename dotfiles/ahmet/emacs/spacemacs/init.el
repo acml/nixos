@@ -146,7 +146,6 @@ This function should only modify configuration layer settings."
      dired-filter
      dired-git-info
      dired-hacks-utils
-     dired-quick-sort
      ;; dired-rainbow
      (dired-show-readme :location (recipe :fetcher gitlab :repo "kisaragi-hiu/dired-show-readme"))
      dired-subtree
@@ -986,11 +985,6 @@ buffer's name.
     (use-package dired-hacks-utils :defer t
       :config
       (dired-utils-format-information-line-mode t))
-
-    ;; Quick sort dired buffers via hydra
-    (use-package dired-quick-sort :defer t
-      :bind (:map dired-mode-map ("s" . hydra-dired-quick-sort/body))
-      :hook (dired-initial-position . dired-quick-sort))
 
     (use-package dired-show-readme :defer t
       :hook (dired-mode . dired-show-readme-mode))
