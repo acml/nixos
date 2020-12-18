@@ -134,14 +134,14 @@ in {
         desktopName = "Radian Emacs";
         icon = "emacs";
         exec = ''
-          emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.emacs.d/radian-user\"))" --load /home/ahmet/.emacs.d/radian-user/early-init.el'';
+          emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.config/emacs.d/radian-user\"))" --load /home/ahmet/.config/emacs.d/radian-user/early-init.el'';
       })
       (makeDesktopItem {
         name = "nano";
         desktopName = "Nano Emacs";
         icon = "emacs";
         exec = ''
-          emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.emacs.d/nano-user\"))" --load /home/ahmet/.emacs.d/nano/init.el -dark'';
+          emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.config/emacs.d/nano\"))" --load /home/ahmet/.config/emacs.d/nano/init.el -dark'';
       })
     ];
 
@@ -149,81 +149,95 @@ in {
     home.file = {
       # Handle multiple emacs installs
       # Chemacs
-      ".emacs".source = builtins.fetchGit {
-        url = "https://github.com/plexus/chemacs";
-        ref = "master";
-      } + "/.emacs";
-      ".emacs-profiles.el".text = ''
-        (("default" . ((user-emacs-directory . "~/.emacs.d/doom")
-                       (env . (("DOOMDIR" . "~/.config/doom")))))
-         ("centaur" . ((user-emacs-directory . "~/.emacs.d/centaur")))
-         ("doom" . ((user-emacs-directory . "~/.emacs.d/doom")
-                    (env . (("DOOMDIR" . "~/.config/doom")))))
-         ("purcell" . ((user-emacs-directory . "~/.emacs.d/purcell")))
-         ("prelude" . ((user-emacs-directory . "~/.emacs.d/prelude")))
-         ("scimax" . ((user-emacs-directory . "~/.emacs.d/scimax")))
-         ("spacemacs" . ((user-emacs-directory . "~/.emacs.d/spacemacs")
-                         (env . (("SPACEMACSDIR" . "~/.config/spacemacs"))))))
+      ".emacs.d/chemacs.el".source = fetchGit { url = "https://github.com/plexus/chemacs2"; } + "/chemacs.el";
+      ".emacs.d/early-init.el".source = fetchGit { url = "https://github.com/plexus/chemacs2"; } + "/early-init.el";
+      ".emacs.d/init.el".source = fetchGit { url = "https://github.com/plexus/chemacs2"; } + "/init.el";
+    };
+
+    xdg.configFile = {
+      "chemacs/profiles.el".text = ''
+        (("centaur" . ((user-emacs-directory . "~/.config/emacs.d/centaur")))
+         ("doom" . ((user-emacs-directory . "~/.config/emacs.d/doom")
+                    (env . (("DOOMDIR" . "~/.config/emacs.d/doom-user")))))
+         ("radian" . ((user-emacs-directory . "~/.config/emacs.d/radian-user")
+                      (straight-p . t)))
+         ("purcell" . ((user-emacs-directory . "~/.config/emacs.d/purcell")))
+         ("prelude" . ((user-emacs-directory . "~/.config/emacs.d/prelude")))
+         ("scimax" . ((user-emacs-directory . "~/.config/emacs.d/scimax")))
+         ("spacemacs" . ((user-emacs-directory . "~/.config/emacs.d/spacemacs")
+                         (env . (("SPACEMACSDIR" . "~/.config/emacs.d/spacemacs-user"))))))
       '';
       # Doom Emacs
-      # ".emacs.d/doom" = {
+      # "emacs.d/doom" = {
       #   source = builtins.fetchGit {
       #     url = "https://github.com/hlissner/doom-emacs";
       #     ref = "develop";
       #   };
       #   recursive = true;
-      #   # onChange = ''
-      #   #   ~/.emacs.d/doom/bin/doom sync
-      #   # '';
+      #   #onChange = ''
+      #   #  env DOOMDIR=~/.config/doom ~/.config/emacs.d/doom/bin/doom sync
+      #   #'';
       # };
-      # ".emacs.d/doom/init.el".text = ''
-      #   (load "default.el")
-      # '';
+      "emacs.d/doom-user" = {
+        source = (system.dirs.dotfiles + "/${name}/emacs/doom");
+        recursive = true;
+        # onChange = "$HOME/.config/emacs.d/doom/bin/doom sync";
+      };
+      #
       # Nano Emacs
-      ".emacs.d/nano" = {
+      #
+      "emacs.d/nano" = {
         source = builtins.fetchGit {
           url = "https://github.com/rougier/nano-emacs";
           ref = "master";
         };
         recursive = true;
       };
-      ".emacs.d/nano/init.el".text = ''
+      "emacs.d/nano/init.el".text = ''
       ;;; Nano Emacs
-      (add-to-list 'load-path "~/.emacs.d/nano")
-      (load-file "~/.emacs.d/nano/nano.el")
+      (add-to-list 'load-path "~/.config/emacs.d/nano")
+      (load-file "~/.config/emacs.d/nano/nano.el")
       '';
+      #
       # Centaur Emacs
-      ".emacs.d/centaur" = {
+      #
+      "emacs.d/centaur" = {
         source = builtins.fetchGit {
           url = "https://github.com/seagle0128/.emacs.d";
           ref = "master";
         };
         recursive = true;
       };
-      ".emacs.d/centaur/custom.el".source = system.dirs.dotfiles
+      "emacs.d/centaur/custom.el".source = system.dirs.dotfiles
         + "/${name}/emacs/centaur/custom.el";
+      #
       # Purcell Emacs
-      ".emacs.d/purcell" = {
+      #
+      "emacs.d/purcell" = {
         source = builtins.fetchGit {
           url = "https://github.com/purcell/emacs.d";
           ref = "master";
         };
         recursive = true;
       };
-      ".emacs.d/purcell/init-local.el".source = system.dirs.dotfiles
+      "emacs.d/purcell/init-local.el".source = system.dirs.dotfiles
         + "/${name}/emacs/purcell/init-local.el";
+      #
       # Prelude Emacs
-      ".emacs.d/prelude" = {
+      #
+      "emacs.d/prelude" = {
         source = builtins.fetchGit {
           url = "https://github.com/bbatsov/prelude";
           ref = "master";
         };
         recursive = true;
       };
-      ".emacs.d/prelude/personal/preload/font.el".source = system.dirs.dotfiles + "/${name}/emacs/prelude/preload/font.el";
-      # ".emacs.d/prelude/personal/prelude-modules.el".source = system.dirs.dotfiles + "/${name}/emacs/prelude/prelude-modules.el";
+      "emacs.d/prelude/personal/preload/font.el".source = system.dirs.dotfiles + "/${name}/emacs/prelude/preload/font.el";
+      # "emacs.d/prelude/personal/prelude-modules.el".source = system.dirs.dotfiles + "/${name}/emacs/prelude/prelude-modules.el";
+      #
       # Scimax
-      ".emacs.d/scimax" = {
+      #
+      "emacs.d/scimax" = {
         source = pkgs.fetchFromGitHub {
           owner = "jkitchin";
           repo = "scimax";
@@ -233,27 +247,21 @@ in {
         };
         recursive = true;
       };
-      ".emacs.d/scimax/user/user.el".source = system.dirs.dotfiles
+      "emacs.d/scimax/user/user.el".source = system.dirs.dotfiles
         + "/${name}/emacs/scimax/user.el";
-      ".emacs.d/scimax/user/preload.el".source = system.dirs.dotfiles
+      "emacs.d/scimax/user/preload.el".source = system.dirs.dotfiles
         + "/${name}/emacs/scimax/user.el";
+      #
       # Spacemacs
-      ".emacs.d/spacemacs" = {
+      #
+      "emacs.d/spacemacs" = {
         source = builtins.fetchGit {
           url = "https://github.com/syl20bnr/spacemacs";
           ref = "develop";
         };
         recursive = true;
       };
-    };
-
-    xdg.configFile = {
-      "doom" = {
-        source = (system.dirs.dotfiles + "/${name}/emacs/doom");
-        recursive = true;
-        onChange = "$HOME/.emacs.d/doom/bin/doom sync";
-      };
-      "spacemacs" = {
+      "emacs.d/spacemacs-user" = {
         source = (system.dirs.dotfiles + "/${name}/emacs/spacemacs");
         recursive = true;
       };
