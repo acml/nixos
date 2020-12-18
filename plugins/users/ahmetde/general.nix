@@ -187,7 +187,7 @@ in {
             };
             env = { WINIT_X11_SCALE_FACTOR = toString system.scale; };
             scrolling = {
-              history = 10000;
+              history = 100000;
             };
           };
         };
