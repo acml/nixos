@@ -268,8 +268,8 @@ in {
     };
 
     home.sessionVariables = {
-      SPACEMACSDIR = "\${HOME}/.config/spacemacs";
-      DOOMDIR = "\${HOME}/.config/doom";
+      SPACEMACSDIR = "\${HOME}/.config/emacs.d/spacemacs-user";
+      DOOMDIR = "\${HOME}/.config/emacs.d/doom-user";
     };
   }) config.icebox.static.users.ahmetde;
 
