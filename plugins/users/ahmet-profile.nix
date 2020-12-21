@@ -87,8 +87,8 @@ in {
           if [ -d "$HOME/.local/bin" ]; then
              export PATH="$PATH:$HOME/.local/bin"
           fi
-          if [ -d "$HOME/.emacs.d/doom/bin" ]; then
-             export PATH="$PATH:$HOME/.emacs.d/doom/bin"
+          if [ -d "$HOME/.config/emacs.d/doom/bin" ]; then
+             export PATH="$PATH:$HOME/.config/emacs.d/doom/bin"
           fi
           MINICOM='-con'
           export MINICOM
