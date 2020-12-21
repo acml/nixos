@@ -241,8 +241,8 @@ in {
         source = pkgs.fetchFromGitHub {
           owner = "jkitchin";
           repo = "scimax";
-          rev = "131f7f6f537c56f1d30396e79634a8b6cd6c887b";
-          sha256 = "02a43701yqqniq6ar61gjq1mn4pk2vm3lj38j1ficjjzl31gr824";
+          rev = "bd215e0f9e61cb4179d39cf43edf5033a3d25563";
+          sha256 = "01sbbz143s68ax2p8kbj6a8q6dqxlvqp4d24j2pxbmsh8qsr8mnq";
           fetchSubmodules = true;
         };
         recursive = true;
