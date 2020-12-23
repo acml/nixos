@@ -140,8 +140,7 @@ in {
         name = "nano";
         desktopName = "Nano Emacs";
         icon = "emacs";
-        exec = ''
-          emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.config/emacs.d/nano\"))" --load /home/ahmet/.config/emacs.d/nano/init.el -dark'';
+        exec = "emacs --with-profile nano -dark";
       })
     ];
 
@@ -161,6 +160,7 @@ in {
                     (env . (("DOOMDIR" . "~/.config/emacs.d/doom-user")))))
          ("radian" . ((user-emacs-directory . "~/.config/emacs.d/radian-user")
                       (straight-p . t)))
+         ("nano" . ((user-emacs-directory . "~/.config/emacs.d/nano")))
          ("purcell" . ((user-emacs-directory . "~/.config/emacs.d/purcell")))
          ("prelude" . ((user-emacs-directory . "~/.config/emacs.d/prelude")))
          ("scimax" . ((user-emacs-directory . "~/.config/emacs.d/scimax")))
@@ -186,7 +186,7 @@ in {
       #
       # Nano Emacs
       #
-      "emacs.d/nano" = {
+      "emacs.d/nano/lisp" = {
         source = builtins.fetchGit {
           url = "https://github.com/rougier/nano-emacs";
           ref = "master";
@@ -195,8 +195,8 @@ in {
       };
       "emacs.d/nano/init.el".text = ''
       ;;; Nano Emacs
-      (add-to-list 'load-path "~/.config/emacs.d/nano")
-      (load-file "~/.config/emacs.d/nano/nano.el")
+      (add-to-list 'load-path "~/.config/emacs.d/nano/lisp")
+      (load-file "~/.config/emacs.d/nano/lisp/nano.el")
       '';
       #
       # Centaur Emacs
