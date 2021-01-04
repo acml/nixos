@@ -217,11 +217,16 @@
     :init
     (progn
       (add-hook 'prog-mode-hook #'highlight-parentheses-mode)
-      (setq hl-paren-delay 0.2)
-      (setq hl-paren-colors '("Springgreen3"
-                              "IndianRed1"
-                              "IndianRed3"
-                              "IndianRed4")))
+      (setq highlight-parentheses-delay 0.2)
+      (setq highlight-parentheses-colors '(rainbow-delimiters-depth-1-face
+                                           rainbow-delimiters-depth-2-face
+                                           rainbow-delimiters-depth-3-face
+                                           rainbow-delimiters-depth-4-face
+                                           rainbow-delimiters-depth-5-face
+                                           rainbow-delimiters-depth-6-face
+                                           rainbow-delimiters-depth-7-face
+                                           rainbow-delimiters-depth-8-face
+                                           rainbow-delimiters-depth-9-face)))
     :config
     (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold))
 
