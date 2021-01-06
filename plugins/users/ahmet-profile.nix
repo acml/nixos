@@ -182,7 +182,8 @@ in {
           lS="${pkgs.exa}/bin/exa -1";                                                      # one column, just names
           lt="${pkgs.exa}/bin/exa --tree --level=2";                                        # tree
 
-          ns = "nix-shell --run zsh -p";
+          ns = "nix-shell";
+          nsu = "nix-shell -I nixpkgs=channel:nixpkgs-unstable";
           ssh = "TERM=xterm-256color ssh";
           sw = "ssh sw";
           wipe = "${pkgs.srm}/bin/srm -vfr";
