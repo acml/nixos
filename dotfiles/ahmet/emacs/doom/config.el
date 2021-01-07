@@ -19,8 +19,12 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
+;; (setq doom-font (font-spec :family "Iosevka" :size 14)
+;;       doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 14))
 (setq doom-font (font-spec :family "Iosevka" :size 14)
-      doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 14))
+      doom-big-font (font-spec :family "Iosevka" :size 26)
+      doom-variable-pitch-font (font-spec :family "Overpass Nerd Font" :size 14)
+      doom-serif-font (font-spec :family "BlexMono Nerd Font" :weight 'light))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -177,19 +181,6 @@
 (use-package! dired-subtree
   :after dired
   :config
-  ;; fixes the case of the first line in dired when the cursor jumps
-  ;; to the header in dired rather then to the first file in buffer
-  (defun dired-subtree-toggle ()
-    "Insert subtree at point or remove it if it was not present."
-    (interactive)
-    (if (dired-subtree--is-expanded-p)
-        (progn
-          (dired-next-line 1)
-          (dired-subtree-remove)
-          (if (bobp)
-              (dired-next-line 1)))
-      (save-excursion (dired-subtree-insert))))
-
   (defadvice dired-subtree-toggle (after dired-icons-refresh ())
     "Insert an empty line when moving up from the top line."
       (revert-buffer))
@@ -197,8 +188,7 @@
 
   (map!
    (:map dired-mode-map
-    :desc "Toggle subtree" :n [tab] #'dired-subtree-toggle))
-  )
+    :desc "Toggle subtree" :n [tab] #'dired-subtree-toggle)))
 
 (after! dired
   ;; Define localleader bindings
@@ -210,7 +200,6 @@
 
 (use-package! docker-tramp)
 (use-package! docker)
-
 
 (use-package! highlight-parentheses
     :defer t
@@ -297,7 +286,7 @@
         modus-themes-bold-constructs t
         modus-themes-fringes nil ; {nil,'subtle,'intense}
         modus-themes-mode-line '3d ; {nil,'3d,'moody}
-        modus-themes-syntax nil ; Lots of options---continue reading the manual
+        modus-themes-syntax 'faint ; Lots of options---continue reading the manual
         modus-themes-intense-hl-line nil
         modus-themes-paren-match nil ; {nil,'subtle-bold,'intense,'intense-bold}
         modus-themes-links 'neutral-underline ; Lots of options---continue reading the manual

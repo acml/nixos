@@ -41,9 +41,11 @@ in mkIf cfg.enable {
           "FiraCode"
           "FiraMono"
           "Hermit"
+          "IBMPlexMono"
           "Inconsolata"
           "Iosevka"
           "Noto"
+          "Overpass"
           "RobotoMono"
           "Ubuntu"
         ];

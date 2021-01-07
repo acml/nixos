@@ -133,8 +133,7 @@ in {
         name = "radian";
         desktopName = "Radian Emacs";
         icon = "emacs";
-        exec = ''
-          emacs -q --eval "(setq user-emacs-directory (file-truename \"/home/ahmet/.config/emacs.d/radian-user\"))" --load /home/ahmet/.config/emacs.d/radian-user/early-init.el'';
+        exec = "emacs --with-profile radian";
       })
       (makeDesktopItem {
         name = "nano";

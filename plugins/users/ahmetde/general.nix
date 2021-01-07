@@ -163,6 +163,107 @@ in {
 
       # Package settings
       programs = {
+        kitty = {
+          enable = true;
+
+          font.name = "Iosevka Term";
+
+          settings = {
+            bold_font        = "auto";
+            italic_font      = "auto";
+            bold_italic_font = "auto";
+
+            font_size = "11.0";
+
+            scrollback_lines = "10000";
+
+            background_opacity = "0.8";
+
+            # dark
+            background = "#000000";
+            foreground = "#ffffff";
+            cursor = "#586e75";
+
+            selection_background = "#555753";
+            # selection_foreground = "#eae3cb";
+
+            color0 = "#2e3436";
+            color8 = "#555753";
+
+            color1 = "#cc0000";
+            color9 = "#ef2929";
+
+            color2 = "#4e9a06";
+            color10 = "#8ae234";
+
+            color3 = "#c4a000";
+            color11 = "#fce94f";
+
+            color4 = "#3465a4";
+            color12 = "#729fcf";
+
+            color5 = "#75507b";
+            color13 = "#ad7fa8";
+
+            color6 = "#06989a";
+            color14 = "#34e2e2";
+
+            color7 = "#d3d7cf";
+            color15 = "#eeeeec";
+
+            # light
+            # background = "#fdf6e3";
+            # foreground = "#657b83";
+            # cursor = "#586e75";
+
+            # selection_background = "#475b62";
+            # selection_foreground = "#eae3cb";
+
+            # color0 = "#073642";
+            # color8 = "#002b36";
+
+            # color1 = "#dc322f";
+            # color9 = "#cb4b16";
+
+            # color2 = "#859900";
+            # color10 = "#586e75";
+
+            # color3 = "#b58900";
+            # color11 = "#657b83";
+
+            # color4 = "#268bd2";
+            # color12 = "#839496";
+
+            # color5 = "#d33682";
+            # color13 = "#6c71c4";
+
+            # color6 = "#2aa198";
+            # color14 = "#93a1a1";
+
+            # color7 = "#eee8d5";
+            # color15 = "#fdf6e3";
+          };
+
+          keybindings = {
+            "ctrl+insert" = "copy_to_clipboard";
+            "shift+insert" =    "paste_from_clipboard";
+
+            "ctrl+enter"  =       "new_window";
+            "ctrl+backspace"  =   "close_window";
+            "ctrl+delete"  =      "close_window";
+            "ctrl+pagedown"  =    "next_window";
+            "ctrl+pageup"  =      "previous_window";
+
+            "ctrl+f" =           "goto_layout stack";
+            "ctrl+escape" =      "last_used_layout";
+
+            "alt+enter" =         "new_tab";
+            "alt+backspace" =     "close_tab";
+            "alt+delete" =        "close_tab";
+            "alt+pagedown" =      "next_tab";
+            "alt+pageup" =        "previous_tab";
+          };
+        };
         alacritty = {
           enable = true;
           settings = {
@@ -186,6 +287,7 @@ in {
               size = 12.0;
             };
             env = { WINIT_X11_SCALE_FACTOR = toString system.scale; };
+            background_opacity = 0.9;
             scrolling = {
               history = 100000;
             };
