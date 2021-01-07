@@ -161,6 +161,7 @@ This function should only modify configuration layer settings."
      ;; magit-todos
      minimap
      (mixed-pitch :location (recipe :fetcher gitlab :repo "jabranham/mixed-pitch"))
+     modus-themes
      posix-manual
      rg
      rmsbolt
@@ -334,7 +335,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font '(("Iosevka"          :size 11.0 :weight normal :width normal)
+   dotspacemacs-default-font '(("Iosevka"          :size 10.5 :weight normal :width normal)
                                ("DejaVu Sans Mono" :size 10.5 :weight normal :width normal)
                                ("Source Code Pro"  :size 10.0 :weight normal :width normal)
                                ("Monospace"        :size 10.0 :weight normal :width normal)
@@ -625,23 +626,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (prefer-coding-system 'utf-8)
   (set-terminal-coding-system 'utf-8)
   (set-keyboard-coding-system 'utf-8)
-
-  (setq modus-operandi-theme-slanted-constructs t
-        modus-operandi-theme-bold-constructs t
-        ;; modus-operandi-theme-visible-fringes t
-        modus-operandi-theme-3d-modeline t
-        modus-operandi-theme-subtle-diffs t
-        modus-operandi-theme-intense-standard-completions t
-        modus-operandi-theme-org-blocks 'rainbow
-        modus-operandi-theme-variable-pitch-headings t
-        modus-operandi-theme-rainbow-headings t
-        ;; modus-operandi-theme-section-headings t
-        modus-operandi-theme-scale-headings t
-        modus-operandi-theme-scale-1 1.05
-        modus-operandi-theme-scale-2 1.1
-        modus-operandi-theme-scale-3 1.15
-        modus-operandi-theme-scale-4 1.2
-        modus-operandi-theme-scale-5 1.3)
   )
 
 (defun dotspacemacs/user-load ()
@@ -990,16 +974,13 @@ buffer's name.
       :hook (dired-mode . dired-show-readme-mode))
 
     (use-package dired-subtree :defer t
-      :bind (:map dired-mode-map
-                  ("<tab>" . acml/dired-subtree-toggle)
-                  ("<backtab>" . dired-subtree-cycle))
+      :bind (:map dired-mode-map ("<tab>" . acml/dired-subtree-toggle))
       :init
       (defun acml/dired-subtree-toggle ()
         "Insert subtree at point or remove it if it was not present."
         (interactive)
         (dired-subtree-toggle)
         (dired-revert))
-      (autoload 'dired-subtree--is-expanded-p "dired-subtree")
       :config
       (setq dired-subtree-use-backgrounds nil))
 
@@ -1145,6 +1126,48 @@ confirmation"
     (set-face-attribute 'default nil :family "Ubuntu Mono")
     :hook
     (text-mode . mixed-pitch-mode))
+
+  (use-package modus-themes :defer t
+    :init
+    ;; Set customization options to values of your choice
+    (setq modus-themes-slanted-constructs t
+          modus-themes-bold-constructs t
+          modus-themes-fringes nil ; {nil,'subtle,'intense}
+          modus-themes-mode-line '3d ; {nil,'3d,'moody}
+          modus-themes-syntax 'faint ; Lots of options---continue reading the manual
+          modus-themes-intense-hl-line nil
+          modus-themes-paren-match nil ; {nil,'subtle-bold,'intense,'intense-bold}
+          modus-themes-links 'neutral-underline ; Lots of options---continue reading the manual
+          modus-themes-no-mixed-fonts nil
+          modus-themes-prompts 'subtle ; {nil,'subtle,'intense}
+          modus-themes-completions 'opinionated ; {nil,'moderate,'opinionated}
+          modus-themes-region 'bg-only-no-extend ; {nil,'no-extend,'bg-only,'bg-only-no-extend}
+          modus-themes-diffs 'desaturated ; {nil,'desaturated,'fg-only,'bg-only}
+          modus-themes-org-blocks nil ; {nil,'grayscale,'rainbow}
+          modus-themes-org-habit 'traffic-light ; {nil,'simplified,'traffic-light}
+          modus-themes-headings ; Lots of options---continue reading the manual
+          '((1 . section)
+            (2 . section-no-bold)
+            (3 . rainbow-line)
+            (t . rainbow-line-no-bold))
+          modus-themes-variable-pitch-headings nil
+          modus-themes-scale-headings nil
+          modus-themes-scale-1 1.1
+          modus-themes-scale-2 1.15
+          modus-themes-scale-3 1.21
+          modus-themes-scale-4 1.27
+          modus-themes-scale-5 1.33)
+
+    ;; Enable the theme files
+    (use-package modus-operandi-theme)
+    (use-package modus-vivendi-theme)
+
+    :config
+    ;; Load the theme of your choice
+    (modus-themes-load-operandi)
+    ;; ;; OR
+    ;; (load-theme 'modus-operandi t)
+    :bind ("<f5>" . modus-themes-toggle))
 
   (use-package mu4e :defer t
     :init
