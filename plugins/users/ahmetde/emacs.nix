@@ -58,6 +58,7 @@ in {
       # :tools editorconfig
       editorconfig-core-c # per-project style config
       # :tools lookup & :lang org +roam
+      gnuplot
       sqlite
       # :lang cc
       ccls # ccls is better than clang-tools
