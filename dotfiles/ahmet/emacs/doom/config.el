@@ -311,9 +311,8 @@
         modus-themes-scale-4 1.27
         modus-themes-scale-5 1.33)
 
-  ;; Enable the theme files
-  (use-package modus-operandi-theme)
-  (use-package modus-vivendi-theme)
+  ;; Load the theme files before enabling a theme
+  (modus-themes-load-themes)
 
   :config
   ;; Load the theme of your choice
