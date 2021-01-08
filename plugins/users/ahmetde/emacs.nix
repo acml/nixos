@@ -60,13 +60,17 @@ in {
       # :tools lookup & :lang org +roam
       sqlite
       # :lang cc
-      ccls
+      ccls # ccls is better than clang-tools
+      # clang-tools
+      cmake-language-server
       glslang
       # :lang go
       gocode
       gomodifytags
       gotests
       gore
+      # :lang docker
+      nodePackages.dockerfile-language-server-nodejs
       # :lang javascript
       nodePackages.javascript-typescript-langserver
       # :lang sh
