@@ -75,11 +75,15 @@ in {
       # :lang javascript
       nodePackages.javascript-typescript-langserver
       # :lang sh
+      bashdb
+      shellcheck
       nodePackages.bash-language-server
       # :lang latex & :lang org (latex previews)
       texlive.combined.scheme-tetex
       # :lang markdown
+      mdl
       pandoc
+      proselint
       # :lang rust
       (pkgs.latest.rustChannels.stable.rust.override {
         extensions = [
