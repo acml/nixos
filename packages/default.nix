@@ -9,6 +9,7 @@
       linode-cli = (callPackage ./linode-cli.nix {});
       zunit = (callPackage ./zunit.nix {});
       sunflower = (callPackage ./sunflower.nix {});
+      worker = (callPackage ./worker.nix {});
     };
   })
 
