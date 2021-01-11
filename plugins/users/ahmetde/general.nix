@@ -130,10 +130,22 @@ in {
         meld
         my.worker
         (nixos-unstable.vscode-with-extensions.override {
-           vscodeExtensions = with vscode-extensions; [
-             bbenoist.Nix
-             ms-vscode.cpptools
+           vscodeExtensions = with nixos-unstable.vscode-extensions; [
+             # bbenoist.Nix
+             jnoortheen.nix-ide
              vscodevim.vim
+             coenraads.bracket-pair-colorizer-2
+             formulahendry.auto-close-tag
+             formulahendry.auto-rename-tag
+             golang.Go
+             ibm.output-colorizer
+             mechatroner.rainbow-csv
+             ms-azuretools.vscode-docker
+             ms-vscode-remote.remote-ssh
+             ms-vscode.cpptools
+             naumovs.color-highlight
+             tyriar.sort-lines
+             vincaslt.highlight-matching-tag
            ];
         })
       ];
