@@ -299,7 +299,10 @@ in {
               };
               size = 12.0;
             };
-            env = { WINIT_X11_SCALE_FACTOR = toString system.scale; };
+            env = {
+              TERM = "xterm-256color";
+              WINIT_X11_SCALE_FACTOR = toString system.scale;
+            };
             background_opacity = 0.9;
             scrolling = {
               history = 100000;
