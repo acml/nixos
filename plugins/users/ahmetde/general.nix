@@ -279,6 +279,7 @@ in {
         };
         alacritty = {
           enable = true;
+          package = pkgs.nixos-unstable.alacritty;
           settings = {
             font = {
               normal = {
