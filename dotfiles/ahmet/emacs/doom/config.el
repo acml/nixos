@@ -97,6 +97,9 @@
 (windmove-default-keybindings 'control)
 (windswap-default-keybindings 'control 'shift)
 
+(add-to-list 'term-file-aliases
+             '("alacritty" . "xterm-256color"))
+
 ; Each path is relative to `+mu4e-mu4e-mail-path', which is ~/.mail by default
 (after! mu4e
   (set-email-account! "yahoo"

@@ -187,7 +187,9 @@ in {
           ssh = "TERM=xterm-256color ssh";
           sw = "ssh sw";
           wipe = "${pkgs.srm}/bin/srm -vfr";
-          upgrade = "sudo nixos-rebuild switch --upgrade";
+
+          update = "sudo nix-channel --update";
+          rebuild = "sudo nixos-rebuild switch --upgrade";
         };
       };
     };
