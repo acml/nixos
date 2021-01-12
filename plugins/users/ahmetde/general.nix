@@ -300,7 +300,7 @@ in {
               size = 12.0;
             };
             env = {
-              TERM = "xterm-256color";
+              # TERM = "xterm-256color";
               WINIT_X11_SCALE_FACTOR = toString system.scale;
             };
             background_opacity = 0.9;
