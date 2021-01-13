@@ -19,6 +19,7 @@ in {
       package = pkgs.emacsPgtkGcc;
       # package = pkgs.emacsGcc;
       # package = pkgs.emacsGit;
+      # package = pkgs.emacs;
       extraPackages = (epkgs:
         (with epkgs; [
           # exwm
