@@ -184,7 +184,8 @@
 (setq dired-hide-details-hide-symlink-targets t)
 (add-hook! dired-mode
   (dired-hide-details-mode 1)
-  (dired-show-readme-mode 1))
+  ;; (dired-show-readme-mode 1)
+  (dired-auto-readme-mode 1))
 
 (use-package! dired-subtree
   :after dired
