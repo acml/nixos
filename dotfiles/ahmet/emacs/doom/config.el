@@ -94,8 +94,12 @@
 (setq-default
  delete-by-moving-to-trash t)
 
-(windmove-default-keybindings 'control)
-(windswap-default-keybindings 'control 'shift)
+;; (windmove-default-keybindings 'control)
+;; (windswap-default-keybindings 'control 'shift)
+;; (add-hook 'org-shiftup-final-hook 'windmove-up)
+;; (add-hook 'org-shiftleft-final-hook 'windmove-left)
+;; (add-hook 'org-shiftdown-final-hook 'windmove-down)
+;; (add-hook 'org-shiftright-final-hook 'windmove-right)
 
 (add-to-list 'term-file-aliases
              '("alacritty" . "xterm-256color"))
