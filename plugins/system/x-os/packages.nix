@@ -50,6 +50,8 @@ in mkIf cfg.enable {
           "Ubuntu"
         ];
       })
+      fira-code
+      roboto-mono
       siji
       symbola
     ];

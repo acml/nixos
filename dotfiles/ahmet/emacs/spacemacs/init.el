@@ -1119,6 +1119,11 @@ confirmation"
   (use-package magit :defer t
     :init
     (setq magit-repository-directories '(( "~/Projects/" . 2)))
+    :config
+    (magit-add-section-hook 'magit-status-sections-hook
+                            'magit-insert-ignored-files
+                            'magit-insert-untracked-files
+                            nil)
     ;; :config
     ;; (magit-add-section-hook 'magit-status-sections-hook
     ;;                         'magit-insert-ignored-files

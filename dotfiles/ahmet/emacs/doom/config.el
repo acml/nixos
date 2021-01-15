@@ -177,6 +177,7 @@
 ;;
 ;; Dired
 ;;
+
 ;; Hook up dired-x global bindings without loading it up-front
 (define-key ctl-x-map "\C-j" 'dired-jump)
 (define-key ctl-x-4-map "\C-j" 'dired-jump-other-window)
@@ -200,6 +201,7 @@
     :desc "Toggle subtree" :n [tab] #'dired-subtree-toggle)))
 
 (after! dired
+  (dired-async-mode 1)
   ;; Define localleader bindings
   (map!
    ;; Define or redefine dired bindings
@@ -245,6 +247,12 @@
                          right-fringe-width 8)))
 
 ;;; :tools magit
+(after! magit
+  (magit-add-section-hook 'magit-status-sections-hook
+                          'magit-insert-ignored-files
+                          'magit-insert-untracked-files
+                          nil))
+
 (setq magit-repository-directories '(("~/Projects" . 2))
       magit-save-repository-buffers nil
       ;; Don't restore the wconf after quitting magit, it's jarring
