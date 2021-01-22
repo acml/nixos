@@ -20,4 +20,5 @@
       sha256 = "1mld0agq52xhbhwfffjqrrpk0niyj0hkxjgy7ban0w0khla9ah4n";
     }))
   (import (fetchTarball "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz"))
+  (import (fetchTarball "https://github.com/mjlbach/neovim-nightly-overlay/archive/master.tar.gz"))
 ]

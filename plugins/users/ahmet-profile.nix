@@ -90,8 +90,6 @@ in {
           if [ -d "$HOME/.config/emacs.d/doom/bin" ]; then
              export PATH="$PATH:$HOME/.config/emacs.d/doom/bin"
           fi
-          MINICOM='-con'
-          export MINICOM
         '';
         history = {
           ignoreDups = true;

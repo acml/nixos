@@ -60,6 +60,7 @@
 ;; (package! move-text) ;; for spacemacs-editing
 ;; (package! string-inflection) ;; for spacemacs-editing
 
+(package! atomic-chrome)
 (package! beginend)
 (package! daemons)
 
@@ -69,7 +70,6 @@
 
 (package! docker)
 (package! docker-tramp)
-
 (package! highlight-parentheses)
 (package! journalctl-mode)
 

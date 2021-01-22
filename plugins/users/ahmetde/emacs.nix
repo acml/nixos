@@ -276,9 +276,16 @@ in {
       };
     };
 
+    services.emacs.enable = true;
+    services.emacs.client.enable = true;
+    services.emacs.client.arguments = [  "-a \"\"" "-c" ];
+    services.emacs.socketActivation.enable = false;
+
+    # home.sessionPath = [ "~/.local/bin" "\${xdg.configHome}/emacs.d/doom/bin" ];
     home.sessionVariables = {
-      SPACEMACSDIR = "\${HOME}/.config/emacs.d/spacemacs-user";
       DOOMDIR = "\${HOME}/.config/emacs.d/doom-user";
+      MINICOM="-con";
+      SPACEMACSDIR = "\${HOME}/.config/emacs.d/spacemacs-user";
     };
   }) config.icebox.static.users.ahmetde;
 

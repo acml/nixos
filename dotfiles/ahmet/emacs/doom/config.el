@@ -212,6 +212,13 @@
 (use-package! docker-tramp)
 (use-package! docker)
 
+(use-package! atomic-chrome
+  :after-call focus-out-hook
+  :config
+  (setq atomic-chrome-default-major-mode 'markdown-mode
+        atomic-chrome-buffer-open-style 'frame)
+  (atomic-chrome-start-server))
+
 (use-package! highlight-parentheses
     :defer t
     :init
