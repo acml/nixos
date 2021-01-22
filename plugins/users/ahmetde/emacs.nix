@@ -281,7 +281,7 @@ in {
     services.emacs.client.arguments = [  "-a \"\"" "-c" ];
     services.emacs.socketActivation.enable = false;
 
-    # home.sessionPath = [ "~/.local/bin" "\${xdg.configHome}/emacs.d/doom/bin" ];
+    home.sessionPath = [ "\${HOME}/.local/bin" "\${HOME}/.config/emacs.d/doom/bin" ];
     home.sessionVariables = {
       DOOMDIR = "\${HOME}/.config/emacs.d/doom-user";
       MINICOM="-con";

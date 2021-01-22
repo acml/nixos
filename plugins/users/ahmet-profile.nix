@@ -83,14 +83,6 @@ in {
         enable = true;
         enableAutosuggestions = true;
         enableCompletion = true;
-        envExtra = ''
-          if [ -d "$HOME/.local/bin" ]; then
-             export PATH="$PATH:$HOME/.local/bin"
-          fi
-          if [ -d "$HOME/.config/emacs.d/doom/bin" ]; then
-             export PATH="$PATH:$HOME/.config/emacs.d/doom/bin"
-          fi
-        '';
         history = {
           ignoreDups = true;
           expireDuplicatesFirst = true;
