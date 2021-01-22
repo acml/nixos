@@ -6,24 +6,40 @@ let
 in {
   config.home-manager.users = iceLib.functions.mkUserConfigs' (name: cfg: {
 
+    home.packages = with pkgs; [ neovim-remote ];
     programs.neovim = {
+      package = pkgs.neovim-nightly;
       enable = true;
       vimAlias = true;
 
       plugins = with pkgs.vimPlugins; [
+        YouCompleteMe
+        agda-vim
+        auto-pairs
+        completion-nvim
+        ctrlp
+        direnv-vim
+        editorconfig-vim
+        goyo-vim
+        nerdcommenter
+        nvim-lspconfig
+        nvim-treesitter
+        syntastic
+        tabular
+        tagbar
         vim-airline
         vim-airline-themes
-
-        vim-gitgutter
-        syntastic
-        YouCompleteMe
-        nerdcommenter
-        auto-pairs
         vim-closetag
-        tagbar
-        ctrlp
-        editorconfig-vim
-        tabular
+        vim-commentary
+        vim-eunuch
+        vim-floaterm
+        vim-fugitive
+        vim-gitgutter
+        vim-pencil
+        vim-polyglot
+        vim-surround
+        vim-which-key
+        zoomwintab-vim
       ];
 
       extraConfig = ''
