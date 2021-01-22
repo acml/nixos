@@ -154,6 +154,10 @@ in {
           mv="mv -i";
 
           calc = "emacs -nw -Q -f full-calc";
+          m = "e --eval \"(progn (magit-status) (delete-other-windows))\"";
+          mt = "m -t";
+          et = "e -t";
+
           cat = "${pkgs.bat}/bin/bat";
           df = "df -h";
           # du = "${pkgs.du-dust}/bin/dust";
