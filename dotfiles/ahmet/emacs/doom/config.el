@@ -9,6 +9,37 @@
 (setq user-full-name "Ahmet Cemal Özgezer"
       user-mail-address "ahmet.ozgezer@andasis.com")
 
+(setq auth-sources '("~/.authinfo.gpg")
+      auth-source-cache-expiry nil) ; default is 7200 (2h)
+
+(setq-default
+ delete-by-moving-to-trash t                      ; Delete files to trash
+ window-combination-resize t                      ; take new window space from all other windows (not just current)
+ x-stretch-cursor t)                              ; Stretch cursor to the glyph width
+
+(setq undo-limit 80000000                         ; Raise undo-limit to 80Mb
+      evil-want-fine-undo t                       ; By default while in insert all changes are one big blob. Be more granular
+      auto-save-default t                         ; Nobody likes to loose work, I certainly don't
+      truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
+
+(display-time-mode 1)                             ; Enable time in the mode-line
+
+(if (equal "Battery status not available"
+           (battery))
+    (display-battery-mode 1)                        ; On laptops it's nice to know how much power you have
+  (setq password-cache-expiry nil))               ; I can trust my desktops ... can't I? (no battery = desktop)
+
+(global-subword-mode 1)                           ; Iterate through CamelCase words
+
+(setq-default custom-file (expand-file-name ".custom.el" doom-private-dir))
+(when (file-exists-p custom-file)
+  (load custom-file))
+
+(setq evil-vsplit-window-right t
+      evil-split-window-below t)
+
+(setq +ivy-buffer-preview t)
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -40,6 +71,18 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+(setq frame-title-format
+      '(""
+        (:eval
+         (if (s-contains-p org-roam-directory (or buffer-file-name ""))
+             (replace-regexp-in-string
+              ".*/[0-9]*-?" "☰ "
+              (subst-char-in-string ?_ ?  buffer-file-name))
+           "%b"))
+        (:eval
+         (let ((project-name (projectile-project-name)))
+           (unless (string= "-" project-name)
+             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

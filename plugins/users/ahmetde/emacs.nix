@@ -153,6 +153,23 @@ in {
       })
     ];
 
+    # Copy the scripts folder
+    home.file.".local/bin".source = let
+      emacs-scripts-dir = (system.dirs.dotfiles + "/${name}/scripts");
+      path = lib.makeBinPath (with pkgs; [
+        gawk gnused jq wget
+        xdg-user-dirs # for the screenshot tool
+      ]);
+    in "${
+      # For the patchShebang phase
+      pkgs.runCommandLocal "emacs-scripts" { nativeBuildInputs = [ pkgs.makeWrapper ]; } ''
+        cp --no-preserve=mode -T -r "${emacs-scripts-dir}" $out
+        chmod +x $out/*
+        for i in $out/*; do
+          wrapProgram $i --prefix PATH : ${path}
+        done
+      ''
+    }";
     # Handwritten configs
     home.file = {
       # Handle multiple emacs installs
@@ -278,7 +295,7 @@ in {
 
     services.emacs.enable = true;
     services.emacs.client.enable = true;
-    services.emacs.client.arguments = [  "-a \"\"" "-c" ];
+    services.emacs.client.arguments = [  "-create-frame --alternate-editor=\"\" --no-wait %F" ];
     services.emacs.socketActivation.enable = false;
 
     home.sessionPath = [ "\${HOME}/.local/bin" "\${HOME}/.config/emacs.d/doom/bin" ];
