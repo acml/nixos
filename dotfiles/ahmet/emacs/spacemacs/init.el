@@ -904,16 +904,25 @@ buffer's name.
 
   (use-package dired
 
-    :hook
-    (dired-mode . dired-hide-details-mode)
-    (dired-mode . (lambda () (rename-buffer (generate-new-buffer-name (format "*dired: %s*" dired-directory)))))
+    :hook ((dired-mode . dired-hide-details-mode)
+           (dired-mode . auto-revert-mode)
+           (dired-mode . (lambda ()
+                           (rename-buffer
+                            (generate-new-buffer-name
+                             (format "*dired: %s*" dired-directory))))))
 
     :config
     (when (spacemacs/system-is-mac)
       (setq insert-directory-program "/usr/local/bin/gls"))
 
-    (setq ;; Details information
-          dired-listing-switches "--group-directories-first -ahl"
+    ;; Dired listing switches
+    ;;  -a : Do not ignore entries starting with .
+    ;;  -l : Use long listing format.
+    ;;  -h : Human-readable sizes like 1K, 234M, ..
+    ;;  -v : Do natural sort .. so the file names starting with . will show up first.
+    ;;  -F : Classify filenames by appending '*' to executables,
+    ;;       '/' to directories, etc.
+    (setq dired-listing-switches "-alhvF --group-directories-first"
 
           ;; delete and copy recursively
           dired-recursive-copies 'always
