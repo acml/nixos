@@ -915,12 +915,11 @@ buffer's name.
     ;;  -v : Do natural sort .. so the file names starting with . will show up first.
     ;;  -F : Classify filenames by appending '*' to executables,
     ;;       '/' to directories, etc.
-    (if (spacemacs/system-is-mac)
-        (if (not (executable-find "gls"))
-            (setq dired-listing-switches "-alhF")
-          (setq insert-directory-program "gls"
-                dired-listing-switches "-alhvF --group-directories-first"))
-      (setq dired-listing-switches "-alhvF --group-directories-first"))
+    (when (or (not (spacemacs/system-is-mac))
+              (if (executable-find "gls")
+                  (setq insert-directory-program "gls")))
+      (setq dired-listing-switches
+            "-alhvF --group-directories-first"))
 
     (setq ;; delete and copy recursively
           dired-recursive-copies 'always
