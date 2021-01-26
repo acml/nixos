@@ -938,15 +938,12 @@ buffer's name.
              ("C-j" . dired-jump-other-window))
       :hook (dired-mode . dired-omit-mode)
       :config
-      (setq dired-omit-verbose nil
-            dired-omit-files
-            (concat dired-omit-files
-                    "\\|^.DS_Store\\'"
-                    "\\|^.project\\(?:ile\\)?\\'"
-                    "\\|^.\\(svn\\|git\\)\\'"
-                    "\\|^.ccls-cache\\'"
-                    "\\|\\(?:\\.js\\)?\\.meta\\'"
-                    "\\|\\.\\(?:elc\\|o\\|pyo\\|swp\\|class\\)\\'")))
+      (setq dired-omit-verbose nil)
+      (nconc dired-omit-extensions '(".DS_Store"
+                                     ".project"
+                                     ".projectile"
+                                     ".ccls-cache/"
+                                     ".swp")))
 
     (use-package dired-async :defer t
       :config
