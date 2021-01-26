@@ -908,9 +908,6 @@ buffer's name.
                              (format "*dired: %s*" dired-directory))))))
 
     :config
-    (when (spacemacs/system-is-mac)
-      (setq insert-directory-program "/usr/local/bin/gls"))
-
     ;; Dired listing switches
     ;;  -a : Do not ignore entries starting with .
     ;;  -l : Use long listing format.
@@ -918,9 +915,14 @@ buffer's name.
     ;;  -v : Do natural sort .. so the file names starting with . will show up first.
     ;;  -F : Classify filenames by appending '*' to executables,
     ;;       '/' to directories, etc.
-    (setq dired-listing-switches "-alhvF --group-directories-first"
+    (if (spacemacs/system-is-mac)
+        (if (not (executable-find "gls"))
+            (setq dired-listing-switches "-alhF")
+          (setq insert-directory-program "gls"
+                dired-listing-switches "-alhvF --group-directories-first"))
+      (setq dired-listing-switches "-alhvF --group-directories-first"))
 
-          ;; delete and copy recursively
+    (setq ;; delete and copy recursively
           dired-recursive-copies 'always
           dired-recursive-deletes 'top
 
