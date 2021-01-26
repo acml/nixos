@@ -666,10 +666,6 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  (use-package treemacs-icons)
-  (treemacs--setup-icon-background-colors)
-  (helm-icons-enable)
-
   (setq focus-follows-mouse t
         gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"
         ido-mode -1
@@ -1008,22 +1004,19 @@ buffer's name.
 
     (use-package dired-subtree :defer t
       :bind (:map dired-mode-map ("<tab>" . acml/dired-subtree-toggle))
-      :init
+      :config
       (defun acml/dired-subtree-toggle ()
         "Insert subtree at point or remove it if it was not present."
         (interactive)
         (dired-subtree-toggle)
         (dired-revert))
-      :config
       (setq dired-subtree-use-backgrounds nil))
 
     (use-package treemacs-icons-dired :defer t
-      :config (use-package treemacs-icons)
-      :init
+      :config
       (defun acml/dired-setup ()
         (unless (eq major-mode 'dired-sidebar-mode)
-          (treemacs-icons-dired-mode)
-          (treemacs--select-icon-set)))
+          (treemacs-icons-dired-mode)))
       :hook (dired-mode . acml/dired-setup))
 
     :bind (:map dired-mode-map
@@ -1359,6 +1352,14 @@ confirmation"
     (proced-auto-update-interval 1)
     (proced-descend t)
     (proced-filter 'user))
+
+  (use-package helm-icons :defer t
+    ;; :if (display-graphic-p)
+    :after helm
+    :config
+    (setq helm-icons-provider 'all-the-icons)
+    :init
+    (helm-icons-enable))
 
   (use-package helm-sys :defer t
     :commands (helm-top)
