@@ -162,7 +162,7 @@ in {
           df = "df -h";
           # du = "${pkgs.du-dust}/bin/dust";
           du = "${pkgs.ncdu}/bin/ncdu --color dark";
-          h = "${pkgs.tldr}/bin/tldr";
+          tldr = "${pkgs.tealdeer}/bin/tldr";
 
           # general use
           ls ="${pkgs.exa}/bin/exa";                                                         # ls
@@ -175,6 +175,9 @@ in {
           # specialty views
           lS="${pkgs.exa}/bin/exa -1";                                                      # one column, just names
           lt="${pkgs.exa}/bin/exa --tree --level=2";                                        # tree
+
+          ps ="${pkgs.procs}/bin/procs";
+          tokei = "${pkgs.tokei}/bin/tokei";
 
           ns = "nix-shell";
           nsu = "nix-shell -I nixpkgs=channel:nixpkgs-unstable";
