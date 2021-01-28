@@ -158,32 +158,32 @@ in {
           mt = "m -t";
           et = "e -t";
 
-          cat = "${pkgs.bat}/bin/bat";
+          cat = "${pkgs.nixos-unstable.bat}/bin/bat";
           df = "df -h";
-          # du = "${pkgs.du-dust}/bin/dust";
-          du = "${pkgs.ncdu}/bin/ncdu --color dark";
-          tldr = "${pkgs.tealdeer}/bin/tldr";
+          # du = "${pkgs.nixos-unstable.du-dust}/bin/dust";
+          du = "${pkgs.nixos-unstable.ncdu}/bin/ncdu --color dark";
+          tldr = "${pkgs.nixos-unstable.tealdeer}/bin/tldr";
 
           # general use
-          ls ="${pkgs.exa}/bin/exa";                                                         # ls
-          l  ="${pkgs.exa}/bin/exa -lbF --git";                                              # list, size, type, git
-          ll ="${pkgs.exa}/bin/exa -lbGF --git";                                             # long list
-          llm="${pkgs.exa}/bin/exa -lbGd --git --sort=modified";                             # long list, modified date sort
-          la ="${pkgs.exa}/bin/exa -lbhHigUmuSa --time-style=long-iso --git --color-scale";  # all list
-          lx ="${pkgs.exa}/bin/exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale"; # all + extended list
+          ls ="${pkgs.nixos-unstable.exa}/bin/exa";                                                         # ls
+          l  ="${pkgs.nixos-unstable.exa}/bin/exa -lbF --git";                                              # list, size, type, git
+          ll ="${pkgs.nixos-unstable.exa}/bin/exa -lbGF --git";                                             # long list
+          llm="${pkgs.nixos-unstable.exa}/bin/exa -lbGd --git --sort=modified";                             # long list, modified date sort
+          la ="${pkgs.nixos-unstable.exa}/bin/exa -lbhHigUmuSa --time-style=long-iso --git --color-scale";  # all list
+          lx ="${pkgs.nixos-unstable.exa}/bin/exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale"; # all + extended list
 
           # specialty views
-          lS="${pkgs.exa}/bin/exa -1";                                                      # one column, just names
-          lt="${pkgs.exa}/bin/exa --tree --level=2";                                        # tree
+          lS="${pkgs.nixos-unstable.exa}/bin/exa -1";                                                      # one column, just names
+          lt="${pkgs.nixos-unstable.exa}/bin/exa --tree --level=2";                                        # tree
 
-          ps ="${pkgs.procs}/bin/procs";
-          tokei = "${pkgs.tokei}/bin/tokei";
+          ps ="${pkgs.nixos-unstable.procs}/bin/procs";
+          tokei = "${pkgs.nixos-unstable.tokei}/bin/tokei";
 
           ns = "nix-shell";
           nsu = "nix-shell -I nixpkgs=channel:nixpkgs-unstable";
           ssh = "TERM=xterm-256color ssh";
           sw = "ssh sw";
-          wipe = "${pkgs.srm}/bin/srm -vfr";
+          wipe = "${pkgs.nixos-unstable.srm}/bin/srm -vfr";
 
           update = "sudo nix-channel --update";
           rebuild = "sudo nixos-rebuild switch --upgrade";
