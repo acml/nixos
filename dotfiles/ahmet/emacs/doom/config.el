@@ -357,9 +357,11 @@
         ;; 'straight-underline, 'subtle-foreground,
         ;; 'subtle-foreground-straight-underline, 'intense-foreground,
         ;; 'intense-foreground-straight-underline, 'colored-background
-        modus-themes-lang-checkers nil
+        modus-themes-lang-checkers 'straight-underline
 
-        modus-themes-mode-line '3d ; {nil,'3d,'moody}
+        ;; Options for `modus-themes-mode-line': nil, '3d, 'moody,
+        ;; 'borderless, 'borderless-3d, 'borderless-moody
+        modus-themes-mode-line 'borderless-3d
 
         ;; Options for `modus-themes-syntax': nil, 'faint,
         ;; 'yellow-comments, 'green-strings,
@@ -373,10 +375,14 @@
         ;; Options for `modus-themes-links': nil, 'faint,
         ;; 'neutral-underline, 'faint-neutral-underline, 'no-underline,
         ;; 'underline-only
-        modus-themes-links 'neutral-underline
+        modus-themes-links 'no-underline
 
         modus-themes-no-mixed-fonts nil
-        modus-themes-prompts 'subtle ; {nil,'subtle,'intense}
+
+        ;; Options for `modus-themes-prompts': nil, 'subtle-accented,
+        ;; 'intense-accented, 'subtle-gray, 'intense-gray
+        modus-themes-prompts 'subtle-accented
+
         modus-themes-completions 'opinionated ; {nil,'moderate,'opinionated}
         modus-themes-region 'bg-only-no-extend ; {nil,'no-extend,'bg-only,'bg-only-no-extend}
         modus-themes-diffs 'desaturated ; {nil,'desaturated,'fg-only,'bg-only}
@@ -399,7 +405,7 @@
         modus-themes-scale-5 1.33)
 
   ;; Load the theme files before enabling a theme
-  (modus-themes-load-themes)
+  ;; (modus-themes-load-themes)
 
   :config
   ;; Load the theme of your choice

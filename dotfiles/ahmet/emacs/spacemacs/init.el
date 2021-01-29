@@ -874,14 +874,6 @@ buffer's name.
     :config
     (beacon-mode 1))
 
-  ;; (use-package beacon
-  ;;   :init
-  ;;   (beacon-mode 1)
-  ;;   (evil-leader/set-key (kbd "ob") 'beacon-blink)
-  ;;   :config
-  ;;   (setq beacon-blink-when-point-moves-vertically 7)
-  ;;   :diminish beacon-mode)
-
   (setq ccls-initialization-options
         `(:cache (:directory ,(file-truename "~/.cache/ccls"))))
 
@@ -1166,9 +1158,11 @@ confirmation"
           ;; 'straight-underline, 'subtle-foreground,
           ;; 'subtle-foreground-straight-underline, 'intense-foreground,
           ;; 'intense-foreground-straight-underline, 'colored-background
-          modus-themes-lang-checkers nil
+          modus-themes-lang-checkers 'straight-underline
 
-          modus-themes-mode-line '3d ; {nil,'3d,'moody}
+          ;; Options for `modus-themes-mode-line': nil, '3d, 'moody,
+          ;; 'borderless, 'borderless-3d, 'borderless-moody
+          modus-themes-mode-line 'borderless-3d
 
           ;; Options for `modus-themes-syntax': nil, 'faint,
           ;; 'yellow-comments, 'green-strings,
@@ -1182,10 +1176,14 @@ confirmation"
           ;; Options for `modus-themes-links': nil, 'faint,
           ;; 'neutral-underline, 'faint-neutral-underline, 'no-underline,
           ;; 'underline-only
-          modus-themes-links 'neutral-underline
+          modus-themes-links 'no-underline
 
           modus-themes-no-mixed-fonts nil
-          modus-themes-prompts 'subtle ; {nil,'subtle,'intense}
+
+          ;; Options for `modus-themes-prompts': nil, 'subtle-accented,
+          ;; 'intense-accented, 'subtle-gray, 'intense-gray
+          modus-themes-prompts 'subtle-accented
+
           modus-themes-completions 'opinionated ; {nil,'moderate,'opinionated}
           modus-themes-region 'bg-only-no-extend ; {nil,'no-extend,'bg-only,'bg-only-no-extend}
           modus-themes-diffs 'desaturated ; {nil,'desaturated,'fg-only,'bg-only}

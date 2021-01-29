@@ -1,1 +1,1 @@
-{ imports = [ ./email.nix ./vim.nix ./emacs.nix ./firefox.nix ./general.nix ./bspwm.nix ./polybar.nix ]; }
+{ imports = [ ./bspwm.nix ./emacs.nix ./email.nix ./firefox.nix ./general.nix ./neovim.nix ./polybar.nix ]; }
