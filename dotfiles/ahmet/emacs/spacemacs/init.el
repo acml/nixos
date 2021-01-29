@@ -120,6 +120,7 @@ This function should only modify configuration layer settings."
      ;; sql
      syntax-checking
      systemd
+     ;; tabs
      (treemacs :variables
                treemacs-use-scope-type 'Perspectives)
      version-control
