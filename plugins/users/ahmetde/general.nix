@@ -118,7 +118,8 @@ in {
         libreoffice
         minicom
         my.sunflower
-        nixos-unstable.ripcord
+        # nixos-unstable.ripcord
+        my.ripcord
         nixos-unstable.bottom
         qtpass
         (pass.withExtensions (p: [ p.pass-import ]))
