@@ -1363,7 +1363,7 @@ confirmation"
 
   (use-package org :defer t
     :config
-    (setq org-directory "~/Dropbox/Documents/org"
+    (setq org-directory "~/Documents/org"
           org-agenda-files (list org-directory)
           org-default-notes-file (concat org-directory "/notes.org")))
 

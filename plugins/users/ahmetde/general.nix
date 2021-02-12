@@ -129,6 +129,7 @@ in {
         glava
         meld
         my.worker
+        nixos-unstable.maestral-gui
         (nixos-unstable.vscode-with-extensions.override {
            vscodeExtensions = with nixos-unstable.vscode-extensions; [
              # bbenoist.Nix

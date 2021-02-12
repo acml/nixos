@@ -11,7 +11,7 @@ in {
     default = false;
   };
   config = mkIf cfg.enable {
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.nixos-unstable.linuxPackages_latest;
 
     # Add swap file
     #swapDevices = [{
