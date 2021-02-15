@@ -263,24 +263,17 @@
   (atomic-chrome-start-server))
 
 (use-package! highlight-parentheses
-    :defer t
-    :init
-    (progn
-      (add-hook 'prog-mode-hook #'highlight-parentheses-mode)
-      (setq highlight-parentheses-delay 0.2)
-      (setq highlight-parentheses-colors '(rainbow-delimiters-depth-1-face
-                                           rainbow-delimiters-depth-2-face
-                                           rainbow-delimiters-depth-3-face
-                                           rainbow-delimiters-depth-4-face
-                                           rainbow-delimiters-depth-5-face
-                                           rainbow-delimiters-depth-6-face
-                                           rainbow-delimiters-depth-7-face
-                                           rainbow-delimiters-depth-8-face
-                                           rainbow-delimiters-depth-9-face)))
-    :config
-    (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold))
+  :init
+  (add-hook 'prog-mode-hook #'highlight-parentheses-mode)
+  (setq highlight-parentheses-delay 0.2)
+  :config
+  (set-face-attribute 'hl-paren-face nil :weight 'ultra-bold))
 
 (use-package! journalctl-mode)
+
+(after! lsp-go
+  (lsp-register-custom-settings
+   '(("gopls.experimentalWorkspaceModule" t t))))
 
 (use-package! lsp-mode
   :config
@@ -370,6 +363,7 @@
         modus-themes-syntax 'faint
 
         modus-themes-intense-hl-line nil
+        modus-themes-subtle-line-numbers nil
         modus-themes-paren-match 'subtle-bold ; {nil,'subtle-bold,'intense,'intense-bold}
 
         ;; Options for `modus-themes-links': nil, 'faint,
@@ -424,6 +418,40 @@
 (use-package! trashed
   :config
   (add-to-list 'evil-emacs-state-modes 'trashed-mode))
+
+(use-package! treemacs
+  :config
+  (setq treemacs-collapse-dirs (if (executable-find "python") 3 0)
+        treemacs-eldoc-display t
+        treemacs-is-never-other-window t
+        treemacs-recenter-after-file-follow t
+        treemacs-recenter-after-project-expand 'on-distance
+        treemacs-show-hidden-files t
+        treemacs-silent-filewatch t
+        treemacs-silent-refresh t
+        treemacs-sorting 'alphabetic-asc
+        treemacs-user-mode-line-format 'none
+        treemacs-width 40
+        treemacs-follow-after-init t)
+
+  ;; set the correct python3 executable path. This is needed for
+  ;; treemacs-git-mode extended
+  (setq treemacs-python-executable (executable-find "python"))
+
+  ;; highlight current line in fringe for treemacs window
+  (treemacs-fringe-indicator-mode)
+
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t)
+
+  (pcase (cons (not (null (executable-find "git")))
+               (not (null treemacs-python-executable)))
+    (`(t . t)
+     (progn
+       (setq +treemacs-git-mode 'deferred)
+       (treemacs-git-mode 'deferred)))
+    (`(t . _)
+     (treemacs-git-mode 'simple))))
 
 (use-package! vterm
   :config

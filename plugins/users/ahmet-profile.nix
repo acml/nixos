@@ -56,7 +56,7 @@ in {
       # Git
       git = {
         enable = true;
-        # delta.enable = true;
+        delta.enable = true;
         userName = "Ahmet Cemal Özgezer";
         userEmail = "ahmet.ozgezer@andasis.com";
         # signing = {
