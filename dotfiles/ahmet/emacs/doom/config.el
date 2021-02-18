@@ -359,7 +359,7 @@
         ;; Options for `modus-themes-syntax': nil, 'faint,
         ;; 'yellow-comments, 'green-strings,
         ;; 'yellow-comments-green-strings, 'alt-syntax,
-        ;; 'alt-syntax-yellow-comments
+        ;; 'alt-syntax-yellow-comments, 'faint-yellow-comments
         modus-themes-syntax 'faint
 
         modus-themes-intense-hl-line nil

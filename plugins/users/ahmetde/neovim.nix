@@ -57,7 +57,7 @@ in {
         vim-airline
         vim-airline-themes
         # File lookup
-        fzf-vim
+        skim-vim
         # File tree
         defx-nvim
         # Show key completion
