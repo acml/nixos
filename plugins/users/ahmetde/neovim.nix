@@ -28,8 +28,8 @@ in {
       withNodeJs = true;
 
       plugins = myPlugins ++ (with pkgs.nixos-unstable.vimPlugins; [
-        ale             # Asynchronous Lint Engine
-        coc-explorer    # LSP
+        ale               # Asynchronous Lint Engine
+        coc-explorer      # LSP
         coc-go
         coc-html
         coc-json
@@ -38,20 +38,20 @@ in {
         coc-python
         coc-rust-analyzer
         coc-vimlsp
-        defx-nvim       # File tree
-        fugitive        # Git
-        rainbow         # Rainbow paranthesis, brackets
-        skim-vim        # File lookup
-        vim-airline     # Statusbar
+        commentary        # comment stuff out
+        defx-nvim         # File tree
+        fugitive          # Git
+        rainbow           # Rainbow paranthesis, brackets
+        sensible          # Defaults everyone can agree on
+        skim-vim          # File lookup
+        vim-airline       # Statusbar
         vim-airline-themes
-        vim-buffergator # Buffer
-        vim-signify     # Gutter with  mode
-        vim-which-key   # Show key completion
-        vista-vim       # Shows symbol with LSP
+        vim-buffergator   # Buffer
+        vim-indent-guides # visually displaying indent levels
+        vim-signify       # Gutter with  mode
+        vim-which-key     # Show key completion
+        vista-vim         # Shows symbol with LSP
 
-        sensible
-        commentary
-        vim-indent-guides
         # Language
         vim-nix
         #vim-addon-nix
