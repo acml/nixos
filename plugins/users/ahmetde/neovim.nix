@@ -28,16 +28,8 @@ in {
       withNodeJs = true;
 
       plugins = myPlugins ++ (with pkgs.nixos-unstable.vimPlugins; [
-        sensible
-        commentary
-        vim-indent-guides
-        # Language
-        vim-nix
-        #vim-addon-nix
-        polyglot
-        ale
-        # LSP
-        coc-explorer
+        ale             # Asynchronous Lint Engine
+        coc-explorer    # LSP
         coc-go
         coc-html
         coc-json
@@ -45,30 +37,29 @@ in {
         coc-nvim
         coc-python
         coc-rust-analyzer
-        # coc-sh
         coc-vimlsp
-        # Git
-        fugitive
-        # Shows symbol with LSP
-        vista-vim
-        # Rainbow paranthesis, brackets
-        rainbow
-        # Statusbar
-        vim-airline
+        defx-nvim       # File tree
+        fugitive        # Git
+        rainbow         # Rainbow paranthesis, brackets
+        skim-vim        # File lookup
+        vim-airline     # Statusbar
         vim-airline-themes
-        # File lookup
-        skim-vim
-        # File tree
-        defx-nvim
-        # Show key completion
-        vim-which-key
-        # Buffer
-        vim-buffergator
+        vim-buffergator # Buffer
+        vim-signify     # Gutter with  mode
+        vim-which-key   # Show key completion
+        vista-vim       # Shows symbol with LSP
+
+        sensible
+        commentary
+        vim-indent-guides
+        # Language
+        vim-nix
+        #vim-addon-nix
+        polyglot
+
         #
         # vim-indent-object
         #
-        # Gutter with  mode
-        vim-signify
       ]);
 
       extraConfig = ''
