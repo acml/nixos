@@ -87,7 +87,7 @@ in {
           ignoreDups = true;
           expireDuplicatesFirst = true;
         };
-        initextra = ''
+        initExtra = ''
           bindkey "^P" up-line-or-search
           bindkey "^N" down-line-or-search
         '';
