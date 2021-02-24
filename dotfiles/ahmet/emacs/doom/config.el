@@ -1,8 +1,9 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/config.el --- My personal configuration -*- lexical-binding: t; -*-
+;;; Commentary:
 
+;;; Code:
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
-
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
@@ -22,12 +23,12 @@
       auto-save-default t                         ; Nobody likes to loose work, I certainly don't
       truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
 
-(display-time-mode 1)                             ; Enable time in the mode-line
+;; (display-time-mode 1)                             ; Enable time in the mode-line
 
-(if (equal "Battery status not available"
-           (battery))
-    (display-battery-mode 1)                        ; On laptops it's nice to know how much power you have
-  (setq password-cache-expiry nil))               ; I can trust my desktops ... can't I? (no battery = desktop)
+;; (if (equal "Battery status not available"
+;;            (battery))
+;;     (display-battery-mode 1)                        ; On laptops it's nice to know how much power you have
+;;   (setq password-cache-expiry nil))               ; I can trust my desktops ... can't I? (no battery = desktop)
 
 (global-subword-mode 1)                           ; Iterate through CamelCase words
 
@@ -133,6 +134,69 @@
 
 (after! ivy-posframe
   (setq ivy-posframe-border-width 3))
+
+(after! persp-mode
+  (setq persp-emacsclient-init-frame-behaviour-override nil))
+
+(defconst ac/c-or-c++-mode--regexp
+  (eval-when-compile
+    (let ((id "[a-zA-Z0-9_]+") (ws "[ \t\r]+") (ws-maybe "[ \t\r]*"))
+      (concat "^" ws-maybe "\\(?:"
+                    "using"     ws "\\(?:namespace" ws "std;\\|std::\\)"
+              "\\|" "namespace" "\\(:?" ws id "\\)?" ws-maybe "{"
+              "\\|" "class"     ws id ws-maybe "[:{\n]"
+              "\\|" "template"  ws-maybe "<.*>"
+              "\\|" "#include"  ws-maybe "<\\(?:string\\|iostream\\|map\\)>"
+              "\\)")))
+  "A regexp applied to C header files to check if they are really C++.")
+
+(defconst ac/make-mode--regexp
+  (eval-when-compile
+    (let ((id "[A-Z0-9_]+") (ws-maybe "[ \t\r]*"))
+      (concat "^" ws-maybe "\\(?:"
+              "include"  ws-maybe ".*"
+              "\\|" id ws-maybe "=" ws-maybe ".*"
+              "\\)")))
+  "A regexp applied to files to check if they are really Makefiles.")
+
+(defun ac/c-or-make-mode ()
+  "Analyze buffer and enable either C or C++ mode.
+Some people and projects use .h extension for C++ header files
+which is also the one used for C header files.  This makes
+matching on file name insufficient for detecting major mode that
+should be used.
+This function attempts to use file contents to determine whether
+the code is C or C++ and based on that chooses whether to enable
+`c-mode' or `c++-mode'."
+  (save-excursion
+    (save-restriction
+      (save-match-data
+        (widen)
+        (goto-char (point-min))
+        (if (re-search-forward ac/c-or-c++-mode--regexp
+                               (+ (point) 50000) t)
+            (c++-mode)
+          (goto-char (point-min))
+          (if (re-search-forward ac/make-mode--regexp
+                                 (+ (point) 50000) t)
+              (makefile-mode)
+            (c-mode)))))))
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . ac/c-or-make-mode))
+
+(defun ac/make-mode-p ()
+  "Analyze buffer and enable Makefile mode.
+This function attempts to use file contents to determine whether
+the code is Makefile and based on that chooses whether to enable
+`makefile-mode'."
+  (save-excursion
+    (save-restriction
+      (save-match-data
+        (widen)
+        (goto-char (point-min))
+        (re-search-forward ac/make-mode--regexp
+                                 (+ (point) magic-mode-regexp-match-limit) t)))))
+(add-to-list 'magic-mode-alist '(ac/make-mode-p . makefile-mode))
 
 (setq-default
  delete-by-moving-to-trash t)

@@ -33,7 +33,7 @@ in {
 
     # Home-manager settings.
     # User-layer packages
-    home.packages = with pkgs; [
+    home.packages = with pkgs.nixos-unstable; [
       binutils
       gnumake
       ## Doom dependencies

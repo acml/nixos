@@ -18,7 +18,7 @@ let
 in {
   config.home-manager.users = iceLib.functions.mkUserConfigs' (name: cfg: {
 
-    home.packages = with pkgs.nixos-unstable; [ fzf ];
+    # home.packages = with pkgs.nixos-unstable; [ fzf ];
     programs.neovim = {
       enable = true;
       package = pkgs.neovim-nightly;
