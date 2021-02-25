@@ -138,65 +138,65 @@
 (after! persp-mode
   (setq persp-emacsclient-init-frame-behaviour-override nil))
 
-(defconst ac/c-or-c++-mode--regexp
-  (eval-when-compile
-    (let ((id "[a-zA-Z0-9_]+") (ws "[ \t\r]+") (ws-maybe "[ \t\r]*"))
-      (concat "^" ws-maybe "\\(?:"
-                    "using"     ws "\\(?:namespace" ws "std;\\|std::\\)"
-              "\\|" "namespace" "\\(:?" ws id "\\)?" ws-maybe "{"
-              "\\|" "class"     ws id ws-maybe "[:{\n]"
-              "\\|" "template"  ws-maybe "<.*>"
-              "\\|" "#include"  ws-maybe "<\\(?:string\\|iostream\\|map\\)>"
-              "\\)")))
-  "A regexp applied to C header files to check if they are really C++.")
+;; (defconst ac/c-or-c++-mode--regexp
+;;   (eval-when-compile
+;;     (let ((id "[a-zA-Z0-9_]+") (ws "[ \t\r]+") (ws-maybe "[ \t\r]*"))
+;;       (concat "^" ws-maybe "\\(?:"
+;;                     "using"     ws "\\(?:namespace" ws "std;\\|std::\\)"
+;;               "\\|" "namespace" "\\(:?" ws id "\\)?" ws-maybe "{"
+;;               "\\|" "class"     ws id ws-maybe "[:{\n]"
+;;               "\\|" "template"  ws-maybe "<.*>"
+;;               "\\|" "#include"  ws-maybe "<\\(?:string\\|iostream\\|map\\)>"
+;;               "\\)")))
+;;   "A regexp applied to C header files to check if they are really C++.")
 
-(defconst ac/make-mode--regexp
-  (eval-when-compile
-    (let ((id "[A-Z0-9_]+") (ws-maybe "[ \t\r]*"))
-      (concat "^" ws-maybe "\\(?:"
-              "include"  ws-maybe ".*"
-              "\\|" id ws-maybe "=" ws-maybe ".*"
-              "\\)")))
-  "A regexp applied to files to check if they are really Makefiles.")
+;; (defconst ac/make-mode--regexp
+;;   (eval-when-compile
+;;     (let ((id "[A-Z0-9_]+") (ws-maybe "[ \t\r]*"))
+;;       (concat "^" ws-maybe "\\(?:"
+;;               "include"  ws-maybe ".*"
+;;               "\\|" id ws-maybe "=" ws-maybe ".*"
+;;               "\\)")))
+;;   "A regexp applied to files to check if they are really Makefiles.")
 
-(defun ac/c-or-make-mode ()
-  "Analyze buffer and enable either C or C++ mode.
-Some people and projects use .h extension for C++ header files
-which is also the one used for C header files.  This makes
-matching on file name insufficient for detecting major mode that
-should be used.
-This function attempts to use file contents to determine whether
-the code is C or C++ and based on that chooses whether to enable
-`c-mode' or `c++-mode'."
-  (save-excursion
-    (save-restriction
-      (save-match-data
-        (widen)
-        (goto-char (point-min))
-        (if (re-search-forward ac/c-or-c++-mode--regexp
-                               (+ (point) 50000) t)
-            (c++-mode)
-          (goto-char (point-min))
-          (if (re-search-forward ac/make-mode--regexp
-                                 (+ (point) 50000) t)
-              (makefile-mode)
-            (c-mode)))))))
+;; (defun ac/c-or-make-mode ()
+;;   "Analyze buffer and enable either C or C++ mode.
+;; Some people and projects use .h extension for C++ header files
+;; which is also the one used for C header files.  This makes
+;; matching on file name insufficient for detecting major mode that
+;; should be used.
+;; This function attempts to use file contents to determine whether
+;; the code is C or C++ and based on that chooses whether to enable
+;; `c-mode' or `c++-mode'."
+;;   (save-excursion
+;;     (save-restriction
+;;       (save-match-data
+;;         (widen)
+;;         (goto-char (point-min))
+;;         (if (re-search-forward ac/c-or-c++-mode--regexp
+;;                                (+ (point) 50000) t)
+;;             (c++-mode)
+;;           (goto-char (point-min))
+;;           (if (re-search-forward ac/make-mode--regexp
+;;                                  (+ (point) 50000) t)
+;;               (makefile-mode)
+;;             (c-mode)))))))
 
-(add-to-list 'auto-mode-alist '("\\.h\\'" . ac/c-or-make-mode))
+;; (add-to-list 'auto-mode-alist '("\\.h\\'" . ac/c-or-make-mode))
 
-(defun ac/make-mode-p ()
-  "Analyze buffer and enable Makefile mode.
-This function attempts to use file contents to determine whether
-the code is Makefile and based on that chooses whether to enable
-`makefile-mode'."
-  (save-excursion
-    (save-restriction
-      (save-match-data
-        (widen)
-        (goto-char (point-min))
-        (re-search-forward ac/make-mode--regexp
-                                 (+ (point) magic-mode-regexp-match-limit) t)))))
-(add-to-list 'magic-mode-alist '(ac/make-mode-p . makefile-mode))
+;; (defun ac/make-mode-p ()
+;;   "Analyze buffer and enable Makefile mode.
+;; This function attempts to use file contents to determine whether
+;; the code is Makefile and based on that chooses whether to enable
+;; `makefile-mode'."
+;;   (save-excursion
+;;     (save-restriction
+;;       (save-match-data
+;;         (widen)
+;;         (goto-char (point-min))
+;;         (re-search-forward ac/make-mode--regexp
+;;                                  (+ (point) magic-mode-regexp-match-limit) t)))))
+;; (add-to-list 'magic-mode-alist '(ac/make-mode-p . makefile-mode))
 
 (setq-default
  delete-by-moving-to-trash t)

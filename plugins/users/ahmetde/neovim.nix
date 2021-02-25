@@ -84,6 +84,11 @@ in {
         " Basics
         syntax on
         let g:airline_theme = 'bubblegum'
+        " let g:airline#extensions#tabline#left_sep = ' '
+        " let g:airline#extensions#tabline#left_alt_sep = '|'
+        " let g:airline#extensions#tabline#formatter = 'default'
+        let g:airline_powerline_fonts = 1
+        " let g:airline_section_z = airline#section#create(['windowswap', '%3p%% ', 'linenr', ':%3v'])
 
         set hidden      " Allows hidden buffer
         set hlsearch
