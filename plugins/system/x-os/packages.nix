@@ -8,7 +8,12 @@ in mkIf cfg.enable {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wineWowPackages.stable
+    # support both 32- and 64-bit applications
+    # nixos-unstable.wineWowPackages.stable
+    # wine-staging (version with experimental features)
+    # nixos-unstable.wineWowPackages.staging
+    nixos-unstable.wineFull
+    nixos-unstable.winetricks
     wget
     nixfmt
     gitAndTools.gitFull
@@ -50,8 +55,6 @@ in mkIf cfg.enable {
           "Ubuntu"
         ];
       })
-      fira-code
-      roboto-mono
       siji
       symbola
     ];
@@ -75,4 +78,5 @@ in mkIf cfg.enable {
 
   # lets users use sudo without password
   security.sudo.wheelNeedsPassword = false;
+  security.doas.wheelNeedsPassword = false;
 }

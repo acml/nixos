@@ -20,8 +20,10 @@ in {
 
     # Allow Spotify Local discovery
     networking.firewall.allowedTCPPorts = [ 57621 ];
-    # Allow TFTP
-    networking.firewall.allowedUDPPorts = [ 69 ];
+    networking.firewall.allowedUDPPorts = [
+      69      # Allow TFTP
+      161 162 # Allow SNMP
+    ];
 
     # 1714-1764 is KDE Connect.
     networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];

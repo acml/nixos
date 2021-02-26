@@ -136,7 +136,13 @@
   (setq ivy-posframe-border-width 3))
 
 (after! persp-mode
-  (setq persp-emacsclient-init-frame-behaviour-override nil))
+  (setq persp-emacsclient-init-frame-behaviour-override nil)
+  (defun display-workspaces-in-minibuffer ()
+    (with-current-buffer " *Minibuf-0*"
+      (erase-buffer)
+      (insert (+workspace--tabline))))
+  (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
+  (+workspace/display))
 
 ;; (defconst ac/c-or-c++-mode--regexp
 ;;   (eval-when-compile
