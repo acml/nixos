@@ -50,6 +50,7 @@ in {
         pinentry_emacs) # in-emacs gnupg prompts
       unzip
       zstd # for undo-fu-session/undo-tree compression
+      xclip xdotool xorg.xprop xorg.xwininfo # emacs-everywhere
 
       ## Module dependencies
       # :checkers spell

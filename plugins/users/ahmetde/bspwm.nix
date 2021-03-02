@@ -410,6 +410,9 @@ in {
 
           XF86MonBrightnessUp
             light -A 5
+
+          F12
+            emacsclient --eval "(emacs-everywhere)"
         '';
       };
     };
@@ -515,6 +518,7 @@ in {
           Emacs = { state = "tiled"; };
           "Emacs:org*" = { state = "floating"; };
           "Emacs:scratch" = { state = "floating"; };
+          "Emacs:emacs-everywhere" = { state = "floating"; sticky = true; };
           feh = { state = "fullscreen"; };
         };
         settings = {

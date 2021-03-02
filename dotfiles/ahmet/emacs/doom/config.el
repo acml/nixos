@@ -8,22 +8,85 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Ahmet Cemal Özgezer"
-      user-mail-address "ahmet.ozgezer@andasis.com")
+      user-mail-address "ahmet.ozgezer@andasis.com"
 
-(setq auth-sources '("~/.authinfo.gpg")
-      auth-source-cache-expiry nil) ; default is 7200 (2h)
+      ;; There are two ways to load a theme. Both assume the theme is installed and
+      ;; available. You can either set `doom-theme' or manually load a theme with the
+      ;; `load-theme' function. This is the default:
+      doom-theme 'modus-operandi
 
-(setq-default
- delete-by-moving-to-trash t                      ; Delete files to trash
- window-combination-resize t                      ; take new window space from all other windows (not just current)
- x-stretch-cursor t)                              ; Stretch cursor to the glyph width
+      ;; This determines the style of line numbers in effect. If set to `nil', line
+      ;; numbers are disabled. For relative line numbers, set this to `relative'.
+      ;;
+      ;; Line numbers are pretty slow all around. The performance boost of
+      ;; disabling them outweighs the utility of always keeping them on.
+      display-line-numbers-type nil
 
-(setq undo-limit 80000000                         ; Raise undo-limit to 80Mb
-      evil-want-fine-undo t                       ; By default while in insert all changes are one big blob. Be more granular
-      auto-save-default t                         ; Nobody likes to loose work, I certainly don't
-      truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
+      ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
+      ;; are the three important ones:
+      ;;
+      ;; + `doom-font'
+      ;; + `doom-variable-pitch-font'
+      ;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
+      ;;   presentations or streaming.
+      ;;
+      ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
+      ;; font string. You generally only need these two:
+      ;; (setq doom-font (font-spec :family "Iosevka" :size 14)
+      ;;       doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 14))
+      doom-font (font-spec :family "Iosevka" :size 14)
+      doom-big-font (font-spec :family "Iosevka" :size 26)
+      doom-variable-pitch-font (font-spec :family "Overpass Nerd Font" :size 14)
+      doom-serif-font (font-spec :family "BlexMono Nerd Font" :weight 'light)
 
-;; (display-time-mode 1)                             ; Enable time in the mode-line
+      fancy-splash-image (concat doom-private-dir "splash.png")
+
+      auth-sources '("~/.authinfo.gpg")
+      auth-source-cache-expiry nil ; default is 7200 (2h)
+
+      calendar-location-name "Istanbul, Turkey"
+      calendar-latitude 41.168602
+      calendar-longitude 29.047024
+
+      delete-by-moving-to-trash t  ; Delete files to trash
+      window-combination-resize t  ; take new window space from all other windows (not just current)
+      x-stretch-cursor t           ; Stretch cursor to the glyph width
+      undo-limit 80000000          ; Raise undo-limit to 80Mb
+      evil-want-fine-undo t        ; By default while in insert all changes are one big blob. Be more granular
+      auto-save-default t          ; Nobody likes to loose work, I certainly don't
+      truncate-string-ellipsis "…" ; Unicode ellispis are nicer than "...", and also save /precious/ space
+
+      ;; Switch to the new window after splitting
+      evil-vsplit-window-right t
+      evil-split-window-below t
+
+      +ivy-buffer-preview t
+
+      ;; If you use `org' and don't want your org files in the default location below,
+      ;; change `org-directory'. It must be set before org loads!
+      org-directory "~/Documents/org/"
+      ;; org-noter-notes-search-path '("~/Documents/org/notes/")
+      org-archive-location (concat org-directory ".archive/%s::")
+      org-roam-directory (concat org-directory "notes/")
+      org-roam-db-location (concat org-roam-directory ".org-roam.db")
+      org-journal-encrypt-journal t
+      org-journal-file-format "%Y%m%d.org"
+      org-startup-folded 'overview
+      org-ellipsis " [...] "
+
+      frame-title-format
+      '(""
+        (:eval
+         (if (s-contains-p org-roam-directory (or buffer-file-name ""))
+             (replace-regexp-in-string
+              ".*/[0-9]*-?" "☰ "
+              (subst-char-in-string ?_ ?  buffer-file-name))
+           "%b"))
+        (:eval
+         (let ((project-name (projectile-project-name)))
+           (unless (string= "-" project-name)
+             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name)))))
+      )
 
 ;; (if (equal "Battery status not available"
 ;;            (battery))
@@ -35,55 +98,6 @@
 (setq-default custom-file (expand-file-name ".custom.el" doom-private-dir))
 (when (file-exists-p custom-file)
   (load custom-file))
-
-(setq evil-vsplit-window-right t
-      evil-split-window-below t)
-
-(setq +ivy-buffer-preview t)
-
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "Iosevka" :size 14)
-;;       doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 14))
-(setq doom-font (font-spec :family "Iosevka" :size 14)
-      doom-big-font (font-spec :family "Iosevka" :size 26)
-      doom-variable-pitch-font (font-spec :family "Overpass Nerd Font" :size 14)
-      doom-serif-font (font-spec :family "BlexMono Nerd Font" :weight 'light))
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-(setq doom-theme 'modus-operandi)
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Documents/org/")
-(setq org-noter-notes-search-path '("~/Documents/org/notes/"))
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
-
-(setq frame-title-format
-      '(""
-        (:eval
-         (if (s-contains-p org-roam-directory (or buffer-file-name ""))
-             (replace-regexp-in-string
-              ".*/[0-9]*-?" "☰ "
-              (subst-char-in-string ?_ ?  buffer-file-name))
-           "%b"))
-        (:eval
-         (let ((project-name (projectile-project-name)))
-           (unless (string= "-" project-name)
-             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -101,6 +115,9 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+;; Prevents some cases of Emacs flickering
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
 (when (window-system)
   (add-to-list 'default-frame-alist '(alpha . (100)))
@@ -254,13 +271,6 @@
                                       :completion (:detailedLabel t)
                                       :cache (:directory ,(file-truename "~/.cache/ccls")))))
 
-(setq calendar-location-name "Istanbul, Turkey"
-      calendar-latitude 41.168602
-      calendar-longitude 29.047024)
-
-;;; :ui doom-dashboard
-(setq fancy-splash-image (concat doom-private-dir "splash.png"))
-
 (map! "M-c" #'capitalize-dwim
       "M-l" #'downcase-dwim
       "M-u" #'upcase-dwim)
@@ -325,13 +335,26 @@
 (use-package! docker-tramp)
 (use-package! docker)
 
-(use-package! atomic-chrome
-  :after-call focus-out-hook
-  :config
-  (setq atomic-chrome-default-major-mode 'markdown-mode
-        atomic-chrome-buffer-open-style 'frame)
-  (atomic-chrome-start-server))
+;; Easier to match with a bspwm rule:
+;;   bspc rule -a 'Emacs:emacs-everywhere' state=floating sticky=on
+(setq emacs-everywhere-frame-name-format "emacs-everywhere")
 
+;; The modeline is not useful to me in the popup window. It looks much nicer
+;; to hide it.
+(add-hook 'emacs-everywhere-init-hooks #'hide-mode-line-mode)
+
+;; Semi-center it over the target window, rather than at the cursor position
+;; (which could be anywhere).
+(defadvice! my-emacs-everywhere-set-frame-position (&rest _)
+  :override #'emacs-everywhere-set-frame-position
+  (cl-destructuring-bind (width . height)
+      (alist-get 'outer-size (frame-geometry))
+    (set-frame-position (selected-frame)
+                        (+ emacs-everywhere-window-x
+                           (/ emacs-everywhere-window-width 2)
+                           (- (/ width 2)))
+                        (+ emacs-everywhere-window-y
+                           (/ emacs-everywhere-window-height 2)))))
 (use-package! highlight-parentheses
   :init
   (add-hook 'prog-mode-hook #'highlight-parentheses-mode)
