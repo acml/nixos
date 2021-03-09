@@ -13,7 +13,8 @@
       ;; There are two ways to load a theme. Both assume the theme is installed and
       ;; available. You can either set `doom-theme' or manually load a theme with the
       ;; `load-theme' function. This is the default:
-      doom-theme 'modus-operandi
+      ; doom-theme 'modus-operandi
+      doom-theme 'doom-one
 
       ;; This determines the style of line numbers in effect. If set to `nil', line
       ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -85,8 +86,7 @@
         (:eval
          (let ((project-name (projectile-project-name)))
            (unless (string= "-" project-name)
-             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name)))))
-      )
+             (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
 
 ;; (if (equal "Battery status not available"
 ;;            (battery))
@@ -513,6 +513,8 @@
   (add-to-list 'evil-emacs-state-modes 'trashed-mode))
 
 (use-package! treemacs
+  :init
+  (defvar treemacs-no-load-time-warnings t)
   :config
   (setq treemacs-collapse-dirs (if (executable-find "python") 3 0)
         treemacs-eldoc-display t
