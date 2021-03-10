@@ -509,7 +509,7 @@
    (org-mode . rainbow-mode)))
 
 (defvar aesthetics/theme nil "The currently selected theme.")
-(defvar aesthetics/themes '(doom-gruvbox doom-Iosvkem doom-dracula doom-moonlight doom-one doom-henna doom-opera doom-spacegrey doom-tomorrow-night) "The cycleable themes.")
+(defvar aesthetics/themes '(doom-gruvbox doom-moonlight doom-one doom-spacegrey doom-tomorrow-night) "The cycleable themes.")
 (defvar aesthetics/themes-set nil "Prevents `set-themes` from running twice. `t` if set.")
 
 (defun set-themes (theme-list)
