@@ -14,7 +14,7 @@
       ;; available. You can either set `doom-theme' or manually load a theme with the
       ;; `load-theme' function. This is the default:
       ; doom-theme 'modus-operandi
-      doom-theme 'doom-one
+      ; doom-theme 'doom-one
 
       ;; This determines the style of line numbers in effect. If set to `nil', line
       ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -499,14 +499,37 @@
   ;; (modus-themes-load-operandi)
   ;; ;; OR
   ;; (load-theme 'modus-operandi t)
-  :bind ("<f5>" . modus-themes-toggle))
+  ;; :bind ("<f5>" . modus-themes-toggle)
+  )
 
 (use-package! rainbow-mode
   :hook
   ((prog-mode . rainbow-mode)
    (org-mode . rainbow-mode)))
 
-;; (use-package! shrface)
+(defvar aesthetics/theme nil "The currently selected theme.")
+(defvar aesthetics/themes '(doom-tomorrow-night doom-one doom-henna doom-opera doom-Iosvkem doom-dracula doom-gruvbox doom-moonlight doom-spacegrey) "The cycleable themes.")
+(defvar aesthetics/themes-set nil "Prevents `set-themes` from running twice. `t` if set.")
+
+(defun set-themes (theme-list)
+  "Configures the provided THEME-LIST to be cycleable using cycle-themes."
+  (when (not aesthetics/themes-set)
+    (setq aesthetics/themes-set t)
+    (setq aesthetics/themes theme-list)
+    (cycle-themes)))
+
+(defun cycle-themes ()
+  "Cycles through the themes defined in aesthetics/themes, which was set by set-themes."
+  (interactive)
+  (let ((theme (pop aesthetics/themes)))
+    (setq aesthetics/themes (append aesthetics/themes (list theme)))
+    (disable-theme aesthetics/theme)
+    (load-theme theme t)
+    (setq aesthetics/theme theme)
+    theme))
+(global-set-key (kbd "<f5>") 'cycle-themes)
+
+(load-theme (elt aesthetics/themes 0) t) ; Default
 
 (use-package! trashed
   :config
