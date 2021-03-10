@@ -15,6 +15,7 @@
       ;; `load-theme' function. This is the default:
       ; doom-theme 'modus-operandi
       ; doom-theme 'doom-one
+      doom-theme 'doom-gruvbox
 
       ;; This determines the style of line numbers in effect. If set to `nil', line
       ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -508,7 +509,7 @@
    (org-mode . rainbow-mode)))
 
 (defvar aesthetics/theme nil "The currently selected theme.")
-(defvar aesthetics/themes '(doom-tomorrow-night doom-one doom-henna doom-opera doom-Iosvkem doom-dracula doom-gruvbox doom-moonlight doom-spacegrey) "The cycleable themes.")
+(defvar aesthetics/themes '(doom-gruvbox doom-Iosvkem doom-dracula doom-moonlight doom-one doom-henna doom-opera doom-spacegrey doom-tomorrow-night) "The cycleable themes.")
 (defvar aesthetics/themes-set nil "Prevents `set-themes` from running twice. `t` if set.")
 
 (defun set-themes (theme-list)
