@@ -14,8 +14,7 @@
       ;; available. You can either set `doom-theme' or manually load a theme with the
       ;; `load-theme' function. This is the default:
       ; doom-theme 'modus-operandi
-      ; doom-theme 'doom-one
-      doom-theme 'doom-gruvbox
+      doom-theme 'doom-one
 
       ;; This determines the style of line numbers in effect. If set to `nil', line
       ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -120,9 +119,8 @@
 ;; Prevents some cases of Emacs flickering
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
-(when (window-system)
-  (add-to-list 'default-frame-alist '(alpha . (95)))
-  (set-frame-parameter (selected-frame) 'alpha '(95)))
+(add-to-list 'default-frame-alist '(alpha . (95)))
+(set-frame-parameter (selected-frame) 'alpha '(95))
 
 (set-popup-rules! '(("^\\*Customize.*" :slot 2 :side right :modeline nil :select t :quit t)
                     (" \\*undo-tree\\*" :slot 2 :side left :size 20 :modeline nil :select t :quit t)
@@ -509,7 +507,7 @@
    (org-mode . rainbow-mode)))
 
 (defvar aesthetics/theme nil "The currently selected theme.")
-(defvar aesthetics/themes '(doom-gruvbox doom-moonlight doom-one doom-spacegrey doom-tomorrow-night) "The cycleable themes.")
+(defvar aesthetics/themes '(doom-one doom-gruvbox doom-tomorrow-night) "The cycleable themes.")
 (defvar aesthetics/themes-set nil "Prevents `set-themes` from running twice. `t` if set.")
 
 (defun set-themes (theme-list)
