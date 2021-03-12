@@ -51,10 +51,10 @@ in mkIf cfg.enable (mkMerge [
 
     virtualisation.kvmgt.enable = true;
 
-    # virtualisation.virtualbox.host = {
-    #   enable = true;
-    #   enableExtensionPack = true;
-    # };
+    virtualisation.virtualbox.host = {
+      enable = true;
+      enableExtensionPack = true;
+    };
 
     # OpenGL 32 bit support for steam
     hardware.opengl.driSupport32Bit = true;
