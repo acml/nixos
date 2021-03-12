@@ -131,6 +131,7 @@ in {
         meld
         my.worker
         nixos-unstable.maestral-gui
+        exercism
         (nixos-unstable.vscode-with-extensions.override {
            vscodeExtensions = with nixos-unstable.vscode-extensions; [
              # bbenoist.Nix
