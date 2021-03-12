@@ -60,6 +60,9 @@ in {
         #
         # vim-indent-object
         #
+        gruvbox-community
+        palenight-vim
+        onedark-vim
       ]);
 
       extraConfig = ''
@@ -75,20 +78,19 @@ in {
 
         " Colors/Theme
         set termguicolors
-        set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-              \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-              \,sm:block-blinkwait175-blinkoff150-blinkon175
-        au ColorScheme * hi Normal  ctermbg=none guibg=none
-        au ColorScheme * hi NonText ctermbg=none guibg=none
-
-        " Basics
-        syntax on
-        let g:airline_theme = 'bubblegum'
+        colorscheme gruvbox
+        let g:airline_theme = 'gruvbox'
         " let g:airline#extensions#tabline#left_sep = ' '
         " let g:airline#extensions#tabline#left_alt_sep = '|'
         " let g:airline#extensions#tabline#formatter = 'default'
         let g:airline_powerline_fonts = 1
         " let g:airline_section_z = airline#section#create(['windowswap', '%3p%% ', 'linenr', ':%3v'])
+        " Display all buffers when only one tab is open
+        let g:airline#extensions#tabline#enabled = 1
+
+
+        " Basics
+        syntax on
 
         set hidden      " Allows hidden buffer
         set hlsearch
@@ -172,9 +174,6 @@ in {
 
         " Enable rainbow paranthesis globally
         let g:rainbow_active = 1
-
-        " Display all buffers when only one tab is open
-        let g:airline#extensions#tabline#enabled = 1
 
         " Polyglot
         let g:polyglot_disabled = ['markdown']
