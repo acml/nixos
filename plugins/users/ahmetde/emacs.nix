@@ -68,10 +68,27 @@ in {
       cmake-language-server
       glslang
       # :lang go
+      delve
+      errcheck
+      go
+      go-tools
+      go2nix
       gocode
+      godef
+      goimports
+      golangci-lint
+      golint
       gomodifytags
-      gotests
+      gopls
       gore
+      gosec
+      gotags
+      gotests
+      gotools    # guru
+      impl
+      # revive   # not avaliable on nixos for now
+      gopkgs     # Replacement of gopkgs with gopls is a work-in-progress.
+      go-outline # It will be replaced with gopls.
       # :lang docker
       nodePackages.dockerfile-language-server-nodejs
       # :lang javascript
@@ -86,6 +103,9 @@ in {
       mdl
       pandoc
       proselint
+      # :lang org
+      scrot
+      graphviz
       # :lang rust
       (pkgs.latest.rustChannels.stable.rust.override {
         extensions = [
@@ -100,6 +120,8 @@ in {
           "rust-src"
         ];
       })
+      # :term vterm
+      cmake
       # :ui treemacs
       python3 # advanced git-mode and directory flattening features require python3
       man-pages

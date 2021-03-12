@@ -13,7 +13,7 @@
       ;; There are two ways to load a theme. Both assume the theme is installed and
       ;; available. You can either set `doom-theme' or manually load a theme with the
       ;; `load-theme' function. This is the default:
-      ; doom-theme 'modus-operandi
+      ;; doom-theme 'modus-operandi
       doom-theme 'doom-one
 
       ;; This determines the style of line numbers in effect. If set to `nil', line
@@ -436,62 +436,38 @@
   ;; Set customization options to values of your choice
   (setq modus-themes-slanted-constructs t
         modus-themes-bold-constructs t
-        modus-themes-fringes nil ; {nil,'subtle,'intense}
-
-        ;; Options for `modus-themes-lang-checkers': nil,
-        ;; 'straight-underline, 'subtle-foreground,
-        ;; 'subtle-foreground-straight-underline, 'intense-foreground,
-        ;; 'intense-foreground-straight-underline, 'colored-background
-        modus-themes-lang-checkers 'straight-underline
-
-        ;; Options for `modus-themes-mode-line': nil, '3d, 'moody,
-        ;; 'borderless, 'borderless-3d, 'borderless-moody
-        modus-themes-mode-line 'borderless-3d
-
-        ;; Options for `modus-themes-syntax': nil, 'faint,
-        ;; 'yellow-comments, 'green-strings,
-        ;; 'yellow-comments-green-strings, 'alt-syntax,
-        ;; 'alt-syntax-yellow-comments, 'faint-yellow-comments
-        modus-themes-syntax 'faint
-
-        modus-themes-intense-hl-line nil
-        modus-themes-subtle-line-numbers nil
-        modus-themes-paren-match 'subtle-bold ; {nil,'subtle-bold,'intense,'intense-bold}
-
-        ;; Options for `modus-themes-links': nil, 'faint,
-        ;; 'neutral-underline, 'faint-neutral-underline, 'no-underline,
-        ;; 'underline-only
-        modus-themes-links 'no-underline
-
+        modus-themes-variable-pitch-headings t
+        modus-themes-variable-pitch-ui t
         modus-themes-no-mixed-fonts nil
-
-        ;; Options for `modus-themes-prompts': nil, 'subtle-accented,
-        ;; 'intense-accented, 'subtle-gray, 'intense-gray
-        modus-themes-prompts 'subtle-accented
-
-        modus-themes-completions 'opinionated ; {nil,'moderate,'opinionated}
-        modus-themes-region 'bg-only-no-extend ; {nil,'no-extend,'bg-only,'bg-only-no-extend}
-        modus-themes-diffs 'desaturated ; {nil,'desaturated,'fg-only,'bg-only}
-        modus-themes-org-blocks nil ; {nil,'grayscale,'rainbow}
-        modus-themes-org-habit nil ; {nil,'simplified,'traffic-light}
-
-        modus-themes-headings ; Lots of options---continue reading the manual
+        modus-themes-headings
         '((1 . section)
           (2 . section-no-bold)
           (3 . rainbow-line)
           (t . rainbow-line-no-bold))
-
-        modus-themes-variable-pitch-ui t
-        modus-themes-variable-pitch-headings t
         modus-themes-scale-headings t
-        modus-themes-scale-1 1.1
-        modus-themes-scale-2 1.15
-        modus-themes-scale-3 1.21
-        modus-themes-scale-4 1.27
-        modus-themes-scale-5 1.33)
+        modus-themes-fringes nil
+        modus-themes-lang-checkers nil
+        modus-themes-org-blocks nil
+        modus-themes-org-habit nil
+        modus-themes-prompts 'subtle-accented
+        modus-themes-mode-line 'borderless-3d
+        modus-themes-diffs 'desaturated
+        modus-themes-syntax 'faint
+        modus-themes-hl-line 'accented-background
+        modus-themes-subtle-line-numbers t
+        modus-themes-paren-match 'subtle-bold
+        modus-themes-region 'bg-only-no-extend
+        modus-themes-links 'faint-neutral-underline
+        modus-themes-completions 'opinionated
+
+        modus-themes-scale-1 1.05
+        modus-themes-scale-2 1.1
+        modus-themes-scale-3 1.15
+        modus-themes-scale-4 1.2
+        modus-themes-scale-5 1.3)
 
   ;; Load the theme files before enabling a theme
-  ;; (modus-themes-load-themes)
+  (modus-themes-load-themes)
 
   :config
   ;; Load the theme of your choice
@@ -507,7 +483,7 @@
    (org-mode . rainbow-mode)))
 
 (defvar aesthetics/theme nil "The currently selected theme.")
-(defvar aesthetics/themes '(doom-one doom-gruvbox doom-tomorrow-night) "The cycleable themes.")
+(defvar aesthetics/themes '(doom-one modus-vivendi modus-operandi doom-gruvbox doom-tomorrow-night) "The cycleable themes.")
 (defvar aesthetics/themes-set nil "Prevents `set-themes` from running twice. `t` if set.")
 
 (defun set-themes (theme-list)
