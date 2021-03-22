@@ -69,6 +69,16 @@ in mkIf cfg.enable (mkMerge [
       package = pkgs.pulseaudioFull;
     };
 
+    # needs nixos-unstable
+    # services.pipewire = {
+    #   enable = true;
+    #   alsa.enable = true;
+    #   alsa.support32Bit = true;
+    #   jack.enable = true;
+    #   pulse.enable = true;
+    #   socketActivation = true;
+    # };
+
     # Enable fwupd service
     services.fwupd.enable = true;
 
