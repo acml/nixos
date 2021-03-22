@@ -122,6 +122,11 @@
 (add-to-list 'default-frame-alist '(alpha . (95)))
 (set-frame-parameter (selected-frame) 'alpha '(95))
 
+(add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (with-selected-frame frame
+                (load-theme 'modus-operandi t))))
+
 (set-popup-rules! '(("^\\*Customize.*" :slot 2 :side right :modeline nil :select t :quit t)
                     (" \\*undo-tree\\*" :slot 2 :side left :size 20 :modeline nil :select t :quit t)
                     ("^\\*Password-Store" :side left :size 0.25)
