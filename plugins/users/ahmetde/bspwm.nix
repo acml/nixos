@@ -133,87 +133,6 @@ in {
       '';
     };
 
-    # services.sxhkd = {
-    #   enable = true;
-    #   keybindings = {
-    #     "super + alt + Escape" = "bspc quit";
-    #     "super + {_,shift + }q" = "bspc node -{c,k}";
-
-    #     # Toggle monocle layout (maximise focused node).
-    #     "super + m" = "bspc desktop -l next";
-
-    #     # Toggle floating, tiled, fullscreen view.
-    #     "super + {t,shift + f,f}" = "bspc node -t \"~{tiled,floating,fullscreen}\"";
-
-    #     "super + Return" = "${pkgs.alacritty}/bin/alacritty";
-    #     #"super + grave" = "scratch";
-    #     #"super + shift + grave" = "emacsclient -e '(open-scratch-frame)'";
-
-    #     "super + space" = "rofi -show drun -modi drun,run -show-icons -theme theme/appmenu.rasi";
-    #     "super + Tab" = "rofi -show window -show-icons -theme theme/windowmenu.rasi";
-    #     #"super + backslash" = "~/.dotfiles/bin/rofi/passmenu";
-    #     #"super + slash" = "~/.dotfiles/bin/rofi/filemenu -x";
-    #     "ctrl + alt + Delete" = "rofi -show p -modi p:${rofi-power-menu}/bin/rofi-power-menu -matching fuzzy -show-icons -icon-theme Papirus-Dark -theme theme/appmenu.rasi";
-
-    #     "super + Escape" = "pkill -USR1 -x sxhkd";
-    #     "{Prior,Next}" = ":";
-
-    #     # focus or send to the given desktop
-    #     "super + {_,shift + }{1-9,0}" = "bspc {desktop -f,node -d} '^{1-9,10}'";
-
-    #     # Focus the node in the given direction.
-    #     "super + {n,e,i,o}" = "bspc node -f {west,south,north,east}";
-    #     "super + {Left,Down,Up,Right}" = "bspc node -f {west,south,north,east}";
-
-    #     # Swap focused window with the one in the given direction.
-    #     "super + shift + {n,e,i,o}" = "bspwm_smart_move {west,south,north,east}";
-    #     "super + shift + {Left,Down,Up,Right}" = "bspwm_smart_move {west,south,north,east}";
-
-    #     # Expand or contract node in the given direction.
-    #     "super + alt + {n,e,i,o}" = "bspwm_resize {west,south,north,east} 50";
-    #     "super + alt + {Left,Down,Up,Right}" = "bspwm_resize {west,south,north,east} 50";
-
-    #     # Preselect the direction or insert again to cancel the preselection.
-    #     # This enters the manual tiling mode that splits the currently focused
-    #     # window.
-    #     "super + ctrl + {n,e,i,o}" = "bspc node --presel-dir '~{west,south,north,east}'";
-    #     "super + ctrl + {Left,Down,Up,Right}" = "bspc node --presel-dir '~{west,south,north,east}'";
-
-    #     # Preselect the ratio.  The default value is 0.5, defined in `bspwmrc`.
-    #     "super + ctrl + {1-9}" = "bspc node -o 0.{1-9}";
-
-    #     ## Resize by preselection
-    #     "super + alt + {1-9}" = "~/.dotfiles/bin/bspwm/presel 0.{1-9}";
-
-    #     # Rotate all windows {counter-}clockwise by 90 degrees.
-    #     "super + {_,shift + }r" = "bspc node @/ --rotate {90,-90}";
-
-    #     # Dynamic gaps.
-    #     "super + shift + bracket{left,right}" = "bspc config -d focused window_gap \"$(($(bspc config -d focused window_gap) {-,+} 5 ))\"";
-
-    #     #
-    #     ## Media keys
-
-    #     # screenshot region
-    #     "Print" = "scrcap";
-    #     # screencast region to mp4
-    #     "super + Print" = "scrrec -s ~/recordings/$(date +%F-%T).mp4";
-    #     # screencast region to gif
-    #     "super + ctrl + Print" = "scrrec -s ~/recordings/$(date +%F-%T).gif";
-
-    #     "XF86MonBrightnessUp" = "light -A 5";
-    #     "XF86MonBrightnessDown" = "light -U 5";
-
-    #     "XF86AudioMute" = "amixer -q set Master toggle";
-    #     "XF86AudioLowerVolume" = "amixer -q set Master 10%- unmute";
-    #     "XF86AudioRaiseVolume" = "amixer -q set Master 10%+ unmute";
-
-    #     "XF86Audio{Play,Pause}" = "spt-send toggle";
-    #     "XF86AudioNext" = "spt-send next";
-    #     "XF86AudioPrev" = "spt-send prev";
-    #   };
-    # };
-
     home.packages = with pkgs; [
       sxhkd
       (writeScriptBin "bspwm_resize" ''
@@ -412,6 +331,9 @@ in {
             light -A 5
 
           F12
+            ${pkgs.tdrop}/bin/tdrop -ma --wm bspwm -w -24 -x 9 -y 32 xterm
+
+          ctrl + F12
             emacsclient --eval "(emacs-everywhere)"
         '';
       };
@@ -515,10 +437,10 @@ in {
         };
         rules = {
           Pinentry = { state = "floating"; center = true; };
-          Emacs = { state = "tiled"; };
           "Emacs:org*" = { state = "floating"; };
           "Emacs:scratch" = { state = "floating"; };
           "Emacs:emacs-everywhere" = { state = "floating"; sticky = true; };
+          Emacs = { state = "tiled"; };
           feh = { state = "fullscreen"; };
         };
         settings = {

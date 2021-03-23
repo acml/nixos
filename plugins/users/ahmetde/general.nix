@@ -132,6 +132,7 @@ in {
         my.worker
         nixos-unstable.maestral-gui
         parted
+        inetutils
         exercism
         (nixos-unstable.vscode-with-extensions.override {
            vscodeExtensions = with nixos-unstable.vscode-extensions; [
