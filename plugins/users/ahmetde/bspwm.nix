@@ -135,6 +135,7 @@ in {
 
     home.packages = with pkgs; [
       sxhkd
+      tmux
       (writeScriptBin "bspwm_resize" ''
                         #!${stdenv.shell}
                         size=''${2:-'10'}
@@ -331,7 +332,7 @@ in {
             light -A 5
 
           F12
-            ${pkgs.tdrop}/bin/tdrop -ma --wm bspwm -w -24 -x 9 -y 32 xterm
+            ${pkgs.my.tdrop}/bin/tdrop -ma --wm bspwm -w -24 -x 9 -y 32 -s dropdown alacritty
 
           ctrl + F12
             emacsclient --eval "(emacs-everywhere)"

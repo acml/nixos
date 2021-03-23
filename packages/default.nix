@@ -11,6 +11,7 @@
       zunit = (callPackage ./zunit.nix {});
       sunflower = (callPackage ./sunflower.nix {});
       worker = (callPackage ./worker.nix {});
+      tdrop = (callPackage ./tdrop.nix {});
     };
   })
 
