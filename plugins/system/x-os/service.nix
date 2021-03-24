@@ -34,6 +34,7 @@ in mkIf cfg.enable (mkMerge [
 
     # Enable GNU Agent in order to make GnuPG works.
     programs.gnupg.agent.enable = true;
+    programs.ssh.startAgent = true;
 
     # Enable CUPS to print documents.
     services.printing.enable = true;
