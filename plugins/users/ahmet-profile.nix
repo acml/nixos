@@ -75,6 +75,22 @@ in {
         };
       };
 
+      tmux = {
+        enable = true;
+        extraConfig = ''
+          # Enable mouse support
+          set -g mouse on
+        '';
+
+        plugins = with pkgs.tmuxPlugins; [
+          yank
+          open
+          sensible
+          pain-control
+          gruvbox
+        ];
+      };
+
       # zsh
       zsh = {
         autocd = true;
@@ -107,6 +123,7 @@ in {
             "sudo"
             "systemadmin"
             "systemd"
+            "tmux"
           ];
           # theme = "agnoster";
         };

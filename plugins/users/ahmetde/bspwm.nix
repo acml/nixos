@@ -135,7 +135,6 @@ in {
 
     home.packages = with pkgs; [
       sxhkd
-      tmux
       (writeScriptBin "bspwm_resize" ''
                         #!${stdenv.shell}
                         size=''${2:-'10'}
