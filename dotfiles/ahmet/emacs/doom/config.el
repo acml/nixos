@@ -63,18 +63,6 @@
 
       +ivy-buffer-preview t
 
-      ;; If you use `org' and don't want your org files in the default location below,
-      ;; change `org-directory'. It must be set before org loads!
-      org-directory "~/Documents/org/"
-      ;; org-noter-notes-search-path '("~/Documents/org/notes/")
-      org-archive-location (concat org-directory ".archive/%s::")
-      org-roam-directory (concat org-directory "notes/")
-      org-roam-db-location (concat org-roam-directory ".org-roam.db")
-      org-journal-encrypt-journal t
-      org-journal-file-format "%Y%m%d.org"
-      org-startup-folded 'overview
-      org-ellipsis " [...] "
-
       frame-title-format
       '(""
         (:eval
@@ -151,8 +139,7 @@
 
                     ;; * lang
                     ;; ** python
-                    ("^\\*Anaconda\\*" :side right :size 82 :quit t :ttl t)
-                    ))
+                    ("^\\*Anaconda\\*" :side right :size 82 :quit t :ttl t)))
 
 (after! ivy-posframe
   (setq ivy-posframe-border-width 3))
@@ -369,6 +356,9 @@
 
 (use-package! journalctl-mode)
 
+(setq +format-on-save-enabled-modes
+      '(go-mode))
+
 (after! lsp-go
   (lsp-register-custom-settings
    '(("gopls.experimentalWorkspaceModule" t t))))
@@ -480,37 +470,28 @@
   ;; (modus-themes-load-operandi)
   ;; ;; OR
   ;; (load-theme 'modus-operandi t)
-  ;; :bind ("<f5>" . modus-themes-toggle)
+  :bind ("<f5>" . modus-themes-toggle)
   )
+
+(use-package! org
+  :init
+  (setq
+      ;; If you use `org' and don't want your org files in the default location below,
+      ;; change `org-directory'. It must be set before org loads!
+      org-directory "~/Documents/org/"
+      ;; ;; org-noter-notes-search-path '("~/Documents/org/notes/")
+      org-archive-location (concat org-directory ".archive/%s::")
+      org-roam-directory (concat org-directory "notes/")
+      org-roam-db-location (concat org-roam-directory ".org-roam.db")
+      org-journal-encrypt-journal t
+      org-journal-file-format "%Y%m%d.org"
+      org-startup-folded 'overview
+      org-ellipsis " [...] "))
 
 (use-package! rainbow-mode
   :hook
   ((prog-mode . rainbow-mode)
    (org-mode . rainbow-mode)))
-
-(defvar aesthetics/theme nil "The currently selected theme.")
-(defvar aesthetics/themes '(modus-operandi modus-vivendi doom-one doom-gruvbox doom-tomorrow-night) "The cycleable themes.")
-(defvar aesthetics/themes-set nil "Prevents `set-themes` from running twice. `t` if set.")
-
-(defun set-themes (theme-list)
-  "Configures the provided THEME-LIST to be cycleable using cycle-themes."
-  (when (not aesthetics/themes-set)
-    (setq aesthetics/themes-set t)
-    (setq aesthetics/themes theme-list)
-    (cycle-themes)))
-
-(defun cycle-themes ()
-  "Cycles through the themes defined in aesthetics/themes, which was set by set-themes."
-  (interactive)
-  (let ((theme (pop aesthetics/themes)))
-    (setq aesthetics/themes (append aesthetics/themes (list theme)))
-    (disable-theme aesthetics/theme)
-    (load-theme theme t)
-    (setq aesthetics/theme theme)
-    theme))
-(global-set-key (kbd "<f5>") 'cycle-themes)
-
-(load-theme (elt aesthetics/themes 0) t) ; Default
 
 (use-package! trashed
   :config
