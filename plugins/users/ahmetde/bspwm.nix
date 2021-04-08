@@ -349,47 +349,68 @@ in {
 
       settings = {
         global = {
-          font = "Fira Code 10";
+          monitor = 0;
           follow = "mouse";
-          frame_width = 3; # Frame around the notification window
+          geometry = "300x50-15+49";
+          indicate_hidden = true;
+          shrink = false;
+          transparency = 20;
+          notification_height = 0;
+          separator_height = 2;
+          padding = 8;
+          horizontal_padding = 8;
+          frame_width = 3;
           frame_color = "#aaaaaa";
-          geometry = "${toString (300 * system.scale)}x5-${
-            toString (30 * system.scale)
-          }-${toString (50 * system.scale)}";
-          format = "<b>%s</b>\\n%b";
+          separator_color = "frame";
+          sort = true;
+          idle_threshold = 120;
+          # font = "Helvetica Neue LT Std,HelveticaNeueLT Std Lt Cn:style=47 Light Condensed,Regular";
+          line_height = 0;
+          markup = "full";
+          format = "<b>%s</b>\n%b";
+          alignment = "center";
+          show_age_threshold = 60;
+          word_wrap = true;
+          ignore_newline = false;
+          stack_duplicates = true;
+          hide_duplicate_count = false;
+          show_indicators = true;
           icon_position = "left";
-          separator_height = (5 * system.scale);
-          mouse_left_click = "do_action";
-          mouse_middle_click = "close_all";
-          mouse_right_click = "close_current";
+          max_icon_size = 75;
+          sticky_history = true;
+          history_length = 20;
+          dmenu = "${pkgs.rofi}/bin/rofi -dmenu -p dunst:";
           browser = "${pkgs.firefox}/bin/firefox -new-tab";
-          dmenu = "${pkgs.dmenu}/bin/dmenu -p dunst:";
+          always_run_script = true;
+          title = "Dunst";
+          class = "Dunst";
+          startup_notification = false;
+          force_xinerama = false;
         };
-
+        experimental = {
+          per_monitor_dpi = false;
+        };
         shortcuts = {
           close = "mod4+grave"; # mod1 is alt
           close_all = "mod4+shift+grave"; # mod4 is super
           history = "mod1+mod4+grave"; # ` is grave
           context = "ctrl+mod4+grave"; # . is period
         };
-
-        urgency_low = { # Dark
-          timeout = 3;
+        urgency_low = {
           background = "#222222";
           foreground = "#888888";
+          timeout = 10;
         };
-
-        urgency_normal = { # Blue
-          timeout = 5;
+        urgency_normal = {
           background = "#285577";
           foreground = "#ffffff";
+          timeout = 10;
         };
-
-        urgency_critical = { # Red
+        urgency_critical = {
           background = "#900000";
           foreground = "#ffffff";
           frame_color = "#ff0000";
-          timeout = 0;
+          timeout = 10;
         };
       };
     };
