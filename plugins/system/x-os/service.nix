@@ -7,9 +7,6 @@ let
   cfg = config.icebox.static.system.x-os;
 in mkIf cfg.enable (mkMerge [
   ({
-    # Enable TRIM Service (May have security concern here)
-    services.fstrim.enable = true;
-
     # Enable usbmuxd for iOS devices.
     services.usbmuxd.enable = true;
 

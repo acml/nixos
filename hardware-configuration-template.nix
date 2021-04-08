@@ -23,7 +23,7 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = true;
 
-  ## SSDs
+  ## SSDs - Enable TRIM Service (May have security concern here)
   services.fstrim.enable = true;
 
   fileSystems."/" =
