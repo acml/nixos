@@ -55,6 +55,7 @@ in {
       ## Module dependencies
       # :checkers spell
       (aspellWithDicts (dicts: with dicts; [ en en-computers en-science tr ]))
+      enchant
       # :checkers grammar
       languagetool
       # :tools editorconfig

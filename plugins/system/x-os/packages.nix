@@ -8,12 +8,8 @@ in mkIf cfg.enable {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # support both 32- and 64-bit applications
-    # nixos-unstable.wineWowPackages.stable
-    # wine-staging (version with experimental features)
-    # nixos-unstable.wineWowPackages.staging
-    nixos-unstable.wineFull
-    nixos-unstable.winetricks
+    wineFull
+    winetricks
     wget
     nixfmt
     gitAndTools.gitFull
