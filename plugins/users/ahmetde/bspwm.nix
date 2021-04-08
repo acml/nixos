@@ -73,65 +73,42 @@ in {
     services.network-manager-applet.enable = true;
 
     # Picom (Compton) compositor
-    services.picom = {
-      enable = true;
-
-      # experimentalBackends = true;
-
-      blur = true;
-      blurExclude = [
-        "window_type = 'dock'"
-        "window_type = 'desktop'"
-        "_GTK_FRAME_EXTENTS@:c"
-      ];
-
-      fade = true;
-      fadeDelta = 5;
-      fadeExclude = [ "window_type *= 'menu'" "name ~= 'Firefox\$'" "focused = 1" ];
-
-      shadow = true;
-      shadowOffsets = [ (-7) (-7) ];
-      shadowOpacity = "0.7";
-      shadowExclude = [
-        # Put shadows on notifications, the scratch popup and rofi only
-        "! name~='(rofi|scratch|Dunst)$'"
-      ];
-      noDockShadow = true;
-      noDNDShadow = true;
-
-      activeOpacity = "1.0";
-      inactiveOpacity = "0.8";
-      menuOpacity = "0.8";
-
-      backend = "glx";
-      vSync = true;
-
-      opacityRule = [
-        "15:class_g ?= 'Bspwm' && class_i ?= 'presel_feedback'"
-        "99:_NET_WM_STATE@:32a = '_NET_WM_STATE_FULLSCREEN'"
-      ];
-
-      # opacityRule = [
-      #   "90:class_g ?= 'emacs' && focused"
-      #   "75:class_g ?= 'emacs' && !focused"
-      #   "90:class_g ?= 'alacritty' && focused"
-      #   "75:class_g ?= 'alacritty' && !focused"
-      # ];
-
-      extraOptions = ''
-        xrender-sync-fence = true;
-        shadow-radius = 7;
-        # frame-opacity = 0.7;
-        blur-method = "gaussian";
-        blur-strength = 5;
-
-        detect-client-opacity = true;
-        detect-rounded-corners = true;
-        detect-transient = true;
-        mark-wmwin-focused = true;
-        mark-ovredir-focused = true;
-      '';
+    services.picom.enable = true;
+    services.picom.package = pkgs.nur.repos.reedrw.picom-next-ibhagwan;
+    services.picom.backend = "glx";
+    services.picom.experimentalBackends = true;
+    services.picom.opacityRule = [
+      "80:class_g  = 'Zathura'"
+      "80:class_g  = 'TelegramDesktop'"
+      "80:class_g  = 'Discord'"
+      "80:class_g  = 'Emacs'"
+      "100:class_g = 'keynav'"
+    ];
+    services.picom.extraOptions = ''
+    detect-client-opacity = true;
+    detect-rounded-corners = true;
+    blur:
+    {
+        method = "kawase";
+        strength = 8;
+        background = false;
+        background-frame = false;
+        background-fixed = false;
     };
+    blur-background-exclude = [
+        "class_g = 'keynav'"
+    ];
+    corner-radius = 18;
+    rounded-corners-exclude = [
+        "window_type = 'dock'",
+        "_NET_WM_STATE@:32a *= '_NET_WM_STATE_FULLSCREEN'",
+        "class_g = 'keynav'",
+    ];
+    round-borders = 1;
+    round-borders-exclude = [
+        "class_g = 'keynav'"
+    ];
+  '';
 
     home.packages = with pkgs; [
       sxhkd
