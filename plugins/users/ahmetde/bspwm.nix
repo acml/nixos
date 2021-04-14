@@ -108,6 +108,9 @@ in {
     round-borders-exclude = [
         "class_g = 'keynav'"
     ];
+    shadow-exclude = [
+        "class_g = 'firefox' && argb",
+    ]
   '';
 
     home.packages = with pkgs; [
