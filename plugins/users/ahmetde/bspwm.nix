@@ -108,9 +108,6 @@ in {
     round-borders-exclude = [
         "class_g = 'keynav'"
     ];
-    shadow-exclude = [
-        "class_g = 'firefox' && argb",
-    ]
   '';
 
     home.packages = with pkgs; [
@@ -210,6 +207,9 @@ in {
           # Toggle floating, tiled, fullscreen view.
           super + {t,shift + f,f}
             bspc node -t "~{tiled,floating,fullscreen}"
+
+          super + shift + Return
+            e
 
           super + Return
             ${pkgs.alacritty}/bin/alacritty
