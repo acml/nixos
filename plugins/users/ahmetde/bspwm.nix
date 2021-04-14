@@ -96,7 +96,8 @@ in {
         background-fixed = false;
     };
     blur-background-exclude = [
-        "class_g = 'keynav'"
+        "class_g = 'keynav'",
+        "class_g = 'Firefox' && window_type *= 'utility'",
     ];
     corner-radius = 9;
     rounded-corners-exclude = [
