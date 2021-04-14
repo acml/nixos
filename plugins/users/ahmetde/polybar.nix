@@ -52,7 +52,6 @@ in {
           override-redirect = true;
           wm-restack = "bspwm";
           line-size = 3;
-          radius = 9;
 
           # border-top-size = 3;
           # border-top-color= "\${colors.border}";
@@ -77,7 +76,7 @@ in {
 
         "bar/top-tray" = {
           inherits = "bar/top";
-          tray-position = "center";
+          tray-position = "right";
           tray-maxsize = 28;
         };
 
