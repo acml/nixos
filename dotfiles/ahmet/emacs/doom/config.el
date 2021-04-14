@@ -40,7 +40,11 @@
       doom-variable-pitch-font (font-spec :family "Overpass Nerd Font" :size 13)
       doom-serif-font (font-spec :family "BlexMono Nerd Font" :weight 'light)
 
-      fancy-splash-image (concat doom-private-dir "splash.png")
+      fancy-splash-image (let ((alternatives '("doom-emacs-bw-light.svg"
+                                               "doom-emacs-flugo-slant_out_purple-small.png"
+                                               "doom-emacs-flugo-slant_out_bw-small.png")))
+                           (concat doom-private-dir "splash/"
+                                   (nth (random (length alternatives)) alternatives)))
 
       auth-sources '("~/.authinfo.gpg")
       auth-source-cache-expiry nil ; default is 7200 (2h)
@@ -128,7 +132,7 @@
                     ("^\\*Help.*" :size 82 :height 0.6 :side right :select t :quit t)
                     ("^ \\*Metahelp.*" :size 82 :side right :select t :quit t)
                     ("^\\*Apropos.*" :size 82 :height 0.6 :side right :select t :quit t)
-                    ("^\\*Messages\\*" :vslot -10 :height 10 :side 'bottom :select t :quit t :ttl nil)
+                    ("^\\*Messages\\*" :vslot -10 :height 10 :side bottom :select t :quit t :ttl nil)
 
                     ;; ("^ ?\\*NeoTree" :side ,neo-window-position :width ,neo-window-width :quit 'current :select t)
                     ("\\*VC-history\\*" :slot 2 :side right :size 82 :modeline nil :select t :quit t)

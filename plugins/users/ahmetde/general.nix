@@ -127,6 +127,9 @@ in {
         gnome3.seahorse
         lazydocker
         keepassxc
+        nixos-unstable.bitwarden
+        nixos-unstable.bitwarden-cli
+        nixos-unstable.rbw
         glava
         meld
         my.worker
