@@ -208,11 +208,8 @@ in {
           super + {t,shift + f,f}
             bspc node -t "~{tiled,floating,fullscreen}"
 
-          super + shift + Return
-            e
-
-          super + Return
-            ${pkgs.alacritty}/bin/alacritty
+          super + {_,alt + }Return
+            {${pkgs.alacritty}/bin/alacritty,e}
 
           super + space
             rofi -show drun -modi drun,run -show-icons -theme theme/appmenu.rasi
