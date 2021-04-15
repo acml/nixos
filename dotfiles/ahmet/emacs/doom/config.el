@@ -217,9 +217,6 @@
 ;;                                  (+ (point) magic-mode-regexp-match-limit) t)))))
 ;; (add-to-list 'magic-mode-alist '(ac/make-mode-p . makefile-mode))
 
-(setq-default
- delete-by-moving-to-trash t)
-
 ;; (windmove-default-keybindings 'control)
 ;; (windswap-default-keybindings 'control 'shift)
 ;; (add-hook 'org-shiftup-final-hook 'windmove-up)
