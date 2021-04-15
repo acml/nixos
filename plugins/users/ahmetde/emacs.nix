@@ -55,13 +55,12 @@ in {
       ## Module dependencies
       # :checkers spell
       (aspellWithDicts (dicts: with dicts; [ en en-computers en-science tr ]))
-      # :checkers grammar
-      languagetool
       # :tools editorconfig
       editorconfig-core-c # per-project style config
       # :tools lookup & :lang org +roam
       gnuplot
       sqlite
+      wordnet
       # :lang cc
       ccls # ccls is better than clang-tools
       # clang-tools
@@ -90,6 +89,7 @@ in {
       gopkgs     # Replacement of gopkgs with gopls is a work-in-progress.
       go-outline # It will be replaced with gopls.
       # :lang docker
+      docker-compose docker-machine
       nodePackages.dockerfile-language-server-nodejs
       # :lang javascript
       nodePackages.javascript-typescript-langserver
