@@ -36,6 +36,8 @@ in {
     home.packages = with pkgs.nixos-unstable; [
       binutils
       gnumake
+      gcc
+      gdb
       ## Doom dependencies
       global
       (ripgrep.override { withPCRE2 = true; })

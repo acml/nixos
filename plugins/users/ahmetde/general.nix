@@ -306,7 +306,7 @@ in {
                 family = "Iosevka Term";
                 style = "Bold Italic";
               };
-              size = 12.0;
+              size = 11.0;
             };
             env = {
               # TERM = "xterm-256color";
