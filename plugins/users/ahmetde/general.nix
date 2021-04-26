@@ -137,6 +137,7 @@ in {
         parted
         inetutils
         exercism
+        nixos-unstable.wordnet
         (nixos-unstable.vscode-with-extensions.override {
            vscodeExtensions = with nixos-unstable.vscode-extensions; [
              # bbenoist.Nix
