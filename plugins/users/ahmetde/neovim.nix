@@ -39,7 +39,6 @@ in {
         coc-rust-analyzer
         coc-vimlsp
         commentary        # comment stuff out
-        defx-nvim         # File tree
         fugitive          # Git
         rainbow           # Rainbow paranthesis, brackets
         sensible          # Defaults everyone can agree on
@@ -63,6 +62,9 @@ in {
         gruvbox-community
         palenight-vim
         onedark-vim
+
+        nvim-tree-lua
+        nvim-web-devicons
 
         plenary-nvim
         popup-nvim
@@ -201,42 +203,76 @@ in {
 
         au FileType gitcommit setlocal tw=68 colorcolumn=69 spell
 
-        " Defx
-        nnoremap <leader>op :Defx -split=vertical -winwidth=50 -direction=topleft<CR>
-        autocmd FileType defx call s:defx_my_settings()
-        function! s:defx_my_settings() abort
-          " Define mappings
-          nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
-          nnoremap <silent><buffer><expr> c defx#do_action('copy')
-          nnoremap <silent><buffer><expr> m defx#do_action('move')
-          nnoremap <silent><buffer><expr> p defx#do_action('paste')
-          nnoremap <silent><buffer><expr> l defx#do_action('open')
-          nnoremap <silent><buffer><expr> E defx#do_action('open', 'vsplit')
-          nnoremap <silent><buffer><expr> P defx#do_action('preview')
-          nnoremap <silent><buffer><expr> o defx#do_action('open_tree', 'toggle')
-          nnoremap <silent><buffer><expr> K defx#do_action('new_directory')
-          nnoremap <silent><buffer><expr> N defx#do_action('new_file')
-          nnoremap <silent><buffer><expr> M defx#do_action('new_multiple_files')
-          nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'mark:indent:icon:filename:type:size:time')
-          nnoremap <silent><buffer><expr> S defx#do_action('toggle_sort', 'time')
-          nnoremap <silent><buffer><expr> d defx#do_action('remove')
-          nnoremap <silent><buffer><expr> r defx#do_action('rename')
-          nnoremap <silent><buffer><expr> ! defx#do_action('execute_command')
-          nnoremap <silent><buffer><expr> x defx#do_action('execute_system')
-          nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
-          nnoremap <silent><buffer><expr> .defx#do_action('toggle_ignored_files')
-          nnoremap <silent><buffer><expr> ; defx#do_action('repeat')
-          nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
-          nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
-          nnoremap <silent><buffer><expr> q defx#do_action('quit')
-          nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
-          nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
-          nnoremap <silent><buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
-          nnoremap <silent><buffer><expr> k line('.') == 1 ? 'G' : 'k'
-          nnoremap <silent><buffer><expr> <C-l> defx#do_action('redraw')
-          nnoremap <silent><buffer><expr> <C-g> defx#do_action('print')
-          nnoremap <silent><buffer><expr> cd defx#do_action('change_vim_cwd')
-        endfunction
+        " nvim_tree
+        let g:nvim_tree_side = 'left' "left by default
+        let g:nvim_tree_width = 40 "30 by default
+        let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
+        let g:nvim_tree_gitignore = 1 "0 by default
+        let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
+        let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
+        let g:nvim_tree_auto_ignore_ft = [ 'startify', 'dashboard' ] "empty by default, don't auto open tree on specific filetypes.
+        let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
+        let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
+        let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
+        let g:nvim_tree_hide_dotfiles = 1 "0 by default, this option hides files and folders starting with a dot `.`
+        let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
+        let g:nvim_tree_root_folder_modifier = ':~' "This is the default. See :help filename-modifiers for more options
+        let g:nvim_tree_tab_open = 1 "0 by default, will open the tree when entering a new tab and the tree was previously open
+        let g:nvim_tree_width_allow_resize  = 1 "0 by default, will not resize the tree when opening a file
+        let g:nvim_tree_disable_netrw = 0 "1 by default, disables netrw
+        let g:nvim_tree_hijack_netrw = 0 "1 by default, prevents netrw from automatically opening when opening directories (but lets you keep its other utilities)
+        let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
+        let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
+        let g:nvim_tree_lsp_diagnostics = 1 "0 by default, will show lsp diagnostics in the signcolumn. See :help nvim_tree_lsp_diagnostics
+        let g:nvim_tree_special_files = [ 'README.md', 'Makefile', 'MAKEFILE' ] " List of filenames that gets highlighted with NvimTreeSpecialFile
+        let g:nvim_tree_show_icons = {
+            \ 'git': 1,
+            \ 'folders': 1,
+            \ 'files': 1,
+            \ }
+        "If 0, do not show the icons for one of 'git' 'folder' and 'files'
+        "1 by default, notice that if 'files' is 1, it will only display
+        "if nvim-web-devicons is installed and on your runtimepath
+
+        " default will show icon by default if no icon is provided
+        " default shows no icon by default
+        let g:nvim_tree_icons = {
+            \ 'default': '',
+            \ 'symlink': '',
+            \ 'git': {
+            \   'unstaged': "✗",
+            \   'staged': "✓",
+            \   'unmerged': "",
+            \   'renamed': "➜",
+            \   'untracked': "★",
+            \   'deleted': "",
+            \   'ignored': "◌"
+            \   },
+            \ 'folder': {
+            \   'default': "",
+            \   'open': "",
+            \   'empty': "",
+            \   'empty_open': "",
+            \   'symlink': "",
+            \   'symlink_open': "",
+            \   },
+            \   'lsp': {
+            \     'hint': "",
+            \     'info': "",
+            \     'warning': "",
+            \     'error': "",
+            \   }
+            \ }
+
+        nnoremap <C-n> :NvimTreeToggle<CR>
+        nnoremap <leader>r :NvimTreeRefresh<CR>
+        nnoremap <leader>n :NvimTreeFindFile<CR>
+        " NvimTreeOpen and NvimTreeClose are also available if you need them
+
+        set termguicolors " this variable must be enabled for colors to be applied properly
+
+        " a list of groups can be found at `:help nvim_tree_highlight`
+        highlight NvimTreeFolderIcon guibg=blue
       '';
     };
 
