@@ -80,6 +80,8 @@ in {
         extraConfig = ''
           # Enable mouse support
           set -g mouse on
+          set  -g default-terminal "tmux-256color"
+          set -ag terminal-overrides ",alacritty:RGB"
         '';
 
         plugins = with pkgs.tmuxPlugins; [
