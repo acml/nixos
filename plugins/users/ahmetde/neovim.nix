@@ -63,6 +63,15 @@ in {
         gruvbox-community
         palenight-vim
         onedark-vim
+
+        plenary-nvim
+        popup-nvim
+        telescope-frecency-nvim
+        telescope-fzf-writer-nvim
+        telescope-fzy-native-nvim
+        telescope-nvim
+        telescope-symbols-nvim
+        telescope-z-nvim
       ]);
 
       extraConfig = ''
@@ -228,7 +237,6 @@ in {
           nnoremap <silent><buffer><expr> <C-g> defx#do_action('print')
           nnoremap <silent><buffer><expr> cd defx#do_action('change_vim_cwd')
         endfunction
-
       '';
     };
 
