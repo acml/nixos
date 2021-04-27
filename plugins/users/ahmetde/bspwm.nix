@@ -442,10 +442,17 @@ in {
           feh = { state = "fullscreen"; };
         };
         settings = {
-          normal_border_color = "#F9F9F9";
-          active_border_color = "#CCFF00";
-          focused_border_color = "#00CCFF";
-          presel_feedback_color = "#FFCC33";
+          normal_border_color = "#44475a";
+          # active_border_color = "#bd93f9";
+          # focused_border_color = "#ff79c6";
+          active_border_color = "#6272a4";
+          focused_border_color = "#8be9fd";
+          presel_feedback_color = "#6272a4";
+
+          # normal_border_color = "#F9F9F9";
+          # active_border_color = "#CCFF00";
+          # focused_border_color = "#00CCFF";
+          # presel_feedback_color = "#FFCC33";
 
           initial_polarity = "first_child";
 
