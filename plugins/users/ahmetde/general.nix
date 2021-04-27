@@ -488,12 +488,8 @@ in {
           package = pkgs.papirus-icon-theme;
         };
         theme = {
-          # name    = "Adementary-dark";
-          # package = pkgs.adementary-theme;
           name    = "Dracula";
           package = pkgs.nixos-unstable.dracula-theme;
-          # name    = "Materia-dark-compact";
-          # package = pkgs.materia-theme;
         };
         # gtk3.extraConfig = { gtk-application-prefer-dark-theme = 1; };
       };
