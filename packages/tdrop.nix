@@ -9,8 +9,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "noctuid";
     repo = "tdrop";
-    rev = "89938c1483821c3924ca4e298d38f85f63961781";
-    sha256 = "1h6m9palxjpz05a3jxbszxriqgz8n4vz63zwkrdk2fkfdy427ccy";
+    rev = "bae687d38584824a61e34f12be0a298d74bcb411";
+    sha256 = "162i17974g02mwg8a1s5z3i29h9ykpnsnd27cwmrzq3g7b1qgsfn";
   };
 
   dontBuild = true;
