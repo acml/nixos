@@ -490,10 +490,10 @@ in {
         theme = {
           # name    = "Adementary-dark";
           # package = pkgs.adementary-theme;
-          # name    = "Ant-Dracula";
-          # package = pkgs.ant-dracula-theme;
-          name    = "Materia-dark-compact";
-          package = pkgs.materia-theme;
+          name    = "Dracula";
+          package = pkgs.nixos-unstable.dracula-theme;
+          # name    = "Materia-dark-compact";
+          # package = pkgs.materia-theme;
         };
         # gtk3.extraConfig = { gtk-application-prefer-dark-theme = 1; };
       };
