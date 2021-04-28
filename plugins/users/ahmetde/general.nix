@@ -124,8 +124,9 @@ in {
         gnome3.seahorse
         lazydocker
         nixos-unstable.bitwarden
-        nixos-unstable.bitwarden-cli
-        nixos-unstable.rbw
+        # nixos-unstable.bitwarden-cli
+        # nixos-unstable.rbw
+        # nur.repos.reedrw.bitwarden-rofi-patched
         glava
         meld
         my.worker
@@ -426,7 +427,7 @@ in {
 
       services.lorri.enable = true;
       # services.owncloud-client.enable = true;
-      services.syncthing.enable = true;
+      # services.syncthing.enable = true;
       # services.syncthing.tray = true;
       # services.kdeconnect.enable = true;
       # services.kdeconnect.indicator = true;

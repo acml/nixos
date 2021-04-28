@@ -209,7 +209,7 @@ in {
             bspc node -t "~{tiled,floating,fullscreen}"
 
           super + {_,alt + }Return
-            {${pkgs.nixos-unstable.alacritty}/bin/alacritty,e}
+            {alacritty,e}
 
           super + space
             rofi -show drun -modi drun,run -show-icons -theme theme/appmenu.rasi
@@ -308,10 +308,10 @@ in {
             light -A 5
 
           F12
-            ${pkgs.my.tdrop}/bin/tdrop -ma --wm bspwm -w -24 -x 9 -y 32 -s dropdown ${pkgs.nixos-unstable.alacritty}/bin/alacritty
+            ${pkgs.my.tdrop}/bin/tdrop -ma --wm bspwm -w -24 -x 9 -y 32 -s dropdown alacritty
 
           ctrl + F12
-            emacsclient --eval "(emacs-everywhere)"
+            ${pkgs.my.tdrop}/bin/tdrop -ma --wm bspwm -w 50% -h 50% -x 25% -y 25% emacsclient --eval "(emacs-everywhere)"
         '';
       };
     };
