@@ -493,7 +493,6 @@ in {
             MONITOR=$monitor polybar top & \
           fi \
           done )"
-          "pkill maestral_qt; while pgrep -u $UID -x maestral_qt >/dev/null; do sleep 1; done && maestral_qt"
         ];
       };
 

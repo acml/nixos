@@ -71,7 +71,8 @@ in {
           modules-left = "menu arrow powermenu arrow random-background arrow bspwm arrow1 title";
           # modules-right = "arrow2 music mpd arrow pulseaudio backlight battery arrow wlan pkg arrow date openweathermap-simple arrow1";
           # modules-center = "title";
-          modules-right = "arrow2 pulseaudio arrow backlight arrow temperature arrow cpu arrow memory arrow fs_root fs_home arrow xkeyboard arrow date";
+          # modules-right = "arrow2 pulseaudio arrow backlight arrow temperature arrow cpu arrow memory arrow fs_root fs_home arrow xkeyboard arrow date";
+          modules-right = "arrow2 pulseaudio arrow backlight arrow temperature arrow cpu arrow memory arrow fs_root arrow xkeyboard arrow date";
         };
 
         "bar/top-tray" = {

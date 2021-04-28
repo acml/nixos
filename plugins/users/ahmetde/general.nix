@@ -121,19 +121,14 @@ in {
         # nixos-unstable.ripcord
         my.ripcord
         nixos-unstable.bottom
-        qtpass
-        (pass.withExtensions (p: [ p.pass-import ]))
-        # (pkgs.pass.withExtensions (exts: [ exts.pass-otp ]))
         gnome3.seahorse
         lazydocker
-        keepassxc
         nixos-unstable.bitwarden
         nixos-unstable.bitwarden-cli
         nixos-unstable.rbw
         glava
         meld
         my.worker
-        nixos-unstable.maestral-gui
         parted
         inetutils
         exercism

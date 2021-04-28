@@ -118,7 +118,6 @@ in {
             "extract"
             "git"
             "gitignore"
-            "pass"
             "ripgrep"
             "rsync"
             "safe-paste"
