@@ -311,7 +311,8 @@ in {
             ${pkgs.my.tdrop}/bin/tdrop -ma --wm bspwm -w -24 -x 9 -y 32 -s dropdown alacritty
 
           ctrl + F12
-            ${pkgs.my.tdrop}/bin/tdrop -ma --wm bspwm -w 50% -h 50% -x 25% -y 25% emacsclient --eval "(emacs-everywhere)"
+            # ${pkgs.my.tdrop}/bin/tdrop -ma --wm bspwm -w 50% -h 50% -x 25% -y 25% emacsclient --eval "(emacs-everywhere)"
+            bspc rule -a "Emacs:*" -o state=floating sticky=on && emacsclient --eval "(emacs-everywhere)"
         '';
       };
     };

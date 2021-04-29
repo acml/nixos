@@ -347,6 +347,7 @@
                            (- (/ width 2)))
                         (+ emacs-everywhere-window-y
                            (/ emacs-everywhere-window-height 2)))))
+
 (use-package! highlight-parentheses
   :init
   (add-hook 'prog-mode-hook #'highlight-parentheses-mode)
