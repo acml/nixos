@@ -80,6 +80,12 @@ in {
         extraConfig = ''
           # Enable mouse support
           set -g mouse on
+
+          # Rebind prefix to C-c. Press twice to send literal C-c.
+          unbind C-b
+          set -g prefix C-c
+          bind C-c send-prefix
+
           set  -g default-terminal "tmux-256color"
           set -ag terminal-overrides ",alacritty:RGB"
         '';

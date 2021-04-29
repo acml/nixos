@@ -390,8 +390,8 @@
       magit-save-repository-buffers nil
       ;; Don't restore the wconf after quitting magit, it's jarring
       magit-inhibit-save-previous-winconf t
-      transient-values '((magit-rebase "--autosquash")
-                         (magit-pull "--rebase")))
+      transient-values '((magit-rebase "--autosquash" "--autostash")
+                         (magit-pull "--rebase" "--autostash")))
 
 (use-package! turkish
   :commands (turkish-mode)
