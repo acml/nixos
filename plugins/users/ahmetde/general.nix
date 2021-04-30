@@ -120,6 +120,7 @@ in {
         my.sunflower
         # nixos-unstable.ripcord
         my.ripcord
+        tdesktop
         nixos-unstable.bottom
         gnome3.seahorse
         lazydocker
