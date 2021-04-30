@@ -41,6 +41,6 @@ in
         (pluginWithCfg fzf-vim)
         (pluginWithLua nvim-fzf)
       ];
-      extraPackages = [ pkgs.fzf ];
+      extraPackages = [ pkgs.bat pkgs.fzf ];
     };
 }
