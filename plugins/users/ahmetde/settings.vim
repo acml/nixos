@@ -17,6 +17,9 @@ set softtabstop=4
 set autoindent
 set smartindent
 
+let g:mapleader = "\<Space>"
+let g:maplocalleader = ','
+
 " Keybindings
 nmap j gj
 nmap k gk

@@ -18,6 +18,7 @@
     ./rnix-lsp
     # ./skim
     ./svelte-lsp
+    ./telescope
     ./theme
     ./treesitter
     ./typescript-lsp
