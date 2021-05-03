@@ -14,11 +14,11 @@
 
 stdenv.mkDerivation rec {
   pname = "worker";
-  version = "4.8.0";
+  version = "4.8.1";
 
   src = fetchurl {
     url = "http://www.boomerangsworld.de/cms/worker/downloads/${pname}-${version}.tar.bz2";
-    sha256 = "0rb57dv0hs51sfkjs24icyy1xny0rb67q6jjq8rimawdjpyp9c7n";
+    sha256 = "1071hyjmwgcbns1nnw705dhfzxvsyvid8yd5wqd4mlnfgmpbkly8";
   };
 
   nativeBuildInputs = [ pkgconfig ];
