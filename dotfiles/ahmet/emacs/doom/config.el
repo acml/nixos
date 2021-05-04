@@ -111,8 +111,8 @@
 ;; Prevents some cases of Emacs flickering
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
-(add-to-list 'default-frame-alist '(alpha . (95)))
-(set-frame-parameter (selected-frame) 'alpha '(95))
+;; (add-to-list 'default-frame-alist '(alpha . (95)))
+;; (set-frame-parameter (selected-frame) 'alpha '(95))
 
 (when (daemonp)
   (add-hook 'after-make-frame-functions

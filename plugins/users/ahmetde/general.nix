@@ -310,7 +310,7 @@ in {
               # TERM = "xterm-256color";
               WINIT_X11_SCALE_FACTOR = toString system.scale;
             };
-            background_opacity = 0.9;
+            # background_opacity = 0.9;
             scrolling = {
               history = 100000;
             };

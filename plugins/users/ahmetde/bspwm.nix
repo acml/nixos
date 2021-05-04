@@ -78,6 +78,8 @@ in {
     services.picom.backend = "glx";
     services.picom.experimentalBackends = true;
     services.picom.opacityRule = [
+      "40:class_g = 'Bspwm' && class_i = 'presel_feedback'"
+      "80:class_g  = 'Alacritty'"
       "80:class_g  = 'Zathura'"
       "80:class_g  = 'TelegramDesktop'"
       "80:class_g  = 'Discord'"
