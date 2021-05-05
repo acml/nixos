@@ -13,7 +13,6 @@ in {
             nodePackages.npm
             nodejs
             pkgs.nur.repos.crazazy.efm-langserver
-            (python38.withPackages (ps: with ps; [ pip pynvim ueberzug ]) )
             ranger
             ripgrep
             xclip
