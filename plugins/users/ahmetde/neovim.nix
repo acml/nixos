@@ -15,6 +15,7 @@ in {
             pkgs.nur.repos.crazazy.efm-langserver
             ranger
             ripgrep
+            tree-sitter
             xclip
         ] ++ (with pkgs; [
         ]);
