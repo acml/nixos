@@ -125,7 +125,7 @@ in {
       # :term vterm
       cmake
       # :ui treemacs
-      python3 # advanced git-mode and directory flattening features require python3
+      (python38.withPackages (ps: with ps; [ pip pynvim ueberzug ])) # advanced git-mode and directory flattening features require python3
       man-pages
       posix_man_pages
       (makeDesktopItem {

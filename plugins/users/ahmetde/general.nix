@@ -123,7 +123,7 @@ in {
         tdesktop
         nixos-unstable.bottom
         gnome3.seahorse
-        lazydocker
+        nixos-unstable.lazydocker
         nixos-unstable.bitwarden
         # nixos-unstable.bitwarden-cli
         # nixos-unstable.rbw
