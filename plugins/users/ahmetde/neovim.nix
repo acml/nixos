@@ -8,7 +8,10 @@ in {
     config.home-manager.users = iceLib.functions.mkUserConfigs' (name: cfg: {
 
         home.packages = with pkgs.nixos-unstable; [
+            bat
             fzf
+            lazygit
+            lolcat
             neovim-remote
             nodePackages.npm
             nodejs
