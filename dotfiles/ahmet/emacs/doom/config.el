@@ -328,12 +328,21 @@
         ;; lsp-completion-use-last-result nil
         ))
 
-(add-hook! ('magit-mode-hook 'text-mode-hook 'prog-mode-hook)
-           (defun acml/set-fringe-widths ()
-             (setq-local left-fringe-width 8
-                         right-fringe-width 8)))
+(add-hook! ('text-mode-hook 'prog-mode-hook)
+  (defun acml/set-fringe-widths ()
+    (setq-local left-fringe-width 6
+                right-fringe-width 6)))
 
 ;;; :tools magit
+;;; does not work if converted to add-hook!
+(add-hook 'magit-mode-hook
+  (lambda ()
+    (setq-local left-fringe-width 16
+                magit-section-visibility-indicator (if (display-graphic-p)
+                                                       '(magit-fringe-bitmap> . magit-fringe-bitmapv)
+                                                     (cons (if (char-displayable-p ?…) "…" "...")
+                                                           t)))))
+
 (after! magit
   (magit-add-section-hook 'magit-status-sections-hook
                           'magit-insert-ignored-files
@@ -536,14 +545,16 @@
       ;; treemacs-sorting 'alphabetic-asc
       ;; treemacs-user-mode-line-format nil
       treemacs-width 40
-      ;; treemacs-follow-after-init t
-      )
+      treemacs-follow-after-init t)
 
 (after! treemacs
+  ;; (add-hook! '(treemacs-mode-hook treemacs-select-hook)
+  ;;   (defun acml/set-treemacs-fringes ()
+  ;;     (set-window-fringes nil 8)))
   ;; highlight current line in fringe for treemacs window
-  (treemacs-fringe-indicator-mode 'always)
-  (treemacs-follow-mode t)
-  (treemacs-filewatch-mode t))
+  ;; (treemacs-fringe-indicator-mode 'always)
+  (treemacs-follow-mode)
+  (treemacs-filewatch-mode))
 
 (use-package! turkish
   :commands (turkish-mode)
