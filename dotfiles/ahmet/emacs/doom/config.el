@@ -91,7 +91,7 @@
     :weight bold :height 2.5 :box (:line-width 10 :color "red")))
 
 ;; Prevents some cases of Emacs flickering
-(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+;; (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
 ;; (add-to-list 'default-frame-alist '(alpha . (95)))
 ;; (set-frame-parameter (selected-frame) 'alpha '(95))
@@ -232,10 +232,6 @@
 (define-key ctl-x-map "\C-j" 'dired-jump)
 (define-key ctl-x-4-map "\C-j" 'dired-jump-other-window)
 
-(use-package! dired-auto-readme
-  :config
-  (appendq! dired-auto-readme-files '("README.rst" "readme.rst")))
-
 (setq dired-hide-details-hide-symlink-targets t)
 (add-hook! dired-mode
   (dired-hide-details-mode 1)
@@ -311,8 +307,19 @@
           (counsel-rg . ivy--regex-plus)
           (t      . ivy--regex-fuzzy))))
 
-(after! ivy-posframe
-  (setq ivy-posframe-border-width 3))
+;; (after! ivy-posframe
+;;   (setf (alist-get t ivy-posframe-display-functions-alist)
+;;         #'ivy-posframe-display-at-frame-top-center)
+;;   (setf (alist-get 'swiper ivy-posframe-display-functions-alist)
+;;         #'ivy-posframe-display-at-frame-top-center)
+;;   (setq ivy-posframe-border-width 1
+;;         ivy-posframe-parameters (append ivy-posframe-parameters '((left-fringe . 3)
+;;                                                                   (right-fringe . 3)))))
+
+(add-hook! 'ivy-posframe-mode-hook
+  (setq ivy-posframe-border-width 1
+        ivy-posframe-parameters (append ivy-posframe-parameters '((left-fringe . 3)
+                                                                  (right-fringe . 3)))))
 
 (use-package! journalctl-mode)
 
@@ -484,14 +491,14 @@
    ;; org-ellipsis " [...] "
    ))
 
-(after! persp-mode
-  (setq persp-emacsclient-init-frame-behaviour-override nil)
-  (defun display-workspaces-in-minibuffer ()
-    (with-current-buffer " *Minibuf-0*"
-      (erase-buffer)
-      (insert (+workspace--tabline))))
-  (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
-  (+workspace/display))
+;; (after! persp-mode
+;;   (setq persp-emacsclient-init-frame-behaviour-override nil)
+;;   (defun display-workspaces-in-minibuffer ()
+;;     (with-current-buffer " *Minibuf-0*"
+;;       (erase-buffer)
+;;       (insert (+workspace--tabline))))
+;;   (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
+;;   (+workspace/display))
 
 (after! counsel-projectile
   (setq counsel-projectile-switch-project-action 'counsel-projectile-switch-project-action-dired))
