@@ -491,14 +491,14 @@
    ;; org-ellipsis " [...] "
    ))
 
-;; (after! persp-mode
-;;   (setq persp-emacsclient-init-frame-behaviour-override nil)
-;;   (defun display-workspaces-in-minibuffer ()
-;;     (with-current-buffer " *Minibuf-0*"
-;;       (erase-buffer)
-;;       (insert (+workspace--tabline))))
-;;   (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
-;;   (+workspace/display))
+(after! persp-mode
+  (setq persp-emacsclient-init-frame-behaviour-override nil)
+  (defun display-workspaces-in-minibuffer ()
+    (with-current-buffer " *Minibuf-0*"
+      (erase-buffer)
+      (insert (+workspace--tabline))))
+  (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
+  (+workspace/display))
 
 (after! counsel-projectile
   (setq counsel-projectile-switch-project-action 'counsel-projectile-switch-project-action-dired))
