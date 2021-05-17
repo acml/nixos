@@ -220,7 +220,7 @@ in {
             rofi -show window -show-icons -theme theme/windowmenu.rasi
 
           ctrl + alt + Delete
-            rofi -show p -modi p:${rofi-power-menu}/bin/rofi-power-menu -matching fuzzy -show-icons -icon-theme Papirus-Dark -theme theme/appmenu.rasi
+            rofi -show p -modi p:${rofi-power-menu}/bin/rofi-power-menu -matching fuzzy -show-icons -icon-theme Papirus-Dark -theme theme/powermenu.rasi
 
           super + Escape
             pkill -USR1 -x sxhkd

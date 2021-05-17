@@ -180,8 +180,6 @@ in {
           click-left = ''${pkgs.writeScript "polybar-click-left" ''
                         #!${pkgs.runtimeShell}
                         ${pkgs.rofi}/bin/rofi -show drun -modi drun \
-                        -xoffset 4 -yoffset 32 \
-                        -columns 1 \
                         -location 1 \
                         -show-icons \
                         -theme theme/startmenu.rasi
