@@ -16,7 +16,8 @@ in {
     programs.emacs = {
       enable = true;
       # package = myEmacs;
-      package = pkgs.emacsPgtkGcc;
+      # package = pkgs.nixpkgs-unstable.emacsPgtkGcc;
+      package = pkgs.nixpkgs-unstable.emacsPgtk;
       # package = pkgs.emacsGcc;
       # package = pkgs.emacsGit;
       # package = pkgs.emacs;
@@ -33,7 +34,7 @@ in {
 
     # Home-manager settings.
     # User-layer packages
-    home.packages = with pkgs.nixos-unstable; [
+    home.packages = with pkgs.nixpkgs-unstable; [
       binutils
       gnumake
       gcc
@@ -109,19 +110,19 @@ in {
       scrot
       graphviz
       # :lang rust
-      (pkgs.latest.rustChannels.stable.rust.override {
-        extensions = [
-          "clippy-preview"
-          # "miri-preview"
-          "rls-preview"
-          "rustfmt-preview"
-          "llvm-tools-preview"
-          "rust-analysis"
-          "rust-std"
-          "rustc-dev"
-          "rust-src"
-        ];
-      })
+      # (pkgs.nixpkgs-unstable.latest.rustChannels.stable.rust.override {
+      #   extensions = [
+      #     "clippy-preview"
+      #     # "miri-preview"
+      #     "rls-preview"
+      #     "rustfmt-preview"
+      #     "llvm-tools-preview"
+      #     "rust-analysis"
+      #     "rust-std"
+      #     "rustc-dev"
+      #     "rust-src"
+      #   ];
+      # })
       # :term vterm
       cmake
       # :ui treemacs

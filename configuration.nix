@@ -35,6 +35,17 @@ in {
           # pass the nixpkgs config to the unstable alias
           # to ensure `allowUnfree = true;` is propagated:
           config = config.nixpkgs.config;
+          overlays = [
+            # (
+            #   import (
+            #     builtins.fetchTarball {
+            #       url =
+            #         "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+            #     }
+            #   )
+            # )
+            # (import (fetchTarball "https://github.com/mjlbach/neovim-nightly-overlay/archive/master.tar.gz"))
+          ] ++ (import ./packages);
         };
       nixos-unstable-small = import (fetchTarball
         "https://nixos.org/channels/nixos-unstable-small/nixexprs.tar.xz") {
@@ -46,7 +57,7 @@ in {
       nur = import (fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") { inherit pkgs; };
     };
   };
-  nixpkgs.overlays = import ./packages;
+  # nixpkgs.overlays = import ./packages;
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;

@@ -101,7 +101,7 @@ in {
         QT_AUTO_SCREEN_SCALE_FACTOR = 1;
       };
 
-      home.packages = with pkgs; [
+      home.packages = with pkgs.nixpkgs-unstable; [
         i3lock-color
         xss-lock
         xautolock
@@ -134,7 +134,6 @@ in {
         parted
         inetutils
         exercism
-        nixos-unstable.wordnet
         (nixos-unstable.vscode-with-extensions.override {
            vscodeExtensions = with nixos-unstable.vscode-extensions; [
              # bbenoist.Nix
