@@ -101,7 +101,7 @@ in {
         QT_AUTO_SCREEN_SCALE_FACTOR = 1;
       };
 
-      home.packages = with pkgs.nixpkgs-unstable; [
+      home.packages = with pkgs.nixos-unstable; [
         i3lock-color
         xss-lock
         xautolock
@@ -191,7 +191,7 @@ in {
             italic_font      = "auto";
             bold_italic_font = "auto";
 
-            font_size = "11.0";
+            font_size = "12.0";
 
             scrollback_lines = "10000";
 
@@ -303,7 +303,7 @@ in {
                 family = "Iosevka Term";
                 style = "Bold Italic";
               };
-              size = 11.0;
+              size = 12.0;
             };
             env = {
               # TERM = "xterm-256color";

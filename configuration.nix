@@ -23,15 +23,9 @@ in {
         "https://nixos.org/channels/nixos-20.09/nixexprs.tar.xz") {
           config = config.nixpkgs.config;
         };
+
       nixos-unstable = import (fetchTarball
         "https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz") {
-          # pass the nixpkgs config to the unstable alias
-          # to ensure `allowUnfree = true;` is propagated:
-          config = config.nixpkgs.config;
-        };
-
-      nixpkgs-unstable = import (fetchTarball
-        "https://github.com/nixos/nixpkgs-channels/archive/nixpkgs-unstable.tar.gz") {
           # pass the nixpkgs config to the unstable alias
           # to ensure `allowUnfree = true;` is propagated:
           config = config.nixpkgs.config;
@@ -47,8 +41,16 @@ in {
             # (import (fetchTarball "https://github.com/mjlbach/neovim-nightly-overlay/archive/master.tar.gz"))
           ] ++ (import ./packages);
         };
+
       nixos-unstable-small = import (fetchTarball
         "https://nixos.org/channels/nixos-unstable-small/nixexprs.tar.xz") {
+          # pass the nixpkgs config to the unstable alias
+          # to ensure `allowUnfree = true;` is propagated:
+          config = config.nixpkgs.config;
+        };
+
+      nixpkgs-unstable = import (fetchTarball
+        "https://github.com/nixos/nixpkgs-channels/archive/nixpkgs-unstable.tar.gz") {
           # pass the nixpkgs config to the unstable alias
           # to ensure `allowUnfree = true;` is propagated:
           config = config.nixpkgs.config;

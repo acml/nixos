@@ -16,25 +16,26 @@ in {
     programs.emacs = {
       enable = true;
       # package = myEmacs;
-      # package = pkgs.nixpkgs-unstable.emacsPgtkGcc;
-      package = pkgs.nixpkgs-unstable.emacsPgtk;
+      package = pkgs.nixos-unstable.emacsPgtkGcc;
+      # package = pkgs.nixos-unstable.emacsPgtk;
       # package = pkgs.emacsGcc;
       # package = pkgs.emacsGit;
       # package = pkgs.emacs;
-      extraPackages = (epkgs:
+      extraPackages = ( epkgs:
         (with epkgs; [
-          # exwm
-          vterm
-          pdf-tools
         ]) ++
 
         # MELPA packages:
-        (with epkgs.melpaPackages; [ ]));
+        (with epkgs.melpaPackages; [
+          # exwm
+          vterm
+          pdf-tools
+        ]));
     };
 
     # Home-manager settings.
     # User-layer packages
-    home.packages = with pkgs.nixpkgs-unstable; [
+    home.packages = with pkgs.nixos-unstable; [
       binutils
       gnumake
       gcc
@@ -110,7 +111,7 @@ in {
       scrot
       graphviz
       # :lang rust
-      # (pkgs.nixpkgs-unstable.latest.rustChannels.stable.rust.override {
+      # (pkgs.nixos-unstable.latest.rustChannels.stable.rust.override {
       #   extensions = [
       #     "clippy-preview"
       #     # "miri-preview"

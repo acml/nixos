@@ -1,4 +1,5 @@
 { stdenv
+, lib
 , fetchurl
 , avfs
 , dbus-glib
@@ -34,7 +35,7 @@ stdenv.mkDerivation rec {
     libXinerama
   ];
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A two-pane file manager with advanced file manipulation features";
     homepage = "http://www.boomerangsworld.de/cms/worker/index.html";
     license =  licenses.gpl2;
