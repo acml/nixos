@@ -349,6 +349,10 @@
         ;; lsp-completion-use-last-result nil
         ))
 
+;; fixes the LSP lag
+(after! lsp-ui
+  (setq lsp-ui-doc-enable nil))
+
 (add-hook! ('text-mode-hook 'prog-mode-hook)
   (defun acml/set-fringe-widths ()
     (setq-local left-fringe-width 6
