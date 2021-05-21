@@ -343,15 +343,18 @@
 
 (after! lsp-mode
   (setq lsp-headerline-breadcrumb-enable t
-        ;; lsp-lens-enable t
-        ;; lsp-enable-file-watchers t
-        ;; lsp-signature-auto-activate nil
-        ;; lsp-completion-use-last-result nil
-        ))
+        lsp-signature-render-documentation t))
 
-;; fixes the LSP lag
 (after! lsp-ui
-  (setq lsp-ui-doc-enable nil))
+  (setq lsp-ui-doc-enable nil ; fixes the LSP lag
+        lsp-ui-doc-position 'bottom
+        lsp-ui-doc-use-childframe t
+        lsp-ui-doc-include-signature t
+        lsp-ui-doc-max-height 50
+        lsp-ui-doc-max-width 150
+        lsp-ui-doc-include-signature t
+        lsp-ui-sideline-show-hover t
+        lsp-ui-sideline-show-symbol t))
 
 (add-hook! ('text-mode-hook 'prog-mode-hook)
   (defun acml/set-fringe-widths ()
