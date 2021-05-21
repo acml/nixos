@@ -96,20 +96,16 @@
 ;; (add-to-list 'default-frame-alist '(alpha . (95)))
 ;; (set-frame-parameter (selected-frame) 'alpha '(95))
 
-(defun --set-emoji-font (frame)
-  "Adjust the font settings of FRAME so Emacs can display emoji properly."
-  (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") frame)
-  (set-fontset-font t 'symbol (font-spec :family "Segoe UI Emoji") frame 'append)
-  (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'append))
-(add-hook 'after-make-frame-functions '--set-emoji-font)
-
 (when (daemonp)
   (add-hook 'after-make-frame-functions
             (lambda (frame)
               (with-selected-frame frame
+                ;; Adjust the font settings of FRAME so Emacs can display emoji properly.
+                (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") frame)
+                (set-fontset-font t 'symbol (font-spec :family "Segoe UI Emoji") frame 'append)
+                (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'append)
                 ;; (load-theme 'doom-one t)
-                (modus-themes-load-operandi)
-                ))))
+                (modus-themes-load-operandi)))))
 
 ;; (windmove-default-keybindings 'control)
 ;; (windswap-default-keybindings 'control 'shift)
