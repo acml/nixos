@@ -32,12 +32,14 @@ in mkIf cfg.enable {
   # Fonts
   fonts = {
     enableFontDir = true;
+    enableDefaultFonts = true;
     enableGhostscriptFonts = true;
     fonts = with pkgs; [
       font-awesome-ttf
+      noto-fonts-emoji
       (nerdfonts.override {
         fonts = [
-          "DejaVuSansMono"
+          # "DejaVuSansMono"
           "DroidSansMono"
           "FiraCode"
           "FiraMono"
@@ -51,14 +53,12 @@ in mkIf cfg.enable {
           "Ubuntu"
         ];
       })
-      siji
       symbola
     ];
     fontconfig = {
-      enable = true;
+      # subpixel.lcdfilter = "light";
       defaultFonts = {
-        sansSerif = [ "Ubuntu" ];
-        monospace = [ "Fira Code" ];
+        emoji = [ "Noto Color Emoji" "Noto Emoji" ];
       };
     };
   };
