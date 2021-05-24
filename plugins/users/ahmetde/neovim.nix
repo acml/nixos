@@ -23,7 +23,10 @@ in {
         ripgrep
         tree-sitter
         xclip
+        universal-ctags
       ] ++ (with pkgs; [ ]);
+
+    xdg.configFile."nvim/init.lua".source = (system.dirs.dotfiles + "/${name}/neovim/init.lua");
 
   }) config.icebox.static.users.ahmetde;
 

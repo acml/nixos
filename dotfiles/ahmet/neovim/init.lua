@@ -30,7 +30,8 @@ require('packer').startup(function()
   use {'nvim-telescope/telescope.nvim',
   requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
   }
-  use 'joshdick/onedark.vim'
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
   use 'itchyny/lightline.vim'
   use { 'lukas-reineke/indent-blankline.nvim', branch="lua" }
   use 'hkupty/iron.nvim.git'
@@ -80,11 +81,11 @@ vim.wo.signcolumn="yes"
 
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
-vim.g.onedark_terminal_italics = 2
-vim.cmd[[colorscheme onedark]]
+vim.o.background = "dark"
+vim.cmd[[colorscheme gruvbox]]
 
 --Set statusbar
-vim.g.lightline = { colorscheme = 'onedark';
+vim.g.lightline = { colorscheme = 'gruvbox';
       active = { left = { { 'mode', 'paste' }, { 'gitbranch', 'readonly', 'filename', 'modified' } } };
       component_function = { gitbranch = 'fugitive#head', };
 }
@@ -176,10 +177,17 @@ require('telescope').setup {
         ["<C-d>"] = false,
       },
     },
-    generic_sorter =  require'telescope.sorters'.get_fzy_sorter,
-    file_sorter =  require'telescope.sorters'.get_fzy_sorter,
+  },
+  extensions = {
+    fzf = {
+      override_generic_sorter = true, -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
+    }
   }
 }
+require('telescope').load_extension('fzf')
 --Add leader shortcuts
 vim.api.nvim_set_keymap('n', '<leader>f', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})
