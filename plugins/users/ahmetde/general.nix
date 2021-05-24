@@ -95,7 +95,7 @@ in {
       # QT_AUTO_SCREEN_SCALE_FACTOR: Let QT auto detect the DPi
       home.sessionVariables = {
         BROWSER = "firefox";
-        TERMINAL = "alacritty";
+        TERMINAL = "kitty";
         GDK_SCALE = "${toString system.scale}";
         GDK_DPI_SCALE = "${toString (1.0 / system.scale)}";
         QT_AUTO_SCREEN_SCALE_FACTOR = 1;
@@ -176,7 +176,7 @@ in {
 
             scrollback_lines = "10000";
 
-            background_opacity = "0.8";
+            # background_opacity = "0.8";
 
             # onedark
             # cursor = "#cccccc";

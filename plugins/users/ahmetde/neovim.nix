@@ -13,6 +13,7 @@ in {
         fzf
         lazygit
         lolcat
+        my.neovide
         neovim-nightly
         neovim-remote
         nodePackages.npm

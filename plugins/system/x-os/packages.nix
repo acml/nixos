@@ -37,6 +37,7 @@ in mkIf cfg.enable {
     fonts = with pkgs; [
       font-awesome-ttf
       noto-fonts-emoji
+      noto-fonts
       (nerdfonts.override {
         fonts = [
           # "DejaVuSansMono"

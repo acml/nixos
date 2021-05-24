@@ -80,6 +80,7 @@ in {
     services.picom.opacityRule = [
       "40:class_g = 'Bspwm' && class_i = 'presel_feedback'"
       "80:class_g  = 'Alacritty'"
+      "80:class_g  = 'kitty'"
       "80:class_g  = 'Zathura'"
       "80:class_g  = 'TelegramDesktop'"
       "80:class_g  = 'Discord'"
@@ -211,7 +212,7 @@ in {
             bspc node -t "~{tiled,floating,fullscreen}"
 
           super + {_,alt + }Return
-            {alacritty,e}
+            {kitty,e}
 
           super + space
             rofi -show drun -modi drun,run -show-icons -theme theme/appmenu.rasi
@@ -310,7 +311,7 @@ in {
             light -A 5
 
           F12
-            ${pkgs.nixos-unstable.my.tdrop}/bin/tdrop -ma --wm bspwm -w -24 -x 9 -y 32 -s dropdown alacritty
+            ${pkgs.nixos-unstable.my.tdrop}/bin/tdrop -ma --wm bspwm -w -24 -x 9 -y 32 -s dropdown kitty
 
           # ${pkgs.nixos-unstable.my.tdrop}/bin/tdrop -ma --wm bspwm -w 50% -h 50% -x 25% -y 25% emacsclient --eval "(emacs-everywhere)"
           ctrl + F12

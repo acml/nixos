@@ -11,6 +11,7 @@
       sunflower = (callPackage ./sunflower.nix {});
       worker = (callPackage ./worker.nix {});
       tdrop = (callPackage ./tdrop.nix {});
+      neovide = (callPackage ./neovide.nix {});
     };
   })
 
