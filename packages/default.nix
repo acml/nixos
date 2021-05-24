@@ -16,6 +16,12 @@
 
   # emacsGit
   (import (fetchTarball "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz"))
+  (self: super: {
+            myEmacs = (import (builtins.fetchTarball {
+                url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+                # sha256 = "1sbmqn7yc5iilqnvy9nvhsa9bx6spfq1kndvvis9031723iyymd1";
+              }) {}).myEmacs;
+          })
   # (import (fetchTarball {
   #     url = "https://github.com/nix-community/emacs-overlay/archive/e3da699893c4be3b946d3586143b03450f9680ee.tar.gz";
   #     sha256 = "1mld0agq52xhbhwfffjqrrpk0niyj0hkxjgy7ban0w0khla9ah4n";

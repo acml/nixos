@@ -16,6 +16,7 @@ in {
     programs.emacs = {
       enable = true;
       # package = myEmacs;
+      # package = pkgs.emacsPgtkGcc;
       package = pkgs.nixos-unstable.emacsPgtkGcc;
       # package = pkgs.nixos-unstable.emacsPgtk;
       # package = pkgs.emacsGcc;

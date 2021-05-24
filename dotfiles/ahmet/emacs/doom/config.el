@@ -592,8 +592,7 @@
   ;; :init (evil-leader/set-key (kbd "ot") 'turkish-mode)
   )
 
-(setq vterm-buffer-name "vterm"
-      vterm-max-scrollback 100000)
+(setq vterm-max-scrollback 100000)
 
 ;; text mode directory tree
 (use-package! ztree

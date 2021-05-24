@@ -13,6 +13,7 @@ in {
         fzf
         lazygit
         lolcat
+        neovim-nightly
         neovim-remote
         nodePackages.npm
         nodejs
@@ -22,20 +23,6 @@ in {
         tree-sitter
         xclip
       ] ++ (with pkgs; [ ]);
-
-    programs.neovim = {
-      enable = true;
-      package = pkgs.nixos-unstable.neovim-nightly;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-
-      # nvim plugin providers
-      withNodeJs = true;
-      withRuby = true;
-      withPython = true;
-      withPython3 = true;
-    };
 
   }) config.icebox.static.users.ahmetde;
 

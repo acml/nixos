@@ -134,25 +134,6 @@ in {
         parted
         inetutils
         exercism
-        (nixos-unstable.vscode-with-extensions.override {
-           vscodeExtensions = with nixos-unstable.vscode-extensions; [
-             # bbenoist.Nix
-             jnoortheen.nix-ide
-             vscodevim.vim
-             coenraads.bracket-pair-colorizer-2
-             formulahendry.auto-close-tag
-             formulahendry.auto-rename-tag
-             golang.Go
-             ibm.output-colorizer
-             mechatroner.rainbow-csv
-             ms-azuretools.vscode-docker
-             ms-vscode-remote.remote-ssh
-             ms-vscode.cpptools
-             naumovs.color-highlight
-             tyriar.sort-lines
-             vincaslt.highlight-matching-tag
-           ];
-        })
       ];
 
       # HACK Without this config file you get "No pinentry program" on 20.03.
@@ -197,91 +178,127 @@ in {
 
             background_opacity = "0.8";
 
-            # dark
-            background = "#000000";
-            foreground = "#ffffff";
-            cursor = "#586e75";
+            # onedark
+            # cursor = "#cccccc";
 
-            selection_background = "#555753";
-            # selection_foreground = "#eae3cb";
+            # foreground = "#eeeeee";
+            # background = "#282828";
 
-            color0 = "#2e3436";
-            color8 = "#555753";
+            # color0 = "#282828";
+            # color8 = "#484848";
+            # color1 = "#f43753";
+            # color9 = "#f43753";
+            # color2  = "#c9d05c";
+            # color10 = "#c9d05c";
+            # color3  = "#ffc24b";
+            # color11 = "#ffc24b";
+            # color4  = "#b3deef";
+            # color12 = "#b3deef";
+            # color5  = "#d3b987";
+            # color13 = "#d3b987";
+            # color6  = "#73cef4";
+            # color14 = "#73cef4";
+            # color7  = "#eeeeee";
+            # color15 = "#ffffff";
 
-            color1 = "#cc0000";
-            color9 = "#ef2929";
+            # active_tab_foreground   = "#282828";
+            # active_tab_background   = "#bbbbbb";
+            # active_tab_font_style   = "bold";
+            # inactive_tab_foreground = "#eeeeee";
+            # inactive_tab_background = "#282828";
+            # inactive_tab_font_style = "normal";
 
-            color2 = "#4e9a06";
-            color10 = "#8ae234";
+            # # selection_foreground = "#282c34";
+            # # selection_background = "#979eab";
 
-            color3 = "#c4a000";
-            color11 = "#fce94f";
+            # gruvbox dark
+            background  = "#282828";
+            foreground  = "#ebdbb2";
 
-            color4 = "#3465a4";
-            color12 = "#729fcf";
+            cursor                = "#928374";
 
-            color5 = "#75507b";
-            color13 = "#ad7fa8";
+            selection_foreground  = "#928374";
+            selection_background  = "#3c3836";
 
-            color6 = "#06989a";
-            color14 = "#34e2e2";
+            color0  = "#282828";
+            color8  = "#928374";
 
-            color7 = "#d3d7cf";
-            color15 = "#eeeeec";
+            color1                = "#cc241d";
+            color9                = "#fb4934";
 
-            # light
-            # background = "#fdf6e3";
-            # foreground = "#657b83";
-            # cursor = "#586e75";
+            color2                = "#98971a";
+            color10               = "#b8bb26";
 
-            # selection_background = "#475b62";
-            # selection_foreground = "#eae3cb";
+            color3                = "#d79921";
+            color11               = "#fabd2d";
 
-            # color0 = "#073642";
-            # color8 = "#002b36";
+            color4                = "#458588";
+            color12               = "#83a598";
 
-            # color1 = "#dc322f";
-            # color9 = "#cb4b16";
+            color5                = "#b16286";
+            color13               = "#d3869b";
 
-            # color2 = "#859900";
-            # color10 = "#586e75";
+            color6                = "#689d6a";
+            color14               = "#8ec07c";
 
-            # color3 = "#b58900";
-            # color11 = "#657b83";
+            color7                = "#a89984";
+            color15               = "#928374";
 
-            # color4 = "#268bd2";
-            # color12 = "#839496";
+            # gruvbox light
+            # background  = "#fbf1c7";
+            # foreground  = "#3c3836";
 
-            # color5 = "#d33682";
-            # color13 = "#6c71c4";
+            # cursor                = "#928374";
 
-            # color6 = "#2aa198";
-            # color14 = "#93a1a1";
+            # selection_foreground  = "#3c3836";
+            # selection_background  = "#928374";
 
-            # color7 = "#eee8d5";
-            # color15 = "#fdf6e3";
+            # color0  = "#fbf1c7";
+            # color8  = "#282828";
+
+            # color1                = "#cc241d";
+            # color9                = "#9d0006";
+
+            # color2                = "#98971a";
+            # color10               = "#79740e";
+
+            # color3                = "#d79921";
+            # color11               = "#b57614";
+
+            # color4                = "#458588";
+            # color12               = "#076678";
+
+            # color5                = "#b16286";
+            # color13               = "#8f3f71";
+
+            # color6                = "#689d6a";
+            # color14               = "#427b58";
+
+            # color7                = "#7c6f64";
+            # color15               = "#928374";
           };
 
-          keybindings = {
-            "ctrl+insert" = "copy_to_clipboard";
-            "shift+insert" =    "paste_from_clipboard";
+          # keybindings = {
+          #   "ctrl+insert" = "copy_to_clipboard";
+          #   "shift+insert" =    "paste_from_clipboard";
 
-            "ctrl+enter"  =       "new_window";
-            "ctrl+backspace"  =   "close_window";
-            "ctrl+delete"  =      "close_window";
-            "ctrl+pagedown"  =    "next_window";
-            "ctrl+pageup"  =      "previous_window";
+          #   "ctrl+enter"  =       "new_window";
+          #   "ctrl+backspace"  =   "close_window";
+          #   "ctrl+delete"  =      "close_window";
+          #   "ctrl+pagedown"  =    "next_window";
+          #   "ctrl+pageup"  =      "previous_window";
 
-            "ctrl+f" =           "goto_layout stack";
-            "ctrl+escape" =      "last_used_layout";
+          #   "ctrl+f" =           "goto_layout stack";
+          #   "ctrl+escape" =      "last_used_layout";
 
-            "alt+enter" =         "new_tab";
-            "alt+backspace" =     "close_tab";
-            "alt+delete" =        "close_tab";
-            "alt+pagedown" =      "next_tab";
-            "alt+pageup" =        "previous_tab";
-          };
+          #   "alt+enter" =         "new_tab";
+          #   "alt+backspace" =     "close_tab";
+          #   "alt+delete" =        "close_tab";
+          #   "alt+pagedown" =      "next_tab";
+          #   "alt+pageup" =        "previous_tab";
+          # };
         };
+
         alacritty = {
           enable = true;
           package = pkgs.nixos-unstable.alacritty;
@@ -383,6 +400,8 @@ in {
           };
         };
 
+        vscode.enable = true;
+        vscode.package = pkgs.nixos-unstable.vscode-fhsWithPackages (ps: with ps; [ git rustup zsh zlib ]);
       };
 
       services.grobi = {
