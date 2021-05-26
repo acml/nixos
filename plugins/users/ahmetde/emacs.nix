@@ -38,6 +38,7 @@ in {
     # User-layer packages
     home.packages = with pkgs.nixos-unstable; [
       binutils
+      file
       gnumake
       gcc
       gdb

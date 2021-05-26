@@ -165,15 +165,22 @@ in {
         kitty = {
           enable = true;
 
-          font.name = "Iosevka Term";
-
           settings = {
-            bold_font        = "auto";
-            italic_font      = "auto";
-            bold_italic_font = "auto";
+            # font_family      = "Iosevka Nerd Font Complete";
+            # bold_font        = "Iosevka Bold Nerd Font Complete";
+            # italic_font      = "Iosevka Italic Nerd Font Complete Mono";
+            # bold_italic_font = "Iosevka Bold Italic Nerd Font Complete";
 
-            font_size = "12.0";
+            # font_family      = "Iosevka Term Nerd Font Complete Mono";
+            # bold_font        = "Iosevka Bold Nerd Font Complete";
+            # italic_font      = "Iosevka Term Italic Nerd Font Complete";
+            # bold_italic_font = "Iosevka Term Bold Italic Nerd Font Complete Mono";
 
+            font_family      = "Fira Code Regular Nerd Font Complete Mono";
+
+            font_size = "11.5";
+
+            adjust_line_height = "-1";
             scrollback_lines = "10000";
 
             # background_opacity = "0.8";
