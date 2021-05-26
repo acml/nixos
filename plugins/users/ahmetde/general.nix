@@ -166,19 +166,32 @@ in {
           enable = true;
 
           settings = {
+            # font_family       = "FiraCode Nerd Font Mono";
+            # italic_font       = "auto";
+            # bold_font         = "FiraCode Bold Nerd Font Complete Mono";
+            # bold_italic_font  = "auto";
+
+            # font_family       = "Hasklug Nerd Font Complete Mono";
+            # italic_font       = "Hasklug Italic Nerd Font Complete Mono";
+            # bold_font         = "Hasklug Bold Nerd Font Complete Mono";
+            # bold_italic_font  = "Hasklug Bold Italic Nerd Font Complete Mono";
+
             # font_family      = "Iosevka Nerd Font Complete";
             # bold_font        = "Iosevka Bold Nerd Font Complete";
             # italic_font      = "Iosevka Italic Nerd Font Complete Mono";
             # bold_italic_font = "Iosevka Bold Italic Nerd Font Complete";
 
-            # font_family      = "Iosevka Term Nerd Font Complete Mono";
-            # bold_font        = "Iosevka Bold Nerd Font Complete";
-            # italic_font      = "Iosevka Term Italic Nerd Font Complete";
-            # bold_italic_font = "Iosevka Term Bold Italic Nerd Font Complete Mono";
+            font_family      = "Iosevka Term Nerd Font Complete Mono";
+            bold_font        = "Iosevka Bold Nerd Font Complete";
+            italic_font      = "Iosevka Term Italic Nerd Font Complete";
+            bold_italic_font = "Iosevka Term Bold Italic Nerd Font Complete Mono";
 
-            font_family      = "Fira Code Regular Nerd Font Complete Mono";
+            # font_family       = "JetBrains Mono Regular Nerd Font Complete Mono";
+            # italic_font       = "JetBrains Mono Italic Nerd Font Complete Mono";
+            # bold_font         = "JetBrains Mono Bold Nerd Font Complete Mono";
+            # bold_italic_font  = "JetBrains Mono Bold Italic Nerd Font Complete Mono";
 
-            font_size = "11.5";
+            font_size = "11.0";
 
             adjust_line_height = "-1";
             scrollback_lines = "10000";
@@ -284,6 +297,41 @@ in {
             # color7                = "#7c6f64";
             # color15               = "#928374";
           };
+
+          # extraConfig = ''
+          #   # Map the specified unicode codepoints to a particular font. Useful
+          #   # if you need special rendering for some symbols, such as for
+          #   # Powerline. Avoids the need for patched fonts. Each unicode code
+          #   # point is specified in the form U+<code point in hexadecimal>. You
+          #   # can specify multiple code points, separated by commas and ranges
+          #   # separated by hyphens. symbol_map itself can be specified multiple
+          #   # times. Syntax is::
+          #   #     symbol_map codepoints Font Family Name
+          #   #
+          #   # See https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points
+          #   # Seti-UI + Custom
+          #   symbol_map U+E5FA-U+E62B Iosevka Term
+          #   # Devicons
+          #   symbol_map U+E700-U+E7C5 Iosevka Term
+          #   # Font Awesome
+          #   symbol_map U+F000-U+F2E0 Iosevka Term
+          #   # Font Awesome Extension
+          #   symbol_map U+E200-U+E2A9 Iosevka Term
+          #   # Material Design Icons
+          #   symbol_map U+F500-U+FD46 Iosevka Term
+          #   # Weather
+          #   symbol_map U+E300-U+E3EB Iosevka Term
+          #   # Octicons
+          #   symbol_map U+F400-U+F4A8,U+2665,U+26A1,U+F27C Iosevka Term
+          #   # Powerline Extra Symbols
+          #   symbol_map U+E0A3,U+E0B4-U+E0C8,U+E0CC-U+E0D2,U+E0D4 Iosevka Term
+          #   # IEC Power Symbols
+          #   symbol_map U+23FB-U+23FE,U+2b58 Iosevka Term
+          #   # Font Logos
+          #   symbol_map U+F300-U+F313 Iosevka Term
+          #   # Pomicons
+          #   symbol_map U+E000-U+E00D Iosevka Term
+          # '';
 
           # keybindings = {
           #   "ctrl+insert" = "copy_to_clipboard";
