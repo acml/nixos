@@ -44,6 +44,7 @@ in mkIf cfg.enable {
           "DroidSansMono"
           "FiraCode"
           "FiraMono"
+          "IBMPlexMono"
           "Inconsolata"
           "Iosevka"
           "JetBrainsMono"
