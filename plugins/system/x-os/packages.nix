@@ -60,6 +60,8 @@ in mkIf cfg.enable {
       # subpixel.lcdfilter = "light";
       defaultFonts = {
         emoji = [ "Noto Color Emoji" "Noto Emoji" ];
+        sansSerif = ["Fira Sans"];
+        monospace = ["Fira Code"];
       };
     };
   };
