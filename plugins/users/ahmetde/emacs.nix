@@ -107,6 +107,8 @@ in {
       texlive.combined.scheme-tetex
       # :lang markdown
       mdl
+      # :lang yaml
+      nodePackages.yaml-language-server
       pandoc
       proselint
       # :lang org
