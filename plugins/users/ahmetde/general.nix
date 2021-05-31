@@ -266,7 +266,7 @@ in {
               --   },
               --   {intensity = "Half", font = font_with_fallback("IosevkaNerdFontCompleteM-Light")}
               -- },
-              font_size = 13.0,
+              font_size = 11.0,
               font_shaper = "Harfbuzz",
               line_height = 1.0,
               freetype_load_target = "HorizontalLcd",
