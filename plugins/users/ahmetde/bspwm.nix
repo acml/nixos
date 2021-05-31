@@ -81,6 +81,7 @@ in {
       "40:class_g = 'Bspwm' && class_i = 'presel_feedback'"
       "80:class_g  = 'Alacritty'"
       "80:class_g  = 'kitty'"
+      "80:class_g  = 'org.wezfurlong.wezterm'"
       "80:class_g  = 'Zathura'"
       "80:class_g  = 'TelegramDesktop'"
       "80:class_g  = 'Discord'"
@@ -212,7 +213,7 @@ in {
             bspc node -t "~{tiled,floating,fullscreen}"
 
           super + {_,alt + }Return
-            {kitty,e}
+            {wezterm,e}
 
           super + space
             rofi -show drun -modi drun,run -show-icons -theme theme/appmenu.rasi

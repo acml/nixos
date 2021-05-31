@@ -102,6 +102,7 @@
               (with-selected-frame frame
                 ;; Adjust the font settings of FRAME so Emacs can display emoji properly.
                 (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") frame)
+                (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'append)
                 (set-fontset-font t 'symbol (font-spec :family "Segoe UI Emoji") frame 'append)
                 (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'append)
                 ;; (load-theme 'doom-one t)
