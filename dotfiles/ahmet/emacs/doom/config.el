@@ -36,9 +36,9 @@
       ;; (setq doom-font (font-spec :family "Iosevka" :size 14)
       ;;       doom-variable-pitch-font (font-spec :family "Ubuntu Nerd Font" :size 14))
       doom-font (font-spec :family "Iosevka Nerd Font" :size 13)
-      doom-big-font (font-spec :family "Iosevka Nerd Font" :size 26)
+      ;; doom-big-font (font-spec :family "Iosevka Nerd Font" :size 26)
       doom-variable-pitch-font (font-spec :family "Overpass Nerd Font" :size 13)
-      doom-serif-font (font-spec :family "BlexMono Nerd Font" :weight 'light)
+      doom-serif-font (font-spec :family "BlexMono Nerd Font" :size 13)
 
       fancy-splash-image (let ((alternatives '("doom-emacs-bw-light.svg"
                                                "doom-emacs-flugo-slant_out_purple-small.png"
@@ -101,10 +101,10 @@
             (lambda (frame)
               (with-selected-frame frame
                 ;; Adjust the font settings of FRAME so Emacs can display emoji properly.
-                (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") frame)
-                (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame 'append)
+                (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") frame)
                 (set-fontset-font t 'symbol (font-spec :family "Segoe UI Emoji") frame 'append)
-                (set-fontset-font t 'symbol (font-spec :family "Symbola") frame 'append)
+                (set-fontset-font t 'symbol (font-spec :family "Noto Color Emoji") frame 'append)
+                (set-fontset-font t 'symbol (font-spec :family "Noto Emoji") frame 'append)
                 ;; (load-theme 'doom-one t)
                 (modus-themes-load-operandi)))))
 
