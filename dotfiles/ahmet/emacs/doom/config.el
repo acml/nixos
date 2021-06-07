@@ -367,6 +367,7 @@
 ;;; does not work if converted to add-hook!
 (add-hook 'magit-mode-hook
   (lambda ()
+    (setq magit-status-margin magit-log-margin)
     (setq-local left-fringe-width 16
                 magit-section-visibility-indicator (if (display-graphic-p)
                                                        '(magit-fringe-bitmap> . magit-fringe-bitmapv)
