@@ -594,9 +594,9 @@
       treemacs-follow-after-init t)
 
 (after! treemacs
-  ;; (add-hook! '(treemacs-mode-hook treemacs-select-hook)
-  ;;   (defun acml/set-treemacs-fringes ()
-  ;;     (set-window-fringes nil 8)))
+  ;; (add-hook! '(treemacs-mode-hook treemacs-select-functions)
+  ;;            (defun acml/set-treemacs-fringes (&optional visibilty)
+  ;;              (set-window-fringes nil 8)))
   ;; highlight current line in fringe for treemacs window
   ;; (treemacs-fringe-indicator-mode 'always)
   (treemacs-follow-mode)
