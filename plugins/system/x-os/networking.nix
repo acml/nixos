@@ -23,6 +23,7 @@ in {
     networking.firewall.allowedUDPPorts = [
       69      # Allow TFTP
       161 162 # Allow SNMP
+      1812 1813 # Allow radius auth/acct
     ];
 
     # 1714-1764 is KDE Connect.

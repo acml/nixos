@@ -5,6 +5,11 @@ with lib;
 let
   inherit (config.icebox.static.lib.configs) system;
   cfg = config.icebox.static.system.x-os;
+  baseconfig = { allowUnfree = true; };
+  unstable = import (fetchTarball
+        "https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz") {
+          config = baseconfig;
+        };
 in mkIf cfg.enable (mkMerge [
   ({
     # Enable usbmuxd for iOS devices.
@@ -29,12 +34,41 @@ in mkIf cfg.enable (mkMerge [
       interval = "12:00";
     };
 
-    # Enable GNU Agent in order to make GnuPG works.
-    programs.gnupg.agent.enable = true;
-    programs.ssh.startAgent = true;
+    # imports = [ <nixos-unstable/nixos/modules/services/audio/mopidy.nix> ];
+    # disabledModules = [ "services/audio/mopidy.nix" ];
+
+    nixpkgs.config = baseconfig // {
+      packageOverrides = pkgs: {
+        mopidy = unstable.mopidy;
+      };
+    };
+
+    services.mopidy = {
+      enable = true;
+      # extensionPackages = with pkgs.nixos-unstable; [ mopidy-iris mopidy-mpd mopidy-somafm mopidy-spotify mopidy-spotify-tunigo mopidy-tunein mopidy-youtube ];
+      extensionPackages = with pkgs.nixos-unstable; [ mopidy-iris mopidy-mpd mopidy-somafm mopidy-spotify mopidy-tunein ];
+      configuration = ''
+      [audio]
+      output = pulsesink server=127.0.0.1
+      [mpd]
+      hostname = ::
+      [spotify]
+      username = ozgezer
+      password = <password>
+      client_id = <client_id>
+      client_secret = <client_secret>
+      [iris]
+      country = US
+      locale = en_US
+      '';
+    };
 
     # Enable CUPS to print documents.
     services.printing.enable = true;
+
+    # Enable GNU Agent in order to make GnuPG works.
+    programs.gnupg.agent.enable = true;
+    programs.ssh.startAgent = true;
 
     # Enable sound.
     sound.enable = true;
